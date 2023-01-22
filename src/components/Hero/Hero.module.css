@@ -1,17 +1,45 @@
 .hero {
-  padding: 2rem 0;
+  height: 100vh;
 
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
 }
 
 .heroTitle {
   font-weight: 900;
-  font-size: 4em;
+  font-size: 8em;
+
+  background: var(--color-theme-primary);
+  background: repeating-linear-gradient(
+    120deg,
+    var(--color-theme-primary),
+    var(--color-theme-secondary),
+    var(--color-theme-primary));
+  background-size: 200% 100%;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientSlide 5s linear infinite;
+}
+
+@keyframes gradientSlide {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 200% 50%;
+  }
 }
 
 .heroSubtitle {
   font-size: 1.5em;
   font-weight: bold;
+}
+
+.heroSocialLinks {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }

@@ -1,8 +1,8 @@
 import { Poppins } from '@next/font/google';
 
-type LayoutProps = {
+export interface LayoutProps {
   children: React.ReactElement;
-};
+}
 
 const poppins = Poppins({
   subsets: ['latin'],
