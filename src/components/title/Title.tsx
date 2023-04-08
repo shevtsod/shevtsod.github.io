@@ -23,6 +23,9 @@ export default function Title({ className }: TitleProps) {
       bgGradient="repeating-linear-gradient(120deg, primary, secondary, primary)"
       bgClip="text"
       backgroundSize="200% 100%"
+      animate={{
+        backgroundPosition: ['0% 50%', '200% 50%'],
+      }}
       // @ts-ignore
       transition={{
         backgroundPosition: {
