@@ -1,4 +1,4 @@
-import Hero from '@/components/Hero/Hero';
+import Hero from '@/components/hero/Hero';
 import useTitle from '@/hooks/useTitle';
 import Head from 'next/head';
 
