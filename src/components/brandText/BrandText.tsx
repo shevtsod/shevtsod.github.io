@@ -1,31 +1,34 @@
-import { chakra, shouldForwardProp } from '@chakra-ui/react';
+import { ChakraProps, chakra, shouldForwardProp } from '@chakra-ui/react';
 import { isValidMotionProp, motion } from 'framer-motion';
-import { useRef } from 'react';
 
-const ChakraHeading = chakra(motion.span, {
+const ChakraSpan = chakra(motion.span, {
   shouldForwardProp: (prop) =>
     isValidMotionProp(prop) || shouldForwardProp(prop),
 });
 
-export interface TitleProps {
+export interface BrandTextProps extends ChakraProps {
   className?: string;
+  children: React.ReactNode;
+  animated?: boolean;
 }
 
-export default function Title({ className }: TitleProps) {
-  const headingRef = useRef<HTMLSpanElement>(null);
-
+export default function BrandText({
+  className,
+  children,
+  animated,
+  ...props
+}: BrandTextProps) {
   return (
-    <ChakraHeading
-      ref={headingRef}
+    <ChakraSpan
       className={className}
-      fontSize={['5xl', '7xl', '9xl']}
-      fontWeight={900}
       bgGradient="repeating-linear-gradient(120deg, primary, secondary, primary)"
       bgClip="text"
       backgroundSize="200% 100%"
-      animate={{
-        backgroundPosition: ['0% 50%', '200% 50%'],
-      }}
+      animate={
+        animated && {
+          backgroundPosition: ['0% 50%', '200% 50%'],
+        }
+      }
       // @ts-ignore
       transition={{
         backgroundPosition: {
@@ -34,8 +37,9 @@ export default function Title({ className }: TitleProps) {
           repeat: Infinity,
         },
       }}
+      {...props}
     >
-      Daniel Shevtsov
-    </ChakraHeading>
+      {children}
+    </ChakraSpan>
   );
 }
