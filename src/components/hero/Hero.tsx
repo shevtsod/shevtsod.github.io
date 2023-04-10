@@ -1,6 +1,5 @@
 import BrandText from '@/components/brandText/BrandText';
 import SocialLink from '@/components/socialButton/SocialButton';
-import { Link } from '@chakra-ui/next-js';
 import {
   Box,
   Flex,
@@ -17,6 +16,11 @@ import { BsChevronDoubleDown } from 'react-icons/bs';
 import { FaGithub } from 'react-icons/fa';
 
 const ChakraBox = chakra(motion.div, {
+  shouldForwardProp: (prop) =>
+    isValidMotionProp(prop) || shouldForwardProp(prop),
+});
+
+const ChakraAnchor = chakra(motion.a, {
   shouldForwardProp: (prop) =>
     isValidMotionProp(prop) || shouldForwardProp(prop),
 });
@@ -86,27 +90,37 @@ export default function Hero({ className }: HeroProps) {
           </Box>
         </Flex>
 
-        <Flex align="center" position="absolute" w="100%" bottom={20}>
-          <ChakraBox
+        <Flex align="center" position="relative" w="100%" bottom={40}>
+          <ChakraAnchor
+            display="flex"
+            alignItems="center"
+            justifyContent="center"
             mx="auto"
+            p={2}
+            border="1px"
+            borderRadius="50%"
+            href={ANCHOR_TECHNOLOGIES}
+            onClick={onClickTechnologies}
+            initial={{
+              color: '#ffffff',
+              backgroundColor: 'rgba(0, 0, 0, 0)',
+            }}
             animate={{
               y: [0, 10, 0],
             }}
+            whileHover={{
+              color: '#000000',
+              backgroundColor: '#ffffff',
+            }}
             // @ts-ignore
             transition={{
-              repeat: Infinity,
+              y: {
+                repeat: Infinity,
+              },
             }}
           >
-            <Link href={ANCHOR_TECHNOLOGIES} onClick={onClickTechnologies}>
-              <Icon
-                as={BsChevronDoubleDown}
-                p={2}
-                boxSize={16}
-                border="1px"
-                borderRadius="50%"
-              />
-            </Link>
-          </ChakraBox>
+            <Icon as={BsChevronDoubleDown} boxSize={14} />
+          </ChakraAnchor>
         </Flex>
       </ChakraBox>
     </Box>
