@@ -1,9 +1,11 @@
+'use client';
+
 import Footer from '@/components/footer/Footer';
 import Header from '@/components/header/Header';
 import { Grid, GridItem } from '@chakra-ui/react';
 
 export interface LayoutProps {
-  children: React.ReactElement;
+  children: React.ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps) {

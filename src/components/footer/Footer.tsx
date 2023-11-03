@@ -1,6 +1,8 @@
+'use client';
+
 import BrandText from '@/components/brandText/BrandText';
 import { Box, Flex, Icon, Link, Text } from '@chakra-ui/react';
-import { FaGithub } from 'react-icons/fa';
+import socials from '../../data/socials';
 
 export interface FooterProps {
   className?: string;
@@ -21,11 +23,14 @@ export default function Footer({ className }: FooterProps) {
               <BrandText fontSize="xl" fontWeight="bold" my={1}>
                 Social
               </BrandText>
-              <Link href="https://github.com/shevtsod" isExternal>
-                <Text display="flex" alignItems="center">
-                  <Icon as={FaGithub} mr={1} /> shevtsod
-                </Text>
-              </Link>
+              {socials.map(({ title, icon, href }, index) => (
+                <Link key={index} href={href} isExternal>
+                  <Text display="flex" alignItems="center">
+                    <Icon as={icon} mr={1} />
+                    {title}
+                  </Text>
+                </Link>
+              ))}
             </Box>
           </Flex>
         </Flex>

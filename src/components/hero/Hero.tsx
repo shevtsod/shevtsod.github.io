@@ -1,19 +1,20 @@
+'use client';
+
 import BrandText from '@/components/brandText/BrandText';
-import SocialLink from '@/components/socialButton/SocialButton';
+import SocialButton from '@/components/socialButton/SocialButton';
 import {
   Box,
   Flex,
   Heading,
   Icon,
-  Wrap,
-  WrapItem,
+  Stack,
   chakra,
   shouldForwardProp,
 } from '@chakra-ui/react';
 import { isValidMotionProp, motion } from 'framer-motion';
 import { useCallback } from 'react';
 import { BsChevronDoubleDown } from 'react-icons/bs';
-import { FaGithub } from 'react-icons/fa';
+import socials from '../../data/socials';
 
 const ChakraBox = chakra(motion.div, {
   shouldForwardProp: (prop) =>
@@ -60,16 +61,25 @@ export default function Hero({ className }: HeroProps) {
           duration: 1,
         }}
       >
-        <Flex
+        <ChakraBox
           height="100%"
           width="100%"
-          bgImage="radial-gradient(gray.900 16%, transparent 12%);"
-          bgSize="30px 30px"
-          bgPosition="8px 8px"
-          direction="column"
-          align="center"
-          justify="center"
+          display="flex"
+          flexDirection="column"
+          alignItems="center"
+          justifyContent="center"
           textAlign="center"
+          _after={{
+            content: '""',
+            position: 'absolute',
+            zIndex: -1,
+            inset: 0,
+            backgroundImage:
+              'radial-gradient(circle at center, gray.900 0.25rem, transparent 0)',
+            bgSize: '2rem 2rem',
+            bgPosition: '0 0, 1rem 1rem',
+            maskImage: 'linear-gradient(to top right, black, transparent)',
+          }}
         >
           <Box>
             <Heading as="h1">
@@ -82,13 +92,20 @@ export default function Hero({ className }: HeroProps) {
                 Daniel Shevtsov
               </BrandText>
             </Heading>
-            <Wrap direction="row" align="center" justify="center" spacing={6}>
-              <WrapItem>
-                <SocialLink Icon={FaGithub}>shevtsod</SocialLink>
-              </WrapItem>
-            </Wrap>
+            <Stack
+              direction={[null, 'column', 'row']}
+              align="center"
+              justify="center"
+              spacing={3}
+            >
+              {socials.map(({ title, icon, href }, index) => (
+                <SocialButton key={index} Icon={icon} href={href}>
+                  {title}
+                </SocialButton>
+              ))}
+            </Stack>
           </Box>
-        </Flex>
+        </ChakraBox>
 
         <Flex align="center" position="relative" w="100%" bottom={40}>
           <ChakraAnchor

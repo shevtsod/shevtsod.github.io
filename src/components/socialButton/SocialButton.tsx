@@ -16,17 +16,19 @@ export interface SocialButtonProps {
   className?: string;
   Icon: IconType;
   children: React.ReactNode;
+  href: string;
 }
 
 export default function SocialLink({
   className,
   Icon,
   children,
+  href,
 }: SocialButtonProps) {
   return (
     <ChakraLink
       className={className}
-      href="https://github.com/shevtsod"
+      href={href}
       target="_blank"
       rel="noopener noreferrer"
       px={4}
@@ -52,7 +54,9 @@ export default function SocialLink({
       whileTap={{ scale: 0.9 }}
     >
       <ChakraIcon as={Icon} boxSize={[4, 5, 6]} mr={1} />
-      <Text fontSize={['sm', 'lg', '2xl']}>{children}</Text>
+      <Text fontSize={['sm', 'lg', '2xl']} whiteSpace="nowrap">
+        {children}
+      </Text>
     </ChakraLink>
   );
 }
