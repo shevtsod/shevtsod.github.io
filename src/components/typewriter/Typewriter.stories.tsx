@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
 import type { Meta, StoryObj } from '@storybook/react';
-import TypewriterText from './TypewriterText';
+import Typewriter from './Typewriter';
 
-const meta: Meta<typeof TypewriterText> = {
-  component: TypewriterText,
+const meta: Meta<typeof Typewriter> = {
+  component: Typewriter,
   args: {
     text: 'Hello World',
     duration: 2,
@@ -13,7 +13,7 @@ const meta: Meta<typeof TypewriterText> = {
 
 export default meta;
 
-type Story = StoryObj<typeof TypewriterText>;
+type Story = StoryObj<typeof Typewriter>;
 
 export const Primary: Story = {};
 

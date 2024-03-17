@@ -1,30 +1,30 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Caret } from '../caret/Caret';
 
-export interface TypewriterTextProps {
+export interface TypewriterProps {
   className?: string;
   text: string;
   duration: number;
   delay?: number;
 }
 
-export default function TypewriterText({
+export default function Typewriter({
   className = '',
   text = '',
   duration = 1,
   delay = 0,
-}: TypewriterTextProps) {
-  const [paused, setPaused] = useState(true);
+}: TypewriterProps) {
+  const [started, setStarted] = useState(false);
   const [displayChars, setDisplayChars] = useState(0);
 
   // Start delay
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setPaused(false);
+      setStarted(true);
     }, delay * 1000);
 
     return () => {
-      setPaused(true);
+      setStarted(false);
       clearTimeout(timeout);
     };
   }, [delay, text]);
@@ -33,7 +33,7 @@ export default function TypewriterText({
   useEffect(() => {
     let interval: NodeJS.Timeout | undefined = undefined;
 
-    if (!paused) {
+    if (started) {
       interval = setInterval(
         () => {
           if (displayChars < text.length) {
@@ -47,7 +47,7 @@ export default function TypewriterText({
     }
 
     return () => clearInterval(interval);
-  }, [paused, duration, text, displayChars]);
+  }, [started, duration, text, displayChars]);
 
   // Reset when text changes
   useEffect(() => {
@@ -60,7 +60,7 @@ export default function TypewriterText({
   );
 
   return (
-    <span className={`${className} whitespace-pre-wrap`}>
+    <span className={`whitespace-pre-wrap ${className}`}>
       {displayText}
       <Caret />
     </span>

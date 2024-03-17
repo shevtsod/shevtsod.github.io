@@ -10,7 +10,7 @@ import { Helmet } from 'react-helmet';
 import { I18nextProvider } from 'react-i18next';
 import useTitle from '../../hooks/useTitle';
 import i18n from '../../i18n';
-import Router from '../router/Router';
+import Router from '../appRouter/AppRouter';
 
 export default function App() {
   return (

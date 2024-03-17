@@ -90,7 +90,7 @@ export default function Boot() {
       <Helmet>
         <title>{t('title')}</title>
       </Helmet>
-      <div className="h-[100svh] my-10 bg-black text-white font-mono">
+      <div className="h-[100svh] py-10 bg-black text-white font-mono">
         <div className="container mx-auto text-sm md:text-lg">
           {children}
           <p>

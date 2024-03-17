@@ -1,17 +1,10 @@
-.hero {
-}
-
 .title {
-  transform: perspective(800px) rotateX(45deg);
-
-  opacity: 0;
   animation:
     fadeIn-0-50 1.5s steps(2, end) 1s normal forwards,
     fadeIn-50-100 1s steps(2, end) 2.5s normal forwards;
 }
 
 .chevron {
-  opacity: 0;
   animation:
     fadeIn-0-50 1s steps(2, end) 6s normal forwards,
     fadeIn-50-100 0.5s steps(2, end) 7s normal forwards,
