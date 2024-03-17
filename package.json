@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "homepage": "https://shevtsod.com",
   "scripts": {
     "dev": "concurrently \"vite --open --host\" \"npm:storybook\"",
     "build": "tsc && vite build",

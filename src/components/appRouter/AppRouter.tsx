@@ -1,9 +1,9 @@
-import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { RouterProvider, createHashRouter } from 'react-router-dom';
 import IndexRoute from '../../routes';
 import ErrorRoute from '../../routes/error';
 import RootRoute from '../../routes/root';
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     element: <RootRoute />,
     errorElement: <ErrorRoute />,
