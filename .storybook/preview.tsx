@@ -2,8 +2,8 @@ import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/react';
 import React from 'react';
 import { I18nextProvider } from 'react-i18next';
+import '../src/components/app/App.css';
 import i18n from '../src/i18n';
-import '../src/index.css';
 
 const preview: Preview = {
   parameters: {

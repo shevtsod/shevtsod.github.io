@@ -18,7 +18,6 @@ export default function ErrorRoute() {
   return (
     <>
       <Helmet>
-        <html lang="en" />
         <title>{useTitle('ERROR!')}</title>
       </Helmet>
       <div className="h-screen flex flex-col justify-center text-center bg-black text-white">

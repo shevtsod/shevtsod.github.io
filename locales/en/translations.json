@@ -1,5 +1,8 @@
 {
   "components": {
+    "Boot": {
+      "title": "BOOTING ..."
+    },
     "Footer": {
       "sections": {
         "social": "Social"

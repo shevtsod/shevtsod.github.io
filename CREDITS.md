@@ -6,9 +6,9 @@
 
 <https://fonts.google.com/specimen/Nothing+You+Could+Do>
 
-# Nunito
+# Ysabeau Office
 
-<https://fonts.google.com/specimen/Nunito>
+<https://fonts.google.com/specimen/Ysabeau+Office>
 
 # SH Pinscher
 

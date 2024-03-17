@@ -1,21 +1,37 @@
 import ChevronDown from 'pixelarticons/svg/chevron-down.svg?react';
 import { useTranslation } from 'react-i18next';
-import TypewriterText from '../typewriter-text/TypewriterText';
+import TypewriterText from '../typewriterText/TypewriterText';
 import styles from './Hero.module.css';
 
-export default function Hero() {
+export interface TitleProps {
+  className?: string;
+}
+
+export function Title({ className = '' }: TitleProps) {
+  const { t } = useTranslation(undefined, { keyPrefix: 'components.Hero' });
+
+  return (
+    <h1
+      className={`${className} ${styles.title} my-20 text-[5em] sm:text-[7em] md:text-[12em] lg:text-[16em] xl:text-[20em] leading-[0.75] whitespace-break-spaces text-primary font-retro`}
+    >
+      {t('title')}
+    </h1>
+  );
+}
+
+export interface HeroProps {
+  className?: string;
+}
+
+export default function Hero({ className = '' }: HeroProps) {
   const { t } = useTranslation(undefined, { keyPrefix: 'components.Hero' });
 
   return (
     <section
       id="hero"
-      className={`${styles.hero} h-screen flex flex-col justify-center text-center overflow-hidden bg-black text-white`}
+      className={`${className} ${styles.hero} h-[100svh]  py-20 relative flex flex-col justify-center text-center overflow-hidden bg-black text-white`}
     >
-      <h1
-        className={`${styles.title} my-10 text-[8em] md:text-[12em] lg:text-[16em] xl:text-[20em] leading-[0.75] whitespace-break-spaces text-primary font-retro`}
-      >
-        {t('title')}
-      </h1>
+      <Title />
       <h2 className="lg:text-lg  font-mono">
         <TypewriterText text={t('subtitle')} duration={2} delay={3.5} />
       </h2>

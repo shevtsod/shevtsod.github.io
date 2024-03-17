@@ -8,14 +8,14 @@ export default {
     extend: {
       colors: {
         primary: '#e51716',
-        secondary: '#e59e19',
-        tertiary: '#171717',
+        secondary: '#b8a401',
+        tertiary: '#222741',
       },
       fontFamily: {
         cursive: ['Nothing You Could Do', 'cursive'],
         mono: ['"Syne Mono"', ...defaultTheme.fontFamily.mono],
         retro: ['"SH Pinscher"', ...defaultTheme.fontFamily.mono],
-        sans: ['"Nunito Variable"', ...defaultTheme.fontFamily.sans],
+        sans: ['"Ysabeau Office Variable"', ...defaultTheme.fontFamily.sans],
         serif: ['"Labrada Variable"', ...defaultTheme.fontFamily.serif],
       },
     },
