@@ -12,7 +12,7 @@ export default function Hero() {
       className={`${styles.hero} h-screen flex flex-col justify-center text-center overflow-hidden bg-black text-white`}
     >
       <h1
-        className={`${styles.title} my-6 text-[25vw] md:text-[20vw] leading-[0.75] whitespace-break-spaces text-primary font-retro`}
+        className={`${styles.title} my-10 text-[8em] md:text-[12em] lg:text-[16em] xl:text-[20em] leading-[0.75] whitespace-break-spaces text-primary font-retro`}
       >
         {t('title')}
       </h1>
