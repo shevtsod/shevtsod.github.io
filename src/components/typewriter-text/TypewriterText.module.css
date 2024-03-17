@@ -1,0 +1,15 @@
+.typewriterText {
+  animation:
+    caret 1s steps(3, end) infinite both;
+}
+
+@keyframes caret {
+  from,
+  to {
+    border-right-color: transparent;
+  }
+
+  50% {
+    border-right-color: initial;
+  }
+}

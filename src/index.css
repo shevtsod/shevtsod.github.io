@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/*******************************************************************************
+ * FONTS
+ ******************************************************************************/
+
+/* SH Pinscher */
+@font-face {
+  font-family: "SH Pinscher";
+  font-weight: 400;
+  src: url("/fonts/SHPinscher/SHPinscher-Regular.woff2") format("woff2"),
+    url("/fonts/SHPinscher/SHPinscher-Regular.woff") format("woff"),
+    url("/fonts/SHPinscher/SHPinscher-Regular.otf") format("opentype");
+}

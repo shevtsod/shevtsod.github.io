@@ -1,0 +1,19 @@
+{
+  "components": {
+    "Footer": {
+      "sections": {
+        "social": "Social"
+      },
+      "copyright": "© 2024 Daniel Shevtsov"
+    },
+    "Hero": {
+      "title": "Daniel\nShevtsov",
+      "subtitle": "Full-stack web developer."
+    }
+  },
+  "routes": {
+    "root": {
+      "title": "Daniel Shevtsov"
+    }
+  }
+}
