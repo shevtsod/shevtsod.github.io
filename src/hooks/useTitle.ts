@@ -8,5 +8,6 @@ import { useTranslation } from 'react-i18next';
  */
 export default function useTitle(title?: string) {
   const { t } = useTranslation(undefined, { keyPrefix: 'routes.root' });
-  return title ? `${title} | ${t('title')}` : t('title');
+  const pageTitle = title ? `\uFF62${title}\uFF63 \u25AA ` : '';
+  return `${pageTitle}${t('title')}`;
 }

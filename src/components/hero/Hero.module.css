@@ -1,4 +1,5 @@
 .title {
+  text-shadow: 0 0.02em 0 theme("textColor.red.900");
   animation:
     fadeIn-0-50 1.5s steps(2, end) 1s normal forwards,
     fadeIn-50-100 1s steps(2, end) 2.5s normal forwards;

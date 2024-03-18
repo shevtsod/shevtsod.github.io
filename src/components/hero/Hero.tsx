@@ -12,7 +12,7 @@ export function Title({ className = '' }: TitleProps) {
 
   return (
     <h1
-      className={`${styles.title} my-20 text-[5em] sm:text-[7em] md:text-[12em] lg:text-[16em] xl:text-[20em] [transform:perspective(400px)_rotateX(45deg)] md:[transform:perspective(800px)_rotateX(45deg)] leading-[0.75] whitespace-break-spaces text-primary font-retro opacity-0 ${className} `}
+      className={`${styles.title} my-20 text-[5em] sm:text-[10em] md:text-[12em] lg:text-[16em] xl:text-[20em] [transform:perspective(400px)_rotateX(45deg)] sm:[transform:perspective(800px)_rotateX(45deg)] leading-[0.75] whitespace-break-spaces text-primary font-retro opacity-0 ${className} `}
     >
       {t('title')}
     </h1>
@@ -29,7 +29,7 @@ export default function Hero({ className = '' }: HeroProps) {
   return (
     <section
       id="hero"
-      className={`h-[100svh] py-10 relative flex flex-col justify-center text-center overflow-hidden bg-black text-white ${className}`}
+      className={`min-h-[100svh] py-10 relative flex flex-col justify-center text-center overflow-hidden bg-black text-white ${className}`}
     >
       <Title />
       <h2 className="lg:text-lg  font-mono">

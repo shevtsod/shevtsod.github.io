@@ -16,13 +16,13 @@ export default function Boot() {
       <p className="w-2/3">
         <b>DS-BIOS ACPI BIOS Revision 6ef62a58-6b91-4521-80ae-519ba640f839</b>
       </p>
-      <p className="w-2/3">CPU: shevtsodCorp (R) CPU X32-00 @ 30.0 MHz</p>
+      <p className="w-2/3">CPU: shevtsodCorp (R) CPU X32-00 @ 40 MHz</p>
       <p>
-        &emsp;Speed: <b>30.0 MHz</b>&emsp;&emsp;Count: 8&emsp;&emsp;
+        &emsp;Speed: <b>40 MHz</b>&emsp;&emsp;Count: 2&emsp;&emsp;
         <span className="text-green-500">OK</span>
       </p>
       <p>
-        Memory Test: <b>8192K</b>&emsp;&emsp;
+        Memory Test: <b>65536K</b>&emsp;&emsp;
         <span className="text-green-500">OK</span>
       </p>
       <br />
@@ -43,6 +43,8 @@ export default function Boot() {
         sequence (code CAAB0C) ...
       </p>
       <p>Checking File System ... DONE</p>
+      <br />
+      <br />
       <br />
       <p>WAIT ...</p>
       <p>WAIT ...</p>
@@ -89,11 +91,11 @@ export default function Boot() {
       <Helmet>
         <title>{t('title')}</title>
       </Helmet>
-      <div className="relative h-[100svh] py-10 bg-black text-white font-mono">
+      <div className="relative min-h-[100svh] py-10 bg-black text-white font-mono">
         <div className="container px-4 mx-auto text-xs md:text-lg">
           <div className="container flex flex-col justify-start items-end absolute top-0 my-10 -mx-10 z-0">
-            <div className="flex flex-col justify-center text-center">
-              <Logo />
+            <div className="flex flex-col justify-center items-center">
+              <Logo className="h-20 w-auto" />
               <b className="mt-2 text-xs">shevtsodOS</b>
               <i className="text-[0.65rem] underline">shevtsod.com</i>
             </div>

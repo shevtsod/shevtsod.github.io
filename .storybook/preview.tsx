@@ -1,3 +1,8 @@
+import '@fontsource-variable/labrada';
+import '@fontsource-variable/ysabeau-office';
+import '@fontsource/nothing-you-could-do';
+import '@fontsource/syne-mono';
+import '@fontsource/vt323';
 import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/react';
 import React from 'react';
