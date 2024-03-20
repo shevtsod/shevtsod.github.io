@@ -1,30 +1,18 @@
 .title {
   text-shadow: 0 0.02em 0 theme("textColor.red.900");
   animation:
-    fadeIn-0-50 1.5s steps(2, end) 1s normal forwards,
-    fadeIn-50-100 1s steps(2, end) 2.5s normal forwards;
+    fade 2.5s steps(4, end) 1s normal forwards;
 }
 
 .chevron {
   animation:
-    fadeIn-0-50 1s steps(2, end) 6s normal forwards,
-    fadeIn-50-100 0.5s steps(2, end) 7s normal forwards,
-    float 0.8s steps(3, end) infinite;
+    fade 1s steps(4, end) 6s normal forwards,
+    caretFloat 0.8s steps(3, end) infinite both;
 }
 
-@keyframes fadeIn-0-50 {
+@keyframes fade {
   from {
     opacity: 0
-  }
-
-  to {
-    opacity: 0.5
-  }
-}
-
-@keyframes fadeIn-50-100 {
-  from {
-    opacity: 0.5
   }
 
   to {
@@ -32,12 +20,12 @@
   }
 }
 
-@keyframes float {
+@keyframes caretFloat {
   from {
     transform: translateY(-20px);
   }
 
   to {
-    transform: translateY(0px);
+    transform: translateY(0);
   }
 }

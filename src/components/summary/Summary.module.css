@@ -1,0 +1,26 @@
+.section {
+  animation: backdropSlide 100s steps(600, end) infinite;
+}
+
+.icon {
+  background:
+  linear-gradient(to right, theme("colors.primary") 4px, transparent 4px) 0 0,
+  linear-gradient(to right, theme("colors.primary") 4px, transparent 4px) 0 100%,
+  linear-gradient(to left, theme("colors.primary") 4px, transparent 4px) 100% 0,
+  linear-gradient(to left, theme("colors.primary") 4px, transparent 4px) 100% 100%,
+  linear-gradient(to bottom, theme("colors.primary") 4px, transparent 4px) 0 0,
+  linear-gradient(to bottom, theme("colors.primary") 4px, transparent 4px) 100% 0,
+  linear-gradient(to top, theme("colors.primary") 4px, transparent 4px) 0 100%,
+  linear-gradient(to top, theme("colors.primary") 4px, transparent 4px) 100% 100%;
+  background-repeat: no-repeat;
+  background-size: 24px 24px;
+}
+
+@keyframes backdropSlide {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -400% 400%;
+  }
+}

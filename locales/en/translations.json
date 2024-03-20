@@ -7,11 +7,17 @@
       "sections": {
         "social": "Social"
       },
-      "copyright": "© 2024 Daniel Shevtsov"
+      "copyright": "Made with <icon></icon> by Daniel Shevtsov"
     },
     "Hero": {
       "title": "Daniel\nShevtsov",
       "subtitle": "Full-stack web developer."
+    },
+    "Summary": {
+      "title": "Skills & Accomplishments at a Glance",
+      "summary1": "Proficient in both modern and less-modern technologies, with <highlight>over 7 years of experience</highlight> in web development. Skilled in development, testing, DevOps and automation - a great fit for many roles.",
+      "summary2": "Creative and detail-oriented, constantly working towards functional solutions without compromising on design and aesthetics. Always seeking to add the <highlight>extra touch</highlight> to give a novel experience that turns heads and amazes.",
+      "summary3": "Well-versed in both <highlight>individual and team settings</highlight>, eager to independently research problems, write thorough documentation, and cooperate with colleagues to deliver a delightful product."
     }
   },
   "routes": {

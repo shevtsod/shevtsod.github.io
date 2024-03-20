@@ -18,6 +18,15 @@ export default {
         sans: ['"Ysabeau Office Variable"', ...defaultTheme.fontFamily.sans],
         serif: ['"Labrada Variable"', ...defaultTheme.fontFamily.serif],
       },
+      keyframes: {
+        fadeIn: {
+          '0%': { opacity: 0 },
+          '100%': { opacity: 1 },
+        },
+      },
+      animation: {
+        'fade-in': 'fadeIn 1s steps(4, end) both',
+      },
     },
   },
   plugins: [],
