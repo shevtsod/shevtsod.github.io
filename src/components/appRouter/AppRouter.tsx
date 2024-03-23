@@ -3,6 +3,7 @@ import IndexRoute from '../../routes';
 import ErrorRoute from '../../routes/error';
 import RootRoute from '../../routes/root';
 
+// https://reactrouter.com/en/main/start/tutorial
 const router = createHashRouter([
   {
     element: <RootRoute />,
@@ -16,7 +17,4 @@ const router = createHashRouter([
   },
 ]);
 
-export default function Router() {
-  // https://reactrouter.com/en/main/start/tutorial
-  return <RouterProvider router={router} />;
-}
+export default () => RouterProvider({ router });

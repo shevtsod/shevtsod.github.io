@@ -6,21 +6,31 @@ import '@fontsource/vt323';
 import './App.css';
 
 import React from 'react';
-import { Helmet } from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { I18nextProvider } from 'react-i18next';
 import useTitle from '../../hooks/useTitle';
 import i18n from '../../i18n';
 import Router from '../appRouter/AppRouter';
 
-export default function App() {
+export interface AppProps {
+  children: React.ReactNode;
+}
+
+export default function App({ children = <Router /> }: AppProps) {
   return (
     <React.StrictMode>
       <I18nextProvider i18n={i18n}>
-        <Helmet>
-          <html lang="en" className="bg-black text-white" />
-          <title>{useTitle()}</title>
-        </Helmet>
-        <Router />
+        <HelmetProvider>
+          <Helmet>
+            <html
+              lang="en"
+              className="bg-theme-gray-800 text-theme-gray-100 font-mono"
+            />
+            <title>{useTitle()}</title>
+          </Helmet>
+
+          {children}
+        </HelmetProvider>
       </I18nextProvider>
     </React.StrictMode>
   );

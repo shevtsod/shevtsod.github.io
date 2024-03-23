@@ -7,7 +7,6 @@ import { useTranslation } from 'react-i18next';
  * @returns title with suffix
  */
 export default function useTitle(title?: string) {
-  const { t } = useTranslation(undefined, { keyPrefix: 'routes.root' });
-  const pageTitle = title ? `｢${title}｣ · ` : '';
-  return `${pageTitle}${t('title')}`;
+  const { t } = useTranslation('app', { keyPrefix: 'routes.root' });
+  return `${title ? `｢${title}｣ · ` : ''}${t('title')}`;
 }

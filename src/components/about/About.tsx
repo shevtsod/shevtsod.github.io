@@ -1,3 +1,8 @@
-export default function About() {
-  return <section id="about"></section>;
+export interface AboutProps extends React.HTMLAttributes<HTMLDivElement> {
+  id?: string;
+  className?: string;
+}
+
+export default function About({ ...props }: AboutProps) {
+  return <div {...props} />;
 }

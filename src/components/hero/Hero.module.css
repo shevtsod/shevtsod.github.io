@@ -1,7 +1,6 @@
 .title {
-  text-shadow: 0 0.02em 0 theme("textColor.red.900");
   animation:
-    fade 2.5s steps(4, end) 1s normal forwards;
+    fade 2.5s steps(4, end) 1s normal both;
 }
 
 .chevron {

@@ -1,11 +1,11 @@
 export interface Technology {
-  name: string;
+  id: string;
   icon: string;
 }
 
 const technologies: Technology[] = [
   {
-    name: 'TypeScript',
+    id: 'typescript',
     icon: 'devicon-typescript-plain',
   },
 ];

@@ -1,18 +1,19 @@
+import classNames from 'classnames';
 import { useEffect, useMemo, useState } from 'react';
-import { Caret } from '../caret/Caret';
+import Caret from '../caret/Caret';
 
-export interface TypewriterProps {
-  className?: string;
+export interface TypewriterProps extends React.HTMLAttributes<HTMLSpanElement> {
   text: string;
   duration: number;
   delay?: number;
 }
 
 export default function Typewriter({
-  className = '',
   text = '',
   duration = 1,
   delay = 0,
+  className,
+  ...props
 }: TypewriterProps) {
   const [started, setStarted] = useState(false);
   const [displayChars, setDisplayChars] = useState(0);
@@ -60,7 +61,7 @@ export default function Typewriter({
   );
 
   return (
-    <span className={`whitespace-pre-wrap ${className}`}>
+    <span {...props} className={classNames('whitespace-pre-wrap', className)}>
       {displayText}
       <Caret />
     </span>

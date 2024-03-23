@@ -15,7 +15,7 @@ export default meta;
 
 type Story = StoryObj<typeof Typewriter>;
 
-export const Primary: Story = {};
+export const Default: Story = {};
 
 export const Styled: Story = {
   args: {
@@ -24,7 +24,7 @@ export const Styled: Story = {
   },
   decorators: [
     (Story) => (
-      <h1 className="text-5xl text-red-600">
+      <h1 className="text-5xl text-center text-theme-red-400 font-retro">
         <Story />
       </h1>
     ),

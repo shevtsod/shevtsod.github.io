@@ -1,24 +1,37 @@
+import classNames from 'classnames';
 import { useInView } from 'framer-motion';
-import HeartIcon from 'pixelarticons/svg/heart.svg?react';
 import { useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
+import HeartIcon from '../../assets/images/icons/heart.svg?react';
 import socials from '../../data/socials';
 
-export default function Footer() {
-  const { t } = useTranslation(undefined, { keyPrefix: 'components.Footer' });
+export interface FooterProps extends React.HTMLAttributes<HTMLElement> {}
+
+export default function Footer({ className, ...props }: FooterProps) {
+  const { t } = useTranslation('app', { keyPrefix: 'components.Footer' });
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
   return (
-    <footer ref={ref} className=" bg-black border-t-primary border-t font-mono">
+    <footer
+      {...props}
+      ref={ref}
+      className={classNames('border-t-theme-red-400 border-t', className)}
+    >
       <div
-        className={`${isInView ? 'animate-fade-in' : 'invisible'} container mx-auto`}
+        className={classNames(
+          {
+            'animate-fade-in': isInView,
+            invisible: !isInView,
+          },
+          'container mx-auto',
+        )}
       >
-        <div className="py-10 px-10 grid grid-flow-row md:grid-flow-col gap-4 justify-center md:justify-normal">
-          <div>
-            <p className="text-lg font-black text-primary">
+        <div className="py-8 px-8 grid grid-cols-1 md:grid-cols-3 gap-4 justify-items-center">
+          <div className="flex flex-col">
+            <div className="text-lg font-bold text-theme-red-400">
               {t('sections.social')}
-            </p>
+            </div>
 
             {socials.map(({ href, icon: Icon, title }, i) => (
               <div key={i}>
@@ -26,25 +39,27 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer noopener"
                   href={href}
-                  className="hover:text-secondary"
+                  className="inline-flex items-center gap-2 hover:text-theme-orange-200"
                 >
-                  <Icon className="inline" /> {title}
+                  <Icon className="inline-block" /> {title}
                 </a>
               </div>
             ))}
           </div>
         </div>
-        <div className="py-6 text-center">
-          <p>
+        <div className="py-8 text-center">
+          <p className="align-middle">
             <Trans
               t={t}
               i18nKey="copyright"
               components={{
-                icon: <HeartIcon className="inline h-5 w-5 text-primary" />,
+                icon: (
+                  <HeartIcon className="inline align-text-top text-theme-red-400" />
+                ),
               }}
             />
           </p>
-          <p className="text-primary">▃ ▃ ▃</p>
+          <p className="text-theme-red-400">▃ ▃ ▃</p>
         </div>
       </div>
     </footer>

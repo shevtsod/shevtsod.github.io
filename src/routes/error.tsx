@@ -1,29 +1,18 @@
-import { Helmet } from 'react-helmet';
-import { isRouteErrorResponse, useRouteError } from 'react-router-dom';
-import useTitle from '../hooks/useTitle';
+import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
+import { useRouteError } from 'react-router-dom';
+import AppError from '../components/appError/AppError';
 
 export default function ErrorRoute() {
+  const { t } = useTranslation('app', { keyPrefix: 'routes.error' });
   const error = useRouteError();
 
-  let message = 'Unexpected Error';
-
-  if (isRouteErrorResponse(error)) {
-    if (error.status === 404) {
-      message = 'Not Found';
-    } else {
-      message = error.data?.message;
-    }
-  }
-
   return (
-    <>
+    <main>
       <Helmet>
-        <title>{useTitle('ERROR!')}</title>
+        <title>{t('title')}</title>
       </Helmet>
-      <div className="h-screen flex flex-col justify-center text-center bg-black text-white">
-        <h1 className="text-9xl font-retro text-primary">ERROR!</h1>
-        <p className="text-lg">{message}</p>
-      </div>
-    </>
+      <AppError className="min-h-[100svh]" title={t('title')} error={error} />
+    </main>
   );
 }

@@ -1,21 +1,21 @@
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import { IconType } from 'react-icons/lib';
+import GithubIcon from '../assets/images/icons/github.svg?react';
+import LinkedinIcon from '../assets/images/icons/linkedin.svg?react';
 
 export interface Social {
   title: string;
-  icon: IconType;
+  icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
   href: string;
 }
 
 const socials: Social[] = [
   {
     title: 'shevtsod',
-    icon: FaGithub,
+    icon: GithubIcon,
     href: 'https://github.com/shevtsod',
   },
   {
     title: 'daniel-shevtsov',
-    icon: FaLinkedin,
+    icon: LinkedinIcon,
     href: 'https://www.linkedin.com/in/daniel-shevtsov-29089b296/',
   },
 ];
