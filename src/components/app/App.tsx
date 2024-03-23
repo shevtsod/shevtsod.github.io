@@ -2,7 +2,6 @@ import '@fontsource-variable/labrada';
 import '@fontsource-variable/ysabeau-office';
 import '@fontsource/nothing-you-could-do';
 import '@fontsource/syne-mono';
-import '@fontsource/vt323';
 import './App.css';
 
 import React from 'react';
@@ -13,7 +12,7 @@ import i18n from '../../i18n';
 import Router from '../appRouter/AppRouter';
 
 export interface AppProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export default function App({ children = <Router /> }: AppProps) {
