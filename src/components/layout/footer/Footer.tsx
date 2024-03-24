@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import HeartIcon from '../../assets/images/icons/heart.svg?react';
-import socials from '../../data/socials';
+import HeartIcon from '../../../assets/images/icons/heart.svg?react';
+import socials from '../../../data/socials';
 
 export interface FooterProps extends React.HTMLAttributes<HTMLElement> {}
 
@@ -54,7 +54,10 @@ export default function Footer({ className, ...props }: FooterProps) {
               i18nKey="copyright"
               components={{
                 icon: (
-                  <HeartIcon className="inline align-text-top text-theme-red-400" />
+                  <HeartIcon
+                    className="h-[16px] w-auto inline align-text-top text-theme-red-400"
+                    viewBox="0 0 16 16"
+                  />
                 ),
               }}
             />

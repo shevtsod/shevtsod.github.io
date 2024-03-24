@@ -5,8 +5,8 @@
 
 .chevron {
   animation:
-    fade 1s steps(4, end) 6s normal forwards,
-    caretFloat 0.8s steps(3, end) infinite both;
+    fade 1s steps(4, end) 6s normal both,
+    caretFloat 0.8s steps(3, end) infinite forwards;
 }
 
 @keyframes fade {

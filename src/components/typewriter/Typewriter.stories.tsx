@@ -5,7 +5,7 @@ import Typewriter from './Typewriter';
 const meta: Meta<typeof Typewriter> = {
   component: Typewriter,
   args: {
-    text: 'Hello World',
+    text: faker.lorem.text(),
     duration: 2,
     delay: 2,
   },

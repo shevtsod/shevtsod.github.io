@@ -1,10 +1,10 @@
 import { Helmet } from 'react-helmet-async';
-import About from '../components/about/About';
-import Contact from '../components/contact/Contact';
-import Hero from '../components/hero/Hero';
-import Projects from '../components/projects/Projects';
-import Summary from '../components/summary/Summary';
-import Technologies from '../components/technologies/Technologies';
+import About from '../components/routes/index/about/About';
+import Contact from '../components/routes/index/contact/Contact';
+import Hero from '../components/routes/index/hero/Hero';
+import Projects from '../components/routes/index/projects/Projects';
+import Summary from '../components/routes/index/summary/Summary';
+import Technologies from '../components/routes/index/technologies/Technologies';
 import useTitle from '../hooks/useTitle';
 
 export default function IndexRoute() {
@@ -14,24 +14,12 @@ export default function IndexRoute() {
         <title>{useTitle('Home')}</title>
       </Helmet>
 
-      <section id="hero">
-        <Hero className="min-h-[100svh]" />
-      </section>
-      <section id="summary">
-        <Summary />
-      </section>
-      <section id="technologies">
-        <Technologies />
-      </section>
-      <section id="projects">
-        <Projects />
-      </section>
-      <section id="about">
-        <About />
-      </section>
-      <section id="contact">
-        <Contact />
-      </section>
+      <Hero as="section" id="hero" className="min-h-[100svh]" />
+      <Summary as="section" id="summary" />
+      <Projects as="section" id="projects" />
+      <Technologies as="section" id="technologies" />
+      <About as="section" id="about" />
+      <Contact as="section" id="contact" />
     </main>
   );
 }

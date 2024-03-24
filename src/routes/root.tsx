@@ -1,7 +1,7 @@
 import React, { Suspense, useMemo } from 'react';
 import { useLocation } from 'react-router-dom';
 import Boot from '../components/boot/Boot';
-import Layout from '../components/layout/Layout';
+import Layout from '../components/layout/layout/Layout';
 
 const BOOT_DELAY = 2;
 const BOOT_PATHNAMES = ['/'];
@@ -16,7 +16,7 @@ export default function RootRoute() {
     () =>
       React.lazy(async () => {
         await new Promise((resolve) => setTimeout(resolve, delay * 1000));
-        return import('../components/appOutlet/AppOutlet');
+        return import('../components/app/appOutlet/AppOutlet');
       }),
     [delay],
   );

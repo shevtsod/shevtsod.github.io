@@ -3,10 +3,10 @@ import { useInView } from 'framer-motion';
 import CodeIcon from 'pixelarticons/svg/code.svg?react';
 import HumanIcon from 'pixelarticons/svg/human.svg?react';
 import SunAltIcon from 'pixelarticons/svg/sun-alt.svg?react';
-import { useRef } from 'react';
+import { ComponentPropsWithoutRef, ElementType, useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import crosshairImage from '../../assets/images/crosshair.webp';
-import Heading from '../heading/Heading';
+import crosshairImage from '../../../../assets/images/crosshair.webp';
+import Heading from '../../../heading/Heading';
 import styles from './Summary.module.css';
 
 interface SummaryItemProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -49,13 +49,20 @@ function SummaryItem({ className, icon: Icon, i18nKey }: SummaryItemProps) {
   );
 }
 
-export interface SummaryProps extends React.HTMLAttributes<HTMLDivElement> {}
+export type SummaryProps<T extends ElementType> = {
+  as?: T;
+} & ComponentPropsWithoutRef<T>;
 
-export default function Summary({ className, ...props }: SummaryProps) {
+export default function Summary<T extends ElementType>({
+  as,
+  className,
+  ...props
+}: SummaryProps<T>) {
+  const Component = as ?? 'div';
   const { t } = useTranslation('app', { keyPrefix: 'components.Summary' });
 
   return (
-    <div
+    <Component
       {...props}
       style={{ backgroundImage: `url("${crosshairImage}")` }}
       className={classNames(
@@ -64,7 +71,7 @@ export default function Summary({ className, ...props }: SummaryProps) {
         className,
       )}
     >
-      <Heading as="h2" className="mb-4 uppercase">
+      <Heading as="h2" className="mb-4 uppercase text-center">
         {t('title')}
       </Heading>
 
@@ -73,6 +80,6 @@ export default function Summary({ className, ...props }: SummaryProps) {
         <SummaryItem i18nKey="summary2" icon={SunAltIcon} />
         <SummaryItem i18nKey="summary3" icon={HumanIcon} />
       </div>
-    </div>
+    </Component>
   );
 }
