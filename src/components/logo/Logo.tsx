@@ -4,7 +4,7 @@ import logoInIcon from '../../assets/images/logo-in.webp';
 import logoRotateIcon from '../../assets/images/logo-rotate.gif';
 import logoIcon from '../../assets/images/logo.webp';
 
-const ROTATE_DURATION = 3.5;
+const ROTATE_DURATION = 3.4;
 
 export interface LogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   shown?: boolean;
