@@ -1,21 +1,18 @@
-import GithubIcon from '../assets/images/icons/github.svg?react';
-import LinkedinIcon from '../assets/images/icons/linkedin.svg?react';
-
 export interface Social {
   title: string;
-  icon: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
+  icon: string;
   href: string;
 }
 
 const socials: Social[] = [
   {
     title: 'shevtsod',
-    icon: GithubIcon,
+    icon: 'github',
     href: 'https://github.com/shevtsod',
   },
   {
     title: 'daniel-shevtsov',
-    icon: LinkedinIcon,
+    icon: 'linkedin',
     href: 'https://www.linkedin.com/in/daniel-shevtsov-29089b296/',
   },
 ];

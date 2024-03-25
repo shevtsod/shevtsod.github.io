@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import HeartIcon from '../../../assets/images/icons/heart.svg?react';
 import socials from '../../../data/socials';
+import Icon from '../../icon/Icon';
 
 export interface FooterProps extends React.HTMLAttributes<HTMLElement> {}
 
@@ -33,7 +33,7 @@ export default function Footer({ className, ...props }: FooterProps) {
               {t('sections.social')}
             </div>
 
-            {socials.map(({ href, icon: Icon, title }, i) => (
+            {socials.map(({ href, icon, title }, i) => (
               <div key={i}>
                 <a
                   target="_blank"
@@ -41,7 +41,7 @@ export default function Footer({ className, ...props }: FooterProps) {
                   href={href}
                   className="inline-flex items-center gap-2 hover:text-theme-orange-200"
                 >
-                  <Icon className="inline-block" /> {title}
+                  <Icon icon={icon} className="inline-block" /> {title}
                 </a>
               </div>
             ))}
@@ -54,7 +54,8 @@ export default function Footer({ className, ...props }: FooterProps) {
               i18nKey="copyright"
               components={{
                 icon: (
-                  <HeartIcon
+                  <Icon
+                    icon="heart"
                     className="h-[16px] w-auto inline align-text-top text-theme-red-400"
                     viewBox="0 0 16 16"
                   />

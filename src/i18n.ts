@@ -8,15 +8,11 @@ i18n
   .use(HttpBackend)
   .init({
     debug: process.env.NODE_ENV === 'development',
-    ns: 'app',
-    defaultNS: 'app',
     backend: {
       loadPath: '/locales/{{lng}}/{{ns}}.json',
     },
-    lng: 'en',
-    interpolation: {
-      escapeValue: false,
-    },
+    ns: 'app',
+    fallbackLng: 'en',
   });
 
 export default i18n;

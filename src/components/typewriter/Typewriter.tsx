@@ -5,36 +5,29 @@ import Caret from '../caret/Caret';
 export interface TypewriterProps extends React.HTMLAttributes<HTMLSpanElement> {
   text: string;
   duration: number;
-  delay?: number;
+  paused?: boolean;
 }
 
 export default function Typewriter({
   text = '',
   duration = 1,
-  delay = 0,
+  paused,
   className,
   ...props
 }: TypewriterProps) {
-  const [started, setStarted] = useState(false);
+  const [playing, setPlaying] = useState(!paused);
   const [displayChars, setDisplayChars] = useState(0);
 
-  // Start delay
+  // Start/pause
   useEffect(() => {
-    const timeout = setTimeout(() => {
-      setStarted(true);
-    }, delay * 1000);
-
-    return () => {
-      setStarted(false);
-      clearTimeout(timeout);
-    };
-  }, [delay, text]);
+    setPlaying(!paused);
+  }, [paused]);
 
   // Typewriter effect
   useEffect(() => {
     let interval: NodeJS.Timeout | undefined = undefined;
 
-    if (started) {
+    if (playing) {
       interval = setInterval(
         () => {
           if (displayChars < text.length) {
@@ -48,7 +41,7 @@ export default function Typewriter({
     }
 
     return () => clearInterval(interval);
-  }, [started, duration, text, displayChars]);
+  }, [playing, duration, text, displayChars]);
 
   // Reset when text changes
   useEffect(() => {

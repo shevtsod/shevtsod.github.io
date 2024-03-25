@@ -7,7 +7,6 @@ const meta: Meta<typeof Typewriter> = {
   args: {
     text: faker.lorem.text(),
     duration: 2,
-    delay: 2,
   },
 };
 
@@ -21,6 +20,7 @@ export const Styled: Story = {
   args: {
     text: faker.lorem.paragraphs(2),
     duration: 5,
+    paused: true,
   },
   decorators: [
     (Story) => (

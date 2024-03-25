@@ -18,11 +18,11 @@ const messages = (
     <p className="w-2/3">CPU: shevtsodCorp (R) CPU X32-00 @ 40 MHz</p>
     <p>
       &emsp;Speed: <b>40 MHz</b>&emsp;&emsp;Count: 2&emsp;&emsp;
-      <span className="text-theme-green-400">OK</span>
+      <span className="text-theme-green-800 dark:text-theme-green-400">OK</span>
     </p>
     <p>
       Memory Test: <b>65536K</b>&emsp;&emsp;
-      <span className="text-theme-green-400">OK</span>
+      <span className="text-theme-green-800 dark:text-theme-green-400">OK</span>
     </p>
     <br />
     <p>Press DEL to run Setup</p>
@@ -37,7 +37,7 @@ const messages = (
       &emsp;*** ERROR: 0x4D2B634BE20F50B53E5FC146705D8BBC (Location
       0x545B9C8564C88DCB4ED7491F0D716816, 0xC67F37C9E02D4D967A9FF05F21E1D2F1)
     </p>
-    <p className="text-theme-yellow-400">
+    <p className="text-theme-yellow-800 dark:text-theme-yellow-400">
       &emsp;*** WARN: Non-critical mount errors resolved, proceeding with boot
       sequence (code CAAB0C) ...
     </p>
@@ -121,10 +121,7 @@ export default function Boot({ className, ...props }: BootProps) {
   return (
     <div
       {...props}
-      className={classNames(
-        'relative min-h-[100svh] py-10 bg-theme-gray-800 text-theme-gray-100',
-        className,
-      )}
+      className={classNames('relative min-h-[100svh] py-10', className)}
     >
       <Helmet>
         <title>{displayTitle}</title>

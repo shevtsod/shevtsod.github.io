@@ -1,4 +1,4 @@
-import React, { Suspense, useMemo } from 'react';
+import React, { Suspense, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Boot from '../components/boot/Boot';
 import Layout from '../components/layout/layout/Layout';
@@ -6,8 +6,13 @@ import Layout from '../components/layout/layout/Layout';
 const BOOT_DELAY = 2;
 const BOOT_PATHNAMES = ['/'];
 
+export interface ContextType {
+  setShowHeaderOnScroll: (value: boolean) => void;
+}
+
 export default function RootRoute() {
   const { pathname } = useLocation();
+  const [showHeaderOnScroll, setShowHeaderOnScroll] = useState(false);
   const delay = BOOT_PATHNAMES.includes(pathname) ? BOOT_DELAY : 0;
   const fallback = BOOT_PATHNAMES.includes(pathname) && <Boot />;
 
@@ -23,8 +28,14 @@ export default function RootRoute() {
 
   return (
     <Suspense fallback={fallback}>
-      <Layout>
-        <LazyOutlet />
+      <Layout showHeaderOnScroll={showHeaderOnScroll}>
+        <LazyOutlet
+          context={
+            {
+              setShowHeaderOnScroll,
+            } satisfies ContextType
+          }
+        />
       </Layout>
     </Suspense>
   );

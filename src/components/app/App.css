@@ -14,8 +14,3 @@
     url("/fonts/SHPinscher/SHPinscher-Regular.woff") format("woff"),
     url("/fonts/SHPinscher/SHPinscher-Regular.otf") format("opentype");
 }
-
-svg,
-svg * {
-  fill: currentColor;
-}

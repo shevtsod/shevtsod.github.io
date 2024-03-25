@@ -31,7 +31,7 @@ export default function AppError({
     <div
       {...props}
       className={classNames(
-        'flex flex-col justify-center text-center bg-theme-gray-800 text-theme-gray-100',
+        'flex flex-col justify-center text-center',
         className,
       )}
     >
