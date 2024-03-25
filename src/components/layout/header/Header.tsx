@@ -35,7 +35,7 @@ export default function Header({
       {...props}
       className={classNames(
         { invisible: !shown },
-        'h-20 flex py-2 sticky top-0 backdrop-blur-md md:backdrop-blur-lg shadow-lg z-10',
+        'h-20 w-full flex py-2 fixed top-0 backdrop-blur-md md:backdrop-blur-lg shadow-lg z-10',
         className,
       )}
     >
