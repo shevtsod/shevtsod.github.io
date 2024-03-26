@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { useEffect, useMemo, useState } from 'react';
-import { Helmet } from 'react-helmet-async';
 import { useTranslation } from 'react-i18next';
 import Caret from '../caret/Caret';
 import Logo from '../logo/Logo';
@@ -63,6 +62,8 @@ export default function Boot({ className, ...props }: BootProps) {
 
   // Add title characters to display
   useEffect(() => {
+    document.title = title.substring(0, displayTitleChars + 1);
+
     let timeout: NodeJS.Timeout | undefined = undefined;
     const interval = setInterval(
       () => {
@@ -82,6 +83,11 @@ export default function Boot({ className, ...props }: BootProps) {
       clearTimeout(timeout);
       clearInterval(interval);
     };
+  }, [title, displayTitleChars]);
+
+  // Update title
+  useEffect(() => {
+    document.title = title.substring(0, displayTitleChars + 1);
   }, [title, displayTitleChars]);
 
   // Add lines to display
@@ -108,11 +114,6 @@ export default function Boot({ className, ...props }: BootProps) {
     };
   }, [messages, displayLines]);
 
-  const displayTitle = useMemo(
-    () => title.substring(0, displayTitleChars),
-    [title, displayTitleChars],
-  );
-
   const children = useMemo(
     () => messages.props.children.slice(0, displayLines),
     [messages, displayLines],
@@ -123,10 +124,6 @@ export default function Boot({ className, ...props }: BootProps) {
       {...props}
       className={classNames('relative min-h-[100svh] py-10', className)}
     >
-      <Helmet>
-        <title>{displayTitle}</title>
-      </Helmet>
-
       <div className="container px-4 mx-auto text-xs md:text-lg">
         <div className="container flex flex-col justify-start items-end absolute top-0 my-10 -mx-10 z-0">
           <div className="flex flex-col justify-center items-center">
