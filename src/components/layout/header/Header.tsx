@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import {
-  ForwardRefComponent,
   HTMLMotionProps,
   motion,
   useMotionValueEvent,
@@ -13,8 +12,7 @@ import styles from './Header.module.css';
 // Scrolled pixels when Header is shown
 const SCROLL_THRESHOLD = 50;
 
-export interface HeaderProps
-  extends ForwardRefComponent<HTMLElement, HTMLMotionProps<'header'>> {
+export interface HeaderProps extends HTMLMotionProps<'header'> {
   showOnScroll?: boolean;
   className?: string;
 }
