@@ -1,13 +1,22 @@
 import classNames from 'classnames';
-import { useMotionValueEvent, useScroll } from 'framer-motion';
+import {
+  ForwardRefComponent,
+  HTMLMotionProps,
+  motion,
+  useMotionValueEvent,
+  useScroll,
+} from 'framer-motion';
 import { useEffect, useState } from 'react';
 import Logo from '../../logo/Logo';
+import styles from './Header.module.css';
 
 // Scrolled pixels when Header is shown
 const SCROLL_THRESHOLD = 50;
 
-export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
+export interface HeaderProps
+  extends ForwardRefComponent<HTMLElement, HTMLMotionProps<'header'>> {
   showOnScroll?: boolean;
+  className?: string;
 }
 
 export default function Header({
@@ -31,17 +40,21 @@ export default function Header({
   });
 
   return (
-    <header
+    <motion.header
       {...props}
       className={classNames(
-        { invisible: !shown },
-        'h-20 w-full flex py-2 fixed top-0 backdrop-blur-md md:backdrop-blur-lg shadow-lg z-10',
+        {
+          'backdrop-blur-md md:backdrop-blur-lg ': shown,
+          'pointer-events-none': !shown,
+        },
+        'h-20 w-full flex py-2 fixed top-0  shadow-lg z-10',
+        styles.header,
         className,
       )}
     >
-      <div className="container mx-auto">
+      <div className={classNames({ invisible: !shown }, 'container mx-auto')}>
         <Logo shown={shown} animated className="h-full w-auto p-2" />
       </div>
-    </header>
+    </motion.header>
   );
 }

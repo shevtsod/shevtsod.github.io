@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 import { useOutletContext } from 'react-router-dom';
 import About from '../components/routes/index/about/About';
 import Contact from '../components/routes/index/contact/Contact';
@@ -11,7 +11,9 @@ import useTitle from '../hooks/useTitle';
 import { ContextType } from './root';
 
 export default function IndexRoute() {
+  const { t } = useTranslation('app', { keyPrefix: 'routes.index' });
   const { setShowHeaderOnScroll } = useOutletContext<ContextType>();
+  useTitle(t('title'));
 
   useEffect(() => {
     setShowHeaderOnScroll(true);
@@ -19,10 +21,6 @@ export default function IndexRoute() {
 
   return (
     <main>
-      <Helmet>
-        <title>{useTitle('Home')}</title>
-      </Helmet>
-
       <Hero as="section" id="hero" className="min-h-[100svh]" />
       <Summary as="section" id="summary" />
       <Projects as="section" id="projects" />

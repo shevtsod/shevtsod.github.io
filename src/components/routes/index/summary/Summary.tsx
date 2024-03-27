@@ -1,38 +1,31 @@
 import classNames from 'classnames';
-import { useInView } from 'framer-motion';
-import CodeIcon from 'pixelarticons/svg/code.svg?react';
-import HumanIcon from 'pixelarticons/svg/human.svg?react';
-import SunAltIcon from 'pixelarticons/svg/sun-alt.svg?react';
 import { ComponentPropsWithoutRef, ElementType, useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import crosshairImage from '../../../../assets/images/crosshair.webp';
+import useFadeInView from '../../../../hooks/useFadeInView';
 import Heading from '../../../heading/Heading';
+import Icon from '../../../icon/Icon';
 import styles from './Summary.module.css';
 
 interface SummaryItemProps extends React.HTMLAttributes<HTMLDivElement> {
-  icon?: React.ElementType;
+  icon?: string;
   i18nKey: string;
 }
 
-function SummaryItem({ className, icon: Icon, i18nKey }: SummaryItemProps) {
+function SummaryItem({ className, icon, i18nKey }: SummaryItemProps) {
   const { t } = useTranslation('app', { keyPrefix: 'components.Summary' });
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  useFadeInView(ref, { once: true });
 
   return (
-    <div
-      ref={ref}
-      className={classNames(
-        {
-          'animate-fade-in': isInView,
-          invisible: !isInView,
-        },
-        'text-theme-gray-200',
-        className,
-      )}
-    >
+    <div ref={ref} className={classNames('text-theme-gray-200 ', className)}>
       <div className="flex justify-center m-8 text-theme-red-400">
-        {Icon && <Icon className={classNames('h-24 w-24 p-4', styles.icon)} />}
+        {icon && (
+          <Icon
+            icon={icon}
+            className={classNames('h-24 w-24 p-4 hover:scale-125', styles.icon)}
+          />
+        )}
       </div>
       <p>
         <Trans
@@ -66,7 +59,7 @@ export default function Summary<T extends ElementType>({
       {...props}
       style={{ backgroundImage: `url("${crosshairImage}")` }}
       className={classNames(
-        `py-12 px-6 bg-repeat bg-[length:128px] [image-rendering:pixelated] bg-theme-gray-800`,
+        `py-12 px-6 bg-repeat bg-[length:128px] image-pixelated bg-theme-gray-800`,
         styles.section,
         className,
       )}
@@ -76,9 +69,9 @@ export default function Summary<T extends ElementType>({
       </Heading>
 
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 md:gap-10 text-center items-start">
-        <SummaryItem i18nKey="summary1" icon={CodeIcon} />
-        <SummaryItem i18nKey="summary2" icon={SunAltIcon} />
-        <SummaryItem i18nKey="summary3" icon={HumanIcon} />
+        <SummaryItem i18nKey="summary1" icon="code" />
+        <SummaryItem i18nKey="summary2" icon="lightbulb" />
+        <SummaryItem i18nKey="summary3" icon="human" />
       </div>
     </Component>
   );

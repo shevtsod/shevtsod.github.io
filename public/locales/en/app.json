@@ -33,6 +33,9 @@
     },
     "error": {
       "title": "CRITICAL ERROR!"
+    },
+    "index": {
+      "title": "Home"
     }
   }
 }

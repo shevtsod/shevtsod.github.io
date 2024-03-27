@@ -1,8 +1,8 @@
 import classNames from 'classnames';
-import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import socials from '../../../data/socials';
+import useFadeInView from '../../../hooks/useFadeInView';
 import Icon from '../../icon/Icon';
 
 export interface FooterProps extends React.HTMLAttributes<HTMLElement> {}
@@ -10,7 +10,7 @@ export interface FooterProps extends React.HTMLAttributes<HTMLElement> {}
 export default function Footer({ className, ...props }: FooterProps) {
   const { t } = useTranslation('app', { keyPrefix: 'components.Footer' });
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true });
+  useFadeInView(ref, { once: true });
 
   return (
     <footer
@@ -18,15 +18,7 @@ export default function Footer({ className, ...props }: FooterProps) {
       ref={ref}
       className={classNames('border-t-theme-red-400 border-t', className)}
     >
-      <div
-        className={classNames(
-          {
-            'animate-fade-in': isInView,
-            invisible: !isInView,
-          },
-          'container mx-auto',
-        )}
-      >
+      <div className="container mx-auto">
         <div className="py-8 px-8 grid grid-cols-1 md:grid-cols-3 gap-4 justify-items-center">
           <div className="flex flex-col">
             <div className="text-lg font-bold text-theme-red-400">

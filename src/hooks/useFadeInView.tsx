@@ -1,0 +1,33 @@
+import { useInView, UseInViewOptions } from 'framer-motion';
+import { RefObject, useEffect } from 'react';
+
+export default function useFadeInView(
+  ref: RefObject<Element>,
+  opts?: UseInViewOptions,
+) {
+  const isInView = useInView(ref, opts);
+
+  useEffect(() => {
+    const { current } = ref;
+
+    if (current) {
+      // Add transition classes
+      ['transition-opacity', 'ease-steps4', 'duration-1000'].forEach(
+        (className) => {
+          if (!current.classList.contains(className)) {
+            current.classList.add(className);
+          }
+        },
+      );
+
+      // Show/hide
+      if (isInView) {
+        current.classList.remove('opacity-0');
+      } else {
+        current.classList.add('opacity-0');
+      }
+    }
+  }, [ref, isInView]);
+
+  return isInView;
+}
