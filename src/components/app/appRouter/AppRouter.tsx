@@ -17,4 +17,6 @@ const router = createHashRouter([
   },
 ]);
 
-export default () => RouterProvider({ router });
+export default function AppRouter() {
+  return <RouterProvider router={router} />;
+}

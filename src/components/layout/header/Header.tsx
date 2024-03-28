@@ -6,6 +6,9 @@ import {
   useScroll,
 } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { NavLink } from 'react-router-dom';
+import Button from '../../button/Button';
 import Logo from '../../logo/Logo';
 import styles from './Header.module.css';
 
@@ -22,6 +25,7 @@ export default function Header({
   className,
   ...props
 }: HeaderProps) {
+  const { t } = useTranslation('app', { keyPrefix: 'components.Header' });
   const { scrollY } = useScroll();
   const [shown, setShown] = useState(!showOnScroll);
 
@@ -44,14 +48,26 @@ export default function Header({
         {
           'backdrop-blur-md md:backdrop-blur-lg ': shown,
           'pointer-events-none': !shown,
+          fixed: showOnScroll,
+          sticky: !showOnScroll,
         },
-        'h-20 w-full flex py-2 fixed top-0  shadow-lg z-10',
+        'h-20 w-full flex py-2 fixed top-0 shadow-lg z-10',
         styles.header,
         className,
       )}
     >
-      <div className={classNames({ invisible: !shown }, 'container mx-auto')}>
+      <div
+        className={classNames(
+          { invisible: !shown },
+          'container mx-auto flex justify-between items-center',
+        )}
+      >
         <Logo shown={shown} animated className="h-full w-auto p-2" />
+        <div className="flex gap-1">
+          <Button as={NavLink} to="/">
+            <b>{t('links.home')}</b>
+          </Button>
+        </div>
       </div>
     </motion.header>
   );

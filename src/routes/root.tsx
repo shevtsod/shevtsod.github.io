@@ -1,5 +1,5 @@
 import React, { Suspense, useMemo, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { ScrollRestoration, useLocation } from 'react-router-dom';
 import Boot from '../components/boot/Boot';
 import Layout from '../components/layout/layout/Layout';
 
@@ -27,16 +27,19 @@ export default function RootRoute() {
   );
 
   return (
-    <Suspense fallback={fallback}>
-      <Layout showHeaderOnScroll={showHeaderOnScroll}>
-        <LazyOutlet
-          context={
-            {
-              setShowHeaderOnScroll,
-            } satisfies ContextType
-          }
-        />
-      </Layout>
-    </Suspense>
+    <>
+      <Suspense fallback={fallback}>
+        <Layout showHeaderOnScroll={showHeaderOnScroll}>
+          <LazyOutlet
+            context={
+              {
+                setShowHeaderOnScroll,
+              } satisfies ContextType
+            }
+          />
+        </Layout>
+      </Suspense>
+      <ScrollRestoration />
+    </>
   );
 }

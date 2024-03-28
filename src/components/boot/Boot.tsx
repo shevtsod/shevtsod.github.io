@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import useTitle from '../../hooks/useTitle';
 import Caret from '../caret/Caret';
 import Logo from '../logo/Logo';
 
@@ -56,39 +57,8 @@ export interface BootProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export default function Boot({ className, ...props }: BootProps) {
   const { t } = useTranslation('app', { keyPrefix: 'components.Boot' });
-  const title = t('title');
-  const [displayTitleChars, setDisplayTitleChars] = useState(0);
+  useTitle(t('title'), { raw: true });
   const [displayLines, setDisplayLines] = useState(0);
-
-  // Add title characters to display
-  useEffect(() => {
-    document.title = title.substring(0, displayTitleChars + 1);
-
-    let timeout: NodeJS.Timeout | undefined = undefined;
-    const interval = setInterval(
-      () => {
-        if (displayTitleChars < title.length) {
-          timeout = setTimeout(
-            () => setDisplayTitleChars(displayTitleChars + 1),
-            (DURATION * 1000) / title.length,
-          );
-        } else {
-          clearInterval(interval);
-        }
-      },
-      (DURATION * 1000) / title.length,
-    );
-
-    return () => {
-      clearTimeout(timeout);
-      clearInterval(interval);
-    };
-  }, [title, displayTitleChars]);
-
-  // Update title
-  useEffect(() => {
-    document.title = title.substring(0, displayTitleChars + 1);
-  }, [title, displayTitleChars]);
 
   // Add lines to display
   useEffect(() => {

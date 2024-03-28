@@ -1,0 +1,50 @@
+.button {
+  --color-bg: theme("colors.theme.red.400");
+  --color-bg-2: transparent;
+  --color-text: theme("colors.theme.gray.800");
+  --color-text-2: theme("colors.theme.red.400");
+  --color-border: transparent;
+  --color-border-2: theme("colors.theme.red.400");
+
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  border-color: var(--color-border);
+}
+
+.button:hover {
+  background-color: var(--color-bg-2);
+  color: var(--color-text-2);
+  border-color: var(--color-border-2);
+}
+
+.button:global(.active) {
+  --color-bg: theme("colors.theme.gray.100");
+  --color-text-2: theme("colors.theme.gray.100");
+  --color-border-2: theme("colors.theme.gray.100");
+}
+
+.hover {
+  animation: buttonHover 0.6s steps(2, end) normal forwards;
+}
+
+.unhover {
+  animation: buttonHover 0.6s steps(2, end) reverse forwards;
+}
+
+@keyframes buttonHover {
+  0% {
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    border-color: var(--color-border);
+  }
+  50% {
+    background-color: var(--color-bg-2);
+    color: var(--color-text-2);
+    border-color: var(--color-border);
+  }
+  100% {
+    background-color: var(--color-bg-2);
+    color: var(--color-text-2);
+    border-color: var(--color-border-2);
+  }
+}

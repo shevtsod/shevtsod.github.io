@@ -16,6 +16,12 @@
       },
       "copyright": "Made with <icon /> by Daniel Shevtsov"
     },
+    "Header": {
+      "links": {
+        "home": "Home",
+        "contact": "Contact"
+      }
+    },
     "Hero": {
       "title": "Daniel\nShevtsov",
       "subtitle": "Full-stack web developer."
