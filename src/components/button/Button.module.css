@@ -2,11 +2,13 @@
   --color-high: theme("colors.theme.red.400");
   --color-low: theme("colors.theme.gray.800");
 
-  background-color: var(--color-low);
+  background-color: transparent;
   color: var(--color-high);
   border-color: var(--color-high);
 
-  transition: 0.4s steps(2, end);
+  transition: background-color 0.4s steps(2, end),
+    color 0.4s steps(2, end),
+    border-color 0.4s steps(2, end);
 }
 
 .button:hover,
@@ -14,7 +16,7 @@
  {
   background-color: var(--color-high);
   color: var(--color-low);
-  border-color: var(--color-low);
+  border-color: transparent;
 }
 
 .success {
