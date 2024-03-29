@@ -45,10 +45,11 @@ export default function Header({
       className={classNames(
         {
           'invisible pointer-events-none': !shown,
+          'backdrop-blur-md md:backdrop-blur-lg': shown,
           fixed: showOnScroll,
           sticky: !showOnScroll,
         },
-        'h-20 w-full flex py-2 fixed top-0 shadow-lg z-50 backdrop-blur-md md:backdrop-blur-lg',
+        'h-20 w-full flex py-2 fixed top-0 shadow-lg z-50',
         styles.header,
         className,
       )}
