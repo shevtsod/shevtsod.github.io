@@ -9,7 +9,7 @@ import { Helmet, HelmetProvider } from 'react-helmet-async';
 import { I18nextProvider } from 'react-i18next';
 import useTitle from '../../hooks/useTitle';
 import i18n from '../../i18n';
-import Router from './appRouter/AppRouter';
+import Router from '../appRouter/AppRouter';
 
 export interface AppProps {
   children?: React.ReactNode;

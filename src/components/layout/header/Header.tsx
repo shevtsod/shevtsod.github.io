@@ -30,11 +30,7 @@ export default function Header({
   const [shown, setShown] = useState(false);
 
   useEffect(() => {
-    if (showOnScroll) {
-      setShown(scrollY.get() > SCROLL_THRESHOLD);
-    } else {
-      setShown(true);
-    }
+    setShown(!showOnScroll || scrollY.get() > SCROLL_THRESHOLD);
   }, [showOnScroll]);
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
@@ -52,7 +48,7 @@ export default function Header({
           fixed: showOnScroll,
           sticky: !showOnScroll,
         },
-        'h-20 w-full flex py-2 fixed top-0 shadow-lg z-10 backdrop-blur-md md:backdrop-blur-lg',
+        'h-20 w-full flex py-2 fixed top-0 shadow-lg z-50 backdrop-blur-md md:backdrop-blur-lg',
         styles.header,
         className,
       )}

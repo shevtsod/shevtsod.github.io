@@ -5,8 +5,8 @@ import Typewriter from './Typewriter';
 const meta: Meta<typeof Typewriter> = {
   component: Typewriter,
   args: {
-    text: faker.lorem.text(),
-    duration: 2,
+    children: faker.lorem.text(),
+    duration: 2000,
   },
 };
 
@@ -18,8 +18,8 @@ export const Default: Story = {};
 
 export const Styled: Story = {
   args: {
-    text: faker.lorem.paragraphs(2),
-    duration: 5,
+    children: faker.lorem.paragraphs(2),
+    duration: 5000,
     paused: true,
   },
   decorators: [

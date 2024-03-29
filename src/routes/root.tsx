@@ -1,10 +1,7 @@
-import React, { Suspense, useMemo, useState } from 'react';
-import { ScrollRestoration, useLocation } from 'react-router-dom';
-import Boot from '../components/boot/Boot';
+import { useState } from 'react';
+import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
 import Layout from '../components/layout/layout/Layout';
-
-const BOOT_DELAY = 2;
-const BOOT_PATHNAMES = ['/'];
+import useBoot from '../hooks/useBoot';
 
 export interface ContextType {
   setShowHeaderOnScroll: (value: boolean) => void;
@@ -13,33 +10,23 @@ export interface ContextType {
 export default function RootRoute() {
   const { pathname } = useLocation();
   const [showHeaderOnScroll, setShowHeaderOnScroll] = useState(false);
-  const delay = BOOT_PATHNAMES.includes(pathname) ? BOOT_DELAY : 0;
-  const fallback = BOOT_PATHNAMES.includes(pathname) && <Boot />;
 
-  // Delay router outlet to show boot screen on selected routes
-  const LazyOutlet = useMemo(
-    () =>
-      React.lazy(async () => {
-        await new Promise((resolve) => setTimeout(resolve, delay * 1000));
-        return import('../components/app/appOutlet/AppOutlet');
-      }),
-    [delay],
-  );
+  if (['/'].includes(pathname)) {
+    const boot = useBoot();
+
+    if (boot) {
+      return boot;
+    }
+  }
+
+  const context: ContextType = {
+    setShowHeaderOnScroll,
+  };
 
   return (
-    <>
-      <Suspense fallback={fallback}>
-        <Layout showHeaderOnScroll={showHeaderOnScroll}>
-          <LazyOutlet
-            context={
-              {
-                setShowHeaderOnScroll,
-              } satisfies ContextType
-            }
-          />
-        </Layout>
-      </Suspense>
+    <Layout showHeaderOnScroll={showHeaderOnScroll}>
+      <Outlet context={context} />
       <ScrollRestoration />
-    </>
+    </Layout>
   );
 }

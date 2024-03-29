@@ -46,12 +46,14 @@ export default function Hero<T extends ElementType>({
       </h1>
 
       <h2 className="lg:text-lg">
-        <Typewriter text={t('subtitle')} duration={2} paused={subtitlePaused} />
+        <Typewriter duration={2000} paused={subtitlePaused}>
+          {t('subtitle')}
+        </Typewriter>
       </h2>
 
       <div
         className={classNames(
-          'absolute bottom-0 right-0 mx-10 my-10 flex flex-col items-center font-retro',
+          'absolute bottom-0 right-0 mx-10 my-10 flex flex-col items-center font-retro pointer-events-none',
           styles.chevron,
         )}
       >

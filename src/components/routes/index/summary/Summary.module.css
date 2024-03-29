@@ -4,6 +4,11 @@
   animation: backdropSlide 4s steps(35, end) infinite;
 }
 
+.background {
+  background-size: 72px 72px;
+  background-repeat: repeat-x;
+}
+
 .icon {
   background:
   linear-gradient(to right, theme("colors.theme.red.400") 4px, transparent 4px) 0 0,

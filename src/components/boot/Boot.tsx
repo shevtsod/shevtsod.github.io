@@ -5,8 +5,6 @@ import useTitle from '../../hooks/useTitle';
 import Caret from '../caret/Caret';
 import Logo from '../logo/Logo';
 
-const DURATION = 0.8;
-
 const messages = (
   <>
     <p className="w-2/3">
@@ -53,62 +51,52 @@ const messages = (
   </>
 );
 
-const COUNTER_MAX = messages.props.children.length;
+export interface BootProps extends React.HTMLAttributes<HTMLDivElement> {
+  duration?: number;
+}
 
-export interface BootProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-export default function Boot({ className, ...props }: BootProps) {
+export default function Boot({
+  duration = 1000,
+  className,
+  ...props
+}: BootProps) {
   const { t } = useTranslation('app', { keyPrefix: 'components.Boot' });
   const title = t('title');
   const [counter, setCounter] = useState(0);
-
+  const counterMax = messages.props.children.length;
   const startTime = useMemo(() => Date.now(), []);
+
+  useTitle(title.slice(0, (counter / counterMax) * title.length), {
+    raw: true,
+  });
 
   // Increment counter
   useEffect(() => {
-    let timeout: NodeJS.Timeout | undefined = undefined;
-    const interval = setInterval(
-      () => {
-        // Time since counter started
-        const elapsedTime = (Date.now() - startTime) / 1000;
-        // Time when counter should reach max
-        const remainingTime = DURATION - elapsedTime;
-        // Remaining incrementations required
-        const remainingCount = COUNTER_MAX - counter;
-        // Minimum incrementation in this interval
-        const minIncrement = remainingTime <= 0 ? remainingCount : 1;
-        // Maximum incrementation in this interval
-        const maxIncrement = Math.min(2, remainingCount);
-        // Actual incrementation in this interval
-        const randomIncrement =
-          Math.floor(Math.random() * (maxIncrement - minIncrement + 1)) +
-          minIncrement;
-        // Decide if to randomly pause and skip this interval
-        const randomPause = remainingTime > 0 && Math.random() > 0.5;
+    const interval = setInterval(() => {
+      // Time since counter started
+      const elapsedTime = Date.now() - startTime;
+      // Time when counter should reach max
+      const remainingTime = duration - elapsedTime;
+      // Remaining incrementations required
+      const remainingCount = counterMax - counter;
+      // Minimum incrementation in this interval
+      const minIncrement = remainingTime <= 0 ? remainingCount : 1;
+      // Maximum incrementation in this interval
+      const maxIncrement = Math.min(2, remainingCount);
+      // Actual incrementation in this interval
+      const randomIncrement = Math.floor(
+        Math.random() * (maxIncrement - minIncrement) + minIncrement,
+      );
+      // Decide if to randomly pause and skip this interval
+      const randomPause = remainingTime > 0 && Math.random() > 0.5;
 
-        if (!randomPause) {
-          setCounter(counter + randomIncrement);
-        }
-      },
-      (DURATION * 1000) / COUNTER_MAX,
-    );
+      if (!randomPause) {
+        setCounter(counter + randomIncrement);
+      }
+    }, duration / counterMax);
 
-    return () => {
-      clearTimeout(timeout);
-      clearInterval(interval);
-    };
+    return () => clearInterval(interval);
   }, [messages, counter]);
-
-  const partialTitle = useMemo(
-    () => title.slice(0, (counter / COUNTER_MAX) * title.length + 1),
-    [title, counter],
-  );
-  useTitle(partialTitle, { raw: true });
-
-  const children = useMemo(
-    () => messages.props.children.slice(0, counter + 1),
-    [messages, counter],
-  );
 
   return (
     <div
@@ -125,7 +113,7 @@ export default function Boot({ className, ...props }: BootProps) {
         </div>
 
         <div className="relative z-10">
-          {children}
+          {messages.props.children.slice(0, counter)}
           <Caret className="block" />
         </div>
       </div>

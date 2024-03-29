@@ -4,7 +4,7 @@ import logoInIcon from '../../assets/images/logo-in.webp';
 import logoRotateIcon from '../../assets/images/logo-rotate.gif';
 import logoIcon from '../../assets/images/logo.webp';
 
-const ANIM_DURATION_ROTATE = 3.4;
+const DURATION_ROTATE = 3.4;
 
 export interface LogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
   shown?: boolean;
@@ -39,9 +39,9 @@ export default function Logo({
 
           timeout = setTimeout(() => {
             setSrc(logoIcon);
-          }, ANIM_DURATION_ROTATE * 1000);
+          }, DURATION_ROTATE * 1000);
         },
-        3 * ANIM_DURATION_ROTATE * 1000,
+        3 * DURATION_ROTATE * 1000,
       );
     }
 

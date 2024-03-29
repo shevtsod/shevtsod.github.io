@@ -2,6 +2,7 @@ import classNames from 'classnames';
 import { ComponentPropsWithoutRef, ElementType, useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import crosshairImage from '../../../../assets/images/crosshair.webp';
+import ditherImage from '../../../../assets/images/dither.webp';
 import useFadeInView from '../../../../hooks/useFadeInView';
 import Heading from '../../../heading/Heading';
 import Icon from '../../../icon/Icon';
@@ -65,11 +66,18 @@ export default function Summary<T extends ElementType>({
       {...props}
       style={{ backgroundImage: `url("${crosshairImage}")` }}
       className={classNames(
-        `py-12 px-6 image-pixelated bg-theme-gray-800`,
+        `relative z-10 pb-12 pt-24 px-6 image-pixelated bg-theme-gray-800`,
         styles.section,
         className,
       )}
     >
+      <div
+        style={{ backgroundImage: `url("${ditherImage}")` }}
+        className={classNames(
+          'h-[72px] w-full absolute top-0 left-0 z-10 image-pixelated  ',
+          styles.background,
+        )}
+      />
       <Heading as="h2" className="mb-4 uppercase text-center">
         {t('title')}
       </Heading>

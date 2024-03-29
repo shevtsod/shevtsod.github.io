@@ -2,6 +2,7 @@
   --color-high: theme("colors.theme.red.400");
   --color-low: theme("colors.theme.gray.800");
 
+  background-clip: padding-box;
   background-color: transparent;
   color: var(--color-high);
   border-color: var(--color-high);
