@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ComponentPropsWithoutRef, ElementType, useMemo } from 'react';
+import { ComponentPropsWithoutRef, ElementType } from 'react';
 import styles from './Button.module.css';
 
 type ButtonVariant = 'success' | 'info' | null;
@@ -20,20 +20,17 @@ export default function Button<T extends ElementType>({
 }: ButtonProps<T>) {
   const Component = as ?? 'button';
 
-  const buttonClasses = useMemo(
-    () =>
-      classNames(
+  return (
+    <Component
+      {...props}
+      className={classNames(
         'inline-flex items-center px-0.5 border-4',
         { active },
         styles.button,
         variant && styles[variant],
         className,
-      ),
-    [active, variant, className],
-  );
-
-  return (
-    <Component {...props} className={buttonClasses}>
+      )}
+    >
       {children}
     </Component>
   );
