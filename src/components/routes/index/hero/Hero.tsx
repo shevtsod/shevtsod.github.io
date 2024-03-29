@@ -32,7 +32,7 @@ export default function Hero<T extends ElementType>({
     <Component
       {...props}
       className={classNames(
-        'relative flex flex-col justify-center text-center overflow-hidden',
+        'container mx-auto relative flex flex-col justify-center text-center overflow-hidden',
         className,
       )}
     >
