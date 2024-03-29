@@ -1,5 +1,7 @@
 .section {
-  animation: backdropSlide 100s steps(1000, end) infinite;
+  background-repeat: repeat;
+  background-size: 128px 128px;
+  animation: backdropSlide 4s steps(35, end) infinite;
 }
 
 .icon {
@@ -16,11 +18,15 @@
   background-size: 24px 24px;
 }
 
+.icon:hover {
+  background-size: 12px 12px;
+}
+
 @keyframes backdropSlide {
   from {
     background-position: 0 0;
   }
   to {
-    background-position: -400% 400%;
+    background-position: 0 128px;
   }
 }

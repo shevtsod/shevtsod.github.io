@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
 
 export interface UseTitleOptions {
@@ -18,10 +18,30 @@ export default function useTitle(
   { raw = false }: UseTitleOptions = {},
 ) {
   const { t } = useTranslation('app', { keyPrefix: 'routes.root' });
-  const formatTitle = (title: string) =>
-    (title && `｢${title}｣ · `) + t('title');
+  const titleRef = useRef(title);
 
   useEffect(() => {
-    document.title = raw ? title : formatTitle(title);
-  }, [title, raw]);
+    titleRef.current = title; // Update the ref to the latest title
+    const formattedTitle = raw
+      ? title
+      : (title && `｢${title}｣ · `) + t('title');
+
+    // Set a timeout to allow for any potential quick consecutive updates
+    const timeout = setTimeout(() => {
+      if (document.title !== formattedTitle) {
+        document.title = formattedTitle;
+      }
+    }, 0);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [title, raw, t]);
+
+  // Ensure that the latest title is set when the component unmounts
+  useEffect(() => {
+    return () => {
+      document.title = titleRef.current;
+    };
+  }, []);
 }

@@ -53,40 +53,61 @@ const messages = (
   </>
 );
 
+const COUNTER_MAX = messages.props.children.length;
+
 export interface BootProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export default function Boot({ className, ...props }: BootProps) {
   const { t } = useTranslation('app', { keyPrefix: 'components.Boot' });
-  useTitle(t('title'), { raw: true });
-  const [displayLines, setDisplayLines] = useState(0);
+  const title = t('title');
+  const [counter, setCounter] = useState(0);
 
-  // Add lines to display
+  const startTime = useMemo(() => Date.now(), []);
+
+  // Increment counter
   useEffect(() => {
     let timeout: NodeJS.Timeout | undefined = undefined;
     const interval = setInterval(
       () => {
-        if (displayLines < messages.props.children.length) {
-          timeout = setTimeout(
-            () => setDisplayLines(displayLines + 1),
-            (Math.random() * (DURATION * 1000)) /
-              messages.props.children.length,
-          );
-        } else {
-          clearInterval(interval);
+        // Time since counter started
+        const elapsedTime = (Date.now() - startTime) / 1000;
+        // Time when counter should reach max
+        const remainingTime = DURATION - elapsedTime;
+        // Remaining incrementations required
+        const remainingCount = COUNTER_MAX - counter;
+        // Minimum incrementation in this interval
+        const minIncrement = remainingTime <= 0 ? remainingCount : 1;
+        // Maximum incrementation in this interval
+        const maxIncrement = Math.min(2, remainingCount);
+        // Actual incrementation in this interval
+        const randomIncrement =
+          Math.floor(Math.random() * (maxIncrement - minIncrement + 1)) +
+          minIncrement;
+        // Decide if to randomly pause and skip this interval
+        const randomPause = remainingTime > 0 && Math.random() > 0.5;
+
+        if (!randomPause) {
+          setCounter(counter + randomIncrement);
         }
       },
-      (DURATION * 1000) / messages.props.children.length,
+      (DURATION * 1000) / COUNTER_MAX,
     );
 
     return () => {
       clearTimeout(timeout);
       clearInterval(interval);
     };
-  }, [messages, displayLines]);
+  }, [messages, counter]);
+
+  const partialTitle = useMemo(
+    () => title.slice(0, (counter / COUNTER_MAX) * title.length + 1),
+    [title, counter],
+  );
+  useTitle(partialTitle, { raw: true });
 
   const children = useMemo(
-    () => messages.props.children.slice(0, displayLines),
-    [messages, displayLines],
+    () => messages.props.children.slice(0, counter + 1),
+    [messages, counter],
   );
 
   return (
@@ -103,11 +124,10 @@ export default function Boot({ className, ...props }: BootProps) {
           </div>
         </div>
 
-        <div className="relative z-10">{children}</div>
-
-        <p>
-          <Caret />
-        </p>
+        <div className="relative z-10">
+          {children}
+          <Caret className="block" />
+        </div>
       </div>
     </div>
   );

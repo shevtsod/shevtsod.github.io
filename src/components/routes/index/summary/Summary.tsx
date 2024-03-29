@@ -7,6 +7,9 @@ import Heading from '../../../heading/Heading';
 import Icon from '../../../icon/Icon';
 import styles from './Summary.module.css';
 
+const DATE = new Date();
+const YEAR = DATE.getFullYear();
+
 interface SummaryItemProps extends React.HTMLAttributes<HTMLDivElement> {
   icon?: string;
   i18nKey: string;
@@ -36,6 +39,9 @@ function SummaryItem({ className, icon, i18nKey }: SummaryItemProps) {
               <span className="font-bold text-theme-gray-800 bg-theme-red-400 p-1" />
             ),
           }}
+          values={{
+            experienceYears: YEAR - 2017,
+          }}
         />
       </p>
     </div>
@@ -59,7 +65,7 @@ export default function Summary<T extends ElementType>({
       {...props}
       style={{ backgroundImage: `url("${crosshairImage}")` }}
       className={classNames(
-        `py-12 px-6 bg-repeat bg-[length:128px] image-pixelated bg-theme-gray-800`,
+        `py-12 px-6 image-pixelated bg-theme-gray-800`,
         styles.section,
         className,
       )}

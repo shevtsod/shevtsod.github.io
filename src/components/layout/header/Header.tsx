@@ -27,11 +27,13 @@ export default function Header({
 }: HeaderProps) {
   const { t } = useTranslation('app', { keyPrefix: 'components.Header' });
   const { scrollY } = useScroll();
-  const [shown, setShown] = useState(!showOnScroll);
+  const [shown, setShown] = useState(false);
 
   useEffect(() => {
     if (showOnScroll) {
       setShown(scrollY.get() > SCROLL_THRESHOLD);
+    } else {
+      setShown(true);
     }
   }, [showOnScroll]);
 
@@ -46,22 +48,16 @@ export default function Header({
       {...props}
       className={classNames(
         {
-          'backdrop-blur-md md:backdrop-blur-lg ': shown,
-          'pointer-events-none': !shown,
+          'invisible pointer-events-none': !shown,
           fixed: showOnScroll,
           sticky: !showOnScroll,
         },
-        'h-20 w-full flex py-2 fixed top-0 shadow-lg z-10',
+        'h-20 w-full flex py-2 fixed top-0 shadow-lg z-10 backdrop-blur-md md:backdrop-blur-lg',
         styles.header,
         className,
       )}
     >
-      <div
-        className={classNames(
-          { invisible: !shown },
-          'container mx-auto flex justify-between items-center',
-        )}
-      >
+      <div className="container mx-auto px-4 flex justify-between items-center">
         <Logo shown={shown} animated className="h-full w-auto p-2" />
         <div className="flex gap-1">
           <Button as={NavLink} to="/">

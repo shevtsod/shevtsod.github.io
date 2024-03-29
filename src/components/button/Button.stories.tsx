@@ -17,6 +17,18 @@ export const Default: Story = {
   },
 };
 
+export const Variant: Story = {
+  args: {
+    children: faker.lorem.sentence(),
+  },
+  render: (args) => (
+    <div className="inline-flex flex-col">
+      <Button {...args} variant="success" />
+      <Button {...args} variant="info" />
+    </div>
+  ),
+};
+
 export const Active: Story = {
   args: {
     children: faker.lorem.sentence(),
