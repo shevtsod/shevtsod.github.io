@@ -12,11 +12,13 @@ import { ContextType } from './root';
 
 export default function IndexRoute() {
   const { t } = useTranslation('app', { keyPrefix: 'routes.index' });
-  const { setShowHeaderOnScroll } = useOutletContext<ContextType>();
+  const { setShowHeaderOnScroll, setShowBoot } =
+    useOutletContext<ContextType>();
   useTitle(t('title'));
 
   useEffect(() => {
     setShowHeaderOnScroll(true);
+    setShowBoot(true);
   }, []);
 
   return (

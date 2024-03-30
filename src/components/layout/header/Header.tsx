@@ -1,10 +1,5 @@
 import classNames from 'classnames';
-import {
-  HTMLMotionProps,
-  motion,
-  useMotionValueEvent,
-  useScroll,
-} from 'framer-motion';
+import { useMotionValueEvent, useScroll } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
@@ -15,7 +10,7 @@ import styles from './Header.module.css';
 // Scrolled pixels when Header is shown
 const SCROLL_THRESHOLD = 50;
 
-export interface HeaderProps extends HTMLMotionProps<'header'> {
+export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   showOnScroll?: boolean;
   className?: string;
 }
@@ -40,7 +35,7 @@ export default function Header({
   });
 
   return (
-    <motion.header
+    <header
       {...props}
       className={classNames(
         {
@@ -62,6 +57,6 @@ export default function Header({
           </Button>
         </div>
       </div>
-    </motion.header>
+    </header>
   );
 }

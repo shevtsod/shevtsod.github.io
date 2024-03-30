@@ -1,31 +1,43 @@
-import { useState } from 'react';
-import { Outlet, ScrollRestoration, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Outlet, ScrollRestoration, useNavigation } from 'react-router-dom';
 import Layout from '../components/layout/layout/Layout';
 import useBoot from '../hooks/useBoot';
 
 export interface ContextType {
   setShowHeaderOnScroll: (value: boolean) => void;
+  setShowBoot: (value: boolean) => void;
 }
 
 export default function RootRoute() {
-  const { pathname } = useLocation();
+  const { state } = useNavigation();
   const [showHeaderOnScroll, setShowHeaderOnScroll] = useState(false);
+  const [showBoot, setShowBoot] = useState(false);
+  const boot = useBoot();
 
-  if (['/'].includes(pathname)) {
-    const boot = useBoot();
-
-    if (boot) {
-      return boot;
+  // Reset layout props when navigating between pages
+  useEffect(() => {
+    if (state === 'loading') {
+      setShowHeaderOnScroll(false);
+      setShowBoot(false);
     }
+  }, [state]);
+
+  // Render boot instead of layout if enabled
+  if (showBoot && boot) {
+    return boot;
   }
 
-  const context: ContextType = {
-    setShowHeaderOnScroll,
-  };
-
+  // Render layout
   return (
     <Layout showHeaderOnScroll={showHeaderOnScroll}>
-      <Outlet context={context} />
+      <Outlet
+        context={
+          {
+            setShowHeaderOnScroll,
+            setShowBoot,
+          } satisfies ContextType
+        }
+      />
       <ScrollRestoration />
     </Layout>
   );

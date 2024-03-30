@@ -4,7 +4,7 @@ import Caret from '../caret/Caret';
 
 export interface TypewriterProps extends React.HTMLAttributes<HTMLSpanElement> {
   children: string;
-  duration: number;
+  duration?: number;
   paused?: boolean;
 }
 
@@ -20,13 +20,13 @@ export default function Typewriter({
   // Typewriter effect
   useEffect(() => {
     let interval = setInterval(() => {
-      if (!paused && counter < children.length) {
-        setCounter(counter + 1);
+      if (!paused) {
+        setCounter((value) => Math.min(value + 1, children.length));
       }
     }, duration / children.length);
 
     return () => clearInterval(interval);
-  }, [paused, duration, children, counter]);
+  }, [paused, duration, children]);
 
   return (
     <span {...props} className={classNames('whitespace-pre-wrap', className)}>

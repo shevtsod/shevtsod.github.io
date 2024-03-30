@@ -24,7 +24,7 @@ export default function Hero<T extends ElementType>({
   const [subtitlePaused, setSubtitlePaused] = useState(true);
 
   useEffect(() => {
-    const timeout = setTimeout(() => setSubtitlePaused(false), 3.5 * 1000);
+    const timeout = setTimeout(() => setSubtitlePaused(false), 3500);
     return () => clearTimeout(timeout);
   }, []);
 

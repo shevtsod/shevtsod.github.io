@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, ElementType, useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import crosshairImage from '../../../../assets/images/crosshair.webp';
 import ditherImage from '../../../../assets/images/dither.webp';
+import pipesImage from '../../../../assets/images/pipes.gif';
 import useFadeInView from '../../../../hooks/useFadeInView';
 import Heading from '../../../heading/Heading';
 import Icon from '../../../icon/Icon';
@@ -23,11 +23,14 @@ function SummaryItem({ className, icon, i18nKey }: SummaryItemProps) {
 
   return (
     <div ref={ref} className={classNames('text-theme-gray-200 ', className)}>
-      <div className="flex justify-center m-8 text-theme-red-400">
+      <div className="flex justify-center m-8">
         {icon && (
           <Icon
             icon={icon}
-            className={classNames('h-24 w-24 p-4 hover:scale-125', styles.icon)}
+            className={classNames(
+              'h-24 w-24 p-4 text-theme-red-400 hover:text-theme-gray-800 hover:bg-theme-red-400 hover:scale-125',
+              styles.icon,
+            )}
           />
         )}
       </div>
@@ -64,9 +67,9 @@ export default function Summary<T extends ElementType>({
   return (
     <Component
       {...props}
-      style={{ backgroundImage: `url("${crosshairImage}")` }}
+      style={{ backgroundImage: `url("${pipesImage}")` }}
       className={classNames(
-        `relative z-10 pb-12 pt-24 px-6 image-pixelated bg-theme-gray-800`,
+        `relative z-10 py-24 px-6 image-pixelated bg-theme-gray-800`,
         styles.section,
         className,
       )}
@@ -78,6 +81,7 @@ export default function Summary<T extends ElementType>({
           styles.background,
         )}
       />
+
       <Heading as="h2" className="mb-4 uppercase text-center">
         {t('title')}
       </Heading>
@@ -87,6 +91,14 @@ export default function Summary<T extends ElementType>({
         <SummaryItem i18nKey="summary2" icon="lightbulb" />
         <SummaryItem i18nKey="summary3" icon="human" />
       </div>
+
+      <div
+        style={{ backgroundImage: `url("${ditherImage}")` }}
+        className={classNames(
+          'h-[72px] w-full absolute bottom-0 left-0 z-10 image-pixelated -scale-y-100',
+          styles.background,
+        )}
+      />
     </Component>
   );
 }
