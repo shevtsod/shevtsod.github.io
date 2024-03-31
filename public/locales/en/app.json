@@ -10,6 +10,16 @@
     "Boot": {
       "title": "BOOTING ..."
     },
+    "Contact": {
+      "title": "Let's chat",
+      "form": {
+        "name": "Your name:",
+        "email": "Your email address:",
+        "message": "Your message:",
+        "submit": "Submit",
+        "submitted": "Thank you for reaching out, I will get back to you shortly!"
+      }
+    },
     "Footer": {
       "sections": {
         "social": "Social"

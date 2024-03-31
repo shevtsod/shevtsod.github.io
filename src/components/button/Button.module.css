@@ -12,12 +12,16 @@
     border-color 0.4s steps(2, end);
 }
 
-.button:hover,
+.button:hover:not(:disabled),
 .button:global(.active)
  {
   background-color: var(--color-high);
   color: var(--color-low);
-  border-color: transparent;
+}
+
+.button:disabled {
+  --color-high: theme("colors.theme.gray.400");
+  cursor: not-allowed;
 }
 
 .success {

@@ -69,17 +69,14 @@ export default function Summary<T extends ElementType>({
       {...props}
       style={{ backgroundImage: `url("${pipesImage}")` }}
       className={classNames(
-        `relative z-10 py-24 px-6 image-pixelated bg-theme-gray-800`,
+        `relative z-10 py-24 px-6 image-pixelated bg-repeat bg-[length:256px_256px] bg-fixed`,
         styles.section,
         className,
       )}
     >
       <div
         style={{ backgroundImage: `url("${ditherImage}")` }}
-        className={classNames(
-          'h-[72px] w-full absolute top-0 left-0 z-10 image-pixelated  ',
-          styles.background,
-        )}
+        className="h-[72px] w-full absolute top-0 left-0 z-10 image-pixelated bg-repeat-x bg-[length:72px_72px]"
       />
 
       <Heading as="h2" className="mb-4 uppercase text-center">
@@ -94,10 +91,7 @@ export default function Summary<T extends ElementType>({
 
       <div
         style={{ backgroundImage: `url("${ditherImage}")` }}
-        className={classNames(
-          'h-[72px] w-full absolute bottom-0 left-0 z-10 image-pixelated -scale-y-100',
-          styles.background,
-        )}
+        className="h-[72px] w-full absolute bottom-0 left-0 z-10 image-pixelated bg-repeat-x bg-[length:72px_72px] -scale-y-100"
       />
     </Component>
   );

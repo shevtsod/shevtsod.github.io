@@ -50,7 +50,9 @@ export default function Header({
       )}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <Logo shown={shown} animated className="h-full w-auto p-2" />
+        <NavLink to="/" className="h-full w-auto p-2">
+          <Logo shown={shown} animated className="h-full w-auto" />
+        </NavLink>
         <div className="flex gap-1">
           <Button as={NavLink} to="/">
             <b>{t('links.home')}</b>

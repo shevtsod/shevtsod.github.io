@@ -1,12 +1,5 @@
 .section {
-  background-repeat: repeat;
-  background-size: 256px 256px;
-  animation: backdropSlide 8s steps(80, end) infinite;
-}
-
-.background {
-  background-size: 72px 72px;
-  background-repeat: repeat-x;
+  animation: backdropSlide 8s steps(112, end) infinite;
 }
 
 .icon {
@@ -32,6 +25,6 @@
     background-position: 0 0;
   }
   to {
-    background-position: -256px 256px;
+    background-position: -256px 0;
   }
 }
