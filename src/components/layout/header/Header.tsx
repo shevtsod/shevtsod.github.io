@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useMotionValueEvent, useScroll } from 'framer-motion';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Button from '../../button/Button';
 import Logo from '../../logo/Logo';
 import styles from './Header.module.css';
@@ -50,12 +50,15 @@ export default function Header({
       )}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">
-        <NavLink to="/" className="h-full w-auto p-2">
-          <Logo shown={shown} animated className="h-full w-auto" />
+        <NavLink to="/" className="h-full aspect-square p-2">
+          <Logo shown={shown} animated className="h-full aspect-square" />
         </NavLink>
         <div className="flex gap-1">
           <Button as={NavLink} to="/">
             <b>{t('links.home')}</b>
+          </Button>
+          <Button as={Link} to="/#contact">
+            <b>{t('links.contact')}</b>
           </Button>
         </div>
       </div>
