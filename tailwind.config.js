@@ -60,9 +60,6 @@ export default {
         sans: ['"Ysabeau Office Variable"', ...defaultTheme.fontFamily.sans],
         serif: ['"Labrada Variable"', ...defaultTheme.fontFamily.serif],
       },
-      transitionTimingFunction: {
-        steps4: 'steps(4, end)',
-      },
     },
   },
   plugins: [],

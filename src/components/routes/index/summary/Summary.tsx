@@ -69,7 +69,7 @@ export default function Summary<T extends ElementType>({
       {...props}
       style={{ backgroundImage: `url("${pipesImage}")` }}
       className={classNames(
-        `relative z-10 py-24 px-6 image-pixelated bg-repeat bg-[length:256px_256px] bg-fixed`,
+        `relative py-24 px-6 image-pixelated bg-repeat bg-[length:256px_256px]`,
         styles.section,
         className,
       )}

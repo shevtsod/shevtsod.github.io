@@ -24,7 +24,7 @@ export default function Button<T extends ElementType>({
     <Component
       {...props}
       className={classNames(
-        'inline-flex items-center px-0.5 border-4',
+        'px-0.5 border-4',
         { active },
         styles.button,
         variant && styles[variant],

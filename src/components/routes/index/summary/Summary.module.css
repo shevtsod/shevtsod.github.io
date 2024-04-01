@@ -15,9 +15,9 @@
   background-repeat: no-repeat;
   background-size: 24px 24px;
 
-  transition: background-color 0.1s steps(2, end),
-    transform 0.2s steps(2, end),
-    color 0.2s steps(2, end) 0.1s;
+  transition: background-color 0.14s steps(2, end),
+    transform 0.14s steps(2, end),
+    color 0.14s steps(2, end) 0.14s;
 }
 
 @keyframes backdropSlide {
@@ -25,6 +25,6 @@
     background-position: 0 0;
   }
   to {
-    background-position: -256px 0;
+    background-position: -256px 256px;
   }
 }

@@ -12,7 +12,7 @@ export default function useFadeInView(
 
     if (current) {
       // Add transition classes
-      ['transition-opacity', 'ease-steps4', 'duration-1000'].forEach(
+      ['transition-opacity', 'ease-[steps(7,end)]', 'duration-1000'].forEach(
         (className) => {
           if (!current.classList.contains(className)) {
             current.classList.add(className);

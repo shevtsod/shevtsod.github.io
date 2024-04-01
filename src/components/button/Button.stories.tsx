@@ -25,6 +25,7 @@ export const Variant: Story = {
     <div className="inline-flex flex-col">
       <Button {...args} variant="success" />
       <Button {...args} variant="info" />
+      <Button {...args} disabled />
     </div>
   ),
 };

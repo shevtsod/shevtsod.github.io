@@ -6,7 +6,7 @@ import {
   forwardRef,
   useRef,
 } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { FieldError, SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import useFadeInView from '../../../../hooks/useFadeInView';
 import Button from '../../../button/Button';
@@ -67,7 +67,7 @@ export default function Contact<T extends ElementType>({
     <Component
       ref={ref}
       {...props}
-      className={classNames('container mx-auto p-6')}
+      className={classNames('container mx-auto p-6 flex flex-col items-center')}
     >
       <Heading as="h2" className="mb-4 uppercase text-center">
         {t('title')}
@@ -76,64 +76,59 @@ export default function Contact<T extends ElementType>({
       <form
         onSubmit={handleSubmit(onSubmit)}
         autoComplete="off"
-        className="flex flex-col justify-center items-center gap-4 text-center"
+        className="w-full lg:w-2/3 xl:w-1/2 flex flex-col justify-center items-center gap-4 text-center"
       >
-        <TextInput
-          type="text"
-          {...register('name', { required: true })}
-          label={
-            <span className="block">
+        <InputLabel
+          text={
+            <span>
               <span className="text-theme-red-400 font-bold">*</span>{' '}
               {t('form.name')}
             </span>
           }
-        />
+          error={errors.name}
+        >
+          <TextInput type="text" {...register('name', { required: true })} />
+        </InputLabel>
 
-        {errors?.name?.message && (
-          <p className="text-theme-red-400 italic">{errors.name.message}</p>
-        )}
-
-        <TextInput
-          type="text"
-          {...register('email', { required: true })}
-          label={
-            <span className="block">
+        <InputLabel
+          text={
+            <span>
               <span className="text-theme-red-400 font-bold">*</span>{' '}
               {t('form.email')}
             </span>
           }
-        />
+          error={errors.email}
+        >
+          <TextInput type="text" {...register('email', { required: true })} />
+        </InputLabel>
 
-        {errors?.email?.message && (
-          <p className="text-theme-red-400 italic">{errors.email.message}</p>
-        )}
-
-        <TextareaInput
-          rows={5}
-          {...register('message', { required: true })}
-          label={
-            <span className="block">
+        <InputLabel
+          text={
+            <span>
               <span className="text-theme-red-400 font-bold">*</span>{' '}
               {t('form.message')}
             </span>
           }
-        />
-
-        {errors?.message?.message && (
-          <p className="text-theme-red-400 italic">{errors.message.message}</p>
-        )}
+          error={errors.message}
+        >
+          <TextareaInput
+            rows={4}
+            {...register('message', { required: true })}
+          />
+        </InputLabel>
 
         <Button
           type="submit"
-          className="text-xl md:text-2xl"
+          className="text-center text-xl md:text-2xl"
           disabled={!isDirty || !isValid || isSubmitting || isSubmitSuccessful}
         >
-          {t('form.submit')}
+          <p className="px-2 font-bold">{t('form.submit')}</p>
         </Button>
 
         {errors.root && (
           <p className="text-theme-red-400 italic">{errors.root.message}</p>
         )}
+
         {isSubmitSuccessful && (
           <p className="text-theme-green-400">{t('form.submitted')}</p>
         )}
@@ -142,54 +137,48 @@ export default function Contact<T extends ElementType>({
   );
 }
 
-export interface InputProps {
-  label?: React.ReactNode;
+export interface InputLabelProps {
+  text?: React.ReactNode;
+  error?: FieldError;
   children?: React.ReactNode;
 }
 
-export function Input({ label, children }: InputProps) {
+export function InputLabel({ text, error, children }: InputLabelProps) {
   return (
-    <label className="w-full md:w-2/3 xl:w-1/2">
-      <span className="block">{label}</span>
+    <label className="w-full">
+      <span className="block">{text}</span>
       {children}
+      {error && <p className="text-theme-red-400 italic">{error.message}</p>}
     </label>
   );
 }
 
 export interface TextInputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: React.ReactNode;
-}
+  extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 export const TextInput = forwardRef(
-  ({ label, ...props }: TextInputProps, ref: Ref<HTMLInputElement>) => {
+  (props: TextInputProps, ref: Ref<HTMLInputElement>) => {
     return (
-      <Input label={label}>
-        <input
-          ref={ref}
-          {...props}
-          className="text-theme-gray-800 w-full p-2 border-theme-red-400 border-solid border-4"
-        />
-      </Input>
+      <input
+        ref={ref}
+        {...props}
+        className="bg-theme-gray-600 w-full p-2 border-none border-4 rounded-none outline-none"
+      />
     );
   },
 );
 
 export interface TextareaInputProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
-  label?: React.ReactNode;
-}
+  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
 export const TextareaInput = forwardRef(
-  ({ label, ...props }: TextareaInputProps, ref: Ref<HTMLTextAreaElement>) => {
+  (props: TextareaInputProps, ref: Ref<HTMLTextAreaElement>) => {
     return (
-      <Input label={label}>
-        <textarea
-          ref={ref}
-          {...props}
-          className="text-theme-gray-800 w-full p-2 border-theme-red-400 border-solid border-4 resize-none"
-        />
-      </Input>
+      <textarea
+        ref={ref}
+        {...props}
+        className="bg-theme-gray-600 w-full p-2 border-none rounded-none resize-none outline-none"
+      />
     );
   },
 );
