@@ -24,6 +24,7 @@ export type ContactFormInputs = {
 
 export default function Contact<T extends ElementType>({
   as,
+  className,
   ...props
 }: ContactProps<T>) {
   const Component = as ?? 'div';
@@ -67,7 +68,10 @@ export default function Contact<T extends ElementType>({
     <Component
       ref={ref}
       {...props}
-      className={classNames('container mx-auto p-6 flex flex-col items-center')}
+      className={classNames(
+        'container mx-auto p-6 flex flex-col items-center',
+        className,
+      )}
     >
       <Heading as="h2" className="mb-4 uppercase text-center">
         {t('title')}
@@ -87,7 +91,11 @@ export default function Contact<T extends ElementType>({
           }
           error={errors.name}
         >
-          <TextInput type="text" {...register('name', { required: true })} />
+          <TextInput
+            type="text"
+            {...register('name', { required: true })}
+            className="text-center"
+          />
         </InputLabel>
 
         <InputLabel
@@ -99,7 +107,11 @@ export default function Contact<T extends ElementType>({
           }
           error={errors.email}
         >
-          <TextInput type="text" {...register('email', { required: true })} />
+          <TextInput
+            type="text"
+            {...register('email', { required: true })}
+            className="text-center"
+          />
         </InputLabel>
 
         <InputLabel
@@ -157,12 +169,15 @@ export interface TextInputProps
   extends React.InputHTMLAttributes<HTMLInputElement> {}
 
 export const TextInput = forwardRef(
-  (props: TextInputProps, ref: Ref<HTMLInputElement>) => {
+  ({ className, ...props }: TextInputProps, ref: Ref<HTMLInputElement>) => {
     return (
       <input
         ref={ref}
         {...props}
-        className="bg-theme-gray-600 w-full p-2 border-none border-4 rounded-none outline-none"
+        className={classNames(
+          'bg-theme-gray-600 w-full p-2 border-none border-4 rounded-none outline-none',
+          className,
+        )}
       />
     );
   },
@@ -172,12 +187,18 @@ export interface TextareaInputProps
   extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
 export const TextareaInput = forwardRef(
-  (props: TextareaInputProps, ref: Ref<HTMLTextAreaElement>) => {
+  (
+    { className, ...props }: TextareaInputProps,
+    ref: Ref<HTMLTextAreaElement>,
+  ) => {
     return (
       <textarea
         ref={ref}
         {...props}
-        className="bg-theme-gray-600 w-full p-2 border-none rounded-none resize-none outline-none"
+        className={classNames(
+          'bg-theme-gray-600 w-full p-2 border-none rounded-none resize-none outline-none',
+          className,
+        )}
       />
     );
   },
