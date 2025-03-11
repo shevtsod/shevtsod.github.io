@@ -29,7 +29,7 @@ function SummaryItem({ className, icon, i18nKey }: SummaryItemProps) {
             icon={icon}
             className={classNames(
               'h-24 w-24 p-4 text-theme-red-400 hover:text-theme-gray-800 hover:bg-theme-red-400 hover:scale-125',
-              styles.icon,
+              styles.icon
             )}
           />
         )}
@@ -71,7 +71,7 @@ export default function Summary<T extends ElementType>({
       className={classNames(
         `relative py-24 px-6 image-pixelated bg-repeat bg-[length:256px_256px]`,
         styles.section,
-        className,
+        className
       )}
     >
       <div

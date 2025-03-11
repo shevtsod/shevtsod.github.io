@@ -25,7 +25,7 @@ export default function Heading<T extends ElementType>({
       <span className="inline-flex items-center p-2 gap-2 bg-theme-red-400">
         <Icon
           icon="hash"
-          className="flex-shrink-0 h-4 md:h-8 w-auto"
+          className="shrink-0 h-4 md:h-8 w-auto"
           viewBox="0 0 16 16"
         />
         <span>{children}</span>

@@ -175,7 +175,7 @@ export const TextInput = forwardRef(
         ref={ref}
         {...props}
         className={classNames(
-          'bg-theme-gray-600 w-full p-2 border-none border-4 rounded-none outline-none',
+          'bg-theme-gray-600 w-full p-2 border-none border-4 rounded-none outline-hidden',
           className,
         )}
       />
@@ -196,7 +196,7 @@ export const TextareaInput = forwardRef(
         ref={ref}
         {...props}
         className={classNames(
-          'bg-theme-gray-600 w-full p-2 border-none rounded-none resize-none outline-none',
+          'bg-theme-gray-600 w-full p-2 border-none rounded-none resize-none outline-hidden',
           className,
         )}
       />
