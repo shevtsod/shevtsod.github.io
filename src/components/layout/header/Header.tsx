@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useMotionValueEvent, useScroll } from 'framer-motion';
+import { useMotionValueEvent, useScroll } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
@@ -46,7 +46,7 @@ export default function Header({
         },
         'h-20 w-full flex py-2 fixed top-0 shadow-lg z-50',
         styles.header,
-        className,
+        className
       )}
     >
       <div className="container mx-auto px-4 flex justify-between items-center">

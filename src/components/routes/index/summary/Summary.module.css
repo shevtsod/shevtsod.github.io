@@ -1,23 +1,47 @@
 .section {
+  -webkit-animation: backdropSlide 8s steps(112, end) infinite;
   animation: backdropSlide 8s steps(112, end) infinite;
 }
 
 .icon {
-  background:
-  linear-gradient(to right, theme("colors.theme.red.400") 4px, transparent 4px) 0 0,
-  linear-gradient(to right, theme("colors.theme.red.400") 4px, transparent 4px) 0 100%,
-  linear-gradient(to left, theme("colors.theme.red.400") 4px, transparent 4px) 100% 0,
-  linear-gradient(to left, theme("colors.theme.red.400") 4px, transparent 4px) 100% 100%,
-  linear-gradient(to bottom, theme("colors.theme.red.400") 4px, transparent 4px) 0 0,
-  linear-gradient(to bottom, theme("colors.theme.red.400") 4px, transparent 4px) 100% 0,
-  linear-gradient(to top, theme("colors.theme.red.400") 4px, transparent 4px) 0 100%,
-  linear-gradient(to top, theme("colors.theme.red.400") 4px, transparent 4px) 100% 100%;
+  background: linear-gradient(
+        to right,
+        var(--color-theme-red-400) 4px,
+        transparent 4px
+      )
+      0 0,
+    linear-gradient(to right, var(--color-theme-red-400) 4px, transparent 4px) 0
+      100%,
+    linear-gradient(to left, var(--color-theme-red-400) 4px, transparent 4px)
+      100% 0,
+    linear-gradient(to left, var(--color-theme-red-400) 4px, transparent 4px)
+      100% 100%,
+    linear-gradient(to bottom, var(--color-theme-red-400) 4px, transparent 4px)
+      0 0,
+    linear-gradient(to bottom, var(--color-theme-red-400) 4px, transparent 4px)
+      100% 0,
+    linear-gradient(to top, var(--color-theme-red-400) 4px, transparent 4px) 0
+      100%,
+    linear-gradient(to top, var(--color-theme-red-400) 4px, transparent 4px)
+      100% 100%;
   background-repeat: no-repeat;
   background-size: 24px 24px;
 
   transition: background-color 0.14s steps(2, end),
-    transform 0.14s steps(2, end),
-    color 0.14s steps(2, end) 0.14s;
+    transform 0.14s steps(2, end), color 0.14s steps(2, end) 0.14s;
+}
+
+.icon:hover {
+  background-color: var(--color-theme-red-400);
+}
+
+@-webkit-keyframes backdropSlide {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -256px 256px;
+  }
 }
 
 @keyframes backdropSlide {

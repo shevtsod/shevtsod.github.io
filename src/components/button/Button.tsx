@@ -28,7 +28,7 @@ export default function Button<T extends ElementType>({
         { active },
         styles.button,
         variant && styles[variant],
-        className,
+        className
       )}
     >
       {children}

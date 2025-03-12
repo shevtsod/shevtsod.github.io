@@ -1,33 +1,37 @@
 .button {
-  --color-high: theme("colors.theme.red.400");
-  --color-low: theme("colors.theme.gray.800");
-
+  --color-high: var(--color-theme-red-400);
+  --color-low: var(--color-theme-gray-800);
   background-clip: padding-box;
   background-color: transparent;
   color: var(--color-high);
   border-color: var(--color-high);
-
-  transition: background-color 0.4s steps(2, end),
-    color 0.4s steps(2, end),
+  transition: background-color 0.4s steps(2, end), color 0.4s steps(2, end),
+    border-color 0.4s steps(2, end);
+  -webkit-transition: background-color 0.4s steps(2, end),
+    color 0.4s steps(2, end), border-color 0.4s steps(2, end);
+  -moz-transition: background-color 0.4s steps(2, end), color 0.4s steps(2, end),
+    border-color 0.4s steps(2, end);
+  -ms-transition: background-color 0.4s steps(2, end), color 0.4s steps(2, end),
+    border-color 0.4s steps(2, end);
+  -o-transition: background-color 0.4s steps(2, end), color 0.4s steps(2, end),
     border-color 0.4s steps(2, end);
 }
 
 .button:hover:not(:disabled),
-.button:global(.active)
- {
+.button:global(.active) {
   background-color: var(--color-high);
   color: var(--color-low);
 }
 
 .button:disabled {
-  --color-high: theme("colors.theme.gray.400");
+  --color-high: var(--color-theme-gray-400);
   cursor: not-allowed;
 }
 
 .success {
-  --color-high: theme("colors.theme.green.400");
+  --color-high: var(--color-theme-green-400);
 }
 
 .info {
-  --color-high: theme("colors.theme.blue.400");
+  --color-high: var(--color-theme-blue-400);
 }

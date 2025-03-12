@@ -19,7 +19,7 @@ export default function Heading<T extends ElementType>({
       {...props}
       className={classNames(
         'text-xl md:text-4xl font-bold text-theme-gray-100 dark:text-theme-gray-800',
-        className,
+        className
       )}
     >
       <span className="inline-flex items-center p-2 gap-2 bg-theme-red-400">

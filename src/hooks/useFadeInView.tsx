@@ -1,9 +1,9 @@
-import { useInView, UseInViewOptions } from 'framer-motion';
+import { useInView, UseInViewOptions } from 'motion/react';
 import { RefObject, useEffect } from 'react';
 
 export default function useFadeInView(
   ref: RefObject<Element>,
-  opts?: UseInViewOptions,
+  opts?: UseInViewOptions
 ) {
   const isInView = useInView(ref, opts);
 
@@ -17,7 +17,7 @@ export default function useFadeInView(
           if (!current.classList.contains(className)) {
             current.classList.add(className);
           }
-        },
+        }
       );
 
       // Show/hide

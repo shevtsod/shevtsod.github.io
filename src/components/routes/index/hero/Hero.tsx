@@ -33,13 +33,13 @@ export default function Hero<T extends ElementType>({
       {...props}
       className={classNames(
         'container mx-auto relative flex flex-col justify-center text-center overflow-hidden',
-        className,
+        className
       )}
     >
       <h1
         className={classNames(
           'mb-16 text-[5em] sm:text-[10em] md:text-[12em] lg:text-[16em] xl:text-[20em] [transform:perspective(400px)_rotateX(45deg)] sm:[transform:perspective(800px)_rotateX(45deg)] leading-[0.75] whitespace-break-spaces text-theme-red-400 font-retro [text-shadow:0_0.03em_0_theme("textColor.theme.red.800")]',
-          styles.title,
+          styles.title
         )}
       >
         {t('title')}
@@ -54,7 +54,7 @@ export default function Hero<T extends ElementType>({
       <div
         className={classNames(
           'absolute bottom-0 right-0 mx-10 my-10 flex flex-col items-center font-retro pointer-events-none',
-          styles.chevron,
+          styles.chevron
         )}
       >
         <div>SCROLL</div>
