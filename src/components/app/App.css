@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 
-@theme {
+/* https://github.com/tailwindlabs/tailwindcss/issues/16904 */
+@theme static {
   --color-theme-gray-100: #ffffff;
   --color-theme-gray-200: #bebebe;
   --color-theme-gray-400: #858585;
