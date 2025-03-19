@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import { useTranslation } from 'react-i18next';
-import { isRouteErrorResponse } from 'react-router-dom';
+import { isRouteErrorResponse } from 'react-router';
 
 export interface AppErrorProps extends React.HTMLAttributes<HTMLDivElement> {
   title?: string;
@@ -32,7 +32,7 @@ export default function AppError({
       {...props}
       className={classNames(
         'flex flex-col justify-center text-center',
-        className,
+        className
       )}
     >
       <h1 className="text-9xl font-retro text-theme-red-400 uppercase">

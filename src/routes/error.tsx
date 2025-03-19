@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { useRouteError } from 'react-router-dom';
+import { useRouteError } from 'react-router';
 import AppError from '../components/appError/AppError';
 import useTitle from '../hooks/useTitle';
 

@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useMotionValueEvent, useScroll } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router';
 import Button from '../../button/Button';
 import Logo from '../../logo/Logo';
 import styles from './Header.module.css';

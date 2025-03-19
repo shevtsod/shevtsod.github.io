@@ -1,4 +1,4 @@
-import { RouterProvider, createHashRouter } from 'react-router-dom';
+import { RouterProvider, createHashRouter } from 'react-router';
 import IndexRoute from '../../routes';
 import ErrorRoute from '../../routes/error';
 import RootRoute from '../../routes/root';

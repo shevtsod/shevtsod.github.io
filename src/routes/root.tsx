@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Outlet, ScrollRestoration, useNavigation } from 'react-router-dom';
+import { Outlet, ScrollRestoration, useNavigation } from 'react-router';
 import Layout from '../components/layout/layout/Layout';
 import useBoot from '../hooks/useBoot';
 
