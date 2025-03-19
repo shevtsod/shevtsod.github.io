@@ -86,7 +86,7 @@ export default function Boot({
         const maxIncrement = Math.min(2, remainingCount);
         // Actual incrementation in this interval
         const randomIncrement = Math.floor(
-          Math.random() * (maxIncrement - minIncrement) + minIncrement,
+          Math.random() * (maxIncrement - minIncrement) + minIncrement
         );
         // Decide if to randomly pause and skip this interval
         const randomPause = remainingTime > 0 && Math.random() > 0.5;
@@ -96,7 +96,7 @@ export default function Boot({
     }, duration / counterMax);
 
     return () => clearInterval(interval);
-  }, [messages]);
+  }, [counterMax, duration, startTime]);
 
   return (
     <div

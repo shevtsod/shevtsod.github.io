@@ -19,7 +19,7 @@ export default function Typewriter({
 
   // Typewriter effect
   useEffect(() => {
-    let interval = setInterval(() => {
+    const interval = setInterval(() => {
       if (!paused) {
         setCounter((value) => Math.min(value + 1, children.length));
       }

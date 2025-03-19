@@ -19,7 +19,7 @@ export default function IndexRoute() {
   useEffect(() => {
     setShowHeaderOnScroll(true);
     setShowBoot(true);
-  }, []);
+  }, [setShowBoot, setShowHeaderOnScroll]);
 
   return (
     <main>

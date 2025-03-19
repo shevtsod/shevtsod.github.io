@@ -4,8 +4,7 @@ import '@fontsource/nothing-you-could-do';
 import '@fontsource/syne-mono';
 import './App.css';
 
-import React from 'react';
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+import React, { useEffect } from 'react';
 import { I18nextProvider } from 'react-i18next';
 import useTitle from '../../hooks/useTitle';
 import i18n from '../../i18n';
@@ -18,18 +17,28 @@ export interface AppProps {
 export default function App({ children = <Router /> }: AppProps) {
   useTitle();
 
+  useEffect(() => {
+    const htmlClasses = ['dark'];
+    const bodyClasses = [
+      'bg-theme-gray-200',
+      'dark:bg-theme-gray-800',
+      'text-theme-gray-800',
+      'dark:text-theme-gray-100',
+      'font-mono',
+    ];
+
+    document.documentElement.classList.add(...htmlClasses);
+    document.body.classList.add(...bodyClasses);
+
+    return () => {
+      document.documentElement.classList.remove(...htmlClasses);
+      document.body.classList.remove(...bodyClasses);
+    };
+  }, []);
+
   return (
     <React.StrictMode>
-      <I18nextProvider i18n={i18n}>
-        <HelmetProvider>
-          <Helmet>
-            <html lang="en" className="dark" />
-            <body className="bg-theme-gray-200 dark:bg-theme-gray-800 text-theme-gray-800 dark:text-theme-gray-100 font-mono" />
-          </Helmet>
-
-          {children}
-        </HelmetProvider>
-      </I18nextProvider>
+      <I18nextProvider i18n={i18n}>{children}</I18nextProvider>
     </React.StrictMode>
   );
 }

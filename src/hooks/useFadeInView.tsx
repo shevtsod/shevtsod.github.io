@@ -2,7 +2,7 @@ import { useInView, UseInViewOptions } from 'motion/react';
 import { RefObject, useEffect } from 'react';
 
 export default function useFadeInView(
-  ref: RefObject<Element>,
+  ref: RefObject<Element | null>,
   opts?: UseInViewOptions
 ) {
   const isInView = useInView(ref, opts);

@@ -26,7 +26,7 @@ export default function Header({
 
   useEffect(() => {
     setShown(!showOnScroll || scrollY.get() > SCROLL_THRESHOLD);
-  }, [showOnScroll]);
+  }, [scrollY, showOnScroll]);
 
   useMotionValueEvent(scrollY, 'change', (latest) => {
     if (showOnScroll) {

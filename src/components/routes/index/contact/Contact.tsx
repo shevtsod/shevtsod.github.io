@@ -53,14 +53,16 @@ export default function Contact<T extends ElementType>({
       });
 
       if (!res.ok) {
-        throw await res.json();
+        const json = await res.json();
+
+        for (const { field, code, message } of json?.errors ?? []) {
+          setError(field, { type: code, message });
+        }
       }
 
       return res.json();
-    } catch (e: any) {
-      for (const { field, code, message } of e?.errors) {
-        setError(field, { type: code, message });
-      }
+    } catch (e: unknown) {
+      console.log(e);
     }
   };
 
@@ -70,7 +72,7 @@ export default function Contact<T extends ElementType>({
       {...props}
       className={classNames(
         'container mx-auto p-6 flex flex-col items-center',
-        className,
+        className
       )}
     >
       <Heading as="h2" className="mb-4 uppercase text-center">
@@ -176,11 +178,11 @@ export const TextInput = forwardRef(
         {...props}
         className={classNames(
           'bg-theme-gray-600 w-full p-2 border-none border-4 rounded-none outline-hidden',
-          className,
+          className
         )}
       />
     );
-  },
+  }
 );
 
 export interface TextareaInputProps
@@ -189,7 +191,7 @@ export interface TextareaInputProps
 export const TextareaInput = forwardRef(
   (
     { className, ...props }: TextareaInputProps,
-    ref: Ref<HTMLTextAreaElement>,
+    ref: Ref<HTMLTextAreaElement>
   ) => {
     return (
       <textarea
@@ -197,9 +199,9 @@ export const TextareaInput = forwardRef(
         {...props}
         className={classNames(
           'bg-theme-gray-600 w-full p-2 border-none rounded-none resize-none outline-hidden',
-          className,
+          className
         )}
       />
     );
-  },
+  }
 );

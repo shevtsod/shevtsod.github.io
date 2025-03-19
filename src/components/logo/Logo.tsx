@@ -17,7 +17,7 @@ export default function Logo({
   className,
   ...props
 }: LogoProps) {
-  const [src, setSrc] = useState('');
+  const [src, setSrc] = useState<string | null>(null);
 
   useEffect(() => {
     if (shown) {
@@ -33,16 +33,13 @@ export default function Logo({
     let timeout: NodeJS.Timeout | undefined = undefined;
 
     if (animated) {
-      interval = setInterval(
-        () => {
-          setSrc(logoRotateIcon);
+      interval = setInterval(() => {
+        setSrc(logoRotateIcon);
 
-          timeout = setTimeout(() => {
-            setSrc(logoIcon);
-          }, DURATION_ROTATE * 1000);
-        },
-        3 * DURATION_ROTATE * 1000,
-      );
+        timeout = setTimeout(() => {
+          setSrc(logoIcon);
+        }, DURATION_ROTATE * 1000);
+      }, 3 * DURATION_ROTATE * 1000);
     }
 
     return () => {
@@ -50,6 +47,10 @@ export default function Logo({
       clearTimeout(timeout);
     };
   }, [shown, animated]);
+
+  if (!src) {
+    return null;
+  }
 
   return (
     <img

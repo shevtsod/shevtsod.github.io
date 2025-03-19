@@ -3,6 +3,7 @@ import type { Preview } from '@storybook/react';
 import React from 'react';
 import App from '../src/components/app/App';
 
+// eslint-disable-next-line storybook/story-exports
 const preview: Preview = {
   parameters: {
     options: {
