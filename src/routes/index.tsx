@@ -25,8 +25,8 @@ export default function IndexRoute() {
     <main>
       <Hero as="section" id="hero" className="min-h-[100svh]" />
       <Summary as="section" id="summary" />
-      <Projects as="section" id="projects" />
       <Technologies as="section" id="technologies" />
+      <Projects as="section" id="projects" />
       <About as="section" id="about" />
       <Contact as="section" id="contact" />
     </main>

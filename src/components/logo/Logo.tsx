@@ -19,12 +19,9 @@ export default function Logo({
 }: LogoProps) {
   const [src, setSrc] = useState<string | null>(null);
 
+  // Transition into view
   useEffect(() => {
-    if (shown) {
-      setSrc(animated ? logoInIcon : logoIcon);
-    } else {
-      setSrc('');
-    }
+    setSrc(animated ? logoInIcon : logoIcon);
   }, [shown, animated]);
 
   // Logo animation
@@ -54,7 +51,7 @@ export default function Logo({
 
   return (
     <img
-      src={src}
+      src={`${src}?t=${Date.now()}`}
       className={classNames('image-pixelated', className)}
       {...props}
     />
