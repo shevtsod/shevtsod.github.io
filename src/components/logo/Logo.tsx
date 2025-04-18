@@ -50,10 +50,12 @@ export default function Logo({
   }
 
   return (
-    <img
-      src={`${src}?t=${Date.now()}`}
-      className={classNames('image-pixelated', className)}
-      {...props}
-    />
+    shown && (
+      <img
+        src={`${src}?t=${Date.now()}`}
+        className={classNames('image-pixelated', className)}
+        {...props}
+      />
+    )
   );
 }
