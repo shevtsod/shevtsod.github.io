@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { ComponentPropsWithoutRef, ElementType, useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import ditherImage from '../../../../assets/images/dither.webp';
+import ditherYImage from '../../../../assets/images/dither-y.svg';
 import pipesImage from '../../../../assets/images/pipes.gif';
 import useFadeInView from '../../../../hooks/useFadeInView';
 import Heading from '../../../heading/Heading';
@@ -75,11 +75,15 @@ export default function Summary<T extends ElementType>({
       )}
     >
       <div
-        style={{ backgroundImage: `url("${ditherImage}")` }}
-        className="h-[72px] w-full absolute top-0 left-0 z-10 image-pixelated bg-repeat-x bg-[length:72px_72px]"
+        style={{ backgroundImage: `url("${ditherYImage}")` }}
+        className="h-[64px] w-full absolute top-0 left-0 z-10 image-pixelated bg-repeat-x bg-[length:64px_64px]"
       />
 
-      <Heading as="h2" className="mb-4 uppercase text-center">
+      <Heading
+        as="h2"
+        className="mb-4 uppercase text-center"
+        href={`#${props.id}`}
+      >
         {t('title')}
       </Heading>
 
@@ -90,8 +94,8 @@ export default function Summary<T extends ElementType>({
       </div>
 
       <div
-        style={{ backgroundImage: `url("${ditherImage}")` }}
-        className="h-[72px] w-full absolute bottom-0 left-0 z-10 image-pixelated bg-repeat-x bg-[length:72px_72px] -scale-y-100"
+        style={{ backgroundImage: `url("${ditherYImage}")` }}
+        className="h-[64px] w-full absolute bottom-0 left-0 z-10 image-pixelated bg-repeat-x bg-[length:64px_64px] rotate-180"
       />
     </Component>
   );

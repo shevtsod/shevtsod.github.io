@@ -1,25 +1,26 @@
 .title {
-  animation:
-    fade 2.5s steps(4, end) 1s normal both;
+  animation: fade 2.5s steps(4, end) 1s normal both;
 }
 
 .chevron {
-  animation:
-    fade 1s steps(4, end) 6s normal both,
-    caretFloat 0.8s steps(3, end) infinite forwards;
+  animation: fade 1s steps(4, end) 6s normal both,
+    floatDown 1.2s steps(3, end) infinite forwards;
 }
 
 @keyframes fade {
-  from {
-    opacity: 0
+  0% {
+    opacity: 0;
   }
 
-  to {
-    opacity: 1
+  99% {
+    opacity: 1;
+  }
+
+  100% {
   }
 }
 
-@keyframes caretFloat {
+@keyframes floatDown {
   from {
     transform: translateY(-20px);
   }

@@ -75,7 +75,11 @@ export default function Contact<T extends ElementType>({
         className
       )}
     >
-      <Heading as="h2" className="mb-4 uppercase text-center">
+      <Heading
+        as="h2"
+        className="mb-4 uppercase text-center"
+        href={`#${props.id}`}
+      >
         {t('title')}
       </Heading>
 

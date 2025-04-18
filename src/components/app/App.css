@@ -1,5 +1,8 @@
 @import 'tailwindcss';
 
+/* https://tailwindcss.com/docs/dark-mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
 /* https://github.com/tailwindlabs/tailwindcss/issues/16904 */
 @theme static {
   --color-theme-gray-100: #ffffff;
@@ -41,6 +44,8 @@
   --font-cursive: Nothing You Could Do, cursive;
   --font-mono: 'Syne Mono', ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-pixel: 'Silkscreen', ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, 'Liberation Mono', 'Courier New', monospace;
   --font-retro: 'SH Pinscher', ui-monospace, SFMono-Regular, Menlo, Monaco,
     Consolas, 'Liberation Mono', 'Courier New', monospace;
   --font-sans: 'Ysabeau Office Variable', ui-sans-serif, system-ui, sans-serif,
@@ -59,11 +64,59 @@
  * FONTS
  ******************************************************************************/
 
-/* SH Pinscher */
+/*
+ * SH Pinscher
+ * https://www.fontsquirrel.com/fonts/sh-pinscher
+ */
 @font-face {
   font-family: 'SH Pinscher';
   font-weight: 400;
   src: url('/fonts/SHPinscher/SHPinscher-Regular.woff2') format('woff2'),
     url('/fonts/SHPinscher/SHPinscher-Regular.woff') format('woff'),
     url('/fonts/SHPinscher/SHPinscher-Regular.otf') format('opentype');
+}
+
+/*
+ * SH Pinscher
+ * https://www.fontsquirrel.com/fonts/Silkscreen
+ */
+@font-face {
+  font-family: 'Silkscreen';
+  src: url('/fonts/Silkscreen/Silkscreen-Bold.woff2') format('woff2'),
+    url('/fonts/Silkscreen/Silkscreen-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Silkscreen Expanded';
+  src: url('/fonts/Silkscreen/Silkscreen-Expanded.woff2') format('woff2'),
+    url('/fonts/Silkscreen/Silkscreen-Expanded.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Silkscreen';
+  src: url('/fonts/Silkscreen/Silkscreen.woff2') format('woff2'),
+    url('/fonts/Silkscreen/Silkscreen.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Silkscreen Expanded';
+  src: url('Silkscreen-ExpandedBold.woff2') format('woff2'),
+    url('Silkscreen-ExpandedBold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+/*******************************************************************************
+ * GLOBAL CSS
+ ******************************************************************************/
+
+html {
+  scroll-behavior: smooth;
 }

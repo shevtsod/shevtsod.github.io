@@ -15,7 +15,7 @@ export default function Icon({
 }: IconProps) {
   const Component = useMemo(
     () => lazy(() => import(`../../assets/images/icons/${icon}.svg?react`)),
-    [icon],
+    [icon]
   );
 
   return (
