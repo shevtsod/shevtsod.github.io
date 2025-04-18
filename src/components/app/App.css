@@ -106,8 +106,8 @@
 }
 @font-face {
   font-family: 'Silkscreen Expanded';
-  src: url('Silkscreen-ExpandedBold.woff2') format('woff2'),
-    url('Silkscreen-ExpandedBold.woff') format('woff');
+  src: url('/fonts/Silkscreen/Silkscreen-ExpandedBold.woff2') format('woff2'),
+    url('/fonts/Silkscreen/Silkscreen-ExpandedBold.woff') format('woff');
   font-weight: bold;
   font-style: normal;
   font-display: swap;

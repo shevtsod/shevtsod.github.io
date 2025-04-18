@@ -24,7 +24,7 @@ export default function Heading<T extends ElementType>({
     </span>
   );
 
-  const Dither = ({ className }: { className: string }) => (
+  const Dither = ({ className }: { className?: string }) => (
     <div
       style={{
         backgroundImage: `url("${miniDitherXRed400Image}")`,
