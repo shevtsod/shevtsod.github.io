@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import Footer from '../footer/Footer';
 import Header from '../header/Header';
 
@@ -9,12 +10,16 @@ export interface LayoutProps extends React.HTMLAttributes<HTMLDivElement> {
 export default function Layout({
   showHeaderOnScroll,
   children,
+  className,
   ...props
 }: LayoutProps) {
   return (
-    <div {...props} className="min-h-[100svh] flex flex-col">
+    <div
+      {...props}
+      className={classNames('min-h-[100svh] flex flex-col', className)}
+    >
       <Header showOnScroll={showHeaderOnScroll} />
-      <main className="flex-1">{children}</main>
+      <main className="flex flex-col flex-1">{children}</main>
       <Footer />
     </div>
   );

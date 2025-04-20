@@ -17,9 +17,10 @@ export interface AppProps {
 export default function App({ children = <Router /> }: AppProps) {
   useTitle();
 
+  // Append classes to HTML and body elements
   useEffect(() => {
-    const htmlClasses = ['dark'];
     const bodyClasses = [
+      'dark',
       'bg-theme-gray-200',
       'dark:bg-theme-gray-800',
       'text-theme-gray-800',
@@ -27,11 +28,9 @@ export default function App({ children = <Router /> }: AppProps) {
       'font-mono',
     ];
 
-    document.documentElement.classList.add(...htmlClasses);
     document.body.classList.add(...bodyClasses);
 
     return () => {
-      document.documentElement.classList.remove(...htmlClasses);
       document.body.classList.remove(...bodyClasses);
     };
   }, []);

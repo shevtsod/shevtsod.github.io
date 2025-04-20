@@ -28,8 +28,9 @@
     },
     "Header": {
       "links": {
-        "home": "Home",
-        "contact": "Contact"
+        "blog": "Blog",
+        "contact": "Contact",
+        "home": "Home"
       }
     },
     "Hero": {
@@ -44,14 +45,17 @@
     }
   },
   "routes": {
-    "root": {
-      "title": "Daniel Shevtsov"
+    "blog": {
+      "title": "Blog"
     },
     "error": {
       "title": "CRITICAL ERROR!"
     },
     "index": {
       "title": "Home"
+    },
+    "root": {
+      "title": "Daniel Shevtsov"
     }
   }
 }

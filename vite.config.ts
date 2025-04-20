@@ -1,5 +1,6 @@
 import mdx from '@mdx-js/rollup';
 import react from '@vitejs/plugin-react-swc';
+import { resolve } from 'path';
 import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
@@ -10,4 +11,9 @@ export default defineConfig({
     assetsInlineLimit: 0,
   },
   plugins: [{ enforce: 'pre', ...mdx() }, react(), svgr()],
+  resolve: {
+    alias: {
+      '@': resolve(__dirname, 'src'),
+    },
+  },
 });

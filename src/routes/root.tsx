@@ -1,44 +1,38 @@
-import { useEffect, useState } from 'react';
-import { Outlet, ScrollRestoration, useNavigation } from 'react-router';
+import classNames from 'classnames';
+import { useEffect } from 'react';
+import { Outlet, ScrollRestoration, useLocation } from 'react-router';
+import Boot from '../components/boot/Boot';
 import Layout from '../components/layout/layout/Layout';
-import useBoot from '../hooks/useBoot';
-
-export interface ContextType {
-  setShowHeaderOnScroll: (value: boolean) => void;
-  setShowBoot: (value: boolean) => void;
-}
+import { useAppStore } from '../hooks/useAppStore';
 
 export default function RootRoute() {
-  const { state } = useNavigation();
-  const [showHeaderOnScroll, setShowHeaderOnScroll] = useState(false);
-  const [showBoot, setShowBoot] = useState(false);
-  const boot = useBoot();
+  const location = useLocation();
+  const showBoot = useAppStore((state) => state.showBoot);
+  const setShowBoot = useAppStore((state) => state.setShowBoot);
+  const showHeaderOnScroll = useAppStore((state) => state.showHeaderOnScroll);
+  const setShowHeaderOnScroll = useAppStore(
+    (state) => state.setShowHeaderOnScroll
+  );
 
-  // Reset layout props when navigating between pages
+  // Reset layout state on navigation
   useEffect(() => {
-    if (state === 'loading') {
-      setShowHeaderOnScroll(false);
-      setShowBoot(false);
-    }
-  }, [state]);
-
-  // Render boot instead of layout if enabled
-  if (showBoot && boot) {
-    return boot;
-  }
+    setShowHeaderOnScroll(false);
+  }, [location, setShowBoot, setShowHeaderOnScroll]);
 
   // Render layout
   return (
-    <Layout showHeaderOnScroll={showHeaderOnScroll}>
-      <Outlet
-        context={
-          {
-            setShowHeaderOnScroll,
-            setShowBoot,
-          } satisfies ContextType
-        }
+    <>
+      <Boot
+        className={classNames({ hidden: !showBoot })}
+        onComplete={() => setShowBoot(false)}
       />
-      <ScrollRestoration />
-    </Layout>
+      <Layout
+        className={classNames({ hidden: showBoot })}
+        showHeaderOnScroll={showHeaderOnScroll}
+      >
+        <Outlet />
+        <ScrollRestoration />
+      </Layout>
+    </>
   );
 }

@@ -9,8 +9,6 @@ export default function ErrorRoute() {
   const error = useRouteError();
 
   return (
-    <main>
-      <AppError className="min-h-[100svh]" title={t('title')} error={error} />
-    </main>
+    <AppError className="min-h-[100svh]" title={t('title')} error={error} />
   );
 }

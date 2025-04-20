@@ -57,6 +57,9 @@ export default function Header({
           <Button as={NavLink} to="/">
             <b>{t('links.home')}</b>
           </Button>
+          <Button as={NavLink} to="/blog">
+            <b>{t('links.blog')}</b>
+          </Button>
           <Button as={Link} to="/#contact">
             <b>{t('links.contact')}</b>
           </Button>

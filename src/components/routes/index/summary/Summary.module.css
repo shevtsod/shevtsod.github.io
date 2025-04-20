@@ -33,6 +33,8 @@
 
 .icon:hover {
   background-color: var(--color-theme-red-400);
+  color: var(--color-theme-gray-800);
+  transform: scale(125%);
 }
 
 @-webkit-keyframes backdropSlide {

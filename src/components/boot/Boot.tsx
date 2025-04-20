@@ -52,12 +52,21 @@ const messages = (
 );
 
 export interface BootProps extends React.HTMLAttributes<HTMLDivElement> {
+  /**
+   * Boot animation duration
+   */
   duration?: number;
+
+  /**
+   * Callback when boot animation completes
+   */
+  onComplete?: () => void;
 }
 
 export default function Boot({
   duration = 1000,
   className,
+  onComplete,
   ...props
 }: BootProps) {
   const { t } = useTranslation('app', { keyPrefix: 'components.Boot' });
@@ -97,6 +106,13 @@ export default function Boot({
 
     return () => clearInterval(interval);
   }, [counterMax, duration, startTime]);
+
+  // Fire onComplete when counter reaches duration
+  useEffect(() => {
+    if (counter >= counterMax) {
+      onComplete?.();
+    }
+  }, [counter, counterMax, onComplete]);
 
   return (
     <div

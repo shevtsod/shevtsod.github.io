@@ -28,7 +28,7 @@ function SummaryItem({ className, icon, i18nKey }: SummaryItemProps) {
           <Icon
             icon={icon}
             className={classNames(
-              'h-24 w-24 p-4 text-theme-red-400 hover:text-theme-gray-800 hover:scale-125',
+              'h-24 w-24 p-4 text-theme-red-400',
               styles.icon
             )}
           />
