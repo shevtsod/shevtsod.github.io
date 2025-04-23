@@ -48,6 +48,11 @@
     "blog": {
       "title": "Blog"
     },
+    "blog-post": {
+      "title": "Blog Post",
+      "postedBy": "By <b>{{author}}</b>",
+      "postedOn": "Posted on <b>{{date}}</b>"
+    },
     "error": {
       "title": "CRITICAL ERROR!"
     },

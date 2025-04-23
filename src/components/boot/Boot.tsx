@@ -58,6 +58,11 @@ export interface BootProps extends React.HTMLAttributes<HTMLDivElement> {
   duration?: number;
 
   /**
+   * Determines whether the boot animation is currently being shown
+   */
+  showBoot?: boolean;
+
+  /**
    * Callback when boot animation completes
    */
   onComplete?: () => void;
@@ -65,6 +70,7 @@ export interface BootProps extends React.HTMLAttributes<HTMLDivElement> {
 
 export default function Boot({
   duration = 1000,
+  showBoot = false,
   className,
   onComplete,
   ...props
@@ -72,6 +78,7 @@ export default function Boot({
   const { t } = useTranslation('app', { keyPrefix: 'components.Boot' });
   const title = t('title');
   const [counter, setCounter] = useState(0);
+  const animationDuration = 0.75 * duration;
   const counterMax = messages.props.children.length;
   const startTime = useMemo(() => Date.now(), []);
 
@@ -86,7 +93,7 @@ export default function Boot({
         // Time since counter started
         const elapsedTime = Date.now() - startTime;
         // Time when counter should reach max
-        const remainingTime = duration - elapsedTime;
+        const remainingTime = animationDuration - elapsedTime;
         // Remaining incrementations required
         const remainingCount = counterMax - value;
         // Minimum incrementation in this interval
@@ -102,17 +109,21 @@ export default function Boot({
 
         return randomPause ? value : value + randomIncrement;
       });
-    }, duration / counterMax);
+    }, animationDuration / counterMax);
 
     return () => clearInterval(interval);
-  }, [counterMax, duration, startTime]);
+  }, [counterMax, startTime, animationDuration]);
 
-  // Fire onComplete when counter reaches duration
+  // Fire onComplete when duration ends
   useEffect(() => {
-    if (counter >= counterMax) {
-      onComplete?.();
-    }
-  }, [counter, counterMax, onComplete]);
+    const timeout = setTimeout(() => {
+      if (showBoot) {
+        onComplete?.();
+      }
+    }, duration);
+
+    return () => clearTimeout(timeout);
+  }, [duration, showBoot, onComplete]);
 
   return (
     <div

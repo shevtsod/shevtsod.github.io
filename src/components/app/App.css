@@ -119,5 +119,7 @@
  ******************************************************************************/
 
 html {
+  /* https://github.com/motiondivision/motion/issues/1853 */
+  position: relative;
   scroll-behavior: smooth;
 }

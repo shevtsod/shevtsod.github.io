@@ -41,7 +41,7 @@ export default function Heading<T extends ElementType>({
     <Component
       {...props}
       className={classNames(
-        'py-6 flex flex-row items-stretch justify-center font-pixel text-xl md:text-4xl text-theme-gray-100 dark:text-theme-gray-800',
+        'flex flex-row items-stretch justify-center font-pixel text-xl md:text-4xl text-theme-gray-100 dark:text-theme-gray-800',
         styles.heading,
         className
       )}

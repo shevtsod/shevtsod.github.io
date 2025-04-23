@@ -1,6 +1,7 @@
 import { RouterProvider, createHashRouter } from 'react-router';
 import IndexRoute from '../../routes';
 import BlogRoute from '../../routes/blog';
+import BlogPostRoute from '../../routes/blog-post';
 import ErrorRoute from '../../routes/error';
 import RootRoute from '../../routes/root';
 
@@ -17,7 +18,10 @@ const router = createHashRouter([
       },
       {
         path: '/blog',
-        Component: BlogRoute,
+        children: [
+          { index: true, Component: BlogRoute },
+          { path: ':path', Component: BlogPostRoute },
+        ],
       },
     ],
   },

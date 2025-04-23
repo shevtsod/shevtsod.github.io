@@ -15,7 +15,7 @@ export interface UseTitleOptions {
  */
 export default function useTitle(
   title: string = '',
-  { raw = false }: UseTitleOptions = {},
+  { raw = false }: UseTitleOptions = {}
 ) {
   const { t } = useTranslation('app', { keyPrefix: 'routes.root' });
 

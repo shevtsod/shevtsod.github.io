@@ -6,7 +6,6 @@ import './App.css';
 
 import React, { useEffect } from 'react';
 import { I18nextProvider } from 'react-i18next';
-import useTitle from '../../hooks/useTitle';
 import i18n from '../../i18n';
 import Router from '../appRouter/AppRouter';
 
@@ -15,8 +14,6 @@ export interface AppProps {
 }
 
 export default function App({ children = <Router /> }: AppProps) {
-  useTitle();
-
   // Append classes to HTML and body elements
   useEffect(() => {
     const bodyClasses = [
