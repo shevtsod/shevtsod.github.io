@@ -1,9 +1,9 @@
 import { faker } from '@faker-js/faker';
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import Heading from './Heading';
+import ScrambledText from './ScrambledText';
 
-const meta: Meta<typeof Heading> = {
-  component: Heading,
+const meta: Meta<typeof ScrambledText> = {
+  component: ScrambledText,
   args: {
     children: faker.lorem.text(),
   },
@@ -11,12 +11,6 @@ const meta: Meta<typeof Heading> = {
 
 export default meta;
 
-type Story = StoryObj<typeof Heading>;
+type Story = StoryObj<typeof ScrambledText>;
 
 export const Default: Story = {};
-
-export const UsingAsProp: Story = {
-  args: {
-    as: 'h2',
-  },
-};

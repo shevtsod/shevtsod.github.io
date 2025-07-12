@@ -4,6 +4,7 @@ import { Trans, useTranslation } from 'react-i18next';
 import socials from '../../../data/socials';
 import useFadeInView from '../../../hooks/useFadeInView';
 import Icon from '../../icon/Icon';
+import ScrambledText from '../../scrambledText/ScrambledText';
 
 export interface FooterProps extends React.HTMLAttributes<HTMLElement> {}
 
@@ -33,7 +34,8 @@ export default function Footer({ className, ...props }: FooterProps) {
                   href={href}
                   className="inline-flex items-center gap-2 hover:text-theme-orange-200"
                 >
-                  <Icon icon={icon} className="inline-block" /> {title}
+                  <Icon icon={icon} className="inline-block" />{' '}
+                  <ScrambledText>{title}</ScrambledText>
                 </a>
               </div>
             ))}

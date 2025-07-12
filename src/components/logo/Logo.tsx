@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import logoInIcon from '../../assets/images/logo-in.webp';
 import logoRotateIcon from '../../assets/images/logo-rotate.gif';
 import logoIcon from '../../assets/images/logo.webp';
@@ -18,23 +18,41 @@ export default function Logo({
   ...props
 }: LogoProps) {
   const [src, setSrc] = useState<string | null>(null);
+  const lastSrcRef = useRef<string | null>(null);
+
+  // Sets a new src by fetching the image at the given URL
+  function setSrcFromUrl(url: string) {
+    fetch(url)
+      .then((res) => res.blob())
+      .then((blob) => {
+        const newObjectUrl = URL.createObjectURL(blob);
+
+        // Revoke previous src
+        if (lastSrcRef.current) {
+          URL.revokeObjectURL(lastSrcRef.current);
+        }
+
+        lastSrcRef.current = newObjectUrl;
+        setSrc(newObjectUrl);
+      });
+  }
 
   // Transition into view
   useEffect(() => {
-    setSrc(animated ? logoInIcon : logoIcon);
+    setSrcFromUrl(animated ? logoInIcon : logoIcon);
   }, [shown, animated]);
 
-  // Logo animation
+  // Animate the logo every few seconds
   useEffect(() => {
-    let interval: NodeJS.Timeout | undefined = undefined;
-    let timeout: NodeJS.Timeout | undefined = undefined;
+    let interval: NodeJS.Timeout | undefined;
+    let timeout: NodeJS.Timeout | undefined;
 
     if (animated) {
       interval = setInterval(() => {
-        setSrc(logoRotateIcon);
+        setSrcFromUrl(logoRotateIcon);
 
         timeout = setTimeout(() => {
-          setSrc(logoIcon);
+          setSrcFromUrl(logoIcon);
         }, DURATION_ROTATE * 1000);
       }, 3 * DURATION_ROTATE * 1000);
     }
@@ -42,17 +60,19 @@ export default function Logo({
     return () => {
       clearInterval(interval);
       clearTimeout(timeout);
+
+      if (lastSrcRef.current) {
+        URL.revokeObjectURL(lastSrcRef.current);
+      }
     };
   }, [shown, animated]);
 
-  if (!src) {
-    return null;
-  }
+  if (!src) return null;
 
   return (
     shown && (
       <img
-        src={`${src}?t=${Date.now()}`}
+        src={src}
         className={classNames('image-pixelated', className)}
         {...props}
       />

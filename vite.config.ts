@@ -6,14 +6,12 @@ import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import { defineConfig } from 'vite';
 import svgr from 'vite-plugin-svgr';
 
+const storybook = process.argv.some((arg) => arg.includes('storybook'));
+
 // https://vitejs.dev/config/
 export default defineConfig({
-  build: {
-    // 250418 - inlined assets not built correctly?
-    assetsInlineLimit: 0,
-  },
   plugins: [
-    {
+    !storybook && {
       enforce: 'pre',
       ...mdx({
         remarkPlugins: [

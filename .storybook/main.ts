@@ -1,4 +1,6 @@
 import type { StorybookConfig } from '@storybook/react-vite';
+import remarkFrontmatter from 'remark-frontmatter';
+import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 
 // eslint-disable-next-line storybook/story-exports
 const config: StorybookConfig = {
@@ -6,10 +8,19 @@ const config: StorybookConfig = {
 
   addons: [
     '@storybook/addon-links',
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
     '@storybook/addon-themes',
     'storybook-addon-remix-react-router',
+    {
+      name: '@storybook/addon-docs',
+      options: {
+        mdxCompileOptions: {
+          remarkPlugins: [
+            remarkFrontmatter,
+            [remarkMdxFrontmatter, { name: 'frontmatter' }],
+          ],
+        },
+      },
+    },
   ],
 
   framework: {

@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import Typewriter from './Typewriter';
 
 const meta: Meta<typeof Typewriter> = {
