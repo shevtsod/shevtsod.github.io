@@ -5,11 +5,8 @@ export interface CaretProps extends React.HTMLAttributes<HTMLSpanElement> {}
 
 export default function Caret({ className, ...props }: CaretProps) {
   return (
-    <span
-      {...props}
-      className={classNames('w-[0.7em]', styles.caret, className)}
-    >
-      &#x2588;
+    <span {...props} className={classNames(styles.caret, className)}>
+      &#9608;
     </span>
   );
 }
