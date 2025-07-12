@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { useMotionValueEvent, useScroll } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { NavLink } from 'react-router';
-import Button from '../../button/Button';
+import { Link, NavLink } from 'react-router';
+import Button, { ButtonProps } from '../../button/Button';
 import Logo from '../../logo/Logo';
 import ScrambledText from '../../scrambledText/ScrambledText';
 import styles from './Header.module.css';
@@ -35,10 +35,10 @@ export default function Header({
     }
   });
 
-  const links = [
-    { text: t('links.home'), to: '/' },
-    { text: t('links.blog'), to: '/blog' },
-    { text: t('links.contact'), to: '/#contact' },
+  const links: ButtonProps<typeof NavLink | typeof Link>[] = [
+    { as: NavLink, children: t('links.home'), to: '/' },
+    { as: NavLink, children: t('links.blog'), to: '/blog' },
+    { as: Link, children: t('links.contact'), to: '/#contact' },
   ];
 
   return (
@@ -61,10 +61,10 @@ export default function Header({
           <Logo shown={shown} animated className="h-full aspect-square" />
         </NavLink>
         <div className="flex gap-1">
-          {links.map(({ text, to }, i) => (
-            <Button key={i} as={NavLink} to={to}>
+          {links.map(({ children, ...props }, i) => (
+            <Button key={i} {...props}>
               <b>
-                <ScrambledText>{text}</ScrambledText>
+                <ScrambledText>{children as string}</ScrambledText>
               </b>
             </Button>
           ))}

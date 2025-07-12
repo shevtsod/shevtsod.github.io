@@ -2,7 +2,7 @@
   animation-name: fade, shine;
   animation-duration: 2.5s, 10s;
   animation-timing-function: steps(4, end), steps(60, end);
-  animation-delay: 1s, 4s;
+  animation-delay: 1s, 6s;
   animation-iteration-count: 1, infinite;
   animation-direction: normal, normal;
   animation-fill-mode: both, forwards;

@@ -88,15 +88,7 @@ export default function Contact<T extends ElementType>({
         autoComplete="off"
         className="w-full lg:w-2/3 xl:w-1/2 flex flex-col justify-center items-center gap-4 text-center"
       >
-        <InputLabel
-          text={
-            <span>
-              <span className="text-theme-red-400 font-bold">*</span>{' '}
-              {t('form.name')}
-            </span>
-          }
-          error={errors.name}
-        >
+        <InputLabel text={<span>{t('form.name')}</span>} error={errors.name}>
           <TextInput
             type="text"
             {...register('name', { required: true })}
@@ -104,15 +96,7 @@ export default function Contact<T extends ElementType>({
           />
         </InputLabel>
 
-        <InputLabel
-          text={
-            <span>
-              <span className="text-theme-red-400 font-bold">*</span>{' '}
-              {t('form.email')}
-            </span>
-          }
-          error={errors.email}
-        >
+        <InputLabel text={<span>{t('form.email')}</span>} error={errors.email}>
           <TextInput
             type="text"
             {...register('email', { required: true })}
@@ -121,12 +105,7 @@ export default function Contact<T extends ElementType>({
         </InputLabel>
 
         <InputLabel
-          text={
-            <span>
-              <span className="text-theme-red-400 font-bold">*</span>{' '}
-              {t('form.message')}
-            </span>
-          }
+          text={<span>{t('form.message')}</span>}
           error={errors.message}
         >
           <TextareaInput
