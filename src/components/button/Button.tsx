@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { ComponentPropsWithoutRef, ElementType } from 'react';
+import { type ComponentPropsWithoutRef, type ElementType } from 'react';
 import styles from './Button.module.css';
 
 type ButtonVariant = 'success' | 'info' | null;

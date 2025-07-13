@@ -1,11 +1,11 @@
+import Button, { type ButtonProps } from '@/components/Button/Button';
+import Logo from '@/components/Logo/Logo';
+import ScrambledText from '@/components/ScrambledText/ScrambledText';
 import classNames from 'classnames';
 import { useMotionValueEvent, useScroll } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from 'react-router';
-import Button, { ButtonProps } from '../../button/Button';
-import Logo from '../../logo/Logo';
-import ScrambledText from '../../scrambledText/ScrambledText';
 import styles from './Header.module.css';
 
 // Scrolled pixels when Header is shown
@@ -21,7 +21,9 @@ export default function Header({
   className,
   ...props
 }: HeaderProps) {
-  const { t } = useTranslation('app', { keyPrefix: 'components.Header' });
+  const { t } = useTranslation('app', {
+    keyPrefix: 'components.Layout.Header',
+  });
   const { scrollY } = useScroll();
   const [shown, setShown] = useState(false);
 

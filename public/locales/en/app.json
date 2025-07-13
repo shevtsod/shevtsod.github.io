@@ -1,65 +1,85 @@
 {
   "components": {
-    "AppError": {
-      "title": "Critical Error!",
-      "messages": {
-        "404": "Not Found",
-        "unexpected": "Unexpected Error"
-      }
-    },
     "Boot": {
       "title": "BOOTING ..."
     },
-    "Contact": {
-      "title": "Let's chat",
-      "form": {
-        "name": "Your name:",
-        "email": "Your email address:",
-        "message": "Your message:",
-        "submit": "Submit",
-        "submitted": "Thank you for reaching out, I will get back to you shortly!"
-      }
-    },
-    "Footer": {
-      "sections": {
-        "social": "Social"
+    "Layout": {
+      "Footer": {
+        "sections": {
+          "social": "Social"
+        },
+        "copyright": "Made with <icon /> by Daniel Shevtsov"
       },
-      "copyright": "Made with <icon /> by Daniel Shevtsov"
-    },
-    "Header": {
-      "links": {
-        "blog": "Blog",
-        "contact": "Contact",
-        "home": "Home"
+      "Header": {
+        "links": {
+          "blog": "Blog",
+          "contact": "Contact",
+          "home": "Home"
+        }
       }
-    },
-    "Hero": {
-      "title": "Daniel\nShevtsov",
-      "subtitle": "Full-stack web developer."
-    },
-    "Summary": {
-      "title": "Profile Summary",
-      "summary1": "Proficient in both modern and less-modern technologies, with <highlight>over {{experienceYears}} years of experience</highlight> in web development. Skilled in development, testing, DevOps and automation - a great fit for many roles.",
-      "summary2": "Creative and detail-oriented, constantly working towards functional solutions without compromising on design and aesthetics. Always seeking to add the <highlight>extra touch</highlight> to give a novel experience that turns heads and amazes.",
-      "summary3": "Well-versed in both <highlight>individual and team settings</highlight>, eager to independently research problems, write thorough documentation, and cooperate with colleagues to deliver a delightful product."
     }
   },
-  "routes": {
+  "features": {
+    "appError": {
+      "components": {
+        "AppError": {
+          "title": "Critical Error!",
+          "messages": {
+            "404": "Not Found",
+            "unexpected": "Unexpected Error"
+          }
+        }
+      },
+      "routes": {
+        "AppErrorRoute": {
+          "title": "CRITICAL ERROR!"
+        }
+      }
+    },
     "blog": {
-      "title": "Blog"
+      "routes": {
+        "BlogRoute": {
+          "title": "Blog"
+        },
+        "BlogPostRoute": {
+          "title": "Blog Post",
+          "postedBy": "By <b>{{author}}</b>",
+          "postedOn": "Posted on <b>{{date}}</b>"
+        }
+      }
     },
-    "blog-post": {
-      "title": "Blog Post",
-      "postedBy": "By <b>{{author}}</b>",
-      "postedOn": "Posted on <b>{{date}}</b>"
-    },
-    "error": {
-      "title": "CRITICAL ERROR!"
-    },
-    "index": {
-      "title": "Home"
-    },
-    "root": {
+    "home": {
+      "components": {
+        "Contact": {
+          "title": "Let's chat",
+          "form": {
+            "name": "Your name:",
+            "email": "Your email address:",
+            "message": "Your message:",
+            "submit": "Submit",
+            "submitted": "Thank you for reaching out, I will get back to you shortly!"
+          }
+        },
+        "Hero": {
+          "title": "Daniel\nShevtsov",
+          "subtitle": "Full-stack web developer."
+        },
+        "Summary": {
+          "title": "Profile Summary",
+          "summary1": "Proficient in both modern and less-modern technologies, with <highlight>over {{experienceYears}} years of experience</highlight> in web development. Skilled in development, testing, DevOps and automation - a great fit for many roles.",
+          "summary2": "Creative and detail-oriented, constantly working towards functional solutions without compromising on design and aesthetics. Always seeking to add the <highlight>extra touch</highlight> to give a novel experience that turns heads and amazes.",
+          "summary3": "Well-versed in both <highlight>individual and team settings</highlight>, eager to independently research problems, write thorough documentation, and cooperate with colleagues to deliver a delightful product."
+        }
+      },
+      "routes": {
+        "IndexRoute": {
+          "title": "Home"
+        }
+      }
+    }
+  },
+  "hooks": {
+    "useTitle": {
       "title": "Daniel Shevtsov"
     }
   }

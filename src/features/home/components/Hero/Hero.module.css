@@ -1,0 +1,100 @@
+.title {
+  animation-name: fade, shine;
+  animation-duration: 2.5s, 10s;
+  animation-timing-function: steps(4, end), steps(60, end);
+  animation-delay: 1s, 6s;
+  animation-iteration-count: 1, infinite;
+  animation-direction: normal, normal;
+  animation-fill-mode: both, forwards;
+
+  background: linear-gradient(
+    115deg,
+    var(--color-theme-red-400) 47.999%,
+    rgba(255, 255, 255, 1) 48%,
+    rgba(255, 255, 255, 1) 48.5%,
+    var(--color-theme-red-400) 48.501%,
+    var(--color-theme-red-400) 49.999%,
+    rgba(255, 255, 255, 1) 50%,
+    rgba(255, 255, 255, 1) 53%,
+    var(--color-theme-red-400) 53.001%
+  );
+  color: transparent;
+  background-clip: text;
+  background-repeat: repeat-x;
+  background-size: 200% auto;
+  background-position-x: -100%;
+}
+
+.chevron {
+  animation: fade 1s steps(4, end) 6s normal both,
+    floatDown 1.2s steps(3, end) infinite forwards;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  99% {
+    opacity: 1;
+  }
+
+  100% {
+  }
+}
+
+@keyframes shine {
+  0% {
+    background-position-x: 100%;
+  }
+
+  1% {
+    background-position-x: right;
+  }
+
+  14% {
+    background-position-x: left;
+  }
+
+  15% {
+    background-position-x: -100%;
+  }
+
+  15.01% {
+    background-position-x: 100%;
+  }
+
+  25% {
+    background-position-x: 100%;
+  }
+
+  26% {
+    background-position-x: right;
+  }
+
+  39% {
+    background-position-x: left;
+  }
+
+  40% {
+    background-position-x: -100%;
+  }
+
+  40.01% {
+    background-position-x: 100%;
+  }
+
+  100% {
+    background-position-x: 100%;
+  }
+}
+
+@keyframes floatDown {
+  from {
+    transform: translateY(-20px);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}

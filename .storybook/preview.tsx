@@ -1,7 +1,6 @@
 import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/react-vite';
-import React from 'react';
-import App from '../src/components/app/App';
+import App from '../src/app/App';
 
 // eslint-disable-next-line storybook/story-exports
 const preview: Preview = {

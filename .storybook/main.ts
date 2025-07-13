@@ -13,11 +13,10 @@ const config: StorybookConfig = {
     {
       name: '@storybook/addon-docs',
       options: {
-        mdxCompileOptions: {
-          remarkPlugins: [
-            remarkFrontmatter,
-            [remarkMdxFrontmatter, { name: 'frontmatter' }],
-          ],
+        mdxPluginOptions: {
+          mdxCompileOptions: {
+            remarkPlugins: [remarkFrontmatter, remarkMdxFrontmatter],
+          },
         },
       },
     },

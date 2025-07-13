@@ -1,9 +1,9 @@
+import Caret from '@/components/Caret/Caret';
+import Logo from '@/components/Logo/Logo';
+import useTitle from '@/hooks/useTitle';
 import classNames from 'classnames';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import useTitle from '../../hooks/useTitle';
-import Caret from '../caret/Caret';
-import Logo from '../logo/Logo';
 
 const messages = (
   <>

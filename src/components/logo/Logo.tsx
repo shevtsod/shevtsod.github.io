@@ -1,8 +1,8 @@
+import logoInIcon from '@/assets/images/logo-in.webp';
+import logoRotateIcon from '@/assets/images/logo-rotate.gif';
+import logoIcon from '@/assets/images/logo.webp';
 import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
-import logoInIcon from '../../assets/images/logo-in.webp';
-import logoRotateIcon from '../../assets/images/logo-rotate.gif';
-import logoIcon from '../../assets/images/logo.webp';
 
 const DURATION_ROTATE = 3.4;
 

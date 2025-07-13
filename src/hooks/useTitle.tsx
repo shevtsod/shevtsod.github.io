@@ -17,7 +17,7 @@ export default function useTitle(
   title: string = '',
   { raw = false }: UseTitleOptions = {}
 ) {
-  const { t } = useTranslation('app', { keyPrefix: 'routes.root' });
+  const { t } = useTranslation('app', { keyPrefix: 'hooks.useTitle' });
 
   useEffect(() => {
     document.title = raw ? title : (title && `｢${title}｣ · `) + t('title');

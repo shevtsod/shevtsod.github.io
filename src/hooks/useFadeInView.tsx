@@ -1,5 +1,5 @@
-import { useInView, UseInViewOptions } from 'motion/react';
-import { RefObject, useEffect } from 'react';
+import { useInView, type UseInViewOptions } from 'motion/react';
+import { type RefObject, useEffect } from 'react';
 
 export default function useFadeInView(
   ref: RefObject<Element | null>,

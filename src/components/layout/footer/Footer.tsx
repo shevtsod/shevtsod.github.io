@@ -1,15 +1,17 @@
+import Icon from '@/components/Icon/Icon';
+import ScrambledText from '@/components/ScrambledText/ScrambledText';
+import socials from '@/config/socials';
+import useFadeInView from '@/hooks/useFadeInView';
 import classNames from 'classnames';
 import { useRef } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
-import socials from '../../../data/socials';
-import useFadeInView from '../../../hooks/useFadeInView';
-import Icon from '../../icon/Icon';
-import ScrambledText from '../../scrambledText/ScrambledText';
 
 export interface FooterProps extends React.HTMLAttributes<HTMLElement> {}
 
 export default function Footer({ className, ...props }: FooterProps) {
-  const { t } = useTranslation('app', { keyPrefix: 'components.Footer' });
+  const { t } = useTranslation('app', {
+    keyPrefix: 'components.Layout.Footer',
+  });
   const ref = useRef(null);
   useFadeInView(ref, { once: true });
 
