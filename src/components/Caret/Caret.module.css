@@ -1,0 +1,26 @@
+.caret {
+  -webkit-animation: blink 1s steps(3, end) infinite both;
+  animation: blink 1s steps(3, end) infinite both;
+}
+
+@-webkit-keyframes blink {
+  from,
+  to {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes blink {
+  from,
+  to {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
