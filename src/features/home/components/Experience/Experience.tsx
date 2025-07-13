@@ -4,7 +4,7 @@ export type AboutProps<T extends ElementType> = {
   as?: T;
 } & ComponentPropsWithoutRef<T>;
 
-export default function About<T extends ElementType>({
+export default function Experience<T extends ElementType>({
   as,
   ...props
 }: AboutProps<T>) {

@@ -3,7 +3,7 @@
  */
 export interface BlogPost {
   path: string;
-  component: React.ComponentType;
+  Component: React.ComponentType;
   frontmatter: FrontmatterType;
 }
 
@@ -28,7 +28,7 @@ export const blogPosts: BlogPost[] = Object.entries(blogModules)
   .map(([path, module]) => {
     return {
       path: path.replace(/^\/src\/blog\/|\.mdx$/g, ''),
-      component: module.default,
+      Component: module.default,
       frontmatter: module.frontmatter,
     } as BlogPost;
   })

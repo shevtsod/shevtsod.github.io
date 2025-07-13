@@ -2,8 +2,8 @@ import LayoutContext from '@/components/Layout/LayoutContext';
 import useTitle from '@/hooks/useTitle';
 import { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import About from '../components/About/About';
 import Contact from '../components/Contact/Contact';
+import Experience from '../components/Experience/Experience';
 import Hero from '../components/Hero/Hero';
 import Projects from '../components/Projects/Projects';
 import Summary from '../components/Summary/Summary';
@@ -30,7 +30,7 @@ export default function IndexRoute() {
       <Summary as="section" id="summary" />
       <Technologies as="section" id="technologies" />
       <Projects as="section" id="projects" />
-      <About as="section" id="about" />
+      <Experience as="section" id="experience" />
       <Contact as="section" id="contact" />
     </>
   );

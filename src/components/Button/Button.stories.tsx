@@ -13,7 +13,7 @@ type Story = StoryObj<typeof Button>;
 export const Default: Story = {
   args: {
     children: faker.lorem.sentence(),
-    onClick: () => console.log('Clicked!'),
+    onClick: () => window.alert('Clicked!'),
   },
 };
 

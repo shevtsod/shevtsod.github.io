@@ -38,8 +38,8 @@ export default function Header({
   });
 
   const links: ButtonProps<typeof NavLink | typeof Link>[] = [
-    { as: NavLink, children: t('links.home'), to: '/' },
-    { as: NavLink, children: t('links.blog'), to: '/blog' },
+    { as: NavLink, children: t('links.home'), to: '/', end: true },
+    { as: NavLink, children: t('links.blog'), to: '/blog', end: true },
     { as: Link, children: t('links.contact'), to: '/#contact' },
   ];
 

@@ -37,14 +37,23 @@
       }
     },
     "blog": {
+      "components": {
+        "BlogPost": {
+          "postedBy": "By <b>{{author}}</b>",
+          "postedOn": "Posted on <b>{{date}}</b>",
+          "backToBlog": "Back to Blog"
+        },
+        "BlogPostCard": {
+          "postedBy": "By <b>{{author}}</b>",
+          "postedOn": "Posted on <b>{{date}}</b>"
+        }
+      },
       "routes": {
         "BlogRoute": {
           "title": "Blog"
         },
         "BlogPostRoute": {
-          "title": "Blog Post",
-          "postedBy": "By <b>{{author}}</b>",
-          "postedOn": "Posted on <b>{{date}}</b>"
+          "title": "Blog Post"
         }
       }
     },

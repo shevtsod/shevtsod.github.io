@@ -1,4 +1,5 @@
 import Button from '@/components/Button/Button';
+import ScrambledText from '@/components/ScrambledText/ScrambledText';
 import useFadeInView from '@/hooks/useFadeInView';
 import classNames from 'classnames';
 import {
@@ -60,11 +61,13 @@ export default function Contact<T extends ElementType>({
         for (const { field, code, message } of json?.errors ?? []) {
           setError(field, { type: code, message });
         }
+
+        throw new Error('Failed to submit');
       }
 
       return res.json();
     } catch (e: unknown) {
-      console.log(e);
+      console.error(e);
     }
   };
 
@@ -118,10 +121,10 @@ export default function Contact<T extends ElementType>({
 
         <Button
           type="submit"
-          className="text-center text-xl md:text-2xl"
+          className="text-center text-xl md:text-2xl px-2 font-bold"
           disabled={!isDirty || !isValid || isSubmitting || isSubmitSuccessful}
         >
-          <p className="px-2 font-bold">{t('form.submit')}</p>
+          <ScrambledText>{t('form.submit')}</ScrambledText>
         </Button>
 
         {errors.root && (

@@ -41,32 +41,41 @@ export interface ScrambledTextProps
   children: string;
   frequency?: number;
   duration?: number;
+  scrambling?: boolean;
 }
 
 export default function ScrambledText({
   children,
   frequency = 1,
   duration = 300,
+  scrambling = false,
   ...props
 }: ScrambledTextProps) {
   const [displayText, setDisplayText] = useState(children);
-  const [scramblingOne, setScramblingOne] = useState(false);
-  const [scrambling, setScrambling] = useState(false);
+  const [isScramblingOne, setIsScramblingOne] = useState(false);
+  const [isScrambling, setIsScrambling] = useState(scrambling);
+
+  // Start scrambling on prop change
+  useEffect(() => {
+    if (scrambling) {
+      setIsScrambling(true);
+    }
+  }, [scrambling]);
 
   // Start scrambling one character once in a while
   useEffect(() => {
     const interval = setInterval(() => {
-      setScramblingOne(true);
+      setIsScramblingOne(true);
     }, 2000 + Math.random() * 1000);
 
     return () => {
       clearTimeout(interval);
     };
-  }, [setScramblingOne]);
+  }, [setIsScramblingOne]);
 
   // Scramble one character
   useEffect(() => {
-    if (scrambling) return;
+    if (isScrambling) return;
 
     let interval: NodeJS.Timeout;
     let timeout: NodeJS.Timeout;
@@ -76,7 +85,7 @@ export default function ScrambledText({
       index = Math.floor(Math.random() * (children.length - 1));
     } while (index >= 0 && children[index] === ' ');
 
-    if (scramblingOne) {
+    if (isScramblingOne) {
       interval = setInterval(() => {
         setDisplayText(scrambleOne(children, index));
       }, frequency);
@@ -84,7 +93,7 @@ export default function ScrambledText({
       timeout = setTimeout(() => {
         clearInterval(interval);
         setDisplayText(children);
-        setScramblingOne(false);
+        setIsScramblingOne(false);
       }, duration);
     }
 
@@ -92,14 +101,14 @@ export default function ScrambledText({
       clearInterval(interval);
       clearTimeout(timeout);
     };
-  }, [scramblingOne, scrambling, children, frequency, duration]);
+  }, [isScramblingOne, isScrambling, children, frequency, duration]);
 
   // Scramble all characters on hover
   useEffect(() => {
     let interval: NodeJS.Timeout;
     let timeout: NodeJS.Timeout;
 
-    if (scrambling) {
+    if (isScrambling) {
       interval = setInterval(() => {
         setDisplayText(scramble(children));
       }, frequency);
@@ -107,7 +116,7 @@ export default function ScrambledText({
       timeout = setTimeout(() => {
         clearInterval(interval);
         setDisplayText(children);
-        setScrambling(false);
+        setIsScrambling(false);
       }, duration);
     }
 
@@ -115,10 +124,10 @@ export default function ScrambledText({
       clearInterval(interval);
       clearTimeout(timeout);
     };
-  }, [scrambling, children, frequency, duration]);
+  }, [isScrambling, children, frequency, duration]);
 
   return (
-    <span onMouseEnter={() => setScrambling(true)} {...props}>
+    <span onMouseEnter={() => setIsScrambling(true)} {...props}>
       {displayText}
     </span>
   );
