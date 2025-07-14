@@ -14,7 +14,6 @@ type Story = StoryObj<typeof BlogPostCard>;
 
 export const Default: Story = {
   args: {
-    index: 1,
     blogPost: {
       path: 'test',
       frontmatter: {

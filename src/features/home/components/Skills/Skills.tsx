@@ -4,18 +4,18 @@ import { useTranslation } from 'react-i18next';
 import useFadeInView from '../../../../hooks/useFadeInView';
 import Heading from '../Heading/Heading';
 
-export type ProjectsProps<T extends ElementType> = {
+export type SkillsProps<T extends ElementType> = {
   as?: T;
 } & ComponentPropsWithoutRef<T>;
 
-export default function Projects<T extends ElementType>({
+export default function Skills<T extends ElementType>({
   as,
   className,
   ...props
-}: ProjectsProps<T>) {
+}: SkillsProps<T>) {
   const Component = as ?? 'div';
   const { t } = useTranslation('app', {
-    keyPrefix: 'features.home.components.Projects',
+    keyPrefix: 'features.home.components.Skills',
   });
   const ref = useRef(null);
   useFadeInView(ref, { once: true });

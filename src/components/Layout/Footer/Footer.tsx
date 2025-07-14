@@ -1,48 +1,86 @@
 import Icon from '@/components/Icon/Icon';
 import ScrambledText from '@/components/ScrambledText/ScrambledText';
-import socials from '@/config/socials';
-import useFadeInView from '@/hooks/useFadeInView';
+import footerLinkSections, {
+  type FooterLink,
+  type FooterLinksSection,
+} from '@/config/footer';
 import classNames from 'classnames';
-import { useRef } from 'react';
+import { type ComponentProps } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
+import { Link, NavLink } from 'react-router';
+import Logo from '../../Logo/Logo';
 
-export interface FooterProps extends React.HTMLAttributes<HTMLElement> {}
+interface FooterLinkComponentProps extends ComponentProps<'div'> {
+  footerLinksSection: FooterLinksSection;
+  footerLink: FooterLink;
+}
+
+function FooterLinkComponent({
+  footerLinksSection: { key: footerLinksSectionKey },
+  footerLink: { to, target, icon, key },
+  ...props
+}: FooterLinkComponentProps) {
+  const { t } = useTranslation('app', {
+    keyPrefix: 'components.Layout.Footer',
+  });
+
+  return (
+    <div {...props}>
+      <Link
+        rel="noreferrer noopener"
+        to={to}
+        target={target}
+        className="inline-flex items-center gap-2 hover:text-theme-orange-200"
+      >
+        {icon && <Icon icon={icon} className="inline-block" />}
+        <ScrambledText>
+          {t(
+            `footerLinksSections.${footerLinksSectionKey}.footerLinks.${key}.title`
+          )}
+        </ScrambledText>
+      </Link>
+    </div>
+  );
+}
+
+export interface FooterProps extends React.ComponentProps<'footer'> {}
 
 export default function Footer({ className, ...props }: FooterProps) {
   const { t } = useTranslation('app', {
     keyPrefix: 'components.Layout.Footer',
   });
-  const ref = useRef(null);
-  useFadeInView(ref, { once: true });
 
   return (
     <footer
       {...props}
-      ref={ref}
       className={classNames('border-t-theme-red-400 border-t', className)}
     >
-      <div className="container mx-auto">
-        <div className="py-8 px-8 grid grid-cols-1 md:grid-cols-3 gap-4 justify-items-center">
-          <div className="flex flex-col">
-            <div className="text-lg font-bold text-theme-red-400">
-              {t('sections.social')}
-            </div>
+      <div className="max-w-xs md:container mx-auto flex flex-col align-middle">
+        <div className="py-8 px-8 grid grid-cols-1 md:grid-cols-4 gap-4">
+          <NavLink to="/">
+            <Logo className="h-24 aspect-square" />
+          </NavLink>
 
-            {socials.map(({ href, icon, title }, i) => (
-              <div key={i}>
-                <a
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  href={href}
-                  className="inline-flex items-center gap-2 hover:text-theme-orange-200"
-                >
-                  <Icon icon={icon} className="inline-block" />{' '}
-                  <ScrambledText>{title}</ScrambledText>
-                </a>
+          {footerLinkSections.map((footerLinksSection, i) => (
+            <div key={i} className="flex flex-col">
+              <div className="text-lg font-bold text-theme-red-400">
+                {t(`footerLinksSections.${footerLinksSection.key}.title`)}
               </div>
-            ))}
-          </div>
+
+              <ul>
+                {footerLinksSection.footerLinks.map((footerLink, j) => (
+                  <li key={j}>
+                    <FooterLinkComponent
+                      footerLinksSection={footerLinksSection}
+                      footerLink={footerLink}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
         </div>
+
         <div className="py-8 text-center">
           <p className="align-middle">
             <Trans

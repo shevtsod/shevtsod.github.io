@@ -10,7 +10,7 @@ export interface BlogPostCardProps
 }
 
 export default function BlogPostCard({
-  index = 1,
+  index = 0,
   blogPost,
   ...props
 }: BlogPostCardProps) {

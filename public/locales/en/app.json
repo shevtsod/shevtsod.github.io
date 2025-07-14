@@ -5,8 +5,32 @@
     },
     "Layout": {
       "Footer": {
-        "sections": {
-          "social": "Social"
+        "footerLinksSections": {
+          "social": {
+            "title": "Social",
+            "footerLinks": {
+              "github": {
+                "title": "shevtsod"
+              },
+              "linkedin": {
+                "title": "daniel.shevtsov"
+              }
+            }
+          },
+          "navigation": {
+            "title": "Navigation",
+            "footerLinks": {
+              "home": {
+                "title": "Home"
+              },
+              "blog": {
+                "title": "Blog"
+              },
+              "contact": {
+                "title": "Contact"
+              }
+            }
+          }
         },
         "copyright": "Made with <icon /> by Daniel Shevtsov"
       },
@@ -72,6 +96,100 @@
         "Hero": {
           "title": "Daniel\nShevtsov",
           "subtitle": "Full-stack web developer."
+        },
+        "Experience": {
+          "title": "Timeline"
+        },
+        "Projects": {
+          "title": "Project Highlights"
+        },
+        "Skills": {
+          "title": "Skill Set",
+          "skillCategories": {
+            "languages": {
+              "title": "Languages",
+              "skills": {
+                "javascript": { "title": "JavaScript" },
+                "java": { "title": "Java" },
+                "csharp": { "title": "C#" },
+                "ruby": { "title": "Ruby" },
+                "php": { "title": "PHP" },
+                "cpp": { "title": "C++" },
+                "bash": { "title": "Bash" }
+              }
+            },
+            "frameworks": {
+              "title": "Frameworks",
+              "skills": {
+                "react": { "title": "React" },
+                "nodejs": { "title": "Node.js" },
+                "nextjs": { "title": "Next.js" },
+                "nestjs": { "title": "NestJS" },
+                "expressjs": { "title": "Express.js" },
+                "jquery": { "title": "jQuery" },
+                "jakartaee": { "title": "Jakarta EE" },
+                "ruby-on-rails": { "title": "Ruby on Rails" },
+                "laravel": { "title": "Laravel" },
+                "android": { "title": "Android" }
+              }
+            },
+            "technologies": {
+              "title": "Technologies",
+              "skills": {
+                "github": { "title": "GitHub" },
+                "gitlab": { "title": "GitLab" },
+                "mysql": { "title": "MySQL" },
+                "postgresql": { "title": "PostgreSQL" },
+                "mongodb": { "title": "MongoDB" },
+                "redis": { "title": "Redis" },
+                "prometheus": { "title": "Prometheus" },
+                "grafana": { "title": "Grafana" },
+                "influxdb": { "title": "InfluxDB" }
+              }
+            },
+            "virtualization": {
+              "title": "Virtualization",
+              "kubernetes": { "title": "Kubernetes" },
+              "docker": { "title": "Docker" },
+              "vagrant": { "title": "Vagrant" }
+            },
+            "cloud": {
+              "title": "Cloud",
+              "skills": {
+                "aws": { "title": "Amazon Web Services" },
+                "azure": { "title": "Microsoft Azure" },
+                "heroku": { "title": "Heroku" },
+                "openstack": { "title": "OpenStack" }
+              }
+            },
+            "ci-cd": {
+              "title": "CI/CD",
+              "skills": {
+                "gitlab-cicd": { "title": "GitLab CI/CD" },
+                "argocd": { "title": "Argo CD" },
+                "circleci": { "title": "CircleCI" },
+                "github-actions": { "title": "GitHub Actions" }
+              }
+            },
+            "networking": {
+              "title": "Networking",
+              "skills": {
+                "fortigate": { "title": "FortiGate + FortiManager" },
+                "netbox": { "title": "NetBox" },
+                "bind": { "title": "BIND" }
+              }
+            },
+            "design": {
+              "title": "Design",
+              "skills": {
+                "photoshop": { "title": "Adobe Photoshop" },
+                "premiere": { "title": "Adobe Premiere Pro" },
+                "figma": { "title": "Figma" },
+                "krita": { "title": "Krita" },
+                "inkscape": { "title": "Inkscape" }
+              }
+            }
+          }
         },
         "Summary": {
           "title": "Profile Summary",

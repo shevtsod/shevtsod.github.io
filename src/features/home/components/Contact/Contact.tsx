@@ -75,10 +75,7 @@ export default function Contact<T extends ElementType>({
     <Component
       ref={ref}
       {...props}
-      className={classNames(
-        'container mx-auto p-6 flex flex-col items-center',
-        className
-      )}
+      className={classNames('container mx-auto my-6', className)}
     >
       <Heading
         as="h2"
@@ -91,7 +88,7 @@ export default function Contact<T extends ElementType>({
       <form
         onSubmit={handleSubmit(onSubmit)}
         autoComplete="off"
-        className="w-full lg:w-2/3 xl:w-1/2 flex flex-col justify-center items-center gap-4 text-center"
+        className="px-6 lg:w-2/3 xl:w-1/2 mx-auto flex flex-col justify-center items-center gap-4 text-center"
       >
         <InputLabel text={<span>{t('form.name')}</span>} error={errors.name}>
           <TextInput

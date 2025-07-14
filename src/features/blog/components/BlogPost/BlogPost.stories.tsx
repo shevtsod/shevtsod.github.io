@@ -1,9 +1,11 @@
 import { faker } from '@faker-js/faker';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { withRouter } from 'storybook-addon-remix-react-router';
 import BlogPost from './BlogPost';
 
 const meta: Meta<typeof BlogPost> = {
   component: BlogPost,
+  decorators: [withRouter],
 };
 
 export default meta;
