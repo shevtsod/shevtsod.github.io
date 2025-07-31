@@ -1,5 +1,6 @@
 /// <reference types="vitest/config" />
 import mdx from '@mdx-js/rollup';
+import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
@@ -29,6 +30,7 @@ export default defineConfig({
       include: /\.(jsx|js|mdx|md|tsx|ts)$/,
     }),
     svgr(),
+    tailwindcss(),
   ],
   resolve: {
     alias: {

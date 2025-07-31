@@ -14,7 +14,7 @@ type Story = StoryObj<typeof BlogRoute>;
 
 export const Default: Story = {
   args: {
-    blogPosts: Array.from({ length: 20 }).map((_, i) => ({
+    blogPosts: Array.from({ length: 20 }).map(() => ({
       path: 'blog1',
       Component: () => <div>Test</div>,
       frontmatter: {
