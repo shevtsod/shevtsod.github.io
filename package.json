@@ -23,6 +23,7 @@
     "@types/mdx": "^2.0.13",
     "@vitejs/plugin-react": "^4.6.0",
     "classnames": "^2.5.1",
+    "date-fns": "^4.1.0",
     "devicon": "^2.16.0",
     "i18next": "^25.3.2",
     "i18next-http-backend": "^3.0.2",

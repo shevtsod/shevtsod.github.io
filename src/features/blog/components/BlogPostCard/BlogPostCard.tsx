@@ -1,12 +1,13 @@
+import { formatISO } from 'date-fns';
 import type { ComponentProps } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router';
-import type { BlogPost } from '../../utils/blogPosts';
+import type { BlogPostType } from '../../utils/blogPosts';
 
 export interface BlogPostCardProps
   extends Partial<ComponentProps<typeof NavLink>> {
   index?: number;
-  blogPost: BlogPost;
+  blogPost: BlogPostType;
 }
 
 export default function BlogPostCard({
@@ -25,13 +26,13 @@ export default function BlogPostCard({
 
   return (
     <NavLink {...props} to={path} className="group">
-      <div className="text-sm">
+      <div className="text-sm mb-4">
         <div className="flex flex-row">
-          <div className="flex flex-col justify-center text-9xl italic font-pixel mr-12 text-zinc-400 dark:text-zinc-900 group-hover:text-gray-400 dark:group-hover:text-zinc-800">
+          <div className="text-right flex-1 flex flex-col justify-center text-9xl italic font-pixel mr-4 text-zinc-400 dark:text-zinc-900 group-hover:text-gray-400 dark:group-hover:text-zinc-800">
             {index}
           </div>
 
-          <div className="mb-3 flex flex-col text-zinc-500 group-hover:text-zinc-700 dark:group-hover:text-zinc-300">
+          <div className="flex-3 flex flex-col text-zinc-500 group-hover:text-zinc-700 dark:group-hover:text-zinc-300">
             <h1 className="text-3xl mb-3">{title}</h1>
 
             <p className="font-bold mb-3">{description}</p>
@@ -50,7 +51,7 @@ export default function BlogPostCard({
                 t={t}
                 i18nKey="postedOn"
                 components={{ b: <b /> }}
-                values={{ date }}
+                values={{ date: formatISO(date) }}
               />
             </span>
           </div>

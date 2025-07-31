@@ -1,15 +1,14 @@
-export interface Skill {
+export interface SkillType {
   key: string;
   icon?: string;
-  iconType?: 'asset' | 'devicons';
 }
 
-export interface SkillCategory {
+export interface SkillCategoryType {
   key: string;
-  skills: Skill[];
+  skills: SkillType[];
 }
 
-const skillCategories: SkillCategory[] = [
+const skillCategories: SkillCategoryType[] = [
   {
     key: 'languages',
     skills: [
@@ -101,6 +100,12 @@ const skillCategories: SkillCategory[] = [
       {
         key: 'influxdb',
       },
+      {
+        key: 'rest',
+      },
+      {
+        key: 'godot',
+      },
     ],
   },
   {
@@ -148,6 +153,9 @@ const skillCategories: SkillCategory[] = [
       },
       {
         key: 'github-actions',
+      },
+      {
+        key: 'github-pages',
       },
     ],
   },

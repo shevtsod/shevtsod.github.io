@@ -101,7 +101,7 @@
           "title": "Timeline"
         },
         "Projects": {
-          "title": "Project Highlights"
+          "title": "Projects"
         },
         "Skills": {
           "title": "Skill Set",
@@ -144,7 +144,9 @@
                 "redis": { "title": "Redis" },
                 "prometheus": { "title": "Prometheus" },
                 "grafana": { "title": "Grafana" },
-                "influxdb": { "title": "InfluxDB" }
+                "influxdb": { "title": "InfluxDB" },
+                "rest": { "title": "REST APIs" },
+                "godot": { "title": "Godot" }
               }
             },
             "virtualization": {
@@ -168,7 +170,8 @@
                 "gitlab-cicd": { "title": "GitLab CI/CD" },
                 "argocd": { "title": "Argo CD" },
                 "circleci": { "title": "CircleCI" },
-                "github-actions": { "title": "GitHub Actions" }
+                "github-actions": { "title": "GitHub Actions" },
+                "github-pages": { "title": "GitHub Pages" }
               }
             },
             "networking": {
@@ -195,7 +198,7 @@
           "title": "Profile Summary",
           "summary1": "Proficient in both modern and less-modern technologies, with <highlight>over {{experienceYears}} years of experience</highlight> in web development. Skilled in development, testing, DevOps and automation - a great fit for many roles.",
           "summary2": "Creative and detail-oriented, constantly working towards functional solutions without compromising on design and aesthetics. Always seeking to add the <highlight>extra touch</highlight> to give a novel experience that turns heads and amazes.",
-          "summary3": "Well-versed in both <highlight>individual and team settings</highlight>, eager to independently research problems, write thorough documentation, and cooperate with colleagues to deliver a delightful product."
+          "summary3": "Well-versed in both <highlight>individual and team settings,</highlight> eager to independently research problems, write thorough documentation, and cooperate with colleagues to deliver a delightful product."
         }
       },
       "routes": {

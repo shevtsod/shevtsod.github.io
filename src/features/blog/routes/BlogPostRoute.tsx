@@ -2,14 +2,21 @@ import useTitle from '@/hooks/useTitle';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router';
 import BlogPost from '../components/BlogPost/BlogPost';
-import { blogPosts } from '../utils/blogPosts';
+import { blogPosts, type BlogPostType } from '../utils/blogPosts';
 
-export default function BlogPostRoute() {
+export interface BlogPostRouteProps {
+  blogPost?: BlogPostType;
+}
+
+export default function BlogPostRoute({
+  blogPost: blogPostProp,
+}: BlogPostRouteProps) {
   const { t } = useTranslation('app', {
     keyPrefix: 'features.blog.routes.BlogPostRoute',
   });
   const { path } = useParams();
-  const blogPost = blogPosts.find((el) => el.path === path);
+
+  const blogPost = blogPostProp ?? blogPosts.find((el) => el.path === path);
 
   if (!blogPost) {
     throw new Error('Blog post not found!');

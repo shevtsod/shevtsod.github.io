@@ -20,7 +20,7 @@ export const Default: Story = {
         title: faker.lorem.sentence(),
         description: faker.lorem.paragraphs(20),
         author: faker.internet.username(),
-        date: faker.date.recent().toISOString(),
+        date: faker.date.recent(),
       },
       Component: () => <div>Test</div>,
     },

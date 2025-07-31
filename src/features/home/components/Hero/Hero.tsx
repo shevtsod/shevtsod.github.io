@@ -59,7 +59,7 @@ export default function Hero<T extends ElementType>({
           <h1
             key={i}
             className={classNames(
-              'mb-16 text-[5em] sm:text-[10em] md:text-[12em] lg:text-[16em] xl:text-[20em] [transform:perspective(400px)_rotateX(45deg)] sm:[transform:perspective(800px)_rotateX(45deg)] leading-[0.75] whitespace-break-spaces font-retro',
+              'mb-16 text-[6em] sm:text-[10em] md:text-[12em] lg:text-[16em] xl:text-[18em] 2xl:text-[20em] [transform:perspective(400px)_rotateX(45deg)] sm:[transform:perspective(800px)_rotateX(45deg)] leading-[0.75] whitespace-break-spaces font-retro',
               styles.title,
               {
                 'absolute top-0 left-0 w-full [text-shadow:0_0.05em_0_var(--color-theme-red-800)] pointer-none':

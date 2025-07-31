@@ -1,11 +1,12 @@
 import Button from '@/components/Button/Button';
 import ScrambledText from '@/components/ScrambledText/ScrambledText';
+import { formatISO } from 'date-fns';
 import { Trans, useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router';
-import type { BlogPost } from '../../utils/blogPosts';
+import type { BlogPostType } from '../../utils/blogPosts';
 
 export interface BlogPostProps {
-  blogPost: BlogPost;
+  blogPost: BlogPostType;
 }
 
 export default function BlogPost({ blogPost }: BlogPostProps) {
@@ -40,7 +41,7 @@ export default function BlogPost({ blogPost }: BlogPostProps) {
               t={t}
               i18nKey="postedOn"
               components={{ b: <b /> }}
-              values={{ date }}
+              values={{ date: formatISO(date) }}
             />
           </span>
         </div>

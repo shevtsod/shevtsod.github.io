@@ -1,20 +1,26 @@
+import { compareAsc, parse } from 'date-fns';
+
 /**
  * Represents the data for one blog post
  */
-export interface BlogPost {
+export interface BlogPostType {
   path: string;
   Component: React.ComponentType;
   frontmatter: FrontmatterType;
 }
 
-/**
- * Frontmatter properties available in a blog post
- */
-export interface FrontmatterType {
+interface RawFrontmatterType {
   title: string;
   description: string;
   date: string;
   author: string;
+}
+
+/**
+ * Frontmatter properties available in a blog post
+ */
+export interface FrontmatterType extends Omit<RawFrontmatterType, 'date'> {
+  date: Date;
 }
 
 // Load posts from src/blog
@@ -24,12 +30,17 @@ const blogModules = import.meta.glob<Record<string, unknown>>(
 );
 
 // Transform and sort posts
-export const blogPosts: BlogPost[] = Object.entries(blogModules)
+export const blogPosts: BlogPostType[] = Object.entries(blogModules)
   .map(([path, module]) => {
+    const frontmatter = module.frontmatter as RawFrontmatterType;
+
     return {
       path: path.replace(/^\/src\/blog\/|\.mdx$/g, ''),
       Component: module.default,
-      frontmatter: module.frontmatter,
-    } as BlogPost;
+      frontmatter: {
+        ...frontmatter,
+        date: parse(frontmatter.date, 'yyyy-MM-dd', new Date()),
+      },
+    } as BlogPostType;
   })
-  .sort((a, b) => b.frontmatter.date.localeCompare(a.frontmatter.date));
+  .sort((a, b) => compareAsc(a.frontmatter.date, b.frontmatter.date));
