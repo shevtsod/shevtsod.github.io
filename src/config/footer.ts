@@ -1,10 +1,9 @@
 import type { HTMLAttributeAnchorTarget } from 'react';
-import type { To } from 'react-router';
 
 export interface FooterLink {
   key: string;
   icon?: string;
-  to: To;
+  href: string;
   target?: HTMLAttributeAnchorTarget;
 }
 
@@ -21,13 +20,13 @@ const footerLinksSections: FooterLinksSection[] = [
       {
         key: 'github',
         icon: 'github',
-        to: 'https://github.com/shevtsod',
+        href: 'https://github.com/shevtsod',
         target: '_blank',
       },
       {
         key: 'linkedin',
         icon: 'linkedin',
-        to: 'https://www.linkedin.com/in/daniel-shevtsov-29089b296/',
+        href: 'https://www.linkedin.com/in/daniel-shevtsov-29089b296/',
         target: '_blank',
       },
     ],
@@ -38,15 +37,15 @@ const footerLinksSections: FooterLinksSection[] = [
     footerLinks: [
       {
         key: 'home',
-        to: '/',
+        href: '/#top',
       },
       {
         key: 'blog',
-        to: '/blog',
+        href: '/blog',
       },
       {
         key: 'contact',
-        to: '/#contact',
+        href: '/#contact',
       },
     ],
   },

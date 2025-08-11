@@ -1,0 +1,13 @@
+.section {
+  -webkit-animation: backdropSlide 8s steps(112, end) infinite;
+  animation: backdropSlide 8s steps(112, end) infinite;
+}
+
+@keyframes backdropSlide {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: -256px 256px;
+  }
+}

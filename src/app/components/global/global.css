@@ -1,0 +1,94 @@
+/* https://tailwindcss.com/docs/installation/framework-guides/nextjs */
+@import 'tailwindcss';
+@import 'tailwindcss';
+/* https://github.com/tailwindlabs/tailwindcss-typography */
+@plugin '@tailwindcss/typography';
+/* https://highlightjs.org/demo */
+@import 'highlight.js/styles/tokyo-night-dark';
+
+/* https://tailwindcss.com/docs/dark-mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* https://tailwindcss.com/docs/theme */
+@theme {
+  --color-theme-gray-100: #ffffff;
+  --color-theme-gray-200: #bebebe;
+  --color-theme-gray-400: #858585;
+  --color-theme-gray-600: #161616;
+  --color-theme-gray-800: #000000;
+
+  --color-theme-red-200: #ea552d;
+  --color-theme-red-400: #e51716;
+  --color-theme-red-600: #92080f;
+  --color-theme-red-800: #5e040e;
+
+  --color-theme-orange-200: #e4a20d;
+  --color-theme-orange-400: #c97b07;
+  --color-theme-orange-600: #ad5d01;
+  --color-theme-orange-800: #883b01;
+
+  --color-theme-yellow-200: #fffe81;
+  --color-theme-yellow-400: #e8db6d;
+  --color-theme-yellow-600: #bfa850;
+  --color-theme-yellow-800: #a78a3f;
+
+  --color-theme-tan-200: #f6e4d4;
+  --color-theme-tan-400: #d4bea5;
+  --color-theme-tan-600: #a18a74;
+  --color-theme-tan-800: #846c5f;
+
+  --color-theme-green-200: #c1e955;
+  --color-theme-green-400: #91cf30;
+  --color-theme-green-600: #61b327;
+  --color-theme-green-800: #44941a;
+
+  --color-theme-blue-200: #1e5898;
+  --color-theme-blue-400: #1b3562;
+  --color-theme-blue-600: #15233e;
+  --color-theme-blue-800: #0c0f1d;
+
+  --font-cursive: var(--font-cursive);
+  --font-mono: var(--font-mono);
+  --font-pixel: var(--font-pixel);
+  --font-retro: var(--font-retro);
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+}
+
+/* https://github.com/tailwindlabs/tailwindcss-typography */
+@utility prose {
+  pre {
+    code {
+      @apply rounded-lg;
+    }
+  }
+
+  code {
+    @apply p-1 bg-zinc-400 dark:bg-zinc-800;
+
+    &::before,
+    &::after {
+      @apply hidden;
+    }
+  }
+}
+
+/* https://github.com/tailwindlabs/tailwindcss-typography */
+/* @utility prose-invert {
+} */
+
+/* Forces an image to render with nearest-neighbor scaling to appear pixelated */
+@utility image-pixelated {
+  image-rendering: pixelated;
+}
+
+/*******************************************************************************
+ * GLOBAL CSS
+ ******************************************************************************/
+
+html {
+  /* https://github.com/motiondivision/motion/issues/1853 */
+  position: relative;
+  /* Smooth scrolling animations */
+  scroll-behavior: smooth;
+}

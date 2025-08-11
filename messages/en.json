@@ -1,0 +1,215 @@
+{
+  "metadata": {
+    "title": "Daniel Shevtsov"
+  },
+  "app": {
+    "(home)": {
+      "components": {
+        "contact": {
+          "title": "Let's chat",
+          "form": {
+            "name": "Your name:",
+            "email": "Your email address:",
+            "message": "Your message:",
+            "submit": "Submit",
+            "submitted": "Thank you for reaching out, I will get back to you shortly!"
+          }
+        },
+        "hero": {
+          "title": "Daniel\nShevtsov",
+          "subtitle": "Full-stack web developer."
+        },
+        "experience": {
+          "title": "Timeline"
+        },
+        "projects": {
+          "title": "Projects"
+        },
+        "skills": {
+          "title": "Skill Set",
+          "skillCategories": {
+            "languages": {
+              "title": "Languages",
+              "skills": {
+                "javascript": { "title": "JavaScript" },
+                "java": { "title": "Java" },
+                "csharp": { "title": "C#" },
+                "ruby": { "title": "Ruby" },
+                "php": { "title": "PHP" },
+                "cpp": { "title": "C++" },
+                "bash": { "title": "Bash" }
+              }
+            },
+            "frameworks": {
+              "title": "Frameworks",
+              "skills": {
+                "react": { "title": "React" },
+                "nodejs": { "title": "Node.js" },
+                "nextjs": { "title": "Next.js" },
+                "nestjs": { "title": "NestJS" },
+                "expressjs": { "title": "Express.js" },
+                "jquery": { "title": "jQuery" },
+                "jakartaee": { "title": "Jakarta EE" },
+                "ruby-on-rails": { "title": "Ruby on Rails" },
+                "laravel": { "title": "Laravel" },
+                "android": { "title": "Android" }
+              }
+            },
+            "technologies": {
+              "title": "Technologies",
+              "skills": {
+                "github": { "title": "GitHub" },
+                "gitlab": { "title": "GitLab" },
+                "mysql": { "title": "MySQL" },
+                "postgresql": { "title": "PostgreSQL" },
+                "mongodb": { "title": "MongoDB" },
+                "redis": { "title": "Redis" },
+                "prometheus": { "title": "Prometheus" },
+                "grafana": { "title": "Grafana" },
+                "influxdb": { "title": "InfluxDB" },
+                "rest": { "title": "REST APIs" },
+                "godot": { "title": "Godot" }
+              }
+            },
+            "virtualization": {
+              "title": "Virtualization",
+              "kubernetes": { "title": "Kubernetes" },
+              "docker": { "title": "Docker" },
+              "vagrant": { "title": "Vagrant" }
+            },
+            "cloud": {
+              "title": "Cloud",
+              "skills": {
+                "aws": { "title": "Amazon Web Services" },
+                "azure": { "title": "Microsoft Azure" },
+                "heroku": { "title": "Heroku" },
+                "openstack": { "title": "OpenStack" }
+              }
+            },
+            "ci-cd": {
+              "title": "CI/CD",
+              "skills": {
+                "gitlab-cicd": { "title": "GitLab CI/CD" },
+                "argocd": { "title": "Argo CD" },
+                "circleci": { "title": "CircleCI" },
+                "github-actions": { "title": "GitHub Actions" },
+                "github-pages": { "title": "GitHub Pages" }
+              }
+            },
+            "networking": {
+              "title": "Networking",
+              "skills": {
+                "fortigate": { "title": "FortiGate + FortiManager" },
+                "netbox": { "title": "NetBox" },
+                "bind": { "title": "BIND" }
+              }
+            },
+            "design": {
+              "title": "Design",
+              "skills": {
+                "photoshop": { "title": "Adobe Photoshop" },
+                "premiere": { "title": "Adobe Premiere Pro" },
+                "figma": { "title": "Figma" },
+                "krita": { "title": "Krita" },
+                "inkscape": { "title": "Inkscape" }
+              }
+            }
+          }
+        },
+        "summary": {
+          "title": "Profile Summary",
+          "summary-item": {
+            "summary1": "Proficient in both modern and less-modern technologies, with <highlight>over {experienceYears} years of experience</highlight> in web development. Skilled in development, testing, DevOps and automation - a great fit for many roles.",
+            "summary2": "Creative and detail-oriented, constantly working towards functional solutions without compromising on design and aesthetics. Always seeking to add the <highlight>extra touch</highlight> to give a novel experience that turns heads and amazes.",
+            "summary3": "Well-versed in both <highlight>individual and team settings,</highlight> eager to independently research problems, write thorough documentation, and cooperate with colleagues to deliver a delightful product."
+          }
+        }
+      },
+      "page": {
+        "title": "Home"
+      }
+    },
+    "blog": {
+      "components": {
+        "blog-posts": {
+          "blog-post-card": {
+            "postedBy": "By <b>{author}</b>",
+            "postedOn": "Posted on <b>{date}</b>"
+          }
+        }
+      },
+      "page": {
+        "title": "Blog"
+      },
+      "[slug]": {
+        "components": {
+          "blog-post": {
+            "postedBy": "By <b>{author}</b>",
+            "postedOn": "Posted on <b>{date}</b>",
+            "backToBlog": "Back to Blog"
+          }
+        },
+        "page": {
+          "title": "Blog Post"
+        }
+      }
+    },
+    "error": {
+      "title": "CRITICAL ERROR!"
+    },
+    "not-found": {
+      "title": "CRITICAL ERROR!"
+    }
+  },
+  "components": {
+    "boot": {
+      "title": "BOOTING ..."
+    },
+    "app-error": {
+      "title": "CRITICAL ERROR!",
+      "messages": {
+        "404": "Not Found",
+        "unexpected": "Unexpected Error"
+      }
+    },
+    "layout": {
+      "footer": {
+        "footerLinksSections": {
+          "social": {
+            "title": "Social",
+            "footerLinks": {
+              "github": {
+                "title": "shevtsod"
+              },
+              "linkedin": {
+                "title": "daniel.shevtsov"
+              }
+            }
+          },
+          "navigation": {
+            "title": "Navigation",
+            "footerLinks": {
+              "home": {
+                "title": "Home"
+              },
+              "blog": {
+                "title": "Blog"
+              },
+              "contact": {
+                "title": "Contact"
+              }
+            }
+          }
+        },
+        "copyright": "Made with <icon></icon> by Daniel Shevtsov"
+      },
+      "header": {
+        "links": {
+          "blog": "Blog",
+          "contact": "Contact",
+          "home": "Home"
+        }
+      }
+    }
+  }
+}

@@ -8,5 +8,5 @@ Run locally using:
 
 ```sh
 npm i
-npm run dev # http://localhost:5173
+npm run dev # http://localhost:3000
 ```

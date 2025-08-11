@@ -1,10 +1,8 @@
-import type { To } from 'react-router';
-
 export interface ProjectType {
   title: string;
   description: string;
-  repository?: To;
-  url?: To;
+  repository?: string;
+  url?: string;
   skills: string[];
 }
 
