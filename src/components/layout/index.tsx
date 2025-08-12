@@ -24,7 +24,7 @@ export default function Layout({
       className={classNames('min-h-[100svh] flex flex-col', className)}
     >
       <Header showOnScroll={showHeaderOnScroll} />
-      <main className="flex-1">{children}</main>
+      <main className="flex flex-col flex-1">{children}</main>
       <Footer />
     </div>
   );

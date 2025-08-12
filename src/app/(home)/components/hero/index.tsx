@@ -98,6 +98,8 @@ export default function Hero<T extends ElementType>({
         className={classNames(
           'important-opacity absolute bottom-0 right-0 mx-10 my-10 flex flex-col items-center font-retro pointer-events-none',
           styles.chevron,
+          // add intro class only if intro mode is enabled
+          { [styles.intro]: intro },
         )}
       >
         <div>SCROLL</div>

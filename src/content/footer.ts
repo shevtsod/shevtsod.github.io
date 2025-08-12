@@ -1,18 +1,18 @@
 import type { HTMLAttributeAnchorTarget } from 'react';
 
-export interface FooterLink {
+export interface FooterLinkType {
   key: string;
   icon?: string;
   href: string;
   target?: HTMLAttributeAnchorTarget;
 }
 
-export interface FooterLinksSection {
+export interface FooterLinkSectionType {
   key: string;
-  footerLinks: FooterLink[];
+  footerLinks: FooterLinkType[];
 }
 
-const footerLinksSections: FooterLinksSection[] = [
+const footerLinksSections: FooterLinkSectionType[] = [
   // Social
   {
     key: 'social',

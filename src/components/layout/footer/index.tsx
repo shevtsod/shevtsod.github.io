@@ -1,45 +1,10 @@
 import Icon from '@/components/icon';
 import Logo from '@/components/logo';
-import ScrambledText from '@/components/scrambled-text';
-import footerLinkSections, {
-  type FooterLink,
-  type FooterLinksSection,
-} from '@/config/footer';
+import footerLinkSections from '@/content/footer';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { type ComponentProps } from 'react';
-
-interface FooterLinkComponentProps extends ComponentProps<'div'> {
-  footerLinksSection: FooterLinksSection;
-  footerLink: FooterLink;
-}
-
-function FooterLinkComponent({
-  footerLinksSection: { key: footerLinksSectionKey },
-  footerLink: { href, target, icon, key },
-  ...props
-}: FooterLinkComponentProps) {
-  const t = useTranslations('components.layout.footer');
-
-  return (
-    <div {...props}>
-      <Link
-        rel="noreferrer noopener"
-        href={href}
-        target={target}
-        className="inline-flex items-center gap-2 hover:text-theme-orange-200"
-      >
-        {icon && <Icon icon={icon} className="inline-block h-[16px] w-auto" />}
-        <ScrambledText>
-          {t(
-            `footerLinksSections.${footerLinksSectionKey}.footerLinks.${key}.title`,
-          )}
-        </ScrambledText>
-      </Link>
-    </div>
-  );
-}
+import FooterLink from './footer-link';
 
 export interface FooterProps extends React.ComponentProps<'footer'> {}
 
@@ -63,17 +28,17 @@ export default function Footer({ className, ...props }: FooterProps) {
             <Logo className="h-16 md:h-24 aspect-square" />
           </Link>
 
-          {footerLinkSections.map((footerLinksSection, i) => (
+          {footerLinkSections.map((footerLinkSection, i) => (
             <div key={i} className="flex flex-col">
               <div className="text-lg font-bold text-theme-red-400">
-                {t(`footerLinksSections.${footerLinksSection.key}.title`)}
+                {t(`footerLinksSections.${footerLinkSection.key}.title`)}
               </div>
 
               <ul>
-                {footerLinksSection.footerLinks.map((footerLink, j) => (
+                {footerLinkSection.footerLinks.map((footerLink, j) => (
                   <li key={j}>
-                    <FooterLinkComponent
-                      footerLinksSection={footerLinksSection}
+                    <FooterLink
+                      footerLinkSection={footerLinkSection}
                       footerLink={footerLink}
                     />
                   </li>

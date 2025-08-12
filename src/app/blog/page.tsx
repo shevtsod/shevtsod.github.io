@@ -16,5 +16,9 @@ export async function generateMetadata(): Promise<Metadata> {
  * Show a listing of blog posts
  */
 export default function BlogPage() {
-  return <BlogPosts blogPosts={blogPosts} />;
+  return (
+    <section className="flex-1">
+      <BlogPosts blogPosts={blogPosts} />
+    </section>
+  );
 }
