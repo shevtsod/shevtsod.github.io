@@ -3,6 +3,7 @@
 import Button from '@/components/button';
 import ScrambledText from '@/components/scrambled-text';
 import useFadeInView from '@/hooks/use-fade-in-view';
+import { zodResolver } from '@hookform/resolvers/zod';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 import {
@@ -13,17 +14,20 @@ import {
   useRef,
 } from 'react';
 import { type FieldError, type SubmitHandler, useForm } from 'react-hook-form';
+import z from 'zod';
 import Heading from '../heading';
 
 export type ContactProps<T extends ElementType> = {
   as?: T;
 } & ComponentPropsWithoutRef<T>;
 
-export type ContactFormInputs = {
-  name: string;
-  email: string;
-  message: string;
-};
+const formSchema = z.object({
+  name: z.string().min(1).max(64),
+  email: z.email(),
+  message: z.string().min(1).max(2048),
+});
+
+type FormSchema = z.infer<typeof formSchema>;
 
 /**
  * Renders the contact section.
@@ -42,15 +46,12 @@ export default function Contact<T extends ElementType>({
     handleSubmit,
     formState: { isSubmitting, isDirty, isValid, errors, isSubmitSuccessful },
     setError,
-  } = useForm<ContactFormInputs>({
-    defaultValues: {
-      name: '',
-      email: '',
-      message: '',
-    },
+  } = useForm<FormSchema>({
+    resolver: zodResolver(formSchema),
+    mode: 'onBlur',
   });
 
-  const onSubmit: SubmitHandler<ContactFormInputs> = async (data) => {
+  const onSubmit: SubmitHandler<FormSchema> = async (data) => {
     try {
       const res = await fetch('https://formspree.io/f/meqyrrqq', {
         method: 'POST',
@@ -124,7 +125,7 @@ export default function Contact<T extends ElementType>({
         </Button>
 
         {errors.root && (
-          <p className="text-theme-red-400 italic">{errors.root.message}</p>
+          <p className="text-theme-red-400 italic">✖ {errors.root.message}</p>
         )}
 
         {isSubmitSuccessful && (
@@ -146,7 +147,7 @@ export function InputLabel({ text, error, children }: InputLabelProps) {
     <label className="w-full">
       <span className="block">{text}</span>
       {children}
-      {error && <p className="text-theme-red-400 italic">{error.message}</p>}
+      {error && <p className="text-theme-red-400">✖ {error.message}</p>}
     </label>
   );
 }

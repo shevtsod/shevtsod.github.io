@@ -1,11 +1,11 @@
 .title {
-  animation-name: fade, shine;
-  animation-duration: 2.5s, 10s;
-  animation-timing-function: steps(4, end), steps(60, end);
-  animation-delay: 1s, 6s;
-  animation-iteration-count: 1, infinite;
-  animation-direction: normal, normal;
-  animation-fill-mode: both, forwards;
+  animation-name: shine;
+  animation-duration: 10s;
+  animation-timing-function: steps(60, end);
+  animation-delay: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-fill-mode: forwards;
 
   background: linear-gradient(
     115deg,
@@ -25,8 +25,19 @@
   background-position-x: -100%;
 }
 
+.title.intro {
+  animation-name: fade, shine;
+  animation-duration: 2.5s, 10s;
+  animation-timing-function: steps(4, end), steps(60, end);
+  animation-delay: 1s, 6s;
+  animation-iteration-count: 1, infinite;
+  animation-direction: normal, normal;
+  animation-fill-mode: both, forwards;
+}
+
 .chevron {
-  animation: fade 1s steps(4, end) 6s normal both,
+  animation:
+    fade 1s steps(4, end) 6s normal both,
     floatDown 1.2s steps(3, end) infinite forwards;
 }
 

@@ -29,6 +29,18 @@ export default function Hero<T extends ElementType>({
   const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.hero');
   const [subtitlePaused, setSubtitlePaused] = useState(true);
+  const [intro, setIntro] = useState(true);
+
+  useEffect(() => {
+    setIntro(!window.location.hash);
+  }, []);
+
+  // Start the subtitle animation with a delay
+  useEffect(() => {
+    setSubtitlePaused(intro);
+    const timeout = setTimeout(() => setSubtitlePaused(false), 3500);
+    return () => clearTimeout(timeout);
+  }, [intro]);
 
   const scrollRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -36,11 +48,7 @@ export default function Hero<T extends ElementType>({
     offset: ['start start', 'end start'],
   });
 
-  useEffect(() => {
-    const timeout = setTimeout(() => setSubtitlePaused(false), 3500);
-    return () => clearTimeout(timeout);
-  }, []);
-
+  // "SCROLL" chevron visibility based on scroll position
   const chevronOpacity = useTransform(
     scrollYProgress,
     [0.1, 0.19, 0.2, 0.39, 0.4],
@@ -64,6 +72,8 @@ export default function Hero<T extends ElementType>({
             className={classNames(
               'mb-16 text-[6em] sm:text-[10em] md:text-[12em] lg:text-[16em] xl:text-[18em] 2xl:text-[20em] [transform:perspective(400px)_rotateX(45deg)] sm:[transform:perspective(800px)_rotateX(45deg)] leading-[0.75] whitespace-break-spaces font-retro',
               styles.title,
+              // add intro class only if intro mode is enabled
+              { [styles.intro]: intro },
               {
                 'absolute top-0 left-0 w-full [text-shadow:0_0.05em_0_var(--color-theme-red-800)] pointer-none':
                   i === 0,
@@ -76,7 +86,7 @@ export default function Hero<T extends ElementType>({
       </div>
 
       <h2 className="lg:text-lg">
-        <Typewriter duration={2000} paused={subtitlePaused}>
+        <Typewriter duration={intro ? 2000 : 0} paused={subtitlePaused}>
           {t('subtitle')}
         </Typewriter>
       </h2>

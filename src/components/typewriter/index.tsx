@@ -22,11 +22,17 @@ export default function Typewriter({
 
   // Increments the count of characters to be displayed on an interval
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (!paused) {
-        setCounter((value) => Math.min(value + 1, children.length));
-      }
-    }, duration / children.length);
+    let interval: NodeJS.Timeout;
+
+    if (duration === 0) {
+      setCounter(children.length);
+    } else {
+      interval = setInterval(() => {
+        if (!paused) {
+          setCounter((value) => Math.min(value + 1, children.length));
+        }
+      }, duration / children.length);
+    }
 
     return () => clearInterval(interval);
   }, [paused, duration, children]);

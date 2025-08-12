@@ -87,7 +87,7 @@ export default function Global({ children, className, ...props }: GlobalProps) {
         shPinscher.variable,
         ysabeauOffice.variable,
         labrada.variable,
-        'antialiased bg-theme-gray-200 dark:bg-theme-gray-800 text-theme-gray-800 dark:text-theme-gray-100 font-mono',
+        'antialiased  dark:bg-theme-gray-800 text-theme-gray-800 dark:text-theme-gray-100 font-mono',
         className,
       )}
     >
