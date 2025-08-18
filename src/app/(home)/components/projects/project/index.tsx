@@ -54,14 +54,14 @@ export default function Project({ project }: ProjectProps) {
       {/* Grain overlay */}
       <div
         className={classNames(
-          `z-1 absolute w-full h-full bg-[url('/images/ui/grain.svg')] bg-repeat bg-size-[256px] brightness-1000 dark:brightness-0 opacity-50 transition-opacity ease-[steps(2,end)] duration-200 pointer-events-none`,
+          `z-1 absolute w-full h-full bg-[url('/images/ui/grain.svg')] bg-repeat bg-size-[256px] brightness-200 dark:brightness-0 opacity-25 dark:opacity-50 transition-opacity ease-[steps(2,end)] duration-200 pointer-events-none`,
           {
             'opacity-0!': isNearMiddle,
           },
         )}
       />
 
-      <div className="relative flex-1 grow flex justify-center px-8 aspect-video bg-black">
+      <div className="relative flex-1 grow flex justify-center px-8 aspect-video">
         {/* Colour overlay */}
         <div
           className={classNames(

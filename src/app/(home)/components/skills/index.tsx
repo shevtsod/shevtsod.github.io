@@ -39,7 +39,10 @@ export default function Skills<T extends ElementType>({
         <ul className="text-center flex flex-col gap-4">
           {skillCategories.map((skillCategory, i) => (
             <li key={i}>
-              <div className="pb-2 font-retro font-bold text-4xl text-theme-orange-600 dark:text-theme-orange-200">
+              <div
+                id={skillCategory.key}
+                className="pb-2 font-retro font-bold text-4xl text-theme-orange-600 dark:text-theme-orange-200 scroll-mt-20"
+              >
                 {t(`skillCategories.${skillCategory.key}.title`)}
               </div>
               <ul className="flex justify-center gap-4 flex-wrap">
