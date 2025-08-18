@@ -7,6 +7,7 @@ import { Configuration, RuleSetCondition, RuleSetRule } from 'webpack';
 const nextConfig: NextConfig = {
   // https://nextjs.org/docs/app/guides/static-exports
   output: 'export',
+  images: { unoptimized: true },
   basePath: process.env.PAGES_BASE_PATH,
   // Configure `pageExtensions` to include markdown and MDX files
   pageExtensions: ['js', 'jsx', 'md', 'mdx', 'ts', 'tsx'],

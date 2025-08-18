@@ -22,10 +22,10 @@ export default function BlogPost({ children, blogPost }: BlogPostProps) {
   } = blogPost;
 
   return (
-    <article className="max-w-3xl mx-auto pb-6 px-4 md:px-0 py-4">
+    <article className="prose xl:prose-xl dark:prose-invert mx-auto pb-6 px-4 md:px-0 py-4">
       <div className="text-sm">
-        <div className="mb-6 flex flex-col text-zinc-500">
-          <h1 className="text-6xl mb-6 font-bold text-theme-red-400">
+        <div className="mb-10 flex flex-col text-zinc-500">
+          <h1 className="text-3xl sm:text-4xl xl:text-6xl mb-4! font-bold text-theme-red-400">
             {title}
           </h1>
 
@@ -47,7 +47,7 @@ export default function BlogPost({ children, blogPost }: BlogPostProps) {
         </div>
       </div>
 
-      <div className="prose xl:prose-xl dark:prose-invert">{children}</div>
+      {children}
 
       <div className="my-4">
         <Button as={Link} href="/blog" className="font-bold">

@@ -36,7 +36,7 @@ export default function SummaryItem({
       <p>
         {t.rich(i18nKey, {
           highlight: (chunks) => (
-            <span className="font-bold text-theme-gray-800 bg-theme-red-400 p-1">
+            <span className="font-bold text-black bg-theme-red-400 p-1">
               {chunks}
             </span>
           ),

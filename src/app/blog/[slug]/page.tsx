@@ -40,7 +40,9 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const { filename } = blogPost;
-  const { default: Component } = await import(`@/content/blog/${filename}`);
+  const { default: Component } = await import(
+    `../../../content/blog/${filename}`
+  );
 
   return (
     <BlogPost blogPost={blogPost}>

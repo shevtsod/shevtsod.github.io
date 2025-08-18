@@ -8,17 +8,17 @@ export interface ExperienceItemType {
 
 export const experience: ExperienceItemType[] = [
   {
-    title: 'Sector Network Support Analyst',
-    company: 'Government of Saskatchewan',
-    location: 'Regina, SK',
-    start: new Date(2017, 8),
-    end: new Date(2019, 9),
-  },
-  {
     title: 'Senior Sector Network Support Analyst',
     company: 'Government of Saskatchewan',
-    location: 'Regina, SK',
+    location: 'Regina, SK, Canada',
     start: new Date(2019, 9),
+  },
+  {
+    title: 'Sector Network Support Analyst',
+    company: 'Government of Saskatchewan',
+    location: 'Regina, SK, Canada',
+    start: new Date(2017, 8),
+    end: new Date(2019, 9),
   },
 ];
 

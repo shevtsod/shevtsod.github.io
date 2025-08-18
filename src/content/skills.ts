@@ -12,21 +12,20 @@ const skillCategories: SkillCategoryType[] = [
   {
     key: 'languages',
     skills: [
-      { key: 'javascript' },
-      { key: 'java' },
-      { key: 'csharp' },
-      { key: 'ruby' },
-      { key: 'php' },
-      { key: 'cpp' },
-      { key: 'bash' },
+      { key: 'javascript', icon: '16x/javascript' },
+      { key: 'java', icon: '16x/java' },
+      { key: 'ruby', icon: '16x/ruby' },
+      { key: 'php', icon: '16x/php' },
+      { key: 'cpp', icon: '16x/cpp' },
+      { key: 'bash', icon: '16x/bash' },
     ],
   },
   {
     key: 'frameworks',
     skills: [
-      { key: 'react' },
-      { key: 'nodejs' },
-      { key: 'nextjs' },
+      { key: 'react', icon: '16x/react' },
+      { key: 'nodejs', icon: '16x/nodejs' },
+      { key: 'nextjs', icon: '16x/nextjs' },
       { key: 'nestjs' },
       { key: 'expressjs' },
       { key: 'jquery' },
@@ -39,11 +38,10 @@ const skillCategories: SkillCategoryType[] = [
   {
     key: 'technologies',
     skills: [
-      { key: 'github' },
+      { key: 'github', icon: '16x/github' },
       { key: 'gitlab' },
       { key: 'mysql' },
       { key: 'postgresql' },
-      { key: 'mongodb' },
       { key: 'redis' },
       { key: 'prometheus' },
       { key: 'grafana' },
@@ -58,12 +56,7 @@ const skillCategories: SkillCategoryType[] = [
   },
   {
     key: 'cloud',
-    skills: [
-      { key: 'aws' },
-      { key: 'azure' },
-      { key: 'heroku' },
-      { key: 'openstack' },
-    ],
+    skills: [{ key: 'aws' }, { key: 'heroku' }, { key: 'openstack' }],
   },
   {
     key: 'ci-cd',
@@ -71,8 +64,8 @@ const skillCategories: SkillCategoryType[] = [
       { key: 'gitlab-cicd' },
       { key: 'argocd' },
       { key: 'circleci' },
-      { key: 'github-actions' },
-      { key: 'github-pages' },
+      { key: 'github-actions', icon: '16x/github' },
+      { key: 'github-pages', icon: '16x/github' },
     ],
   },
   {
@@ -82,8 +75,7 @@ const skillCategories: SkillCategoryType[] = [
   {
     key: 'design',
     skills: [
-      { key: 'photoshop' },
-      { key: 'premiere' },
+      { key: 'adobe-cc' },
       { key: 'figma' },
       { key: 'krita' },
       { key: 'inkscape' },

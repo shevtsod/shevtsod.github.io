@@ -1,0 +1,76 @@
+.codecCall {
+  animation-name: delayedHide;
+  animation-duration: 3.2s;
+  animation-timing-function: steps(4, end);
+  animation-delay: 0s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
+.codecCallContent {
+  animation-name: flash;
+  animation-duration: 1.5s;
+  animation-timing-function: steps(4, end);
+  animation-delay: 0s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: infinite;
+}
+
+@keyframes delayedHide {
+  0% {
+    opacity: 100%;
+  }
+
+  90% {
+    opacity: 100%;
+  }
+
+  100% {
+    opacity: 0%;
+    pointer-events: none;
+  }
+}
+
+@keyframes flash {
+  0% {
+    opacity: 0%;
+  }
+
+  30% {
+    opacity: 0%;
+  }
+
+  30.01% {
+    opacity: 100%;
+  }
+
+  45% {
+    opacity: 100%;
+  }
+
+  45.01% {
+    opacity: 0%;
+  }
+
+  55% {
+    opacity: 0%;
+  }
+
+  55.01% {
+    opacity: 100%;
+  }
+
+  75% {
+    opacity: 100%;
+  }
+
+  75.01% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 0%;
+  }
+}

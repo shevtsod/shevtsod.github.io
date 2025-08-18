@@ -1,8 +1,8 @@
 'use client';
 
+import Boot from '@/components/boot';
 import Layout from '@/components/layout';
 import { useEffect, useState } from 'react';
-import Boot from '../../components/boot';
 
 export interface HomeLayoutProps {
   children: React.ReactNode;

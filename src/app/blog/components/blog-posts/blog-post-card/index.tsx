@@ -1,8 +1,11 @@
+'use client';
+
 import type { BlogPostType } from '@/utils/blog';
 import { formatISO } from 'date-fns';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import type { ComponentProps } from 'react';
+import ScrambledText from '../../../../../components/scrambled-text';
 
 export interface BlogPostCardProps
   extends Partial<ComponentProps<typeof Link>> {
@@ -29,13 +32,13 @@ export default function BlogPostCard({
     <Link {...props} href={`/blog/${slug}`} className="group">
       <div className="text-sm my-4">
         <div className="flex flex-row">
-          <div className="text-right flex-1 flex flex-col justify-center text-9xl italic font-pixel mr-4 text-zinc-400 dark:text-zinc-900 group-hover:text-gray-400 dark:group-hover:text-zinc-800">
+          <div className="text-right flex-1 self-center text-9xl italic font-pixel mr-4 text-zinc-400 dark:text-zinc-900 group-hover:text-gray-400 dark:group-hover:text-zinc-800">
             {index}
           </div>
 
           <div className="flex-3 flex flex-col text-zinc-500 group-hover:text-zinc-700 dark:group-hover:text-zinc-300">
-            <h1 className="text-3xl mb-3 font-bold text-theme-red-400 group-hover:underline">
-              {title}
+            <h1 className="text-3xl mb-3 font-bold text-theme-red-400 group-hover:underline decoration-6 [text-decoration-skip-ink:_none]">
+              <ScrambledText>{title}</ScrambledText>
             </h1>
 
             <p className="font-bold mb-3">{description}</p>

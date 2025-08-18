@@ -26,7 +26,7 @@ export default function FooterLink({
         rel="noreferrer noopener"
         href={href}
         target={target}
-        className="inline-flex items-center gap-2 hover:text-theme-orange-200"
+        className="inline-flex items-center gap-2 hover:text-theme-orange-600 dark:hover:text-theme-orange-200"
       >
         {icon && <Icon icon={icon} className="inline-block h-[16px] w-auto" />}
         <ScrambledText>

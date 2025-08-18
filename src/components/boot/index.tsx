@@ -129,7 +129,10 @@ export default function Boot({
   return (
     <div
       {...props}
-      className={classNames('relative min-h-[100svh] py-10', className)}
+      className={classNames(
+        'relative min-h-[100svh] py-10 bg-white dark:bg-black',
+        className,
+      )}
     >
       <div className="container px-4 mx-auto text-xs md:text-lg">
         <div className="container flex flex-col justify-start items-end absolute top-0 my-10 -mx-10 z-0">

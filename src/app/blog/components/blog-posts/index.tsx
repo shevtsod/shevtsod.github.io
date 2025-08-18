@@ -10,11 +10,11 @@ export interface BlogPostsProps {
  */
 export default function BlogPosts({ blogPosts }: BlogPostsProps) {
   return (
-    <ul className="max-w-3xl mx-auto py-4">
+    <ul className="max-w-3xl mx-auto">
       {blogPosts.map((blogPost, i) => (
         <li
           key={blogPosts.length - i - 1}
-          className="not-last:border-b border-zinc-900 mb-4"
+          className="not-last:border-b border-zinc-900 py-6"
         >
           <BlogPostCard index={blogPosts.length - i - 1} blogPost={blogPost} />
         </li>

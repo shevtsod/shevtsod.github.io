@@ -1,7 +1,8 @@
+import Root from '@/app/components/root';
 import { Metadata, Viewport } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
 import { getLocale, getTranslations } from 'next-intl/server';
-import Global from './components/global';
+import './globals.css';
 
 // https://nextjs.org/docs/app/api-reference/functions/generate-metadata
 export async function generateMetadata(): Promise<Metadata> {
@@ -35,12 +36,12 @@ export default async function RootLayout({ children }: RootLayoutProps) {
   const locale = await getLocale();
 
   return (
-    <html lang={locale} className="dark">
-      <body>
+    <html lang={locale}>
+      <Root as="body">
         <NextIntlClientProvider locale={locale}>
-          <Global>{children}</Global>
+          {children}
         </NextIntlClientProvider>
-      </body>
+      </Root>
     </html>
   );
 }

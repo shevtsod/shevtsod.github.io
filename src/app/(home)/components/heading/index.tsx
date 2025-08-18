@@ -28,11 +28,8 @@ export default function Heading<T extends ElementType>({
 
   const Dither = ({ className }: { className?: string }) => (
     <div
-      style={{
-        backgroundImage: `url("/images/mini-dither-x-red-400.svg")`,
-      }}
       className={classNames(
-        'h-auto min-w-[60px] image-pixelated bg-repeat-y bg-[length:64px_64px]',
+        "h-auto min-w-[60px] image-pixelated bg-repeat-y bg-[length:64px_64px] bg-[url('/images/ui/dither-x-red-400.svg')]",
         styles.dither,
         className,
       )}
@@ -43,7 +40,7 @@ export default function Heading<T extends ElementType>({
     <Component
       {...props}
       className={classNames(
-        'pt-4 flex flex-row items-stretch justify-center font-pixel text-xl md:text-4xl text-theme-gray-100 dark:text-theme-gray-800',
+        'pt-4 flex flex-row items-stretch justify-center font-pixel text-xl md:text-4xl text-theme-gray-100 dark:text-black',
         styles.heading,
         className,
       )}

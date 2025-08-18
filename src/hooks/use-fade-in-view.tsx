@@ -12,7 +12,7 @@ export default function useFadeInView(
   ref: RefObject<Element | null>,
   opts?: UseInViewOptions,
 ) {
-  const isInView = useInView(ref, opts);
+  const inView = useInView(ref, opts);
 
   useEffect(() => {
     const { current } = ref;
@@ -28,13 +28,13 @@ export default function useFadeInView(
       );
 
       // Show/hide
-      if (isInView) {
+      if (inView) {
         current.classList.remove('opacity-0');
       } else {
         current.classList.add('opacity-0');
       }
     }
-  }, [ref, isInView]);
+  }, [ref, inView]);
 
-  return isInView;
+  return inView;
 }

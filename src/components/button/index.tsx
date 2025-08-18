@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { type ComponentPropsWithoutRef, type ElementType } from 'react';
 import styles from './button.module.css';
 
-type ButtonVariant = 'success' | 'info' | null;
+type ButtonVariant = 'success' | 'info' | 'warn' | null;
 
 export type ButtonProps<T extends ElementType> = {
   as?: T;
@@ -27,7 +27,7 @@ export default function Button<T extends ElementType>({
     <Component
       {...props}
       className={classNames(
-        'px-0.5 border-4',
+        'px-0.5 border-4 no-underline',
         { active },
         styles.button,
         variant && styles[variant],

@@ -1,6 +1,7 @@
 import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/nextjs';
-import Global from '../src/app/components/global';
+import Root from '../src/app/components/root';
+import '../src/app/globals.css';
 import nextIntl from './next-intl';
 
 const preview: Preview = {
@@ -34,13 +35,17 @@ const preview: Preview = {
       // 'off' - skip a11y checks entirely
       test: 'todo',
     },
+    nextjs: {
+      // https://storybook.js.org/docs/get-started/frameworks/nextjs#set-nextjsappdirectory-to-true
+      appDirectory: true,
+    },
   },
   decorators: [
     // Wrap stories with global styling
     (Story) => (
-      <Global>
+      <Root>
         <Story />
-      </Global>
+      </Root>
     ),
     // https://storybook.js.org/docs/essentials/themes
     withThemeByClassName({

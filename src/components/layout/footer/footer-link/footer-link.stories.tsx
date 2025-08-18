@@ -17,7 +17,7 @@ export const Default: Story = {
     },
     footerLink: {
       key: 'github',
-      icon: 'github',
+      icon: '16x/github',
       href: 'https://github.com/shevtsod',
       target: '_blank',
     },

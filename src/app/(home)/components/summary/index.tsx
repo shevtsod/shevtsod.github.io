@@ -29,36 +29,35 @@ export default function Summary<T extends ElementType>({
     <Component
       ref={ref}
       {...props}
-      style={{ backgroundImage: `url("/images/pipes.gif")` }}
       className={classNames(
-        `relative py-20 px-6 image-pixelated bg-repeat bg-[length:256px_256px]`,
+        `relative py-20 px-6 image-pixelated bg-repeat bg-[length:256px_256px] bg-[url('/images/ui/pipes.gif')]`,
         styles.section,
         className,
       )}
     >
-      <div
-        style={{ backgroundImage: `url("/images/dither-y.svg")` }}
-        className="h-[64px] w-full absolute top-0 left-0 z-10 image-pixelated bg-repeat-x bg-[length:64px_64px]"
-      />
+      <div className="container mx-auto">
+        <div className="h-[64px] w-full absolute top-0 left-0 z-10 image-pixelated bg-repeat-x bg-[length:64px_64px] bg-[url('/images/ui/dither-y-white.svg')] dark:bg-[url('/images/ui/dither-y-black.svg')]" />
 
-      <Heading as="h2" className="uppercase text-center" href={`#${props.id}`}>
-        {t('title')}
-      </Heading>
+        <Heading
+          as="h2"
+          className="uppercase text-center mb-8"
+          href={`#${props.id}`}
+        >
+          {t('title')}
+        </Heading>
 
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 md:gap-10 text-center items-start">
-        <SummaryItem
-          i18nKey="summary1"
-          icon="code"
-          values={{ experienceYears: new Date().getFullYear() - 2017 }}
-        />
-        <SummaryItem i18nKey="summary2" icon="lightbulb" />
-        <SummaryItem i18nKey="summary3" icon="human" />
+        <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 text-center items-start">
+          <SummaryItem
+            i18nKey="summary1"
+            icon="16x/code"
+            values={{ experienceYears: new Date().getFullYear() - 2017 }}
+          />
+          <SummaryItem i18nKey="summary2" icon="16x/lightbulb" />
+          <SummaryItem i18nKey="summary3" icon="16x/human" />
+        </div>
+
+        <div className="h-[64px] w-full absolute bottom-0 left-0 z-10 image-pixelated bg-repeat-x bg-[length:64px_64px] bg-[url('/images/ui/dither-y-white.svg')] dark:bg-[url('/images/ui/dither-y-black.svg')] rotate-180" />
       </div>
-
-      <div
-        style={{ backgroundImage: `url("/images/dither-y.svg")` }}
-        className="h-[64px] w-full absolute bottom-0 left-0 z-10 image-pixelated bg-repeat-x bg-[length:64px_64px] rotate-180"
-      />
     </Component>
   );
 }

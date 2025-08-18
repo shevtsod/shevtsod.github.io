@@ -17,7 +17,10 @@ export default function Footer({ className, ...props }: FooterProps) {
   return (
     <footer
       {...props}
-      className={classNames('border-t-theme-red-400 border-t', className)}
+      className={classNames(
+        'z-50 bg-white dark:bg-black border-t-theme-red-400 border-t-8 md:border-t-12',
+        className,
+      )}
     >
       <div className="max-w-xs md:container mx-auto flex flex-col align-middle">
         <div className="py-8 px-8 grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -25,7 +28,7 @@ export default function Footer({ className, ...props }: FooterProps) {
             href={{ pathname: '/', hash: 'top ' }}
             className="flex justify-center md:justify-start"
           >
-            <Logo className="h-16 md:h-24 aspect-square" />
+            <Logo className="h-16 md:h-24 w-auto aspect-square" />
           </Link>
 
           {footerLinkSections.map((footerLinkSection, i) => (
@@ -53,14 +56,21 @@ export default function Footer({ className, ...props }: FooterProps) {
             {t.rich('copyright', {
               icon: () => (
                 <Icon
-                  icon="heart"
+                  icon="16x/heart"
                   className="h-[16px] w-auto inline align-text-top text-theme-red-400"
                   viewBox="0 0 16 16"
                 />
               ),
             })}
           </p>
-          <p className="text-theme-red-400">▃ ▃ ▃</p>
+          <div className="flex flex-row justify-center gap-3 py-4">
+            {Array.from({ length: 3 }).map((_, i) => (
+              <span
+                key={i}
+                className="inline-block bg-theme-red-400 w-6 md:w-8 h-2 md:h-3"
+              />
+            ))}
+          </div>
         </div>
       </div>
     </footer>

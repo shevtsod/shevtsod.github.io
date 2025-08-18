@@ -8,7 +8,7 @@ import {
   Ysabeau_Office,
 } from 'next/font/google';
 import localFont from 'next/font/local';
-import './global.css';
+import { ComponentPropsWithoutRef, ElementType } from 'react';
 
 // https://nextjs.org/docs/app/getting-started/fonts
 
@@ -67,18 +67,25 @@ export const labrada = Labrada({
   variable: '--font-serif',
 });
 
-export interface GlobalProps extends React.HTMLAttributes<HTMLDivElement> {
-  children?: React.ReactNode;
-}
+export type RootProps<T extends ElementType> = {
+  as?: T;
+} & ComponentPropsWithoutRef<T>;
 
 /**
- * Global styles component extracted from global layout.tsx so that the styles
+ * App root component extracted from global layout.tsx so that the styles
  * can be passed to both Next.js and to Storybook (Storybook cannot take the
  * layout.tsx directly because it includes html and body elements).
  */
-export default function Global({ children, className, ...props }: GlobalProps) {
+export default function Root<T extends ElementType>({
+  as,
+  children,
+  className,
+  ...props
+}: RootProps<T>) {
+  const Component = as ?? 'div';
+
   return (
-    <div
+    <Component
       {...props}
       className={classNames(
         nothingYouCouldDo.variable,
@@ -87,11 +94,11 @@ export default function Global({ children, className, ...props }: GlobalProps) {
         shPinscher.variable,
         ysabeauOffice.variable,
         labrada.variable,
-        'antialiased  dark:bg-theme-gray-800 text-theme-gray-800 dark:text-theme-gray-100 font-mono',
+        'antialiased  dark:bg-black text-black dark:text-theme-gray-100 font-mono transition-colors ease-[steps(4,end)] duration-400',
         className,
       )}
     >
       {children}
-    </div>
+    </Component>
   );
 }

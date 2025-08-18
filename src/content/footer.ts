@@ -19,13 +19,13 @@ const footerLinksSections: FooterLinkSectionType[] = [
     footerLinks: [
       {
         key: 'github',
-        icon: 'github',
+        icon: '16x/github',
         href: 'https://github.com/shevtsod',
         target: '_blank',
       },
       {
         key: 'linkedin',
-        icon: 'linkedin',
+        icon: '16x/linkedin',
         href: 'https://www.linkedin.com/in/daniel-shevtsov-29089b296/',
         target: '_blank',
       },

@@ -4,11 +4,18 @@ import Button, { type ButtonProps } from '@/components/button';
 import Logo from '@/components/logo';
 import ScrambledText from '@/components/scrambled-text';
 import classNames from 'classnames';
-import { useMotionValueEvent, useScroll } from 'motion/react';
+import {
+  motion,
+  useMotionValueEvent,
+  useScroll,
+  useSpring,
+  useTransform,
+} from 'motion/react';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import ThemeSwitch from '../theme-switch';
 import styles from './header.module.css';
 
 // Scrolled pixels when Header is shown
@@ -16,26 +23,36 @@ const SCROLL_THRESHOLD = 50;
 
 export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   showOnScroll?: boolean;
-  className?: string;
+  showProgress?: boolean;
+  animatedLogo?: boolean;
 }
 
 /**
  * App header/navigation bar.
  */
 export default function Header({
-  showOnScroll,
+  showOnScroll = false,
+  showProgress = false,
+  animatedLogo = true,
   className,
   ...props
 }: HeaderProps) {
   const t = useTranslations('components.layout.header');
-  const { scrollY } = useScroll();
-  const [shown, setShown] = useState(false);
+  const { scrollY, scrollYProgress } = useScroll();
+  const [shown, setShown] = useState(!showOnScroll);
   const pathname = usePathname();
+  const smoothScrollY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 20,
+  });
+  const progress = useTransform(smoothScrollY, [0, 1], ['0%', '100%']);
 
+  // Reset scroll progress when pathname changes
   useEffect(() => {
-    setShown(!showOnScroll || scrollY.get() > SCROLL_THRESHOLD);
-  }, [scrollY, showOnScroll]);
+    scrollYProgress.set(0);
+  }, [pathname, scrollYProgress]);
 
+  // Show or hide the header based on the scroll position passing a threshold
   useMotionValueEvent(scrollY, 'change', (latest) => {
     if (showOnScroll) {
       setShown(latest > SCROLL_THRESHOLD);
@@ -64,24 +81,25 @@ export default function Header({
     <header
       {...props}
       className={classNames(
-        {
-          'invisible pointer-events-none': !shown,
-          'backdrop-blur-md md:backdrop-blur-lg': shown,
-          fixed: showOnScroll,
-          sticky: !showOnScroll,
-        },
-        'h-20 w-full flex py-2 fixed top-0 shadow-lg z-50',
+        'h-18 w-full flex flex-col fixed top-0 shadow-lg z-50 bg-black/10 backdrop-blur-md md:backdrop-blur-lg',
+        { 'bg-transparent pointer-events-none opacity-0': !shown },
+        { fixed: showOnScroll, sticky: !showOnScroll },
         styles.header,
         className,
       )}
     >
-      <div className="container mx-auto px-4 flex justify-between items-center">
+      <div className="flex-1 container mx-auto px-4 flex justify-between items-center">
         <Link
           href={{ pathname: '/', hash: 'top ' }}
           className="h-full aspect-square p-2"
         >
-          <Logo shown={shown} animated className="h-full aspect-square" />
+          <Logo
+            shown={shown}
+            animated={animatedLogo}
+            className="h-auto w-full aspect-square"
+          />
         </Link>
+
         <div className="flex gap-1">
           {links.map(({ children, ...props }, i) => (
             <Button
@@ -98,8 +116,18 @@ export default function Header({
               </b>
             </Button>
           ))}
+
+          <ThemeSwitch className="mx-1" />
         </div>
       </div>
+
+      {showProgress && (
+        <motion.div
+          className="h-1 bg-theme-red-400"
+          initial={{ width: 0 }}
+          style={{ width: progress }}
+        ></motion.div>
+      )}
     </header>
   );
 }

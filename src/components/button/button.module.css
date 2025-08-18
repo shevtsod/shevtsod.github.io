@@ -1,19 +1,13 @@
 .button {
   --color-high: var(--color-theme-red-400);
-  --color-low: var(--color-theme-gray-800);
+  --color-low: var(--color-black);
   background-clip: padding-box;
   background-color: transparent;
   color: var(--color-high);
   border-color: var(--color-high);
-  transition: background-color 0.4s steps(2, end), color 0.4s steps(2, end),
-    border-color 0.4s steps(2, end);
-  -webkit-transition: background-color 0.4s steps(2, end),
-    color 0.4s steps(2, end), border-color 0.4s steps(2, end);
-  -moz-transition: background-color 0.4s steps(2, end), color 0.4s steps(2, end),
-    border-color 0.4s steps(2, end);
-  -ms-transition: background-color 0.4s steps(2, end), color 0.4s steps(2, end),
-    border-color 0.4s steps(2, end);
-  -o-transition: background-color 0.4s steps(2, end), color 0.4s steps(2, end),
+  transition:
+    background-color 0.4s steps(2, end),
+    color 0.4s steps(2, end),
     border-color 0.4s steps(2, end);
 }
 
@@ -34,4 +28,8 @@
 
 .info {
   --color-high: var(--color-theme-blue-400);
+}
+
+.warn {
+  --color-high: var(--color-theme-orange-200);
 }

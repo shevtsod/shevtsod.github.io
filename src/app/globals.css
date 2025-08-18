@@ -9,13 +9,16 @@
 /* https://tailwindcss.com/docs/dark-mode */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* https://tailwindcss.com/docs/upgrade-guide#hover-styles-on-mobile */
+@custom-variant hover (&:hover);
+
 /* https://tailwindcss.com/docs/theme */
 @theme {
   --color-theme-gray-100: #ffffff;
   --color-theme-gray-200: #bebebe;
   --color-theme-gray-400: #858585;
-  --color-theme-gray-600: #161616;
-  --color-theme-gray-800: #000000;
+  --color-theme-gray-600: #2b2b2b;
+  --color-theme-gray-800: #121212;
 
   --color-theme-red-200: #ea552d;
   --color-theme-red-400: #e51716;
@@ -42,6 +45,8 @@
   --color-theme-green-600: #61b327;
   --color-theme-green-800: #44941a;
 
+  --color-theme-blue-100: #81acdb;
+  --color-theme-blue-150: #4578b0;
   --color-theme-blue-200: #1e5898;
   --color-theme-blue-400: #1b3562;
   --color-theme-blue-600: #15233e;
@@ -58,6 +63,8 @@
 /* https://github.com/tailwindlabs/tailwindcss-typography */
 @utility prose {
   pre {
+    @apply bg-transparent m-0 px-0! max-h-200;
+
     code {
       @apply rounded-lg;
     }

@@ -1,8 +1,10 @@
-# <https://shevtsod.com>
+# ![Logo](./public/images/logo.webp) [_shevtsod.com_](https://shevtsod.com)
 
 My homepage 🏠
 
-# Developing
+![Promotional Image](./public/images/promo.png)
+
+## Getting Started
 
 Run locally using:
 

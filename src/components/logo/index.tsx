@@ -1,6 +1,6 @@
-import logoInIcon from '@/../public/images/logo-in.webp';
-import logoRotateIcon from '@/../public/images/logo-rotate.gif';
-import logoIcon from '@/../public/images/logo.webp';
+import logoInIcon from '@/../public/images/ui/logo-in.webp';
+import logoRotateIcon from '@/../public/images/ui/logo-rotate.gif';
+import logoIcon from '@/../public/images/ui/logo.webp';
 import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
 
@@ -83,6 +83,8 @@ export default function Logo({
       // eslint-disable-next-line @next/next/no-img-element
       <img
         src={src}
+        height={32}
+        width={32}
         alt="Logo"
         className={classNames('image-pixelated', className)}
         {...props}

@@ -75,7 +75,7 @@ export default function Hero<T extends ElementType>({
               // add intro class only if intro mode is enabled
               { [styles.intro]: intro },
               {
-                'absolute top-0 left-0 w-full [text-shadow:0_0.05em_0_var(--color-theme-red-800)] pointer-none':
+                'absolute top-0 left-0 w-full [text-shadow:0_0.05em_0_var(--color-theme-red-800)] pointer-events-none':
                   i === 0,
               },
             )}
@@ -104,7 +104,7 @@ export default function Hero<T extends ElementType>({
       >
         <div>SCROLL</div>
         <Icon
-          icon="arrow-down"
+          icon="16x/arrow-down"
           className="h-[32px] w-auto"
           viewBox="0 0 16 16"
         />
