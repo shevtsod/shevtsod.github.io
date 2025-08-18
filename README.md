@@ -1,4 +1,4 @@
-# ![Logo](./public/images/logo.webp) [_shevtsod.com_](https://shevtsod.com)
+# ![Logo](./public/images/ui/logo.webp) [_shevtsod.com_](https://shevtsod.com)
 
 My homepage 🏠
 
