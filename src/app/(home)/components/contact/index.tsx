@@ -28,7 +28,7 @@ export type ContactProps<T extends ElementType> = {
 const formSchema = z.object({
   name: z.string().min(1).max(64),
   email: z.email().max(320),
-  message: z.string().min(1).max(2048),
+  message: z.string().min(1).max(1024),
 });
 
 type FormSchema = z.infer<typeof formSchema>;
@@ -110,9 +110,9 @@ export default function Contact<T extends ElementType>({
           <InputLabel error={errors.message}>
             <Input
               as="textarea"
-              rows={4}
-              maxLength={2048}
+              maxLength={1024}
               placeholder={t('form.message')}
+              className="min-h-64 max-h-128"
               {...register('message', { required: true })}
             />
           </InputLabel>
@@ -151,12 +151,12 @@ export default function Contact<T extends ElementType>({
           <div className="font-retro font-bold text-lg md:text-2xl">
             {Object.entries(errors).map(([key, error]) => (
               <p key={key} className="text-theme-red-400">
-                ✖ {error.message}
+                ⨉ {error.message}
               </p>
             ))}
 
             {isSubmitSuccessful && (
-              <p className="text-theme-green-400">✔ {t('form.submitted')}</p>
+              <p className="text-theme-blue-200">◯ {t('form.submitted')}</p>
             )}
           </div>
         </div>
