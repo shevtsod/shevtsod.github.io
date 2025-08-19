@@ -43,8 +43,8 @@ export default function Contact<T extends ElementType>({
 }: ContactProps<T>) {
   const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.contact');
-  const ref = useRef(null);
-  const inView = useFadeInView(ref, { once: true, amount: 'all' });
+  const formRef = useRef(null);
+  const formInView = useFadeInView(formRef, { once: true, amount: 'all' });
   const [intro, setIntro] = useState(true);
 
   const {
@@ -87,7 +87,6 @@ export default function Contact<T extends ElementType>({
 
   return (
     <Component
-      ref={ref}
       {...props}
       className={classNames(
         'dark relative py-6 dark:bg-black dark:text-theme-gray-100',
@@ -95,94 +94,114 @@ export default function Contact<T extends ElementType>({
       )}
     >
       <form
+        ref={formRef}
         onSubmit={handleSubmit(onSubmit)}
         autoComplete="off"
         className={classNames(
-          'container max-w-6xl mx-auto p-6',
+          'max-w-4xl flex flex-col justify-center items-center gap-3 text-center mx-auto',
           styles.form,
           // add intro class only if intro mode is enabled
-          { [styles.intro]: inView && intro },
+          { [styles.intro]: formInView && intro },
         )}
       >
-        <Codec />
+        <div className="container mx-auto max-w-6xl">
+          <Codec />
+        </div>
 
-        <div className="max-w-4xl flex flex-col justify-center items-center gap-3 text-center mx-auto">
-          <InputLabel error={errors.message}>
+        <InputLabel error={errors.message} className="relative">
+          <Input
+            as="textarea"
+            rows={4}
+            maxLength={1024}
+            placeholder={t('form.message')}
+            className="max-h-128"
+            {...register('message', { required: true })}
+          />
+          {intro && (
+            <div
+              className={classNames(
+                'absolute h-full w-full bg-black text-start text-xl md:text-2xl px-10',
+                styles.callout,
+                // add intro class only if intro mode is enabled
+                { [styles.intro]: formInView && intro },
+              )}
+            >
+              {t('form.callout')}
+            </div>
+          )}
+        </InputLabel>
+
+        <div className="self-stretch flex flex-col sm:flex-row gap-4">
+          <InputLabel error={errors.name}>
             <Input
-              as="textarea"
-              maxLength={1024}
-              placeholder={t('form.message')}
-              className="min-h-64 max-h-128"
-              {...register('message', { required: true })}
+              type="text"
+              placeholder={t('form.name')}
+              {...register('name', { required: true })}
             />
           </InputLabel>
 
-          <div className="self-stretch flex flex-col sm:flex-row gap-4">
-            <InputLabel error={errors.name}>
-              <Input
-                type="text"
-                placeholder={t('form.name')}
-                {...register('name', { required: true })}
-              />
-            </InputLabel>
-
-            <InputLabel error={errors.email}>
-              <Input
-                type="text"
-                placeholder={t('form.email')}
-                {...register('email', { required: true })}
-              />
-            </InputLabel>
-          </div>
-
-          <Button
-            type="submit"
-            className="text-center text-xl md:text-2xl px-2 py-1 font-bold w-full cursor-pointer"
-            disabled={
-              !isDirty || !isValid || isSubmitting || isSubmitSuccessful
-            }
-          >
-            <ScrambledText className="inline-block w-full">
-              {t('form.submit')}
-            </ScrambledText>
-          </Button>
-
-          {/* Feedback */}
-          <div className="font-retro font-bold text-lg md:text-2xl">
-            {Object.entries(errors).map(([key, error]) => (
-              <p key={key} className="text-theme-red-400">
-                ⨉ {error.message}
-              </p>
-            ))}
-
-            {isSubmitSuccessful && (
-              <p className="text-theme-blue-200">◯ {t('form.submitted')}</p>
-            )}
-          </div>
+          <InputLabel error={errors.email}>
+            <Input
+              type="text"
+              placeholder={t('form.email')}
+              {...register('email', { required: true })}
+            />
+          </InputLabel>
         </div>
 
-        <BlogPromo />
+        <Button
+          type="submit"
+          className="text-center text-xl md:text-2xl px-2 py-1 font-bold w-full cursor-pointer"
+          disabled={!isDirty || !isValid || isSubmitting || isSubmitSuccessful}
+        >
+          <ScrambledText className="inline-block w-full">
+            {t('form.submit')}
+          </ScrambledText>
+        </Button>
+
+        {/* Feedback */}
+        <div className="font-retro font-bold text-lg md:text-2xl">
+          {Object.entries(errors).map(([key, error]) => (
+            <p key={key} className="text-theme-red-400">
+              ⨉ {error.message}
+            </p>
+          ))}
+
+          {isSubmitSuccessful && (
+            <p className="text-theme-blue-200">◯ {t('form.submitted')}</p>
+          )}
+        </div>
       </form>
 
+      <BlogPromo />
+
       {/* Codec call overlay */}
-      {inView && intro && (
+      {formInView && intro && (
         <CodecCall className="absolute top-0 left-0 h-full w-full" />
       )}
     </Component>
   );
 }
 
-export interface InputLabelProps extends HTMLAttributes<HTMLInputElement> {
+export interface InputLabelProps extends HTMLAttributes<HTMLLabelElement> {
   error?: FieldError;
   children?: React.ReactNode;
 }
 
-export function InputLabel({ error, children }: InputLabelProps) {
+export function InputLabel({
+  error,
+  children,
+  className,
+  ...props
+}: InputLabelProps) {
   return (
     <label
-      className={classNames('w-full flex flex-col gap-2', {
-        'border-4 border-theme-red-400': error,
-      })}
+      {...props}
+      className={classNames(
+        'w-full flex flex-col gap-2',
+        { 'border-4 border-theme-red-400': error },
+        className,
+      )}
     >
       {children}
     </label>

@@ -71,7 +71,7 @@ export default function Experience<T extends ElementType>({
 
                 <div className="flex-6 basis-0 shrink-0 py-8">
                   <div className="font-bold font-retro text-3xl text-theme-red-600 dark:text-theme-red-200">
-                    ｢{experienceItem.title}｣
+                    {experienceItem.title}
                   </div>
                   <div className="font-bold">{experienceItem.company}</div>
                   <div>{experienceItem.location}</div>

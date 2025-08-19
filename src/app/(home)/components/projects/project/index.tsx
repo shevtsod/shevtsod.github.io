@@ -116,26 +116,28 @@ export default function Project({ project }: ProjectProps) {
                 target="_blank"
                 className="text-theme-red-400"
               >
-                <ScrambledText>{`｢${title}｣`}</ScrambledText>
+                <ScrambledText>{`${title}`}</ScrambledText>
               </Link>
             ) : (
-              `｢${title}｣`
+              `${title}`
             )}
           </div>
 
           {/* Skills */}
-          <ul className="flex flex-wrap gap-4">
+          <ul className="flex flex-wrap gap-3">
             {projectSkillCategories?.map((skillCategory) =>
               skillCategory.skills.map((skill, i) => (
                 <li key={i}>
-                  <Skill skill={skill} skillCategory={skillCategory} />
+                  <Link href={{ pathname: '/', hash: `skill:${skill.key}` }}>
+                    <Skill skill={skill} skillCategory={skillCategory} />
+                  </Link>
                 </li>
               )),
             )}
           </ul>
 
           {/* Description */}
-          <div className="font-bold">{description}</div>
+          <div className="font-bold text-sm md:text-base">{description}</div>
 
           {/* Links */}
           <ul className="flex flex-wrap gap-2">
@@ -146,7 +148,7 @@ export default function Project({ project }: ProjectProps) {
                   href={link.url}
                   target="_blank"
                   variant="warn"
-                  className="text-center text-lg md:text-xl px-2 font-bold"
+                  className="text-center md:text-lg px-2 font-bold"
                 >
                   <ScrambledText>{t(`links.${link.key}.title`)}</ScrambledText>
                 </Button>

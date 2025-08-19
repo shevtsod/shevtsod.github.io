@@ -21,18 +21,15 @@ export default function Skill({
   );
 
   return (
-    <a
-      href={`#${skillCategory.key}`}
+    <span
       className={classNames(
-        'inline-block py-1 px-2 text-md font-bold rounded-md bg-theme-blue-100 dark:bg-theme-blue-600 hover:bg-theme-blue-150 dark:hover:bg-theme-blue-400 dark:text-theme-gray-200 hover:scale-115 transition-all ease-[steps(2,end)] duration-200',
+        'inline-flex items-center gap-1 py-1 px-2 rounded-md bg-theme-blue-100 dark:bg-theme-blue-600 hover:bg-theme-blue-150 dark:hover:bg-theme-blue-400 dark:text-theme-gray-200 hover:scale-115 transition-all ease-[steps(2,end)] duration-200',
         className,
       )}
       {...props}
     >
-      <div className="flex gap-1">
-        {icon && <Icon icon={icon} className="w-[16px] h-auto" />}
-        <span>{t(`skills.${key}.title`)}</span>
-      </div>
-    </a>
+      {icon && <Icon icon={icon} className="h-[16px] w-auto" />}
+      <span className="text-sm font-bold">{t(`skills.${key}.title`)}</span>
+    </span>
   );
 }

@@ -81,7 +81,7 @@ export default function Header({
     <header
       {...props}
       className={classNames(
-        'h-18 w-full flex flex-col fixed top-0 shadow-lg z-50 bg-black/10 backdrop-blur-md md:backdrop-blur-lg',
+        'h-14 md:h-18 w-full flex flex-col fixed top-0 shadow-lg z-50 bg-black/10 backdrop-blur-md md:backdrop-blur-lg',
         { 'bg-transparent pointer-events-none opacity-0': !shown },
         { fixed: showOnScroll, sticky: !showOnScroll },
         styles.header,
@@ -96,11 +96,11 @@ export default function Header({
           <Logo
             shown={shown}
             animated={animatedLogo}
-            className="h-auto w-full aspect-square"
+            className="h-full w-auto"
           />
         </Link>
 
-        <div className="flex gap-1">
+        <div className="h-full py-3 md:py-5 flex gap-1 items-center">
           {links.map(({ children, ...props }, i) => (
             <Button
               key={i}
@@ -117,7 +117,7 @@ export default function Header({
             </Button>
           ))}
 
-          <ThemeSwitch className="mx-1" />
+          <ThemeSwitch />
         </div>
       </div>
 

@@ -29,16 +29,18 @@ export default function BlogPromo<T extends ElementType>({
     <Component
       ref={ref}
       {...props}
-      className={classNames('pt-20 pb-8', className)}
+      className={classNames('pt-12 pb-8', className)}
     >
-      <div className="container mx-auto px-8 text-center text-2xl font-bold">
-        {t.rich('callout', {
-          blog: () => (
-            <Button as={Link} href="/blog" className="px-2 py-1">
-              <ScrambledText>{t('blog')}</ScrambledText>
-            </Button>
-          ),
-        })}
+      <div className="container mx-auto px-8 text-center md:text-xl lg:text-2xl font-bold">
+        <Link href="/blog">
+          {t.rich('callout', {
+            blog: () => (
+              <Button className="px-1 py-0.5 cursor-pointer">
+                <ScrambledText>{t('blog')}</ScrambledText>
+              </Button>
+            ),
+          })}
+        </Link>
       </div>
     </Component>
   );

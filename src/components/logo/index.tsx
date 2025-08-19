@@ -83,8 +83,8 @@ export default function Logo({
       // eslint-disable-next-line @next/next/no-img-element
       <img
         src={src}
-        height={32}
-        width={32}
+        height={16}
+        width={16}
         alt="Logo"
         className={classNames('image-pixelated', className)}
         {...props}

@@ -8,6 +8,16 @@
   animation-iteration-count: 1;
 }
 
+.callout.intro {
+  animation-name: animateCallout;
+  animation-duration: 5s;
+  animation-timing-function: steps(4, end);
+  animation-delay: 4s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
 @keyframes scaleY {
   0% {
     transform: scaleY(0%);
@@ -19,5 +29,24 @@
 
   100% {
     transform: scaleY(100%);
+  }
+}
+
+@keyframes animateCallout {
+  0% {
+    color: transparent;
+  }
+
+  20% {
+    color: revert;
+  }
+
+  80% {
+    opacity: 100%;
+  }
+
+  100% {
+    opacity: 0%;
+    pointer-events: none;
   }
 }

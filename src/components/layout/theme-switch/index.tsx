@@ -50,7 +50,7 @@ export default function ThemeSwitch({ className, ...props }: ThemeSwitchProps) {
       }
       {...props}
       className={classNames(
-        'relative h-[32px] w-[32px] cursor-pointer text-theme-red-400',
+        'relative h-full aspect-square cursor-pointer text-theme-red-400',
         className,
       )}
     >
@@ -58,8 +58,9 @@ export default function ThemeSwitch({ className, ...props }: ThemeSwitchProps) {
         <Icon
           key={i}
           className={classNames(
-            'absolute top-0 left-0 h-[32px] w-auto transition-opacity  ease-[steps(3,end)] duration-400',
+            'h-full w-auto transition-opacity ease-[steps(3,end)] duration-400',
             {
+              'absolute top-0 left-0`': i === 1,
               'opacity-0': i === 0 ? theme === 'dark' : theme === 'light',
             },
           )}

@@ -9,4 +9,12 @@ export default meta;
 
 type Story = StoryObj<typeof Component>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    skill: { key: 'javascript', icon: '16x/javascript' },
+    skillCategory: {
+      key: 'languages',
+      skills: [],
+    },
+  },
+};

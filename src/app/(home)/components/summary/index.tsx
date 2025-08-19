@@ -23,7 +23,7 @@ export default function Summary<T extends ElementType>({
   const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.summary');
   const ref = useRef(null);
-  useFadeInView(ref, { once: true });
+  useFadeInView(ref, { once: true, margin: '0px 0px -50px 0px' });
 
   return (
     <Component
