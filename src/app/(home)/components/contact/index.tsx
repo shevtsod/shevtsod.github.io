@@ -98,78 +98,80 @@ export default function Contact<T extends ElementType>({
         onSubmit={handleSubmit(onSubmit)}
         autoComplete="off"
         className={classNames(
-          'max-w-4xl flex flex-col justify-center items-center gap-3 text-center mx-auto',
+          'container max-w-6xl mx-auto',
           styles.form,
           // add intro class only if intro mode is enabled
           { [styles.intro]: formInView && intro },
         )}
       >
-        <div className="container mx-auto max-w-6xl">
-          <Codec />
-        </div>
+        <Codec />
 
-        <InputLabel error={errors.message} className="relative">
-          <Input
-            as="textarea"
-            rows={4}
-            maxLength={1024}
-            placeholder={t('form.message')}
-            className="max-h-128"
-            {...register('message', { required: true })}
-          />
-          {intro && (
-            <div
-              className={classNames(
-                'absolute h-full w-full bg-black text-start text-xl md:text-2xl px-10',
-                styles.callout,
-                // add intro class only if intro mode is enabled
-                { [styles.intro]: formInView && intro },
-              )}
-            >
-              {t('form.callout')}
-            </div>
-          )}
-        </InputLabel>
-
-        <div className="self-stretch flex flex-col sm:flex-row gap-4">
-          <InputLabel error={errors.name}>
+        <div className="max-w-4xl mx-auto flex flex-col gap-3">
+          <InputLabel error={errors.message} className="relative">
             <Input
-              type="text"
-              placeholder={t('form.name')}
-              {...register('name', { required: true })}
+              as="textarea"
+              rows={4}
+              maxLength={1024}
+              placeholder={t('form.message')}
+              className="max-h-128"
+              {...register('message', { required: true })}
             />
+            {intro && (
+              <div
+                className={classNames(
+                  'absolute h-full w-full bg-black text-start text-xl md:text-2xl px-10',
+                  styles.callout,
+                  // add intro class only if intro mode is enabled
+                  { [styles.intro]: formInView && intro },
+                )}
+              >
+                {t('form.callout')}
+              </div>
+            )}
           </InputLabel>
 
-          <InputLabel error={errors.email}>
-            <Input
-              type="text"
-              placeholder={t('form.email')}
-              {...register('email', { required: true })}
-            />
-          </InputLabel>
-        </div>
+          <div className="self-stretch flex flex-col sm:flex-row gap-4">
+            <InputLabel error={errors.name}>
+              <Input
+                type="text"
+                placeholder={t('form.name')}
+                {...register('name', { required: true })}
+              />
+            </InputLabel>
 
-        <Button
-          type="submit"
-          className="text-center text-xl md:text-2xl px-2 py-1 font-bold w-full cursor-pointer"
-          disabled={!isDirty || !isValid || isSubmitting || isSubmitSuccessful}
-        >
-          <ScrambledText className="inline-block w-full">
-            {t('form.submit')}
-          </ScrambledText>
-        </Button>
+            <InputLabel error={errors.email}>
+              <Input
+                type="text"
+                placeholder={t('form.email')}
+                {...register('email', { required: true })}
+              />
+            </InputLabel>
+          </div>
 
-        {/* Feedback */}
-        <div className="font-retro font-bold text-lg md:text-2xl">
-          {Object.entries(errors).map(([key, error]) => (
-            <p key={key} className="text-theme-red-400">
-              ⨉ {error.message}
-            </p>
-          ))}
+          <Button
+            type="submit"
+            className="text-center text-xl md:text-2xl px-2 py-1 font-bold w-full cursor-pointer"
+            disabled={
+              !isDirty || !isValid || isSubmitting || isSubmitSuccessful
+            }
+          >
+            <ScrambledText className="inline-block w-full">
+              {t('form.submit')}
+            </ScrambledText>
+          </Button>
 
-          {isSubmitSuccessful && (
-            <p className="text-theme-blue-200">◯ {t('form.submitted')}</p>
-          )}
+          {/* Feedback */}
+          <div className="font-retro font-bold text-lg md:text-2xl">
+            {Object.entries(errors).map(([key, error]) => (
+              <p key={key} className="text-theme-red-400">
+                ⨉ {error.message}
+              </p>
+            ))}
+
+            {isSubmitSuccessful && (
+              <p className="text-theme-blue-200">◯ {t('form.submitted')}</p>
+            )}
+          </div>
         </div>
       </form>
 
