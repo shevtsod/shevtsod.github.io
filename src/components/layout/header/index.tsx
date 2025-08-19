@@ -100,7 +100,7 @@ export default function Header({
           />
         </Link>
 
-        <div className="h-full py-3 md:py-5 flex gap-1 items-center">
+        <div className="h-full flex gap-1 items-center">
           {links.map(({ children, ...props }, i) => (
             <Button
               key={i}
@@ -117,7 +117,7 @@ export default function Header({
             </Button>
           ))}
 
-          <ThemeSwitch />
+          <ThemeSwitch className="h-8!" />
         </div>
       </div>
 
