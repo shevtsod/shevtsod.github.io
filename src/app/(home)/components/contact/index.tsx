@@ -98,7 +98,7 @@ export default function Contact<T extends ElementType>({
         onSubmit={handleSubmit(onSubmit)}
         autoComplete="off"
         className={classNames(
-          'container max-w-6xl mx-auto',
+          'container max-w-5xl mx-auto',
           styles.form,
           // add intro class only if intro mode is enabled
           { [styles.intro]: formInView && intro },
