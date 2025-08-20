@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
+import bundleAnalyzer from '@next/bundle-analyzer';
 import createMDX from '@next/mdx';
 import type { NextConfig } from 'next';
 import createNextIntlPlugin from 'next-intl/plugin';
@@ -104,4 +105,9 @@ const withMDX = createMDX({
 //next-intl.dev/docs/getting-started/app-router/without-i18n-routing
 const withNextIntl = createNextIntlPlugin();
 
-export default withNextIntl(withMDX(nextConfig));
+// https://nextjs.org/docs/app/guides/package-bundling
+const withBundleAnalyzer = bundleAnalyzer({
+  enabled: process.env.ANALYZE === 'true',
+});
+
+export default withBundleAnalyzer(withNextIntl(withMDX(nextConfig)));

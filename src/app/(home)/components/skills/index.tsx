@@ -47,7 +47,7 @@ export default function Skills<T extends ElementType>({
           {t('title')}
         </Heading>
 
-        <ul className="flex flex-row flex-wrap justify-center gap-12">
+        <ul className="flex flex-row flex-wrap justify-center gap-4 md:gap-8">
           {skillCategories.map((skillCategory, i) => (
             <li key={i} className="md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
               <h3

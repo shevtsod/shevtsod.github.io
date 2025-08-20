@@ -61,15 +61,16 @@ export default function Experience<T extends ElementType>({
                 {experienceCategory.experienceItems.map((experienceItem, i) => (
                   <li key={i} className="group">
                     <div className="flex flex-row gap-8">
-                      <div className="flex-1 flex justify-end">
-                        <div className="self-center px-4 font-bold text-theme-gray-600 group-hover:text-theme-gray-400 transition-colors">
+                      <div className="flex-1 flex justify-end gap-4">
+                        <div className="self-center font-bold text-theme-gray-600 group-hover:text-theme-gray-400 transition-colors">
                           {format(experienceItem.start, 'y')}
                         </div>
+
                         <div className="flex flex-col items-center">
                           {/* Line to previous item */}
                           <div
                             className={classNames('grow h-full w-1', {
-                              'bg-theme-gray-800 group-hover:bg-theme-gray-400 transition-colors':
+                              'bg-theme-gray-800 group-hover:bg-theme-gray-600 transition-colors':
                                 i > 0 && i,
                             })}
                           />
@@ -79,7 +80,7 @@ export default function Experience<T extends ElementType>({
                           {/* Line to next item */}
                           <div
                             className={classNames('grow h-full w-1', {
-                              'bg-theme-gray-800 group-hover:bg-theme-gray-400 transition-colors':
+                              'bg-theme-gray-800 group-hover:bg-theme-gray-600 transition-colors':
                                 i <
                                 experienceCategory.experienceItems.length - 1,
                             })}
@@ -94,7 +95,7 @@ export default function Experience<T extends ElementType>({
                             i < experienceCategory.experienceItems.length - 1,
                         })}
                       >
-                        <div className="font-bold font-retro text-3xl text-theme-red-600 dark:text-theme-red-200">
+                        <div className="font-bold font-retro text-xl md:text-2xl text-theme-red-600 dark:text-theme-red-200">
                           {experienceItem.title}
                         </div>
 
