@@ -44,8 +44,12 @@ export default function Contact<T extends ElementType>({
   const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.contact');
   const formRef = useRef(null);
-  const formInView = useFadeInView(formRef, { once: true, amount: 'all' });
   const [intro, setIntro] = useState(true);
+  const formInView = useFadeInView(formRef, {
+    once: true,
+    amount: 'all',
+    skip: !intro,
+  });
 
   const {
     register,

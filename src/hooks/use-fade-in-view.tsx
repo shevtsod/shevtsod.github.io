@@ -1,6 +1,10 @@
 import { useInView, type UseInViewOptions } from 'motion/react';
 import { type RefObject, useEffect } from 'react';
 
+export interface UseFadeInViewOptions extends UseInViewOptions {
+  skip?: boolean;
+}
+
 /**
  * Wraps {@link useInView} with a custom fade-in animation.
  *
@@ -10,9 +14,10 @@ import { type RefObject, useEffect } from 'react';
  */
 export default function useFadeInView(
   ref: RefObject<Element | null>,
-  opts?: UseInViewOptions,
+  opts: UseFadeInViewOptions = {},
 ) {
   const inView = useInView(ref, opts);
+  const { skip } = opts;
 
   useEffect(() => {
     const { current } = ref;
@@ -28,13 +33,13 @@ export default function useFadeInView(
       );
 
       // Show/hide
-      if (inView) {
+      if (inView || skip) {
         current.classList.remove('opacity-0');
       } else {
         current.classList.add('opacity-0');
       }
     }
-  }, [ref, inView]);
+  }, [ref, inView, skip]);
 
   return inView;
 }

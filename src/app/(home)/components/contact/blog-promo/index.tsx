@@ -6,7 +6,13 @@ import useFadeInView from '@/hooks/use-fade-in-view';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { ComponentPropsWithoutRef, ElementType, useRef } from 'react';
+import {
+  ComponentPropsWithoutRef,
+  ElementType,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 
 export type BlogPromoProps<T extends ElementType> = {
   as?: T;
@@ -23,7 +29,12 @@ export default function BlogPromo<T extends ElementType>({
   const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.contact.blog-promo');
   const ref = useRef(null);
-  useFadeInView(ref, { once: true });
+  const [intro, setIntro] = useState(true);
+  useFadeInView(ref, { once: true, skip: !intro });
+
+  useEffect(() => {
+    setIntro(!window.location.hash);
+  }, []);
 
   return (
     <Component

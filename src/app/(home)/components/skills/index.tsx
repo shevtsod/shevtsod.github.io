@@ -4,7 +4,13 @@ import { skillCategories } from '@/content/skills';
 import useFadeInView from '@/hooks/use-fade-in-view';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
-import { useRef, type ComponentPropsWithoutRef, type ElementType } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ComponentPropsWithoutRef,
+  type ElementType,
+} from 'react';
 import Heading from '../heading';
 import Skill from './skill';
 
@@ -23,7 +29,12 @@ export default function Skills<T extends ElementType>({
   const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.skills');
   const ref = useRef(null);
-  useFadeInView(ref, { once: true });
+  const [intro, setIntro] = useState(true);
+  useFadeInView(ref, { once: true, skip: !intro });
+
+  useEffect(() => {
+    setIntro(!window.location.hash);
+  }, []);
 
   return (
     <Component ref={ref} {...props} className={classNames('py-8', className)}>

@@ -5,7 +5,13 @@ import useFadeInView from '@/hooks/use-fade-in-view';
 import classNames from 'classnames';
 import { format } from 'date-fns';
 import { useTranslations } from 'next-intl';
-import { useRef, type ComponentPropsWithoutRef, type ElementType } from 'react';
+import {
+  useEffect,
+  useRef,
+  useState,
+  type ComponentPropsWithoutRef,
+  type ElementType,
+} from 'react';
 import Heading from '../heading';
 
 export type ExperienceProps<T extends ElementType> = {
@@ -23,14 +29,15 @@ export default function Experience<T extends ElementType>({
   const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.experience');
   const ref = useRef(null);
-  useFadeInView(ref, { once: true });
+  const [intro, setIntro] = useState(true);
+  useFadeInView(ref, { once: true, skip: !intro });
+
+  useEffect(() => {
+    setIntro(!window.location.hash);
+  }, []);
 
   return (
-    <Component
-      ref={ref}
-      {...props}
-      className={classNames('relative pt-8 pb-16', className)}
-    >
+    <Component ref={ref} {...props} className={classNames('py-8', className)}>
       <div className="container max-w-4xl mx-auto px-8">
         <Heading
           as="h2"
@@ -80,7 +87,13 @@ export default function Experience<T extends ElementType>({
                         </div>
                       </div>
 
-                      <div className="flex-6 basis-0 shrink-0 py-6">
+                      <div
+                        className={classNames('flex-6 basis-0 shrink-0', {
+                          'pt-4': i > 0,
+                          'pb-4':
+                            i < experienceCategory.experienceItems.length - 1,
+                        })}
+                      >
                         <div className="font-bold font-retro text-3xl text-theme-red-600 dark:text-theme-red-200">
                           {experienceItem.title}
                         </div>
@@ -109,8 +122,6 @@ export default function Experience<T extends ElementType>({
             </li>
           ))}
         </ul>
-
-        <div className="h-[64px] w-full absolute bottom-0 left-0 z-10 image-pixelated bg-repeat-x bg-[length:64px_64px] bg-[url('/images/ui/dither-y-white.svg')] dark:bg-[url('/images/ui/dither-y-black.svg')] rotate-180" />
       </div>
     </Component>
   );

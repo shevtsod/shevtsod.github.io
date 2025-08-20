@@ -3,7 +3,12 @@
 import projects from '@/content/projects';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
-import { type ComponentPropsWithoutRef, type ElementType } from 'react';
+import {
+  useEffect,
+  useState,
+  type ComponentPropsWithoutRef,
+  type ElementType,
+} from 'react';
 import Heading from '../heading';
 import Project from './project';
 
@@ -21,6 +26,11 @@ export default function Projects<T extends ElementType>({
 }: ProjectsProps<T>) {
   const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.projects');
+  const [intro, setIntro] = useState(true);
+
+  useEffect(() => {
+    setIntro(!window.location.hash);
+  }, []);
 
   return (
     <Component {...props} className={classNames('pt-6', className)}>
@@ -36,7 +46,10 @@ export default function Projects<T extends ElementType>({
         <ul className="flex flex-col">
           {projects.map((project, i) => (
             <li key={i}>
-              <Project project={project} />
+              <Project
+                project={project}
+                useFadeInViewOptions={{ skip: i === 0 || !intro }}
+              />
             </li>
           ))}
         </ul>

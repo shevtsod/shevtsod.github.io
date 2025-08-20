@@ -3,7 +3,7 @@ import Button from '@/components/button';
 import ScrambledText from '@/components/scrambled-text';
 import { ProjectType } from '@/content/projects';
 import { skillCategories, SkillCategoryType } from '@/content/skills';
-import useFadeInView from '@/hooks/use-fade-in-view';
+import useFadeInView, { UseFadeInViewOptions } from '@/hooks/use-fade-in-view';
 import classNames from 'classnames';
 import { useInView } from 'motion/react';
 import { useTranslations } from 'next-intl';
@@ -13,17 +13,21 @@ import { useEffect, useMemo, useRef } from 'react';
 
 export interface ProjectProps {
   project: ProjectType;
+  useFadeInViewOptions?: UseFadeInViewOptions;
 }
 
 /**
  * Renders one project.
  */
-export default function Project({ project }: ProjectProps) {
+export default function Project({
+  project,
+  useFadeInViewOptions,
+}: ProjectProps) {
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const isNearMiddle = useInView(ref, { margin: '-50% 0px -50% 0px' });
   const t = useTranslations('app.(home).components.projects.project');
-  useFadeInView(ref, { once: true, amount: 'all' });
+  useFadeInView(ref, { once: true, amount: 'all', ...useFadeInViewOptions });
 
   const { title, description, skills: skillKeys, promo, links } = project;
   const repository = links?.find((p) => p.key === 'repository');
