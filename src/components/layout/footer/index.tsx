@@ -56,7 +56,7 @@ export default function Footer({ className, ...props }: FooterProps) {
             {t.rich('copyright', {
               icon: () => (
                 <Icon
-                  icon="16x/heart"
+                  icon="Heart"
                   className="h-[16px] w-auto inline align-text-top text-theme-red-400"
                   viewBox="0 0 16 16"
                 />

@@ -60,11 +60,11 @@ export default function Summary<T extends ElementType>({
         <div className="grid grid-cols-1 md:grid-cols-3 md:gap-10 text-center items-start">
           <SummaryItem
             i18nKey="summary1"
-            icon="16x/code"
+            icon="Code"
             values={{ experienceYears: new Date().getFullYear() - 2017 }}
           />
-          <SummaryItem i18nKey="summary2" icon="16x/lightbulb" />
-          <SummaryItem i18nKey="summary3" icon="16x/human" />
+          <SummaryItem i18nKey="summary2" icon="Lightbulb" />
+          <SummaryItem i18nKey="summary3" icon="Human" />
         </div>
 
         <div className="h-[64px] w-full absolute bottom-0 left-0 z-10 image-pixelated bg-repeat-x bg-[length:64px_64px] bg-[url('/images/ui/dither-y-white.svg')] dark:bg-[url('/images/ui/dither-y-black.svg')] rotate-180" />

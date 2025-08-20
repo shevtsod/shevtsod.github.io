@@ -1,8 +1,9 @@
+import { IconKey } from '@/components/icon';
 import type { HTMLAttributeAnchorTarget } from 'react';
 
 export interface FooterLinkType {
   key: string;
-  icon?: string;
+  icon?: IconKey;
   href: string;
   target?: HTMLAttributeAnchorTarget;
 }
@@ -19,13 +20,13 @@ export const footerLinksSections: FooterLinkSectionType[] = [
     footerLinks: [
       {
         key: 'github',
-        icon: '16x/github',
+        icon: 'Github',
         href: 'https://github.com/shevtsod',
         target: '_blank',
       },
       {
         key: 'linkedin',
-        icon: '16x/linkedin',
+        icon: 'Linkedin',
         href: 'https://www.linkedin.com/in/daniel-shevtsov-29089b296/',
         target: '_blank',
       },

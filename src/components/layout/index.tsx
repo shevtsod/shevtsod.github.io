@@ -52,7 +52,7 @@ export default function Layout({
         title={t('returnToTop')}
       >
         <Icon
-          icon="16x/arrow-down"
+          icon="ArrowDown"
           className="h-[32px] w-auto rotate-180"
           viewBox="0 0 16 16"
         />

@@ -11,6 +11,6 @@ type Story = StoryObj<typeof Component>;
 
 export const Default: Story = {
   args: {
-    icon: '16x/heart',
+    icon: 'Heart',
   },
 };

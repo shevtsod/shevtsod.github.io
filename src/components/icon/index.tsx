@@ -1,9 +1,12 @@
+import * as Icons from '@/content/icons';
 import classNames from 'classnames';
-import React, { Suspense, lazy, useMemo } from 'react';
+import React, { Suspense } from 'react';
 import styles from './icon.module.css';
 
+export type IconKey = keyof typeof Icons;
+
 export interface IconProps extends React.SVGProps<SVGSVGElement> {
-  icon: string;
+  icon: IconKey;
   viewBox?: string;
 }
 
@@ -17,10 +20,7 @@ export default function Icon({
   viewBox = '0 0 16 16',
   ...props
 }: IconProps) {
-  const Component = useMemo(
-    () => lazy(() => import(`../../../public/images/icons/${icon}.svg`)),
-    [icon],
-  );
+  const Component = Icons[icon];
 
   return (
     <Suspense>

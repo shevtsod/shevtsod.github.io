@@ -104,7 +104,7 @@ export default function Hero<T extends ElementType>({
       >
         <div>SCROLL</div>
         <Icon
-          icon="16x/arrow-down"
+          icon="ArrowDown"
           className="h-[32px] w-auto"
           viewBox="0 0 16 16"
         />

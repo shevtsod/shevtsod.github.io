@@ -32,19 +32,21 @@ export default function BlogPost({ children, blogPost }: BlogPostProps) {
 
           <p className="prose-xl font-bold mb-6">{description}</p>
 
-          <span>
-            {t.rich('postedBy', {
-              b: (chunks) => <b>{chunks}</b>,
-              author,
-            })}
-          </span>
+          <span className="inline-flex gap-4 flex-wrap">
+            <span>
+              {t.rich('postedBy', {
+                b: (chunks) => <b>{chunks}</b>,
+                author,
+              })}
+            </span>
 
-          <span className="inline-flex gap-2">
-            <Icon
-              icon="16x/clock"
-              className="w-[1em] aspect-square inline-block"
-            />
-            {format(date, 'PP')}
+            <span className="inline-flex gap-2">
+              <Icon
+                icon="Clock"
+                className="w-[1em] aspect-square inline-block"
+              />
+              {format(date, 'PP')}
+            </span>
           </span>
         </div>
       </div>

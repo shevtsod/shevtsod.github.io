@@ -12,7 +12,7 @@ type Story = StoryObj<typeof Component>;
 export const Default: Story = {
   args: {
     i18nKey: 'summary1',
-    icon: '16x/code',
+    icon: 'Code',
     values: { experienceYears: 0 },
   },
 };

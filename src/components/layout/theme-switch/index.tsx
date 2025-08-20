@@ -1,6 +1,6 @@
 'use client';
 
-import Icon from '@/components/icon';
+import Icon, { IconKey } from '@/components/icon';
 import classNames from 'classnames';
 import { HTMLAttributes, useEffect, useState } from 'react';
 
@@ -55,7 +55,7 @@ export default function ThemeSwitch({ className, ...props }: ThemeSwitchProps) {
       )}
       aria-label="Theme"
     >
-      {['16x/sun', '16x/moon'].map((icon, i) => (
+      {(['Sun', 'Moon'] as IconKey[]).map((icon, i) => (
         <Icon
           key={i}
           className={classNames(

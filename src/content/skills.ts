@@ -1,3 +1,4 @@
+import { IconKey } from '@/components/icon';
 export interface SkillCategoryType {
   key: string;
   skills: SkillType[];
@@ -5,30 +6,30 @@ export interface SkillCategoryType {
 
 export interface SkillType {
   key: string;
-  icon?: string;
+  icon?: IconKey;
 }
 
 export const skillCategories: SkillCategoryType[] = [
   {
     key: 'languages',
     skills: [
-      { key: 'javascript', icon: '16x/javascript' },
-      { key: 'java', icon: '16x/java' },
-      { key: 'ruby', icon: '16x/ruby' },
-      { key: 'php', icon: '16x/php' },
-      { key: 'cpp', icon: '16x/cpp' },
-      { key: 'bash', icon: '16x/bash' },
+      { key: 'javascript', icon: 'Javascript' },
+      { key: 'java', icon: 'Java' },
+      { key: 'ruby', icon: 'Ruby' },
+      { key: 'php', icon: 'Php' },
+      { key: 'cpp', icon: 'Cpp' },
+      { key: 'bash', icon: 'Bash' },
     ],
   },
   {
     key: 'frameworks',
     skills: [
-      { key: 'react', icon: '16x/react' },
-      { key: 'nodejs', icon: '16x/nodejs' },
-      { key: 'nextjs', icon: '16x/nextjs' },
-      { key: 'nestjs', icon: '16x/nestjs' },
-      { key: 'expressjs', icon: '16x/expressjs' },
-      { key: 'jquery', icon: '16x/jquery' },
+      { key: 'react', icon: 'React' },
+      { key: 'nodejs', icon: 'Nodejs' },
+      { key: 'nextjs', icon: 'Nextjs' },
+      { key: 'nestjs', icon: 'Nestjs' },
+      { key: 'expressjs', icon: 'Expressjs' },
+      { key: 'jquery', icon: 'Jquery' },
       { key: 'jakartaee' },
       { key: 'ruby-on-rails' },
       { key: 'laravel' },
@@ -38,8 +39,8 @@ export const skillCategories: SkillCategoryType[] = [
   {
     key: 'technologies',
     skills: [
-      { key: 'github', icon: '16x/github' },
-      { key: 'gitlab', icon: '16x/gitlab' },
+      { key: 'github', icon: 'Github' },
+      { key: 'gitlab', icon: 'Gitlab' },
       { key: 'mysql' },
       { key: 'postgresql' },
       { key: 'redis' },
@@ -53,9 +54,9 @@ export const skillCategories: SkillCategoryType[] = [
   {
     key: 'virtualization',
     skills: [
-      { key: 'kubernetes', icon: '16x/kubernetes' },
-      { key: 'docker', icon: '16x/docker' },
-      { key: 'vagrant', icon: '16x/vagrant' },
+      { key: 'kubernetes', icon: 'Kubernetes' },
+      { key: 'docker', icon: 'Docker' },
+      { key: 'vagrant', icon: 'Vagrant' },
     ],
   },
   {
@@ -68,8 +69,8 @@ export const skillCategories: SkillCategoryType[] = [
       { key: 'gitlab-cicd' },
       { key: 'argocd' },
       { key: 'circleci' },
-      { key: 'github-actions', icon: '16x/github' },
-      { key: 'github-pages', icon: '16x/github' },
+      { key: 'github-actions', icon: 'Github' },
+      { key: 'github-pages', icon: 'Github' },
     ],
   },
   {

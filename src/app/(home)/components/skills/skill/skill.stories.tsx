@@ -11,7 +11,7 @@ type Story = StoryObj<typeof Component>;
 
 export const Default: Story = {
   args: {
-    skill: { key: 'javascript', icon: '16x/javascript' },
+    skill: { key: 'javascript', icon: 'Javascript' },
     skillCategory: {
       key: 'languages',
       skills: [],
