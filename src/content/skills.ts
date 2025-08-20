@@ -1,14 +1,14 @@
-export interface SkillType {
-  key: string;
-  icon?: string;
-}
-
 export interface SkillCategoryType {
   key: string;
   skills: SkillType[];
 }
 
-const skillCategories: SkillCategoryType[] = [
+export interface SkillType {
+  key: string;
+  icon?: string;
+}
+
+export const skillCategories: SkillCategoryType[] = [
   {
     key: 'languages',
     skills: [
@@ -26,9 +26,9 @@ const skillCategories: SkillCategoryType[] = [
       { key: 'react', icon: '16x/react' },
       { key: 'nodejs', icon: '16x/nodejs' },
       { key: 'nextjs', icon: '16x/nextjs' },
-      { key: 'nestjs' },
-      { key: 'expressjs' },
-      { key: 'jquery' },
+      { key: 'nestjs', icon: '16x/nestjs' },
+      { key: 'expressjs', icon: '16x/expressjs' },
+      { key: 'jquery', icon: '16x/jquery' },
       { key: 'jakartaee' },
       { key: 'ruby-on-rails' },
       { key: 'laravel' },
@@ -39,7 +39,7 @@ const skillCategories: SkillCategoryType[] = [
     key: 'technologies',
     skills: [
       { key: 'github', icon: '16x/github' },
-      { key: 'gitlab' },
+      { key: 'gitlab', icon: '16x/gitlab' },
       { key: 'mysql' },
       { key: 'postgresql' },
       { key: 'redis' },
@@ -52,14 +52,18 @@ const skillCategories: SkillCategoryType[] = [
   },
   {
     key: 'virtualization',
-    skills: [{ key: 'kubernetes' }, { key: 'docker' }, { key: 'vagrant' }],
+    skills: [
+      { key: 'kubernetes', icon: '16x/kubernetes' },
+      { key: 'docker', icon: '16x/docker' },
+      { key: 'vagrant', icon: '16x/vagrant' },
+    ],
   },
   {
     key: 'cloud',
     skills: [{ key: 'aws' }, { key: 'heroku' }, { key: 'openstack' }],
   },
   {
-    key: 'ci-cd',
+    key: 'cicd',
     skills: [
       { key: 'gitlab-cicd' },
       { key: 'argocd' },
@@ -82,5 +86,3 @@ const skillCategories: SkillCategoryType[] = [
     ],
   },
 ];
-
-export default skillCategories;

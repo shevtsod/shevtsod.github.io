@@ -1,9 +1,10 @@
 'use client';
 
 import Button from '@/components/button';
+import Icon from '@/components/icon';
 import ScrambledText from '@/components/scrambled-text';
 import type { BlogPostType } from '@/utils/blog';
-import { formatISO } from 'date-fns';
+import { format } from 'date-fns';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 
@@ -25,11 +26,11 @@ export default function BlogPost({ children, blogPost }: BlogPostProps) {
     <article className="prose xl:prose-xl dark:prose-invert mx-auto pb-6 px-4 md:px-0 py-4">
       <div className="text-sm">
         <div className="mb-10 flex flex-col text-zinc-500">
-          <h1 className="text-3xl sm:text-4xl xl:text-6xl mb-4! font-bold text-theme-red-400">
+          <h1 className="text-2xl sm:text-3xl xl:text-4xl mb-0! font-bold text-theme-red-400">
             {title}
           </h1>
 
-          <p className="font-bold mb-6">{description}</p>
+          <p className="prose-xl font-bold mb-6">{description}</p>
 
           <span>
             {t.rich('postedBy', {
@@ -38,11 +39,12 @@ export default function BlogPost({ children, blogPost }: BlogPostProps) {
             })}
           </span>
 
-          <span>
-            {t.rich('postedOn', {
-              b: (chunks) => <b>{chunks}</b>,
-              date: formatISO(date),
-            })}
+          <span className="inline-flex gap-2">
+            <Icon
+              icon="16x/clock"
+              className="w-[1em] aspect-square inline-block"
+            />
+            {format(date, 'PP')}
           </span>
         </div>
       </div>

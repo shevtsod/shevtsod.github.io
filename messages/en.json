@@ -28,6 +28,14 @@
           "title": "Daniel\nShevtsov"
         },
         "experience": {
+          "experienceCategories": {
+            "employment": {
+              "title": "Employment"
+            },
+            "education": {
+              "title": "Education"
+            }
+          },
           "experienceItem": {
             "end": {
               "now": "Now"
@@ -47,7 +55,7 @@
         },
         "skills": {
           "skillCategories": {
-            "ci-cd": {
+            "cicd": {
               "title": "CI/CD",
               "skills": {
                 "gitlab-cicd": { "title": "GitLab CI/CD" },
@@ -152,8 +160,7 @@
         "components": {
           "blog-post": {
             "backToBlog": "Back to Blog",
-            "postedBy": "By <b>{author}</b>",
-            "postedOn": "Posted on <b>{date}</b>"
+            "postedBy": "By <b>{author}</b>"
           }
         },
         "page": {
@@ -163,8 +170,7 @@
       "components": {
         "blog-posts": {
           "blog-post-card": {
-            "postedBy": "By <b>{author}</b>",
-            "postedOn": "Posted on <b>{date}</b>"
+            "postedBy": "By <b>{author}</b>"
           }
         }
       },

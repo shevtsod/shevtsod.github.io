@@ -18,6 +18,16 @@
   animation-iteration-count: 1;
 }
 
+.blogPromo.intro {
+  animation-name: fadeIn;
+  animation-duration: 0.5s;
+  animation-timing-function: steps(4, end);
+  animation-delay: 10s;
+  animation-direction: normal;
+  animation-fill-mode: both;
+  animation-iteration-count: 1;
+}
+
 @keyframes scaleY {
   0% {
     transform: scaleY(0%);
@@ -48,5 +58,15 @@
   100% {
     opacity: 0%;
     pointer-events: none;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 100%;
   }
 }

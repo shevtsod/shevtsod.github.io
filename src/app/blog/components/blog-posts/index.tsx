@@ -1,4 +1,4 @@
-import { BlogPostType } from '../../../../utils/blog';
+import { BlogPostType } from '@/utils/blog';
 import BlogPostCard from './blog-post-card';
 
 export interface BlogPostsProps {
@@ -10,7 +10,7 @@ export interface BlogPostsProps {
  */
 export default function BlogPosts({ blogPosts }: BlogPostsProps) {
   return (
-    <ul className="max-w-3xl mx-auto">
+    <ul className="container max-w-3xl mx-auto">
       {blogPosts.map((blogPost, i) => (
         <li
           key={blogPosts.length - i - 1}

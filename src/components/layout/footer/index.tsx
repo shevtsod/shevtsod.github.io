@@ -1,6 +1,6 @@
 import Icon from '@/components/icon';
 import Logo from '@/components/logo';
-import footerLinkSections from '@/content/footer';
+import { footerLinksSections } from '@/content/footer';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -31,7 +31,7 @@ export default function Footer({ className, ...props }: FooterProps) {
             <Logo className="h-16 md:h-24 w-auto aspect-square" />
           </Link>
 
-          {footerLinkSections.map((footerLinkSection, i) => (
+          {footerLinksSections.map((footerLinkSection, i) => (
             <div key={i} className="flex flex-col">
               <div className="text-lg font-bold text-theme-red-400">
                 {t(`footerLinksSections.${footerLinkSection.key}.title`)}

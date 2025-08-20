@@ -2,7 +2,7 @@ import Skill from '@/app/(home)/components/skills/skill';
 import Button from '@/components/button';
 import ScrambledText from '@/components/scrambled-text';
 import { ProjectType } from '@/content/projects';
-import skillCategories, { SkillCategoryType } from '@/content/skills';
+import { skillCategories, SkillCategoryType } from '@/content/skills';
 import useFadeInView from '@/hooks/use-fade-in-view';
 import classNames from 'classnames';
 import { useInView } from 'motion/react';
@@ -124,17 +124,19 @@ export default function Project({ project }: ProjectProps) {
           </div>
 
           {/* Skills */}
-          <ul className="flex flex-wrap gap-3">
-            {projectSkillCategories?.map((skillCategory) =>
-              skillCategory.skills.map((skill, i) => (
-                <li key={i}>
-                  <Link href={{ pathname: '/', hash: `skill:${skill.key}` }}>
-                    <Skill skill={skill} skillCategory={skillCategory} />
-                  </Link>
-                </li>
-              )),
-            )}
-          </ul>
+          {projectSkillCategories && (
+            <ul className="flex flex-wrap gap-3 group">
+              {projectSkillCategories.map((skillCategory) =>
+                skillCategory.skills.map((skill, i) => (
+                  <li key={i}>
+                    <Link href={{ pathname: '/', hash: `skill:${skill.key}` }}>
+                      <Skill skill={skill} skillCategory={skillCategory} />
+                    </Link>
+                  </li>
+                )),
+              )}
+            </ul>
+          )}
 
           {/* Description */}
           <div className="font-bold text-sm md:text-base">{description}</div>

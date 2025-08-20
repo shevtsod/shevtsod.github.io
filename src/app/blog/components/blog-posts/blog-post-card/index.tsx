@@ -1,11 +1,12 @@
 'use client';
 
+import Icon from '@/components/icon';
+import ScrambledText from '@/components/scrambled-text';
 import type { BlogPostType } from '@/utils/blog';
-import { formatISO } from 'date-fns';
+import { format } from 'date-fns';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import type { ComponentProps } from 'react';
-import ScrambledText from '../../../../../components/scrambled-text';
 
 export interface BlogPostCardProps
   extends Partial<ComponentProps<typeof Link>> {
@@ -36,12 +37,10 @@ export default function BlogPostCard({
             {index}
           </div>
 
-          <div className="flex-3 flex flex-col text-zinc-500 group-hover:text-zinc-700 dark:group-hover:text-zinc-300">
-            <h1 className="text-3xl mb-3 font-bold text-theme-red-400 group-hover:underline decoration-6 [text-decoration-skip-ink:_none]">
+          <div className="flex-3 flex flex-col justify-center text-zinc-500 group-hover:text-zinc-700 dark:group-hover:text-zinc-300">
+            <h1 className="text-xl md:text-3xl mb-3 font-bold text-theme-red-400 group-hover:underline decoration-6 [text-decoration-skip-ink:_none]">
               <ScrambledText>{title}</ScrambledText>
             </h1>
-
-            <p className="font-bold mb-3">{description}</p>
 
             <span>
               {t.rich('postedBy', {
@@ -50,11 +49,12 @@ export default function BlogPostCard({
               })}
             </span>
 
-            <span>
-              {t.rich('postedOn', {
-                b: (chunks) => <b>{chunks}</b>,
-                date: formatISO(date),
-              })}
+            <span className="inline-flex gap-2">
+              <Icon
+                icon="16x/clock"
+                className="w-[1em] aspect-square inline-block"
+              />
+              {format(date, 'PP')}
             </span>
           </div>
         </div>

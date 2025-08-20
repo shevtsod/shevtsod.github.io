@@ -54,7 +54,7 @@ export default function Contact<T extends ElementType>({
     setError,
   } = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
   useEffect(() => {
@@ -98,7 +98,7 @@ export default function Contact<T extends ElementType>({
         onSubmit={handleSubmit(onSubmit)}
         autoComplete="off"
         className={classNames(
-          'container max-w-5xl mx-auto',
+          'container max-w-5xl mx-auto text-center',
           styles.form,
           // add intro class only if intro mode is enabled
           { [styles.intro]: formInView && intro },
@@ -119,7 +119,7 @@ export default function Contact<T extends ElementType>({
             {intro && (
               <div
                 className={classNames(
-                  'absolute h-full w-full bg-black text-start text-xl md:text-2xl px-10',
+                  'absolute h-full w-full z-1 bg-black text-start text-xl md:text-2xl px-10',
                   styles.callout,
                   // add intro class only if intro mode is enabled
                   { [styles.intro]: formInView && intro },
@@ -175,7 +175,13 @@ export default function Contact<T extends ElementType>({
         </div>
       </form>
 
-      <BlogPromo />
+      <BlogPromo
+        className={classNames(
+          styles.blogPromo,
+          // add intro class only if intro mode is enabled
+          { [styles.intro]: formInView && intro },
+        )}
+      />
 
       {/* Codec call overlay */}
       {formInView && intro && (

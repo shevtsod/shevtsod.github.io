@@ -12,7 +12,7 @@ export interface FooterLinkSectionType {
   footerLinks: FooterLinkType[];
 }
 
-const footerLinksSections: FooterLinkSectionType[] = [
+export const footerLinksSections: FooterLinkSectionType[] = [
   // Social
   {
     key: 'social',
@@ -50,5 +50,3 @@ const footerLinksSections: FooterLinkSectionType[] = [
     ],
   },
 ];
-
-export default footerLinksSections;
