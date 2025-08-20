@@ -51,7 +51,7 @@ export default function Summary<T extends ElementType>({
 
         <Heading
           as="h2"
-          className="uppercase text-center mb-8"
+          className="uppercase text-center mb-6"
           href={`#${props.id}`}
         >
           {t('title')}

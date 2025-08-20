@@ -53,6 +53,7 @@ export default function ThemeSwitch({ className, ...props }: ThemeSwitchProps) {
         'relative h-full aspect-square cursor-pointer text-theme-red-400',
         className,
       )}
+      aria-label="Theme"
     >
       {['16x/sun', '16x/moon'].map((icon, i) => (
         <Icon

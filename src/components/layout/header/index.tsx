@@ -92,6 +92,7 @@ export default function Header({
         <Link
           href={{ pathname: '/', hash: 'top ' }}
           className="h-full aspect-square p-2"
+          aria-label="Logo"
         >
           <Logo
             shown={shown}

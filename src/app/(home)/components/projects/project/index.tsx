@@ -113,7 +113,7 @@ export default function Project({
       >
         <div className="z-1 self-stretch flex flex-col justify-center gap-4">
           {/* Title */}
-          <div className="font-bold font-retro text-4xl xl:text-5xl text-theme-red-600 dark:text-theme-red-200">
+          <h3 className="font-bold font-retro text-3xl md:text-4xl xl:text-5xl text-theme-red-600 dark:text-theme-red-200">
             {repository ? (
               <Link
                 href={repository.url}
@@ -125,7 +125,7 @@ export default function Project({
             ) : (
               `${title}`
             )}
-          </div>
+          </h3>
 
           {/* Skills */}
           {projectSkillCategories && (

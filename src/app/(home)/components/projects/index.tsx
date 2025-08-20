@@ -37,7 +37,7 @@ export default function Projects<T extends ElementType>({
       <div>
         <Heading
           as="h2"
-          className="uppercase text-center mb-8"
+          className="uppercase text-center mb-6"
           href={`#${props.id}`}
         >
           {t('title')}

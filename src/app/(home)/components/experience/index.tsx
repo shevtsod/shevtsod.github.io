@@ -37,25 +37,25 @@ export default function Experience<T extends ElementType>({
   }, []);
 
   return (
-    <Component ref={ref} {...props} className={classNames('py-8', className)}>
+    <Component ref={ref} {...props} className={classNames('py-10', className)}>
       <div className="container max-w-4xl mx-auto px-8">
         <Heading
           as="h2"
-          className="uppercase text-center mb-8"
+          className="uppercase text-center mb-6"
           href={`#${props.id}`}
         >
           {t('title')}
         </Heading>
 
-        <ul className="flex flex-col">
+        <ul className="flex flex-col justify-center gap-6">
           {experienceCategories.map((experienceCategory, i) => (
             <li key={i}>
-              <div
+              <h3
                 id={`experienceCategory:${experienceCategory.key}`}
                 className="m-2 text-center font-retro font-bold text-3xl md:text-4xl text-theme-orange-600 dark:text-theme-orange-200 scroll-mt-20"
               >
                 {t(`experienceCategories.${experienceCategory.key}.title`)}
-              </div>
+              </h3>
 
               <ul>
                 {experienceCategory.experienceItems.map((experienceItem, i) => (

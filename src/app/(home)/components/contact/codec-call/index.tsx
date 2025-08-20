@@ -19,14 +19,16 @@ export default function CodecCall({ className, ...props }: CodecCallProps) {
     >
       <div
         className={classNames(
-          'flex-1 flex flex-col items-center justify-center ',
+          'flex-1 flex flex-col items-center justify-center',
           styles.codecCallContent,
         )}
       >
-        <div className="text-6xl bg-theme-red-400 text-black px-8 my-2 uppercase shadow-[0_0px_1.5rem_var(--color-theme-red-400)]">
+        <div className="text-2xl md:text-3xl lg:text-6xl bg-theme-red-400 text-black px-8 my-2 uppercase shadow-[0_0px_1.5rem_var(--color-theme-red-400)]">
           {t('call')}
         </div>
-        <div className="text-4xl">{t('push-select')}</div>
+        <div className="text-xl md:text-2xl lg:text-4xl">
+          {t('push-select')}
+        </div>
       </div>
     </div>
   );

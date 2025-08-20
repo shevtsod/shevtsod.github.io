@@ -93,7 +93,7 @@ export default function Contact<T extends ElementType>({
     <Component
       {...props}
       className={classNames(
-        'dark relative py-6 dark:bg-black dark:text-theme-gray-100',
+        'dark relative dark:bg-black dark:text-theme-gray-100',
         className,
       )}
     >
@@ -102,7 +102,7 @@ export default function Contact<T extends ElementType>({
         onSubmit={handleSubmit(onSubmit)}
         autoComplete="off"
         className={classNames(
-          'container max-w-5xl mx-auto text-center',
+          'container max-w-5xl mx-auto px-2 text-center',
           styles.form,
           // add intro class only if intro mode is enabled
           { [styles.intro]: formInView && intro },
@@ -110,7 +110,7 @@ export default function Contact<T extends ElementType>({
       >
         <Codec />
 
-        <div className="max-w-4xl mx-auto flex flex-col gap-3">
+        <div className="max-w-4xl mx-auto px-6 lg:px-0 flex flex-col gap-3">
           <InputLabel error={errors.message} className="relative">
             <Input
               as="textarea"
