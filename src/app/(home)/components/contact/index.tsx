@@ -102,7 +102,7 @@ export default function Contact<T extends ElementType>({
         onSubmit={handleSubmit(onSubmit)}
         autoComplete="off"
         className={classNames(
-          'container max-w-5xl mx-auto px-2 text-center',
+          'container max-w-4xl mx-auto px-2 text-center',
           styles.form,
           // add intro class only if intro mode is enabled
           { [styles.intro]: formInView && intro },
@@ -110,7 +110,7 @@ export default function Contact<T extends ElementType>({
       >
         <Codec />
 
-        <div className="max-w-4xl mx-auto px-6 lg:px-0 flex flex-col gap-3">
+        <div className="max-w-3xl mx-auto px-6 lg:px-0 flex flex-col gap-3">
           <InputLabel error={errors.message} className="relative">
             <Input
               as="textarea"
@@ -123,7 +123,7 @@ export default function Contact<T extends ElementType>({
             {intro && (
               <div
                 className={classNames(
-                  'absolute h-full w-full z-1 bg-black text-start text-xl md:text-2xl px-10',
+                  'absolute h-full w-full z-1 bg-black text-start md:text-lg px-10',
                   styles.callout,
                   // add intro class only if intro mode is enabled
                   { [styles.intro]: formInView && intro },
@@ -154,7 +154,7 @@ export default function Contact<T extends ElementType>({
 
           <Button
             type="submit"
-            className="text-center text-xl md:text-2xl px-2 py-1 font-bold w-full cursor-pointer"
+            className="text-center md:text-lg px-2 py-1 font-bold w-full cursor-pointer"
             disabled={
               !isDirty || !isValid || isSubmitting || isSubmitSuccessful
             }
@@ -165,7 +165,7 @@ export default function Contact<T extends ElementType>({
           </Button>
 
           {/* Feedback */}
-          <div className="font-retro font-bold text-lg md:text-2xl">
+          <div className="font-retro font-bold md:text-lg">
             {Object.entries(errors).map(([key, error]) => (
               <p key={key} className="text-theme-red-400">
                 ⨉ {error.message}
@@ -235,7 +235,7 @@ export function Input<T extends ElementType>({
     <Component
       {...props}
       className={classNames(
-        'bg-theme-gray-200/25 dark:bg-theme-gray-800/50 text-lg md:text-2xl font-bold w-full py-2 px-8 border-none border-4 rounded-none outline-hidden',
+        'bg-theme-gray-200/25 dark:bg-theme-gray-800/50 md:text-lg font-bold w-full py-2 px-8 border-none border-4 rounded-none outline-hidden',
         className,
       )}
     />

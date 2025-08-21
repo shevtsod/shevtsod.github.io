@@ -101,7 +101,7 @@ export default function Header({
           />
         </Link>
 
-        <div className="h-full flex gap-1 items-center">
+        <div className="h-full flex gap-1 items-center text-xs md:text-base">
           {links.map(({ children, ...props }, i) => (
             <Button
               key={i}
@@ -118,7 +118,7 @@ export default function Header({
             </Button>
           ))}
 
-          <ThemeSwitch className="h-8!" />
+          <ThemeSwitch className="h-6! md:h-8!" />
         </div>
       </div>
 

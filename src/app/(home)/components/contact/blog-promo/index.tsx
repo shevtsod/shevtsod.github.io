@@ -42,7 +42,7 @@ export default function BlogPromo<T extends ElementType>({
       {...props}
       className={classNames('pt-12 pb-8', className)}
     >
-      <div className="container mx-auto px-8 text-center md:text-xl lg:text-2xl font-bold">
+      <div className="container mx-auto px-8 text-center md:text-lg lg:text-xl font-bold">
         <Link href="/blog">
           {t.rich('callout', {
             blog: () => (
