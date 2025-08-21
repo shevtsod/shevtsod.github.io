@@ -59,10 +59,11 @@ export default function ThemeSwitch({ className, ...props }: ThemeSwitchProps) {
         <Icon
           key={i}
           className={classNames(
-            'h-full w-auto transition-opacity ease-[steps(3,end)] duration-400',
+            'h-full w-auto transition-all ease-[steps(3,end)] duration-200',
             {
               'absolute top-0 left-0`': i === 1,
-              'opacity-0': i === 0 ? theme === 'dark' : theme === 'light',
+              'scale-0': i === 0 ? theme === 'dark' : theme === 'light',
+              'delay-50': i === 1 ? theme === 'dark' : theme === 'light',
             },
           )}
           viewBox="0 0 16 16"
