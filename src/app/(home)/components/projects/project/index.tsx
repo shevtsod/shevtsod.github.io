@@ -111,7 +111,7 @@ export default function Project({
           { 'from-transparent': isNearMiddle },
         )}
       >
-        <div className="z-1 self-stretch flex flex-col justify-center gap-4">
+        <div className="z-1 xl:max-w-2xl self-stretch flex flex-col justify-center gap-4">
           {/* Title */}
           <h3 className="font-bold font-retro text-3xl md:text-4xl xl:text-5xl text-theme-red-600 dark:text-theme-red-200">
             {repository ? (

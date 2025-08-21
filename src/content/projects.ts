@@ -61,7 +61,7 @@ const projects: ProjectType[] = [
       path: '/videos/projects/480p/android-app-store.mp4',
       type: 'video',
     },
-    skills: ['php', 'laravel', 'android', 'react', 'circleci', 'aws'],
+    skills: ['php', 'laravel', 'mysql', 'android', 'react', 'circleci', 'aws'],
     links: [
       {
         key: 'presentation',
@@ -91,7 +91,7 @@ const projects: ProjectType[] = [
       path: '/images/projects/retro-game-console.jpg',
       type: 'image',
     },
-    skills: ['cpp'],
+    skills: ['c'],
     links: [
       {
         key: 'repository',

@@ -110,9 +110,11 @@
               "title": "Languages",
               "skills": {
                 "javascript": { "title": "JavaScript" },
+                "typescript": { "title": "TypeScript" },
                 "java": { "title": "Java" },
                 "ruby": { "title": "Ruby" },
                 "php": { "title": "PHP" },
+                "c": { "title": "C" },
                 "cpp": { "title": "C++" },
                 "bash": { "title": "Bash" }
               }
@@ -122,8 +124,8 @@
               "skills": {
                 "github": { "title": "GitHub" },
                 "gitlab": { "title": "GitLab" },
-                "mysql": { "title": "MySQL" },
                 "postgresql": { "title": "PostgreSQL" },
+                "mysql": { "title": "MySQL" },
                 "redis": { "title": "Redis" },
                 "prometheus": { "title": "Prometheus" },
                 "grafana": { "title": "Grafana" },
