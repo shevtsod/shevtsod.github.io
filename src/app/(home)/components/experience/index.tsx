@@ -47,12 +47,12 @@ export default function Experience<T extends ElementType>({
           {t('title')}
         </Heading>
 
-        <ul className="flex flex-col justify-center gap-6">
+        <ul className="flex flex-col justify-center gap-3 md:gap-6">
           {experienceCategories.map((experienceCategory, i) => (
             <li key={i}>
               <h3
                 id={`experienceCategory:${experienceCategory.key}`}
-                className="m-2 text-center font-retro font-bold text-3xl md:text-4xl text-theme-orange-600 dark:text-theme-orange-200 scroll-mt-20"
+                className="m-2 text-center font-retro font-bold text-2xl md:text-4xl text-theme-orange-600 dark:text-theme-orange-200 scroll-mt-20"
               >
                 {t(`experienceCategories.${experienceCategory.key}.title`)}
               </h3>

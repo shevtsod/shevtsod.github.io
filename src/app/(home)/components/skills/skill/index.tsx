@@ -28,8 +28,10 @@ export default function Skill({
       )}
       {...props}
     >
-      {icon && <Icon icon={icon} className="h-[16px] w-auto" />}
-      <span className="text-sm font-bold">{t(`skills.${key}.title`)}</span>
+      {icon && <Icon icon={icon} className="h-3 md:h-4 w-auto" />}
+      <span className="text-xs md:text-sm font-bold">
+        {t(`skills.${key}.title`)}
+      </span>
     </span>
   );
 }
