@@ -29,7 +29,11 @@ export default function AppError({
       <h1 className="text-9xl font-retro text-theme-red-400 uppercase">
         {title ?? t('title')}
       </h1>
-      {message && <p className="text-lg">{message}</p>}
+      {message && (
+        <p className="text-lg font-mono text-black dark:text-white">
+          {message}
+        </p>
+      )}
     </div>
   );
 }

@@ -93,6 +93,9 @@ const withMDX = createMDX({
       // https://mdxjs.com/guides/frontmatter/
       ['remark-frontmatter'],
       ['remark-mdx-frontmatter'],
+      // https://github.com/mattjennings/remark-reading-time
+      ['remark-reading-time'],
+      ['remark-reading-time/mdx'],
     ],
     rehypePlugins: [
       // https://mdxjs.com/guides/syntax-highlighting/

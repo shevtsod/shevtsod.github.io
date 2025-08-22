@@ -4,6 +4,16 @@ import { readdir } from 'fs/promises';
 import { basename, extname, join } from 'path';
 
 /**
+ * Represents the estimated reading time for a blog post.
+ */
+export interface ReadingTime {
+  time: number;
+  minutes: number;
+  words: number;
+  text: string;
+}
+
+/**
  * Represents one blog post.
  */
 export interface BlogPostType {
@@ -18,15 +28,18 @@ export interface BlogPostType {
 interface RawFrontmatterType {
   title?: string;
   description?: string;
-  date?: string;
   author?: string;
+  created?: string;
+  updated?: string;
 }
 
 /**
  * Frontmatter properties available in a blog post
  */
-export interface FrontmatterType extends Omit<RawFrontmatterType, 'date'> {
-  date?: Date;
+export interface FrontmatterType
+  extends Omit<RawFrontmatterType, 'created' | 'updated'> {
+  created?: Date;
+  updated?: Date;
 }
 
 // Directory containing blog posts
@@ -60,9 +73,12 @@ export const blogPosts: BlogPostType[] = (
                 outputFormat: 'function-body',
               }),
             ),
-          // Convert string to date
-          date: frontmatter?.date
-            ? parse(frontmatter.date, 'yyyy-MM-dd', new Date())
+          // Convert strings to dates
+          created: frontmatter?.created
+            ? parse(frontmatter.created, 'yyyy-MM-dd', new Date())
+            : undefined,
+          updated: frontmatter?.updated
+            ? parse(frontmatter.updated, 'yyyy-MM-dd', new Date())
             : undefined,
         },
       };
@@ -75,10 +91,10 @@ export const blogPosts: BlogPostType[] = (
       ? true
       : !['markdown-test'].includes(bp.slug),
   )
-  // Sort by date, most recent first
+  // Sort by created date, most recent first
   .sort((a, b) => {
-    const dateA = a.frontmatter?.date;
-    const dateB = b.frontmatter?.date;
+    const dateA = a.frontmatter?.created;
+    const dateB = b.frontmatter?.created;
     if (!dateA && !dateB) return 0;
     if (!dateA) return 1;
     if (!dateB) return -1;

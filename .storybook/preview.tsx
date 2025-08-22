@@ -2,7 +2,7 @@ import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/nextjs';
 import classNames from 'classnames';
 import '../src/app/globals.css';
-import { rootClassName } from '../src/app/layout';
+import { rootClassName } from '../src/app/root';
 import nextIntl from './next-intl';
 
 const preview: Preview = {

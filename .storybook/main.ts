@@ -8,6 +8,8 @@ import rehypeSlug from 'rehype-slug';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
+import remarkReadingTime from 'remark-reading-time';
+import remarkReadingTimeMdx from 'remark-reading-time/mdx';
 import { RuleSetCondition, RuleSetRule } from 'webpack';
 
 const config: StorybookConfig = {
@@ -26,6 +28,9 @@ const config: StorybookConfig = {
               // https://mdxjs.com/guides/frontmatter/
               remarkFrontmatter,
               remarkMdxFrontmatter,
+              // https://github.com/mattjennings/remark-reading-time
+              remarkReadingTime,
+              remarkReadingTimeMdx,
             ],
             rehypePlugins: [
               // https://mdxjs.com/guides/syntax-highlighting/

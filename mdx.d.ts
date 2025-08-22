@@ -5,5 +5,6 @@ declare module '*.mdx' {
   import type { MDXProps } from 'mdx/types';
 
   export const tableOfContents: Toc;
+
   export default function MDXContent(props: MDXProps): JSX.Element;
 }

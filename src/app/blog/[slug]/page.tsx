@@ -44,13 +44,18 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   const { filename } = blogPost;
-  const { default: Component, tableOfContents } = await import(
-    `../../../content/blog/${filename}`
-  );
+  const {
+    default: Component,
+    tableOfContents,
+    readingTime,
+  } = await import(`../../../content/blog/${filename}`);
+
+  console.log(readingTime);
 
   return (
     <BlogPost
       blogPost={blogPost}
+      readingTime={readingTime}
       tableOfContents={tableOfContents}
       prevBlogPost={prevBlogPost}
       nextBlogPost={nextBlogPost}

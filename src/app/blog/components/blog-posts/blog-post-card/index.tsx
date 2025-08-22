@@ -25,7 +25,7 @@ export default function BlogPostCard({
   const t = useTranslations('app.blog.components.blog-posts.blog-post-card');
 
   const {
-    frontmatter: { title, author, date },
+    frontmatter: { title, author, created, updated },
     slug,
   } = blogPost;
 
@@ -52,10 +52,17 @@ export default function BlogPostCard({
                 </span>
               )}
 
-              {date && (
+              {created && (
                 <span className="inline-flex gap-2 flex-wrap">
-                  <Icon icon="Clock" className="w-[1em] h-auto inline-block" />
-                  {format(date, 'PP')}
+                  <Icon icon="Plus" className="w-[1em] h-auto inline-block" />
+                  {format(created, 'PP')}
+                </span>
+              )}
+
+              {updated && (
+                <span className="inline-flex gap-2 flex-wrap">
+                  <Icon icon="Pencil" className="w-[1em] h-auto inline-block" />
+                  {format(updated, 'PP')}
                 </span>
               )}
             </span>

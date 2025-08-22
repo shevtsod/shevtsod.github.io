@@ -24,7 +24,7 @@ export default function BlogPromo<T extends ElementType>({
   const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.contact.blog-promo');
   const ref = useRef(null);
-  const [intro, setIntro] = useIntro();
+  const [intro] = useIntro();
   useFadeInView(ref, { once: true, skip: !intro });
 
   return (

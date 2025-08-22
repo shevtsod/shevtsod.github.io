@@ -4,7 +4,7 @@ import Button from '@/components/button';
 import Icon from '@/components/icon';
 import ScrambledText from '@/components/scrambled-text';
 import { useTheme } from '@/components/theme';
-import type { BlogPostType } from '@/utils/blog';
+import type { BlogPostType, ReadingTime } from '@/utils/blog';
 import Giscus from '@giscus/react';
 import { run } from '@mdx-js/mdx';
 import { Toc } from '@stefanprobst/rehype-extract-toc';
@@ -19,6 +19,7 @@ import TableOfContents from '../table-of-contents';
 export interface BlogPostProps {
   children: React.ReactNode;
   blogPost: BlogPostType;
+  readingTime: ReadingTime;
   tableOfContents: Toc;
   prevBlogPost?: BlogPostType;
   nextBlogPost?: BlogPostType;
@@ -30,6 +31,7 @@ export interface BlogPostProps {
 export default function BlogPost({
   children,
   blogPost,
+  readingTime,
   tableOfContents,
   prevBlogPost,
   nextBlogPost,
@@ -38,7 +40,7 @@ export default function BlogPost({
   const t = useTranslations('app.blog.[slug].components.blog-post');
   const { theme } = useTheme();
   const {
-    frontmatter: { title, description, author, date },
+    frontmatter: { title, description, author, created, updated },
   } = blogPost;
   const [descriptionMdx, setDesccriptionMdx] = useState<MDXModule | undefined>(
     undefined,
@@ -57,16 +59,16 @@ export default function BlogPost({
   }, [description]);
   return (
     <article className="grow w-full max-w-3xl prose dark:prose-invert mx-auto py-8 px-4 md:px-0 flex flex-col font-sans">
-      <div className="mb-10 flex flex-col gap-2 text-zinc-500 text-sm">
+      <div className="flex flex-col text-zinc-500 text-sm">
         <h1 className="mb-0! font-bold text-theme-red-400 font-mono">
           {title}
         </h1>
 
-        <h2 className="prose-xl text-zinc-500! [&>*]:my-0">
+        <h2 className="prose-xl text-zinc-500! my-4! [&>*]:my-0">
           <Description />
         </h2>
 
-        <span className="inline-flex gap-4 flex-wrap">
+        <span className="inline-flex gap-4 flex-wrap my-4">
           {author && (
             <span>
               {t.rich('postedBy', {
@@ -76,16 +78,33 @@ export default function BlogPost({
             </span>
           )}
 
-          {date && (
-            <span className="inline-flex gap-2">
+          {readingTime && (
+            <span className="inline-flex gap-2 flex-wrap">
               <Icon icon="Clock" className="w-[1em] h-auto inline-block" />
-              {format(date, 'PP')}
+              {t('readingTime', { minutes: Math.ceil(readingTime.minutes) })}
+            </span>
+          )}
+
+          {created && (
+            <span className="inline-flex gap-2 flex-wrap">
+              <Icon icon="Plus" className="w-[1em] h-auto inline-block" />
+              {format(created, 'PP')}
+            </span>
+          )}
+
+          {updated && (
+            <span className="inline-flex gap-2 flex-wrap">
+              <Icon icon="Pencil" className="w-[1em] h-auto inline-block" />
+              {format(updated, 'PP')}
             </span>
           )}
         </span>
 
         {/* Table of Contents */}
-        <TableOfContents tableOfContents={tableOfContents} className="mx-6" />
+        <TableOfContents
+          tableOfContents={tableOfContents}
+          className="mx-6 mt-2 mb-6"
+        />
       </div>
 
       <div className="stretch grow-1 w-full">{children}</div>

@@ -163,7 +163,8 @@
         "components": {
           "blog-post": {
             "backToBlog": "Back to Blog",
-            "postedBy": "By <b>{author}</b>"
+            "postedBy": "By <b>{author}</b>",
+            "readingTime": "{minutes} minute read"
           }
         },
         "page": {
@@ -173,7 +174,8 @@
       "components": {
         "blog-posts": {
           "blog-post-card": {
-            "postedBy": "By <b>{author}</b>"
+            "postedBy": "By <b>{author}</b>",
+            "readingTime": "{minutes} minute read"
           }
         }
       },
