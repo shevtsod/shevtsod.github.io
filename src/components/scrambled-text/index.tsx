@@ -38,7 +38,7 @@ function scramble(str: string) {
 
 export interface ScrambledTextProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  children: string;
+  children?: string;
   frequency?: number;
   duration?: number;
   scrambling?: boolean;
@@ -49,7 +49,7 @@ export interface ScrambledTextProps
  * a glitched effect. Scrambles all characters for a short time on hover.
  */
 export default function ScrambledText({
-  children,
+  children = '',
   frequency = 1,
   duration = 300,
   scrambling = false,
@@ -132,6 +132,8 @@ export default function ScrambledText({
       clearTimeout(timeout);
     };
   }, [isScrambling, children, frequency, duration]);
+
+  if (!children) return;
 
   return (
     <span onMouseEnter={() => setIsScrambling(true)} {...props}>

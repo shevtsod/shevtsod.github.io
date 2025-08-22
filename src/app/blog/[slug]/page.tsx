@@ -34,19 +34,27 @@ export interface BlogPostPageProps {
  */
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
-  const blogPost = blogPosts.find((post) => post.slug === slug);
+  const blogPostIndex = blogPosts.findIndex((post) => post.slug === slug);
+  const prevBlogPost = blogPosts[blogPostIndex - 1];
+  const blogPost = blogPosts[blogPostIndex];
+  const nextBlogPost = blogPosts[blogPostIndex + 1];
 
   if (!blogPost) {
     notFound();
   }
 
   const { filename } = blogPost;
-  const { default: Component } = await import(
+  const { default: Component, tableOfContents } = await import(
     `../../../content/blog/${filename}`
   );
 
   return (
-    <BlogPost blogPost={blogPost}>
+    <BlogPost
+      blogPost={blogPost}
+      tableOfContents={tableOfContents}
+      prevBlogPost={prevBlogPost}
+      nextBlogPost={nextBlogPost}
+    >
       <Component />
     </BlogPost>
   );

@@ -1,8 +1,9 @@
 'use client';
 
 import Icon, { IconKey } from '@/components/icon';
+import { useTheme } from '@/components/theme';
 import classNames from 'classnames';
-import { HTMLAttributes, useEffect, useState } from 'react';
+import { HTMLAttributes } from 'react';
 
 export interface ThemeSwitchProps extends HTMLAttributes<HTMLButtonElement> {}
 
@@ -10,38 +11,7 @@ export interface ThemeSwitchProps extends HTMLAttributes<HTMLButtonElement> {}
  * Renders a button that changes the current theme when clicked.
  */
 export default function ThemeSwitch({ className, ...props }: ThemeSwitchProps) {
-  const [theme, setTheme] = useState<string | undefined>(undefined);
-
-  // Detect current theme
-  // https://tailwindcss.com/docs/dark-mode#with-system-theme-support
-  useEffect(() => {
-    // Change mode on mount from localStorage or user preference
-    const localStorageTheme = localStorage.getItem('theme');
-    const prefersTheme = window.matchMedia('(prefers-color-scheme: dark)')
-      .matches
-      ? 'dark'
-      : 'light';
-
-    const computedTheme = theme ?? localStorageTheme ?? prefersTheme;
-    setTheme(computedTheme);
-    document.documentElement.classList.toggle('dark', computedTheme === 'dark');
-    localStorage.setItem('theme', computedTheme);
-
-    // Watch for preference change
-    function toggleTheme(event: MediaQueryListEvent) {
-      setTheme(event.matches ? 'dark' : 'light');
-    }
-
-    window
-      .matchMedia('(prefers-color-scheme: dark)')
-      .addEventListener('change', toggleTheme);
-
-    return () => {
-      window
-        .matchMedia('(prefers-color-scheme: dark)')
-        .removeEventListener('change', toggleTheme);
-    };
-  }, [theme]);
+  const { theme, setTheme } = useTheme();
 
   return (
     <button
@@ -50,7 +20,7 @@ export default function ThemeSwitch({ className, ...props }: ThemeSwitchProps) {
       }
       {...props}
       className={classNames(
-        'relative h-full aspect-square cursor-pointer text-theme-red-400',
+        'relative h-full w-auto cursor-pointer text-theme-red-400',
         className,
       )}
       aria-label="Theme"
@@ -62,8 +32,8 @@ export default function ThemeSwitch({ className, ...props }: ThemeSwitchProps) {
             'h-full w-auto transition-all ease-[steps(3,end)] duration-200',
             {
               'absolute top-0 left-0`': i === 1,
-              'scale-0': i === 0 ? theme === 'dark' : theme === 'light',
-              'delay-50': i === 1 ? theme === 'dark' : theme === 'light',
+              'scale-0': i === 0 ? theme !== 'light' : theme !== 'dark',
+              'delay-50': i === 1 ? theme !== 'light' : theme !== 'dark',
             },
           )}
           viewBox="0 0 16 16"

@@ -27,6 +27,7 @@ export { default as Jquery } from './16x/jquery.svg';
 export { default as Kubernetes } from './16x/kubernetes.svg';
 export { default as Laravel } from './16x/laravel.svg';
 export { default as Lightbulb } from './16x/lightbulb.svg';
+export { default as Link } from './16x/link.svg';
 export { default as Linkedin } from './16x/linkedin.svg';
 export { default as Moon } from './16x/moon.svg';
 export { default as Mysql } from './16x/mysql.svg';

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import bundleAnalyzer from '@next/bundle-analyzer';
 import createMDX from '@next/mdx';
 import type { NextConfig } from 'next';
@@ -90,14 +89,19 @@ const withMDX = createMDX({
   options: {
     remarkPlugins: [
       // https://github.com/remarkjs/remark-gfm
-      ['remark-gfm'] as unknown as any,
+      ['remark-gfm'],
       // https://mdxjs.com/guides/frontmatter/
-      ['remark-frontmatter'] as unknown as any,
-      ['remark-mdx-frontmatter'] as unknown as any,
+      ['remark-frontmatter'],
+      ['remark-mdx-frontmatter'],
     ],
     rehypePlugins: [
       // https://mdxjs.com/guides/syntax-highlighting/
-      ['rehype-highlight'] as unknown as any,
+      ['rehype-highlight'],
+      // https://github.com/rehypejs/rehype-slug
+      ['rehype-slug'],
+      // https://github.com/stefanprobst/rehype-extract-toc
+      ['@stefanprobst/rehype-extract-toc'],
+      ['@stefanprobst/rehype-extract-toc/mdx'],
     ],
   },
 });

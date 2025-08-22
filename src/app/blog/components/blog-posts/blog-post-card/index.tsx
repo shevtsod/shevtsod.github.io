@@ -31,32 +31,33 @@ export default function BlogPostCard({
 
   return (
     <Link {...props} href={`/blog/${slug}`} className="group">
-      <div className="text-sm my-4">
+      <div className="text-sm my-4 font-sans">
         <div className="flex flex-row">
           <div className="text-right flex-1 self-center text-9xl italic font-pixel mr-4 text-zinc-400 dark:text-zinc-900 group-hover:text-gray-400 dark:group-hover:text-zinc-800">
             {index}
           </div>
 
           <div className="flex-3 flex flex-col justify-center text-zinc-500 group-hover:text-zinc-700 dark:group-hover:text-zinc-300">
-            <h1 className="text-xl md:text-3xl mb-3 font-bold text-theme-red-400 group-hover:underline decoration-6 [text-decoration-skip-ink:_none]">
+            <h1 className="text-xl md:text-3xl mb-3 font-bold text-theme-red-400 group-hover:underline decoration-6 [text-decoration-skip-ink:_none] font-retro">
               <ScrambledText>{title}</ScrambledText>
             </h1>
 
             <span className="inline-flex gap-4">
-              <span>
-                {t.rich('postedBy', {
-                  b: (chunks) => <b>{chunks}</b>,
-                  author,
-                })}
-              </span>
+              {author && (
+                <span>
+                  {t.rich('postedBy', {
+                    b: (chunks) => <b>{chunks}</b>,
+                    author,
+                  })}
+                </span>
+              )}
 
-              <span className="inline-flex gap-2 flex-wrap">
-                <Icon
-                  icon="Clock"
-                  className="w-[1em] aspect-square inline-block"
-                />
-                {format(date, 'PP')}
-              </span>
+              {date && (
+                <span className="inline-flex gap-2 flex-wrap">
+                  <Icon icon="Clock" className="w-[1em] h-auto inline-block" />
+                  {format(date, 'PP')}
+                </span>
+              )}
             </span>
           </div>
         </div>

@@ -2,7 +2,7 @@
 
 import Boot from '@/components/boot';
 import Layout from '@/components/layout';
-import { useEffect, useState } from 'react';
+import { useIntro } from '@/hooks/use-intro';
 
 export interface HomeLayoutProps {
   children: React.ReactNode;
@@ -13,19 +13,17 @@ export interface HomeLayoutProps {
  * the main content unless a hash (e.g., "#top") is appended to the URL.
  */
 export default function HomeLayout({ children }: HomeLayoutProps) {
-  const [booted, setBooted] = useState(true);
+  const [intro, setIntro] = useIntro();
 
-  // Show the boot animation unless there is a URL hash
-  useEffect(() => {
-    if (!window.location.hash) {
-      setBooted(false);
-    }
-  }, []);
-
-  // Show boot animation
-  if (!booted) {
-    return <Boot onComplete={() => setBooted(true)} />;
-  }
-
-  return <Layout showHeaderOnScroll={true}>{children}</Layout>;
+  return (
+    <Layout
+      showHeaderOnScroll={true}
+      header={intro === false}
+      footer={intro === false}
+      fab={intro === false}
+    >
+      {intro === false && children}
+      {intro && <Boot onComplete={() => setIntro(false)} />}
+    </Layout>
+  );
 }

@@ -52,8 +52,8 @@ export default function Header({
     scrollYProgress.set(0);
   }, [pathname, scrollYProgress]);
 
-  // Show or hide the header based on the scroll position passing a threshold
   useMotionValueEvent(scrollY, 'change', (latest) => {
+    // Show or hide the header based on the scroll position passing a threshold
     if (showOnScroll) {
       setShown(latest > SCROLL_THRESHOLD);
     }
@@ -90,8 +90,8 @@ export default function Header({
     >
       <div className="flex-1 container mx-auto px-4 flex justify-between items-center">
         <Link
-          href={{ pathname: '/', hash: 'top ' }}
-          className="h-full aspect-square p-2"
+          href={{ pathname: '/', hash: '#top' }}
+          className="h-full w-auto p-2"
           aria-label="Logo"
         >
           <Logo
@@ -124,9 +124,9 @@ export default function Header({
 
       {showProgress && (
         <motion.div
-          className="h-1 bg-theme-red-400"
           initial={{ width: 0 }}
           style={{ width: progress }}
+          className="h-1 bg-theme-red-400"
         ></motion.div>
       )}
     </header>

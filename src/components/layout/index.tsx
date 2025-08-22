@@ -1,6 +1,7 @@
 'use client';
 
 import Icon from '@/components/icon';
+import { useTheme } from '@/components/theme';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -10,6 +11,9 @@ import Header from './header';
 
 export interface LayoutProps extends React.HTMLAttributes<HTMLDivElement> {
   children?: React.ReactNode;
+  header?: boolean;
+  footer?: boolean;
+  fab?: boolean;
   showHeaderOnScroll?: boolean;
   showProgress?: boolean;
   animatedLogo?: boolean;
@@ -21,6 +25,9 @@ export interface LayoutProps extends React.HTMLAttributes<HTMLDivElement> {
  */
 export default function Layout({
   children,
+  header = true,
+  footer = true,
+  fab = true,
   showHeaderOnScroll,
   showProgress,
   animatedLogo,
@@ -29,34 +36,54 @@ export default function Layout({
   ...props
 }: LayoutProps) {
   const t = useTranslations('components.layout');
+  const { theme } = useTheme();
 
   return (
     <div
       {...props}
-      className={classNames('min-h-[100svh] flex flex-col', className)}
+      className={classNames(
+        'min-h-[100svh] flex flex-col bg-white dark:bg-black text-black dark:text-theme-gray-100 font-mono transition-colors ease-[steps(4,end)] duration-400',
+        className,
+      )}
     >
-      <Header
-        showOnScroll={showHeaderOnScroll}
-        showProgress={showProgress}
-        animatedLogo={animatedLogo}
-      />
+      {/* https://highlightjs.org/demo */}
+      {/* https://github.com/highlightjs/highlight.js/issues/3652 */}
+      {theme && (
+        <link
+          rel="stylesheet"
+          href={`/styles/highlight.js/tokyo-night-${theme}.min.css`}
+        />
+      )}
+
+      {header && (
+        <Header
+          showOnScroll={showHeaderOnScroll}
+          showProgress={showProgress}
+          animatedLogo={animatedLogo}
+        />
+      )}
+
       <main className={classNames('flex flex-col flex-1', mainClassName)}>
         {children}
       </main>
-      <Footer />
-      <Fab
-        as={Link}
-        href="#top"
-        showOnScroll
-        className="m-8"
-        title={t('returnToTop')}
-      >
-        <Icon
-          icon="ArrowDown"
-          className="h-[32px] w-auto rotate-180"
-          viewBox="0 0 16 16"
-        />
-      </Fab>
+
+      {footer && <Footer />}
+
+      {fab && (
+        <Fab
+          as={Link}
+          href="#top"
+          showOnScroll
+          className="m-8"
+          title={t('returnToTop')}
+        >
+          <Icon
+            icon="ArrowDown"
+            className="h-[32px] w-auto rotate-180"
+            viewBox="0 0 16 16"
+          />
+        </Fab>
+      )}
     </div>
   );
 }

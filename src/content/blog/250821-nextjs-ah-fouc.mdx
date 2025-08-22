@@ -1,0 +1,460 @@
+---
+title: 'Next.js - Ah, FOUC...'
+description:
+  'A tale of the arduous and perilous journey to set `<html class="dark">`'
+date: '2025-08-21'
+author: shevtsod
+---
+
+# The problem
+
+What is "FOUC"? ~~FOUC is what you say when you run into this issue~~
+[FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content) is an issue that
+happens when the page content loads before its styles. It causes a split-second
+flash of the raw unstyled content until the styles load and update the page to
+look as intended.
+
+In the old days, the quick fixes for FOUC were to:
+
+- Move or even inline critical styles in the `<head>` to force the browser to
+  load them before the content. These should be kept short as possible as they
+  block the loading of the rest of the page.
+- Set certain styles such as user's preferred theme on the server-side (e.g.,
+  `<html class="dark">`) to "bake" it into the HTML instead of doing it on page
+  load with a client-side script.
+
+I recently ran into FOUC while working on this portfolio website. Here's what
+happened
+
+![FOUC Example](/images/blog/250821-nextjs-ah-fouc/fouc1.gif)
+
+User's POV:
+
+<YouTubeEmbed videoId="qfxDEZX9K0o" />
+
+But what's going on? Well, it's a specific form of FOUC that would be more
+appropriate to call "Flash of Default Theme." The app loads the "light" theme by
+default and then realizes the user actually wanted the dark theme, so it course
+corrects but by that point it's already too late.
+
+Let's see exactly where it happens. This project uses
+[Next.js](https://nextjs.org/) with the App router and
+[Tailwind](https://tailwindcss.com/) for styles. I wanted to have the following
+functionality:
+
+- Have a `light` and `dark` theme.
+- On first visit, follow the user's operating system preference to select the
+  initial theme.
+- Store the selected theme for subsequent visits.
+- Provide a "theme switcher" button that allows the user to override the theme.
+
+The
+[`app/layout.tsx`](https://nextjs.org/docs/app/api-reference/file-conventions/layout)
+component is very standard:
+
+```tsx
+export default async function RootLayout({ children }: RootLayoutProps) {
+  return (
+    <html>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+Following Tailwind's docs for
+[Dark mode](https://tailwindcss.com/docs/dark-mode), the `Layout.tsx` component
+looks something like:
+
+```tsx
+'use client';
+
+export default function Layout({ children }: LayoutProps) {
+  const [theme, setTheme] = useState<string | undefined>(undefined);
+
+  // Detect and set the initial theme
+  // 💥 The problem is here!
+  useEffect(() => {
+    // Previously selected theme stored in localStorage
+    const storedTheme = localStorage.getItem('theme');
+    // System preference
+    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)')
+      .matches
+      ? 'dark'
+      : 'light';
+    // Resolve the theme by order of precedence
+    const resolvedTheme = storedTheme || preferredTheme;
+
+    setTheme(resolvedTheme);
+    localStorage.setItem('theme', newTheme);
+    document.documentElement.classList.remove(oldTheme);
+  }, []);
+
+  return (
+    <div>
+      <Header />
+      {children}
+      <Footer />
+    </div>
+  );
+}
+```
+
+Nothing too crazy here, we just use a `useEffect` hook that runs when the
+component is mounted and we:
+
+1. check if the user already has a theme preference stored in `localStorage`
+   from a previous visit.
+2. otherwise, check if the user has a preferred operating system theme via
+   [`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme).
+3. Set the theme we detected in three places:
+   - In a `theme` state variable so we can pass it down to components (e.g., a
+     theme switcher button).
+   - In `localStorage` so that their preference is remembered on the next visit
+     (step 1 above).
+   - In the DOM itself via `document.documentElement` so we end up with
+     `<html class="dark">` and let Tailwind take it from there.
+
+But... the `useEffect` itself is the problem. 😭 `app/layout.tsx` is a **server
+component** that renders static HTML, so the initial page render looks something
+like:
+
+```html
+<html>
+  <head>
+    <!-- ... -->
+  </head>
+  <body>
+    <!-- ... -->
+  </body>
+</html>
+```
+
+Then, our `Layout.tsx`, a **client component**, mounts client-side and runs its
+`useEffect`, which results in
+
+```html
+<html class="dark">
+  <head>
+    <!-- ... -->
+  </head>
+  <body>
+    <!-- ... -->
+  </body>
+</html>
+```
+
+This is what we wanted but it happened too late. We already rendered with the
+light theme so the user got **💣 flashbanged 💣**. If you add some styles to
+smoothly transition between themes, the problem is exacerbated - your fancy
+transition betrays you and draws even more attention to the FOUC by making it
+last longer.
+
+We can't move this logic to `app/layout.tsx` because it's a **server component**
+that doesn't have access to browser APIs. We also can't just make `Layout.tsx` a
+**server component**. It needs to be a **client component** because it uses
+browser APIs like `document` and `localStorage`. So what _can_ we do?
+
+# The solution
+
+To be clear, the issue I am describing is related to SSR/SSG apps and
+intricacies between **server** and **client components**. I've spent some time
+researching possible solutions and, as it turns out, there isn't a nice, simple,
+and "clean" solution in Next.js right now...
+
+There's a long discussion about exactly this issue in the Next.js repo:
+
+- https://github.com/vercel/next.js/discussions/53063
+
+The solutions/workarounds proposed in the discussion fall into two categories:
+
+1. Solutions that involve storing and loading the theme with HTTP APIs such as
+   `cookies()` in `layout.tsx`.
+2. Solutions that involve breaking out of React and injecting a `<script>` above
+   the content.
+
+In all cases, the solutions try to work around the server-client boundary by
+injecting the theme outside the React app.
+
+In my case, solution #1 is immediately out the window because my app is
+[statically exported](https://nextjs.org/docs/app/guides/static-exports) to
+GitHub Pages and I can't use any HTTP APIs. 😅 So, we're left with solution #2.
+Let's see how we can make it work.
+
+The basic idea of solution #1 is to create a script like this:
+
+```js
+function script() {
+  try {
+    const storedTheme = localStorage.getItem('theme');
+    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)')
+      .matches
+      ? 'dark'
+      : 'light';
+    const resolvedTheme = storedTheme || preferredTheme;
+    document.documentElement.classList.add(resolvedTheme);
+  } catch (_) {}
+}
+```
+
+> This script will **NOT** be transpiled so it should not use any newer
+> ECMAScript features to support as many browsers as possible. It will also be
+> injected above the app content, so it should be kept as short as possible.
+
+Then, we want to create a React `Context` to allow our React components to read
+and set the theme.
+
+```tsx
+export interface ThemeContextProps {
+  /** the current theme */
+  theme?: string;
+  /** update the current theme */
+  setTheme: React.Dispatch<React.SetStateAction<string>>;
+}
+
+const ThemeContext = createContext<ThemeContextProps>(defaultThemeContextProps);
+```
+
+We can create a `useTheme` hook to make consuming the context friendlier:
+
+```tsx
+export function useTheme() {
+  return useContext(ThemeContext);
+}
+```
+
+This will let our components read and set the theme like so:
+
+```tsx
+const { theme, setTheme } = useTheme();
+```
+
+Finally, to tie it all together, we create a custom `ThemeProvider` that wraps
+the `ThemeContext.Provider` and injects our script above the content.
+
+```tsx
+export interface ThemeProviderProps {
+  children: React.ReactNode;
+}
+
+/**
+ * Provides ThemeContext to children
+ */
+export function ThemeProvider({ children }: ThemeProviderProps) {
+  const [themeState, setThemeState] = useState<string | undefined>(undefined);
+
+  // Applies a new theme to DOM and localStorage
+  const applyTheme = useCallback(
+    (oldTheme: string | undefined, newTheme: string) => {
+      localStorage.setItem('theme', newTheme);
+      if (oldTheme) {
+        document.documentElement.classList.remove(oldTheme);
+      }
+      document.documentElement.classList.add(newTheme);
+    },
+    [],
+  );
+
+  // Sets the new theme
+  const setTheme = useCallback<React.Dispatch<React.SetStateAction<string>>>(
+    (value) => {
+      if (typeof value === 'function') {
+        setThemeState((oldTheme) => {
+          const newTheme = value(oldTheme ?? '');
+          applyTheme(oldTheme, newTheme);
+          return newTheme;
+        });
+      } else {
+        setThemeState(value);
+        applyTheme(themeState, value);
+      }
+    },
+    [themeState, applyTheme],
+  );
+
+  // Detect and set the initial theme
+  useEffect(() => {
+    // Previously selected theme stored in localStorage
+    const storedTheme = localStorage.getItem('theme');
+    // System preference
+    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)')
+      .matches
+      ? 'dark'
+      : 'light';
+    // Resolve the theme by order of precedence
+    const resolvedTheme = storedTheme || preferredTheme;
+    setTheme(resolvedTheme);
+  }, [setTheme]);
+
+  const handleMatchMediaChange = useCallback(
+    (event: MediaQueryListEvent) => {
+      setTheme(event.matches ? 'dark' : 'light');
+    },
+    [setTheme],
+  );
+
+  // Change theme based on user preference
+  useEffect(() => {
+    const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
+    matchMedia.addEventListener('change', handleMatchMediaChange);
+
+    return () =>
+      matchMedia.removeEventListener('change', handleMatchMediaChange);
+  }, [handleMatchMediaChange]);
+
+  return (
+    <ThemeContext.Provider value={{ theme: themeState, setTheme }}>
+      <script
+        dangerouslySetInnerHTML={{ __html: `(${script.toString()})()` }}
+      />
+
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+```
+
+There's a lot going on here, so let's break down a few important bits:
+
+- ```tsx
+  const [themeState, setThemeState] = useState<string | undefined>(undefined);
+  ```
+
+  Same as before, this is our `theme` state variable that our components can use
+  to read and set the state. We call it `themeState` because we wrap
+  `setThemeState` with our own `setTheme` that has a couple of side effects and
+  is what we pass into our `ThemeContext`.
+
+- The `applyTheme` callback actually updates the theme in both `localStorage`
+  and the DOM (`document.documentElement`).
+- The `setTheme` callback is our wrapper for `setThemeState` that also calls
+  `applyTheme` as a side-effect.
+- ```tsx
+  // Detect and set the initial theme
+  useEffect(() => { /* ... */ }
+  ```
+
+  This `useEffect` sets the initial value for `themeState`.
+
+- ```tsx
+  // Change theme based on user preference
+  useEffect(() => { /* ... */ }
+  ```
+
+  This `useEffect` listens for changes to `prefers-color-scheme` (i.e., if the
+  user changes their operating system or browser preference) and calls
+  `setTheme`.
+
+- ```tsx
+  <script dangerouslySetInnerHTML={{ __html: `(${script.toString()})()` }} />
+  ```
+
+  This is the secret sauce that makes it all work. This serializes our `script`
+  from before as an
+  [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) and places it
+  in a `<script>` element just above our app content which makes it run first.
+
+Then, to actually use it, we update our `app/layout.tsx` like so:
+
+```tsx
+export default async function RootLayout({ children }: RootLayoutProps) {
+  return (
+    <html>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+But wait... there's another issue...
+
+![Hydration Error](/images/blog/250821-nextjs-ah-fouc/hydration-error.png)
+
+A [hydration error](https://nextjs.org/docs/messages/react-hydration-error).
+This tells us that the React tree rendered on the server for `app/layout.tsx` is
+different from what was rendered in the browser on the first render. Next.js
+catches and warns us about this because hydration mismatches can reduce
+performance.
+
+No easy fix here, because that's exactly what our `script` is doing out of
+necessity. We just need to add `suppressHydrationWarning` to `app/layout.tsx`
+which suppresses this warning on just the `<html>` element, so we'll still be
+notified of other hydration warnings in our app itself.
+
+```tsx
+export default async function RootLayout({ children }: RootLayoutProps) {
+  return (
+    <html suppressHydrationWarning>
+      <body>
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+Et voilà, it works!
+
+![No FOUC example](/images/blog/250821-nextjs-ah-fouc/fouc2.gif)
+
+# Thoughts
+
+The solution above satisfies my use case, but there are definitely a few code
+smells, notably:
+
+- ```tsx
+  <script dangerouslySetInnerHTML={{ __html: `(${script.toString()})()` }} />
+  ```
+
+  Just the name `dangerouslySetInnerHTML` indicates that this is not something
+  you should typically do, and `(${script.toString()})()` is just nasty.
+
+- `suppressHydrationWarning` again indicates that we are doing something
+  unusual.
+
+However, every other solution/workaround I found has these two elements. In
+fact, there's a great NPM package
+[`next-themes`](https://github.com/pacocoursey/next-themes) that solves this
+same issue and in just
+[~500 lines of code](https://github.com/pacocoursey/next-themes/tree/main/next-themes/src).
+It has a lot more bells and whistles than my basic solution above, including:
+
+- Support for an arbitrary number of themes
+- Sync the theme across browser tabs
+- Force specific pages to a specific theme
+- Indication of system or user-selected theme
+
+But a look through its code exposes that it too uses both the
+`(${script.toString()})()` IIFE and `suppressHydrationWarning`.
+
+If I were to do it again, I would definitely just use `next-themes` because of
+all its features, but I have a much better understanding of how and why it works
+like this after going through this exercise myself.
+
+Ultimately, I think this is a DX deficiency in Next.js. It would be really great
+if we could just do something like this instead. Maybe someday.
+
+```tsx
+export default async function RootLayout({ children }: RootLayoutProps) {
+  return (
+    <html>
+      <head>
+        <script>
+          document.documentElement.classList.add(localStorage.getItem('theme'));
+        </script>
+      </head>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+# TL;DR
+
+- If you use Next.js, just use
+  [`next-themes`](https://github.com/pacocoursey/next-themes).
+- If you don't use Next.js, just use
+  `document.documentElement.classList.add("dark")` in a `<script>` in `<head>`.
+  😉

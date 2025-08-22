@@ -1,7 +1,8 @@
 import { withThemeByClassName } from '@storybook/addon-themes';
 import type { Preview } from '@storybook/nextjs';
-import Root from '../src/app/components/root';
+import classNames from 'classnames';
 import '../src/app/globals.css';
+import { rootClassName } from '../src/app/layout';
 import nextIntl from './next-intl';
 
 const preview: Preview = {
@@ -43,14 +44,19 @@ const preview: Preview = {
   decorators: [
     // Wrap stories with global styling
     (Story) => (
-      <Root>
+      <div
+        className={classNames(
+          rootClassName,
+          'bg-white dark:bg-black text-black dark:text-theme-gray-100 font-mono',
+        )}
+      >
         <Story />
-      </Root>
+      </div>
     ),
     // https://storybook.js.org/docs/essentials/themes
     withThemeByClassName({
       themes: {
-        light: 'light',
+        light: '',
         dark: 'dark',
       },
       defaultTheme: 'dark',

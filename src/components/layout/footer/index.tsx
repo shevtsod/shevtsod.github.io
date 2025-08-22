@@ -25,10 +25,10 @@ export default function Footer({ className, ...props }: FooterProps) {
       <div className="max-w-xs md:container mx-auto flex flex-col align-middle">
         <div className="py-8 px-8 grid grid-cols-1 md:grid-cols-4 gap-4">
           <Link
-            href={{ pathname: '/', hash: 'top ' }}
+            href={{ pathname: '/', hash: '#top' }}
             className="flex justify-center md:justify-start"
           >
-            <Logo className="h-16 md:h-24 w-auto aspect-square" />
+            <Logo className="h-16 md:h-24 w-auto" />
           </Link>
 
           {footerLinksSections.map((footerLinkSection, i) => (

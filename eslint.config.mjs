@@ -19,6 +19,13 @@ const eslintConfig = [
           allowInterfaces: 'with-single-extends',
         },
       ],
+      // https://typescript-eslint.io/rules/no-unused-vars/
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          caughtErrorsIgnorePattern: '^_',
+        },
+      ],
     },
   }),
   // https://github.com/prettier/eslint-plugin-prettier

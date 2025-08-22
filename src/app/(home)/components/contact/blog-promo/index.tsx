@@ -3,16 +3,11 @@
 import Button from '@/components/button';
 import ScrambledText from '@/components/scrambled-text';
 import useFadeInView from '@/hooks/use-fade-in-view';
+import { useIntro } from '@/hooks/use-intro';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import {
-  ComponentPropsWithoutRef,
-  ElementType,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { ComponentPropsWithoutRef, ElementType, useRef } from 'react';
 
 export type BlogPromoProps<T extends ElementType> = {
   as?: T;
@@ -29,12 +24,8 @@ export default function BlogPromo<T extends ElementType>({
   const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.contact.blog-promo');
   const ref = useRef(null);
-  const [intro, setIntro] = useState(true);
+  const [intro, setIntro] = useIntro();
   useFadeInView(ref, { once: true, skip: !intro });
-
-  useEffect(() => {
-    setIntro(!window.location.hash);
-  }, []);
 
   return (
     <Component

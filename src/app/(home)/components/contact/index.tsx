@@ -3,6 +3,7 @@
 import Button from '@/components/button';
 import ScrambledText from '@/components/scrambled-text';
 import useFadeInView from '@/hooks/use-fade-in-view';
+import { useIntro } from '@/hooks/use-intro';
 import { zodResolver } from '@hookform/resolvers/zod';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
@@ -10,9 +11,7 @@ import React, {
   type ComponentPropsWithoutRef,
   type ElementType,
   HTMLAttributes,
-  useEffect,
   useRef,
-  useState,
 } from 'react';
 import { type FieldError, type SubmitHandler, useForm } from 'react-hook-form';
 import z from 'zod';
@@ -44,7 +43,7 @@ export default function Contact<T extends ElementType>({
   const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.contact');
   const formRef = useRef(null);
-  const [intro, setIntro] = useState(true);
+  const [intro] = useIntro();
   const formInView = useFadeInView(formRef, {
     once: true,
     amount: 'all',
@@ -60,10 +59,6 @@ export default function Contact<T extends ElementType>({
     resolver: zodResolver(formSchema),
     mode: 'onChange',
   });
-
-  useEffect(() => {
-    setIntro(!window.location.hash);
-  }, []);
 
   const onSubmit: SubmitHandler<FormSchema> = async (data) => {
     try {
@@ -211,7 +206,7 @@ export function InputLabel({
       {...props}
       className={classNames(
         'w-full flex flex-col gap-2',
-        { 'border-4 border-theme-red-400': error },
+        { 'outline-4 outline-theme-red-400': error },
         className,
       )}
     >
@@ -235,7 +230,7 @@ export function Input<T extends ElementType>({
     <Component
       {...props}
       className={classNames(
-        'bg-theme-gray-200/25 dark:bg-theme-gray-800/50 md:text-lg font-bold w-full py-2 px-8 border-none border-4 rounded-none outline-hidden',
+        'bg-theme-gray-200/25 dark:bg-theme-gray-800/50 md:text-lg font-bold w-full py-2 px-8 rounded-none outline-none',
         className,
       )}
     />

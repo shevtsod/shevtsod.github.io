@@ -2,6 +2,7 @@
 
 import Icon from '@/components/icon';
 import Typewriter from '@/components/typewriter';
+import { useIntro } from '@/hooks/use-intro';
 import classNames from 'classnames';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useTranslations } from 'next-intl';
@@ -29,15 +30,11 @@ export default function Hero<T extends ElementType>({
   const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.hero');
   const [subtitlePaused, setSubtitlePaused] = useState(true);
-  const [intro, setIntro] = useState(true);
-
-  useEffect(() => {
-    setIntro(!window.location.hash);
-  }, []);
+  const [intro] = useIntro();
 
   // Start the subtitle animation with a delay
   useEffect(() => {
-    setSubtitlePaused(intro);
+    setSubtitlePaused(!!intro);
     const timeout = setTimeout(() => setSubtitlePaused(false), 3500);
     return () => clearTimeout(timeout);
   }, [intro]);
@@ -86,7 +83,10 @@ export default function Hero<T extends ElementType>({
       </div>
 
       <h2 className="lg:text-lg">
-        <Typewriter duration={intro ? 2000 : 0} paused={subtitlePaused}>
+        <Typewriter
+          duration={intro === false ? 0 : 2000}
+          paused={subtitlePaused}
+        >
           {t('subtitle')}
         </Typewriter>
       </h2>

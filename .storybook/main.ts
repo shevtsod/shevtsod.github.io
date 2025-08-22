@@ -1,7 +1,10 @@
 'use client';
 
+import rehypeExtractToc from '@stefanprobst/rehype-extract-toc';
+import rehypeExtractTocMdx from '@stefanprobst/rehype-extract-toc/mdx';
 import type { StorybookConfig } from '@storybook/nextjs';
 import rehypeHighlight from 'rehype-highlight';
+import rehypeSlug from 'rehype-slug';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
@@ -27,6 +30,11 @@ const config: StorybookConfig = {
             rehypePlugins: [
               // https://mdxjs.com/guides/syntax-highlighting/
               rehypeHighlight,
+              // https://github.com/rehypejs/rehype-slug
+              rehypeSlug,
+              // https://github.com/stefanprobst/rehype-extract-toc
+              rehypeExtractToc,
+              rehypeExtractTocMdx,
             ],
           },
         },

@@ -3,8 +3,6 @@
 @import 'tailwindcss';
 /* https://github.com/tailwindlabs/tailwindcss-typography */
 @plugin '@tailwindcss/typography';
-/* https://highlightjs.org/demo */
-@import 'highlight.js/styles/tokyo-night-dark';
 
 /* https://tailwindcss.com/docs/dark-mode */
 @custom-variant dark (&:where(.dark, .dark *));
@@ -63,19 +61,30 @@
 /* https://github.com/tailwindlabs/tailwindcss-typography */
 @utility prose {
   pre {
-    @apply bg-transparent m-0 px-0! max-h-200;
+    @apply block;
 
     code {
-      @apply rounded-lg;
+      @apply rounded-lg overflow-x-auto;
     }
   }
 
   code {
-    @apply p-1 bg-zinc-400 dark:bg-zinc-800;
-
+    /* Hide backticks */
     &::before,
     &::after {
       @apply hidden;
+    }
+  }
+
+  blockquote {
+    p {
+      @apply my-0 not-italic;
+
+      /* Hide quotes */
+      &::before,
+      &::after {
+        @apply hidden;
+      }
     }
   }
 }
@@ -87,15 +96,4 @@
 /* Forces an image to render with nearest-neighbor scaling to appear pixelated */
 @utility image-pixelated {
   image-rendering: pixelated;
-}
-
-/*******************************************************************************
- * GLOBAL CSS
- ******************************************************************************/
-
-html {
-  /* https://github.com/motiondivision/motion/issues/1853 */
-  position: relative;
-  /* Smooth scrolling animations */
-  scroll-behavior: smooth;
 }

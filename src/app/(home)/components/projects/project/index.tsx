@@ -133,7 +133,12 @@ export default function Project({
               {projectSkillCategories.map((skillCategory) =>
                 skillCategory.skills.map((skill, i) => (
                   <li key={i}>
-                    <Link href={{ pathname: '/', hash: `skill:${skill.key}` }}>
+                    <Link
+                      href={{
+                        pathname: '/',
+                        hash: `skillCategory:${skillCategory.key}`,
+                      }}
+                    >
                       <Skill skill={skill} skillCategory={skillCategory} />
                     </Link>
                   </li>
