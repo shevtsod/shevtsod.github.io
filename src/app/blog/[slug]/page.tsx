@@ -50,8 +50,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     readingTime,
   } = await import(`../../../content/blog/${filename}`);
 
-  console.log(readingTime);
-
   return (
     <BlogPost
       blogPost={blogPost}

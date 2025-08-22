@@ -19,7 +19,7 @@ export const Default: Story = {
         title: faker.lorem.sentence(),
         description: faker.lorem.paragraph(),
         author: faker.internet.username(),
-        date: faker.date.recent(),
+        created: faker.date.recent(),
       },
     },
     children: (
