@@ -78,7 +78,7 @@
 
   blockquote {
     p {
-      @apply my-0 not-italic;
+      @apply my-0 not-italic font-normal;
 
       /* Hide quotes */
       &::before,
@@ -96,4 +96,12 @@
 /* Forces an image to render with nearest-neighbor scaling to appear pixelated */
 @utility image-pixelated {
   image-rendering: pixelated;
+}
+
+:root {
+  color-scheme: light;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
 }

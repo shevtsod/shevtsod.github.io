@@ -36,7 +36,6 @@ export default function ThemeSwitch({ className, ...props }: ThemeSwitchProps) {
               'delay-50': i === 1 ? theme !== 'light' : theme !== 'dark',
             },
           )}
-          viewBox="0 0 16 16"
           icon={icon}
         />
       ))}

@@ -5,6 +5,7 @@ import { useTheme } from '@/components/theme';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import Fab from './fab';
 import Footer from './footer';
 import Header from './header';
@@ -37,6 +38,11 @@ export default function Layout({
 }: LayoutProps) {
   const t = useTranslations('components.layout');
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   return (
     <div
@@ -48,7 +54,7 @@ export default function Layout({
     >
       {/* https://highlightjs.org/demo */}
       {/* https://github.com/highlightjs/highlight.js/issues/3652 */}
-      {theme && (
+      {mounted && (
         <link
           rel="stylesheet"
           href={`/styles/highlight.js/tokyo-night-${theme}.min.css`}

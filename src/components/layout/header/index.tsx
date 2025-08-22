@@ -12,10 +12,10 @@ import {
   useTransform,
 } from 'motion/react';
 import { useTranslations } from 'next-intl';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import ThemeSwitch from '../theme-switch';
 import styles from './header.module.css';
 
 // Scrolled pixels when Header is shown
@@ -26,6 +26,11 @@ export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
   showProgress?: boolean;
   animatedLogo?: boolean;
 }
+
+const ThemeSwitch = dynamic(() => import('../theme-switch'), {
+  ssr: false,
+  loading: () => <div className="w-6 md:w-8" />,
+});
 
 /**
  * App header/navigation bar.

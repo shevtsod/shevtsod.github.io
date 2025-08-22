@@ -36,39 +36,9 @@ export interface ThemeProviderProps {
  * Provides ThemeContext to children
  */
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [themeState, setThemeState] = useState<string | undefined>(undefined);
+  const [themeState, setThemeState] = useState<string | undefined>(() => {
+    if (typeof window === 'undefined') return undefined;
 
-  // Applies a new theme to DOM and localStorage
-  const applyTheme = useCallback(
-    (oldTheme: string | undefined, newTheme: string) => {
-      localStorage.setItem('theme', newTheme);
-      if (oldTheme) {
-        document.documentElement.classList.remove(oldTheme);
-      }
-      document.documentElement.classList.add(newTheme);
-    },
-    [],
-  );
-
-  // Sets the new theme
-  const setTheme = useCallback<React.Dispatch<React.SetStateAction<string>>>(
-    (value) => {
-      if (typeof value === 'function') {
-        setThemeState((oldTheme) => {
-          const newTheme = value(oldTheme ?? '');
-          applyTheme(oldTheme, newTheme);
-          return newTheme;
-        });
-      } else {
-        setThemeState(value);
-        applyTheme(themeState, value);
-      }
-    },
-    [themeState, applyTheme],
-  );
-
-  // Detect and set the initial theme
-  useEffect(() => {
     // Previously selected theme stored in localStorage
     const storedTheme = localStorage.getItem('theme');
     // System preference
@@ -77,9 +47,32 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       ? 'dark'
       : 'light';
     // Resolve the theme by order of precedence
-    const resolvedTheme = storedTheme || preferredTheme;
-    setTheme(resolvedTheme);
-  }, [setTheme]);
+    return storedTheme || preferredTheme;
+  });
+
+  // Applies a new theme to DOM and localStorage
+  function applyTheme(theme: string) {
+    localStorage.setItem('theme', theme);
+    document.documentElement.classList.remove('dark', 'light');
+    document.documentElement.classList.add(theme);
+  }
+
+  // Sets the new theme
+  const setTheme = useCallback<React.Dispatch<React.SetStateAction<string>>>(
+    (value) => {
+      if (typeof value === 'function') {
+        setThemeState((oldTheme) => {
+          const newTheme = value(oldTheme ?? '');
+          applyTheme(newTheme);
+          return newTheme;
+        });
+      } else {
+        setThemeState(value);
+        applyTheme(value);
+      }
+    },
+    [],
+  );
 
   const handleMatchMediaChange = useCallback(
     (event: MediaQueryListEvent) => {

@@ -229,51 +229,42 @@ This will let our components read and set the theme like so:
 const { theme, setTheme } = useTheme();
 ```
 
+> Note that `theme` and `setTheme` can only be used **client-side** and will
+> result in a hydration error (more on that later) if an attempt is made to
+> render based on these values on the server.
+>
+> To use these in our components, we'll need to make sure we're rendering on the
+> client, i.e.,
+>
+> ```tsx
+> 'use client';
+>
+> export default function MyComponent() {
+>   const { theme, setTheme } = useTheme();
+>   const [mounted, setMounted] = useState(false);
+>
+>   // sets mounted to true when rendered on the client
+>   useEffect(() => {
+>     setMounted(true);
+>   }, [])
+>
+>   if (!mounted) return null;
+>
+>   return (/* ... */);
+> }
+> ```
+
 Finally, to tie it all together, we create a custom `ThemeProvider` that wraps
 the `ThemeContext.Provider` and injects our script above the content.
 
 ```tsx
-export interface ThemeProviderProps {
-  children: React.ReactNode;
-}
-
 /**
  * Provides ThemeContext to children
  */
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [themeState, setThemeState] = useState<string | undefined>(undefined);
+  const [themeState, setThemeState] = useState<string | undefined>(() => {
+    if (typeof window === 'undefined') return undefined;
 
-  // Applies a new theme to DOM and localStorage
-  const applyTheme = useCallback(
-    (oldTheme: string | undefined, newTheme: string) => {
-      localStorage.setItem('theme', newTheme);
-      if (oldTheme) {
-        document.documentElement.classList.remove(oldTheme);
-      }
-      document.documentElement.classList.add(newTheme);
-    },
-    [],
-  );
-
-  // Sets the new theme
-  const setTheme = useCallback<React.Dispatch<React.SetStateAction<string>>>(
-    (value) => {
-      if (typeof value === 'function') {
-        setThemeState((oldTheme) => {
-          const newTheme = value(oldTheme ?? '');
-          applyTheme(oldTheme, newTheme);
-          return newTheme;
-        });
-      } else {
-        setThemeState(value);
-        applyTheme(themeState, value);
-      }
-    },
-    [themeState, applyTheme],
-  );
-
-  // Detect and set the initial theme
-  useEffect(() => {
     // Previously selected theme stored in localStorage
     const storedTheme = localStorage.getItem('theme');
     // System preference
@@ -282,9 +273,32 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       ? 'dark'
       : 'light';
     // Resolve the theme by order of precedence
-    const resolvedTheme = storedTheme || preferredTheme;
-    setTheme(resolvedTheme);
-  }, [setTheme]);
+    return storedTheme || preferredTheme;
+  });
+
+  // Applies a new theme to DOM and localStorage
+  const applyTheme = (theme: string) => {
+    localStorage.setItem('theme', theme);
+    document.documentElement.classList.remove('dark', 'light');
+    document.documentElement.classList.add(theme);
+  };
+
+  // Sets the new theme
+  const setTheme = useCallback<React.Dispatch<React.SetStateAction<string>>>(
+    (value) => {
+      if (typeof value === 'function') {
+        setThemeState((oldTheme) => {
+          const newTheme = value(oldTheme ?? '');
+          applyTheme(newTheme);
+          return newTheme;
+        });
+      } else {
+        setThemeState(value);
+        applyTheme(value);
+      }
+    },
+    [],
+  );
 
   const handleMatchMediaChange = useCallback(
     (event: MediaQueryListEvent) => {
@@ -317,24 +331,22 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 There's a lot going on here, so let's break down a few important bits:
 
 - ```tsx
-  const [themeState, setThemeState] = useState<string | undefined>(undefined);
+  const [themeState, setThemeState] = useState<string | undefined>(() => {
+    /* ... */
+  });
   ```
 
   Same as before, this is our `theme` state variable that our components can use
   to read and set the state. We call it `themeState` because we wrap
   `setThemeState` with our own `setTheme` that has a couple of side effects and
-  is what we pass into our `ThemeContext`.
+  is what we pass into our `ThemeContext`. This time, we pass it an initializer
+  function to set the initial theme from `localStorage` or
+  `prefers-color-scheme`.
 
-- The `applyTheme` callback actually updates the theme in both `localStorage`
+- The `applyTheme` function actually updates the theme in both `localStorage`
   and the DOM (`document.documentElement`).
 - The `setTheme` callback is our wrapper for `setThemeState` that also calls
   `applyTheme` as a side-effect.
-- ```tsx
-  // Detect and set the initial theme
-  useEffect(() => { /* ... */ }
-  ```
-
-  This `useEffect` sets the initial value for `themeState`.
 
 - ```tsx
   // Change theme based on user preference
