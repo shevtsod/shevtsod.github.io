@@ -319,6 +319,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
   return (
     <ThemeContext.Provider value={{ theme: themeState, setTheme }}>
       <script
+        suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: `(${script.toString()})()` }}
       />
 
@@ -417,7 +418,10 @@ The solution above satisfies my use case, but there are definitely a few code
 smells, notably:
 
 - ```tsx
-  <script dangerouslySetInnerHTML={{ __html: `(${script.toString()})()` }} />
+  <script
+    suppressHydrationWarning
+    dangerouslySetInnerHTML={{ __html: `(${script.toString()})()` }}
+  />
   ```
 
   Just the name `dangerouslySetInnerHTML` indicates that this is not something

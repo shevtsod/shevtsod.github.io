@@ -90,11 +90,10 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       matchMedia.removeEventListener('change', handleMatchMediaChange);
   }, [handleMatchMediaChange]);
 
-  console.log(themeState);
-
   return (
     <ThemeContext.Provider value={{ theme: themeState, setTheme }}>
       <script
+        suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: `(${script.toString()})()` }}
       />
 
@@ -123,5 +122,6 @@ function script() {
       : 'light';
     const resolvedTheme = storedTheme || preferredTheme;
     document.documentElement.classList.add(resolvedTheme);
+    console.log(resolvedTheme);
   } catch (_) {}
 }
