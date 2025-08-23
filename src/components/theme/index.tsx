@@ -40,15 +40,18 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     if (typeof window === 'undefined') return undefined;
 
     // Previously selected theme stored in localStorage
-    const storedTheme = localStorage.getItem('theme');
-    // System preference
-    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)')
-      .matches
-      ? 'dark'
-      : 'light';
-    // Resolve the theme by order of precedence
-    return storedTheme || preferredTheme;
-    console.log(`themeState: ${storedTheme || preferredTheme}`);
+    try {
+      const storedTheme = localStorage.getItem('theme');
+      // System preference
+      const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)')
+        .matches
+        ? 'dark'
+        : 'light';
+      // Resolve the theme by order of precedence
+      console.log(`themeState: ${storedTheme || preferredTheme}`);
+      return storedTheme || preferredTheme;
+    } catch (_) {}
+    return undefined;
   });
 
   // Applies a new theme to DOM and localStorage
