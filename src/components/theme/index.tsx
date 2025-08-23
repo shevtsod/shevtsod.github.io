@@ -90,6 +90,8 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       matchMedia.removeEventListener('change', handleMatchMediaChange);
   }, [handleMatchMediaChange]);
 
+  console.log(themeState);
+
   return (
     <ThemeContext.Provider value={{ theme: themeState, setTheme }}>
       <script

@@ -39,7 +39,11 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 
   return (
     // suppressHydrationWarning due to ThemeProvider
-    <html lang={locale} suppressHydrationWarning className="scroll-smooth">
+    <html
+      lang={locale}
+      suppressHydrationWarning
+      className="scroll-smooth relative"
+    >
       <body className={rootClassName}>
         <ThemeProvider>
           <NextIntlClientProvider locale={locale}>
