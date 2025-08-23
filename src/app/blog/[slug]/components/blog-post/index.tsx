@@ -61,7 +61,7 @@ export default function BlogPost({
   return (
     <article className="grow w-full max-w-3xl prose dark:prose-invert mx-auto py-8 px-4 md:px-0 flex flex-col font-sans">
       <div className="flex flex-col text-zinc-500 text-sm">
-        <h1 className="mb-0! font-bold text-theme-red-400 font-mono">
+        <h1 className="mb-0! font-bold text-theme-red-400 font-pixel">
           {title}
         </h1>
 
