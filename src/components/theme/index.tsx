@@ -17,7 +17,7 @@ export interface ThemeContextProps {
   /** the current theme */
   theme?: string;
   /** update the current theme */
-  setTheme: React.Dispatch<React.SetStateAction<string>>;
+  setTheme: React.Dispatch<React.SetStateAction<string | undefined>>;
 }
 
 /**
@@ -36,7 +36,7 @@ export interface ThemeProviderProps {
  * Provides ThemeContext to children
  */
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [themeState, setThemeState] = useState<string | undefined>(() => {
+  const [theme, setTheme] = useState<string | undefined>(() => {
     if (typeof window === 'undefined') return undefined;
 
     // Previously selected theme stored in localStorage
@@ -48,7 +48,6 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
         ? 'dark'
         : 'light';
       // Resolve the theme by order of precedence
-      console.log(`themeState: ${storedTheme || preferredTheme}`);
       return storedTheme || preferredTheme;
     } catch (_) {}
     return undefined;
@@ -59,29 +58,10 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     localStorage.setItem('theme', theme);
     document.documentElement.classList.remove('dark', 'light');
     document.documentElement.classList.add(theme);
-    console.log(`applyTheme: ${theme}`);
   }
-
-  // Sets the new theme
-  const setTheme = useCallback<React.Dispatch<React.SetStateAction<string>>>(
-    (value) => {
-      if (typeof value === 'function') {
-        setThemeState((oldTheme) => {
-          const newTheme = value(oldTheme ?? '');
-          applyTheme(newTheme);
-          return newTheme;
-        });
-      } else {
-        setThemeState(value);
-        applyTheme(value);
-      }
-    },
-    [],
-  );
 
   const handleMatchMediaChange = useCallback(
     (event: MediaQueryListEvent) => {
-      console.log(`matchMedia: ${event.matches ? 'dark' : 'light'}`);
       setTheme(event.matches ? 'dark' : 'light');
     },
     [setTheme],
@@ -96,8 +76,15 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       matchMedia.removeEventListener('change', handleMatchMediaChange);
   }, [handleMatchMediaChange]);
 
+  // Apply the theme whenever the themeState changes
+  useEffect(() => {
+    if (theme) {
+      applyTheme(theme);
+    }
+  }, [theme]);
+
   return (
-    <ThemeContext.Provider value={{ theme: themeState, setTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       <script
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: `(${script.toString()})()` }}
@@ -128,6 +115,5 @@ function script() {
       : 'light';
     const resolvedTheme = storedTheme || preferredTheme;
     document.documentElement.classList.add(resolvedTheme);
-    console.log('script: ' + resolvedTheme);
   } catch (_) {}
 }
