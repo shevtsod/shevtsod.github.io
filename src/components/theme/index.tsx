@@ -48,6 +48,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       : 'light';
     // Resolve the theme by order of precedence
     return storedTheme || preferredTheme;
+    console.log(`themeState: ${storedTheme || preferredTheme}`);
   });
 
   // Applies a new theme to DOM and localStorage
@@ -55,6 +56,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
     localStorage.setItem('theme', theme);
     document.documentElement.classList.remove('dark', 'light');
     document.documentElement.classList.add(theme);
+    console.log(`applyTheme: ${theme}`);
   }
 
   // Sets the new theme
@@ -76,6 +78,7 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   const handleMatchMediaChange = useCallback(
     (event: MediaQueryListEvent) => {
+      console.log(`matchMedia: ${event.matches ? 'dark' : 'light'}`);
       setTheme(event.matches ? 'dark' : 'light');
     },
     [setTheme],
@@ -122,6 +125,6 @@ function script() {
       : 'light';
     const resolvedTheme = storedTheme || preferredTheme;
     document.documentElement.classList.add(resolvedTheme);
-    console.log(resolvedTheme);
+    console.log('script: ' + resolvedTheme);
   } catch (_) {}
 }
