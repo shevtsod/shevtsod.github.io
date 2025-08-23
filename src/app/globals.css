@@ -61,7 +61,7 @@
 /* https://github.com/tailwindlabs/tailwindcss-typography */
 @utility prose {
   pre {
-    @apply block;
+    @apply bg-transparent m-0 px-0! max-h-200 overflow-auto;
 
     code {
       @apply rounded-lg overflow-x-auto;
@@ -69,6 +69,8 @@
   }
 
   code {
+    @apply rounded-lg p-1 bg-zinc-400 dark:bg-zinc-800;
+
     /* Hide backticks */
     &::before,
     &::after {
@@ -77,6 +79,8 @@
   }
 
   blockquote {
+    @apply px-2 py-4 bg-theme-blue-100/50 dark:bg-theme-blue-600/50;
+
     p {
       @apply my-0 not-italic font-normal;
 

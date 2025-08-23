@@ -43,7 +43,7 @@ export default function BlogPost({
   const {
     frontmatter: { title, description, author, created, updated },
   } = blogPost;
-  const [descriptionMdx, setDesccriptionMdx] = useState<MDXModule | undefined>(
+  const [descriptionMdx, setDescriptionMdx] = useState<MDXModule | undefined>(
     undefined,
   );
   const Description = descriptionMdx ? descriptionMdx.default : undefined;
@@ -52,7 +52,7 @@ export default function BlogPost({
   useEffect(() => {
     if (description) {
       (async function () {
-        setDesccriptionMdx(
+        setDescriptionMdx(
           await run(description, { ...runtime, baseUrl: import.meta.url }),
         );
       })();
@@ -65,7 +65,7 @@ export default function BlogPost({
           {title}
         </h1>
 
-        <h2 className="prose-xl text-zinc-500! my-4! [&>*]:my-0">
+        <h2 className="prose-xl text-zinc-500 my-4!">
           {Description ? (
             <Description />
           ) : (

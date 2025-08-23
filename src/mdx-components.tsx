@@ -37,28 +37,10 @@ const customH = (
 
 // https://nextjs.org/docs/app/guides/mdx#global-styles-and-components
 const components: MDXComponents = {
-  code: (props) => (
-    <code className="rounded-lg p-1 bg-zinc-400 dark:bg-zinc-800" {...props} />
-  ),
-  pre: (props) => (
-    <pre
-      className="bg-transparent m-0 px-0! max-h-200 overflow-auto"
-      {...props}
-    />
-  ),
   a: (props) => (
     <a
       className="text-theme-blue-200 dark:text-theme-blue-100"
       target="_blank"
-      {...props}
-    />
-  ),
-  blockquote: ({ className, ...props }) => (
-    <blockquote
-      className={classNames(
-        'px-2 py-4 bg-theme-blue-100/50 dark:bg-theme-blue-600/50',
-        className,
-      )}
       {...props}
     />
   ),
