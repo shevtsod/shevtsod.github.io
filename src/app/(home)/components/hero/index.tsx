@@ -82,14 +82,16 @@ export default function Hero<T extends ElementType>({
         ))}
       </div>
 
-      <h2 className="lg:text-lg">
-        <Typewriter
-          duration={intro === false ? 0 : 2000}
-          paused={subtitlePaused}
-        >
-          {t('subtitle')}
-        </Typewriter>
-      </h2>
+      {intro !== undefined && (
+        <h2 className="lg:text-lg">
+          <Typewriter
+            duration={intro === false ? 0 : 2000}
+            paused={subtitlePaused}
+          >
+            {t('subtitle')}
+          </Typewriter>
+        </h2>
+      )}
 
       <motion.div
         style={{

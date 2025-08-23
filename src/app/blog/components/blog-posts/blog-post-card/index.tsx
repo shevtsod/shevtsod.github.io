@@ -26,7 +26,7 @@ export default function BlogPostCard({
   const t = useTranslations('app.blog.components.blog-posts.blog-post-card');
 
   const {
-    frontmatter: { title, author, created, updated },
+    frontmatter: { title, author, created, updated, tags },
     slug,
   } = blogPost;
 
@@ -64,6 +64,18 @@ export default function BlogPostCard({
                 <span className="inline-flex gap-2 flex-wrap">
                   <Icon icon="Pencil" className="w-[1em] h-auto inline-block" />
                   {format(new UTCDate(updated), 'PP')}
+                </span>
+              )}
+
+              {tags.length > 0 && (
+                <span className="inline-flex gap-2 flex-wrap">
+                  <Icon icon="Tag" className="w-[1em] h-auto inline-block" />
+                  {tags.map((tag, i) => (
+                    <span key={i}>
+                      {tag}
+                      {i < tags.length - 1 && <span>, </span>}
+                    </span>
+                  ))}
                 </span>
               )}
             </span>

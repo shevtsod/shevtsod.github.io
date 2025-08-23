@@ -46,7 +46,7 @@ export default function Contact<T extends ElementType>({
   const [intro] = useIntro();
   const formInView = useFadeInView(formRef, {
     once: true,
-    amount: 'all',
+    margin: '-50% 0px -50% 0px',
     skip: !intro,
   });
 

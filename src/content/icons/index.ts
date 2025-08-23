@@ -45,5 +45,6 @@ export { default as Rest } from './16x/rest.svg';
 export { default as RubyOnRails } from './16x/ruby-on-rails.svg';
 export { default as Ruby } from './16x/ruby.svg';
 export { default as Sun } from './16x/sun.svg';
+export { default as Tag } from './16x/tag.svg';
 export { default as Typescript } from './16x/typescript.svg';
 export { default as Vagrant } from './16x/vagrant.svg';

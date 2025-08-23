@@ -41,7 +41,7 @@ export default function BlogPost({
   const t = useTranslations('app.blog.[slug].components.blog-post');
   const { theme } = useTheme();
   const {
-    frontmatter: { title, description, author, created, updated },
+    frontmatter: { title, description, author, created, updated, tags },
   } = blogPost;
   const [descriptionMdx, setDescriptionMdx] = useState<MDXModule | undefined>(
     undefined,
@@ -58,6 +58,7 @@ export default function BlogPost({
       })();
     }
   }, [description]);
+
   return (
     <article className="grow w-full max-w-3xl prose dark:prose-invert mx-auto py-8 px-4 md:px-0 flex flex-col font-sans">
       <div className="flex flex-col text-zinc-500 text-sm">
@@ -101,6 +102,18 @@ export default function BlogPost({
             <span className="inline-flex gap-2 flex-wrap">
               <Icon icon="Pencil" className="w-[1em] h-auto inline-block" />
               {format(new UTCDate(updated), 'PP')}
+            </span>
+          )}
+
+          {tags.length > 0 && (
+            <span className="inline-flex gap-2 flex-wrap">
+              <Icon icon="Tag" className="w-[1em] h-auto inline-block" />
+              {tags.map((tag, i) => (
+                <span key={i}>
+                  {tag}
+                  {i < tags.length - 1 && <span>, </span>}
+                </span>
+              ))}
             </span>
           )}
         </span>

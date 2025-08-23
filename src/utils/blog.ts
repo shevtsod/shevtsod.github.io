@@ -32,15 +32,17 @@ interface RawFrontmatterType {
   author?: string;
   created?: string;
   updated?: string;
+  tags?: string;
 }
 
 /**
  * Frontmatter properties available in a blog post
  */
 export interface FrontmatterType
-  extends Omit<RawFrontmatterType, 'created' | 'updated'> {
+  extends Omit<RawFrontmatterType, 'created' | 'updated' | 'tags'> {
   created?: Date;
   updated?: Date;
+  tags: string[];
 }
 
 // Directory containing blog posts
@@ -81,6 +83,8 @@ export const blogPosts: BlogPostType[] = (
           updated: frontmatter?.updated
             ? parse(frontmatter.updated, 'yyyy-MM-dd', new UTCDate())
             : undefined,
+          // Convert tags to array
+          tags: frontmatter?.tags ? frontmatter.tags.split(',') : [],
         },
       };
     }),
