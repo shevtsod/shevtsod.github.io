@@ -13,7 +13,7 @@ import { format } from 'date-fns';
 import { MDXModule } from 'mdx/types';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { Fragment, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import * as runtime from 'react/jsx-runtime';
 import TableOfContents from '../table-of-contents';
 
@@ -46,7 +46,7 @@ export default function BlogPost({
   const [descriptionMdx, setDesccriptionMdx] = useState<MDXModule | undefined>(
     undefined,
   );
-  const Description = descriptionMdx ? descriptionMdx.default : Fragment;
+  const Description = descriptionMdx ? descriptionMdx.default : undefined;
 
   // https://mdxjs.com/guides/mdx-on-demand/
   useEffect(() => {
@@ -66,7 +66,11 @@ export default function BlogPost({
         </h1>
 
         <h2 className="prose-xl text-zinc-500! my-4! [&>*]:my-0">
-          <Description />
+          {Description ? (
+            <Description />
+          ) : (
+            <p className="h-8 w-full rounded bg-theme-gray-200 dark:bg-theme-gray-800" />
+          )}
         </h2>
 
         <span className="inline-flex gap-4 flex-wrap my-4">

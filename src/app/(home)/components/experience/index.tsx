@@ -98,9 +98,13 @@ export default function Experience<T extends ElementType>({
                         <div>{experienceItem.location}</div>
 
                         <div className="text-theme-gray-400">
-                          {format(new UTCDate(experienceItem.start), 'PP')} →{' '}
+                          {format(
+                            new UTCDate(experienceItem.start),
+                            'MMM. yyyy',
+                          )}{' '}
+                          →{' '}
                           {experienceItem.end ? (
-                            format(new UTCDate(experienceItem.end), 'PP')
+                            format(new UTCDate(experienceItem.end), 'MMM. yyyy')
                           ) : (
                             <span className="text-theme-orange-600 dark:text-theme-orange-200">
                               {t('experienceItem.end.now')}
