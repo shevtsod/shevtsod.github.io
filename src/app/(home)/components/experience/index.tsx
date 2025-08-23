@@ -3,6 +3,7 @@
 import { experienceCategories } from '@/content/experience';
 import useFadeInView from '@/hooks/use-fade-in-view';
 import { useIntro } from '@/hooks/use-intro';
+import { UTCDate } from '@date-fns/utc';
 import classNames from 'classnames';
 import { format } from 'date-fns';
 import { useTranslations } from 'next-intl';
@@ -54,7 +55,7 @@ export default function Experience<T extends ElementType>({
                     <div className="flex flex-row gap-8">
                       <div className="flex-1 flex justify-end gap-4">
                         <div className="self-center font-bold text-theme-gray-600 group-hover:text-theme-gray-400 transition-colors">
-                          {format(experienceItem.start, 'y')}
+                          {format(new UTCDate(experienceItem.start), 'y')}
                         </div>
 
                         <div className="flex flex-col items-center">
@@ -97,9 +98,9 @@ export default function Experience<T extends ElementType>({
                         <div>{experienceItem.location}</div>
 
                         <div className="text-theme-gray-400">
-                          {format(experienceItem.start, 'PP')} →{' '}
+                          {format(new UTCDate(experienceItem.start), 'PP')} →{' '}
                           {experienceItem.end ? (
-                            format(experienceItem.end, 'PP')
+                            format(new UTCDate(experienceItem.end), 'PP')
                           ) : (
                             <span className="text-theme-orange-600 dark:text-theme-orange-200">
                               {t('experienceItem.end.now')}

@@ -5,6 +5,7 @@ import Icon from '@/components/icon';
 import ScrambledText from '@/components/scrambled-text';
 import { useTheme } from '@/components/theme';
 import type { BlogPostType, ReadingTime } from '@/utils/blog';
+import { UTCDate } from '@date-fns/utc';
 import Giscus from '@giscus/react';
 import { run } from '@mdx-js/mdx';
 import { Toc } from '@stefanprobst/rehype-extract-toc';
@@ -88,14 +89,14 @@ export default function BlogPost({
           {created && (
             <span className="inline-flex gap-2 flex-wrap">
               <Icon icon="Plus" className="w-[1em] h-auto inline-block" />
-              {format(created, 'PP')}
+              {format(new UTCDate(created), 'PP')}
             </span>
           )}
 
           {updated && (
             <span className="inline-flex gap-2 flex-wrap">
               <Icon icon="Pencil" className="w-[1em] h-auto inline-block" />
-              {format(updated, 'PP')}
+              {format(new UTCDate(updated), 'PP')}
             </span>
           )}
         </span>

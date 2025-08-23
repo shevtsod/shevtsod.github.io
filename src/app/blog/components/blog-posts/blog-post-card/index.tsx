@@ -3,6 +3,7 @@
 import Icon from '@/components/icon';
 import ScrambledText from '@/components/scrambled-text';
 import type { BlogPostType } from '@/utils/blog';
+import { UTCDate } from '@date-fns/utc';
 import { format } from 'date-fns';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
@@ -55,14 +56,14 @@ export default function BlogPostCard({
               {created && (
                 <span className="inline-flex gap-2 flex-wrap">
                   <Icon icon="Plus" className="w-[1em] h-auto inline-block" />
-                  {format(created, 'PP')}
+                  {format(new UTCDate(created), 'PP')}
                 </span>
               )}
 
               {updated && (
                 <span className="inline-flex gap-2 flex-wrap">
                   <Icon icon="Pencil" className="w-[1em] h-auto inline-block" />
-                  {format(updated, 'PP')}
+                  {format(new UTCDate(updated), 'PP')}
                 </span>
               )}
             </span>
