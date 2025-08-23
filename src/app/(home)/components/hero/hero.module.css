@@ -51,7 +51,7 @@
   animation-timing-function: steps(4, end), steps(3, end);
   animation-delay: 6s, 0s;
   animation-direction: normal, normal;
-  animation-fill-mode: both, forwards;
+  animation-fill-mode: backwards, forwards;
   animation-iteration-count: 1, infinite;
 }
 

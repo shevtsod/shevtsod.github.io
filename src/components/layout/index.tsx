@@ -54,10 +54,10 @@ export default function Layout({
     >
       {/* https://highlightjs.org/demo */}
       {/* https://github.com/highlightjs/highlight.js/issues/3652 */}
-      {mounted && (
+      {mounted && theme === 'dark' && (
         <link
           rel="stylesheet"
-          href={`/styles/highlight.js/tokyo-night-${theme}.min.css`}
+          href={`/styles/highlight.js/tokyo-night-dark.min.css`}
         />
       )}
 

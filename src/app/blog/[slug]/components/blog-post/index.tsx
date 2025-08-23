@@ -127,7 +127,7 @@ export default function BlogPost({
 
       <div className="stretch grow-1 w-full">{children}</div>
 
-      <div className="my-4 flex gap-2 justify-between items-stretch text-center [&>*]:flex-1">
+      <div className="my-4 flex gap-2 justify-between items-center text-center [&>*]:flex-1">
         <div>
           {prevBlogPost && (
             <Link
@@ -163,6 +163,16 @@ export default function BlogPost({
 
       {/* https://giscus.app/ */}
       <div className="overflow-x-auto">
+        <span className="text-sm italic">
+          {t.rich('discussionAttribution', {
+            link: () => (
+              <a href="https://giscus.app/" target="_blank">
+                giscus
+              </a>
+            ),
+          })}
+        </span>
+
         <Giscus
           id="comments"
           repo="shevtsod/shevtsod.github.io"
