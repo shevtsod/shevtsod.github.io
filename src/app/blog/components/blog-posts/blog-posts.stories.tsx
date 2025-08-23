@@ -1,3 +1,4 @@
+import { BlogPostType } from '@/utils/blog';
 import { faker } from '@faker-js/faker';
 import type { Meta, StoryObj } from '@storybook/nextjs';
 import Component from '.';
@@ -12,15 +13,20 @@ type Story = StoryObj<typeof Component>;
 
 export const Default: Story = {
   args: {
-    blogPosts: Array.from({ length: 20 }).map((_, i) => ({
-      slug: `test-${i}`,
-      filename: `test-${i}.mdx`,
-      frontmatter: {
-        title: faker.lorem.sentence(),
-        description: faker.lorem.paragraph(),
-        author: faker.internet.username(),
-        date: faker.date.recent(),
-      },
-    })),
+    blogPosts: Array.from({ length: 20 }).map(
+      (_, i) =>
+        ({
+          slug: `test-${i}`,
+          filename: `test-${i}.mdx`,
+          frontmatter: {
+            title: faker.lorem.sentence(),
+            description: faker.lorem.paragraph(),
+            author: faker.internet.username(),
+            created: faker.date.recent(),
+            updated: faker.date.recent(),
+            tags: Array.from({ length: 3 }).map(() => faker.lorem.word()),
+          },
+        }) as BlogPostType,
+    ),
   },
 };
