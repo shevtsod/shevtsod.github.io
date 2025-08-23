@@ -262,43 +262,29 @@ the `ThemeContext.Provider` and injects our script above the content.
  * Provides ThemeContext to children
  */
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  const [themeState, setThemeState] = useState<string | undefined>(() => {
+  const [theme, setTheme] = useState<string | undefined>(() => {
     if (typeof window === 'undefined') return undefined;
 
     // Previously selected theme stored in localStorage
-    const storedTheme = localStorage.getItem('theme');
-    // System preference
-    const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)')
-      .matches
-      ? 'dark'
-      : 'light';
-    // Resolve the theme by order of precedence
-    return storedTheme || preferredTheme;
+    try {
+      const storedTheme = localStorage.getItem('theme');
+      // System preference
+      const preferredTheme = window.matchMedia('(prefers-color-scheme: dark)')
+        .matches
+        ? 'dark'
+        : 'light';
+      // Resolve the theme by order of precedence
+      return storedTheme || preferredTheme;
+    } catch (_) {}
+    return undefined;
   });
 
   // Applies a new theme to DOM and localStorage
-  const applyTheme = (theme: string) => {
+  function applyTheme(theme: string) {
     localStorage.setItem('theme', theme);
     document.documentElement.classList.remove('dark', 'light');
     document.documentElement.classList.add(theme);
-  };
-
-  // Sets the new theme
-  const setTheme = useCallback<React.Dispatch<React.SetStateAction<string>>>(
-    (value) => {
-      if (typeof value === 'function') {
-        setThemeState((oldTheme) => {
-          const newTheme = value(oldTheme ?? '');
-          applyTheme(newTheme);
-          return newTheme;
-        });
-      } else {
-        setThemeState(value);
-        applyTheme(value);
-      }
-    },
-    [],
-  );
+  }
 
   const handleMatchMediaChange = useCallback(
     (event: MediaQueryListEvent) => {
@@ -316,8 +302,15 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
       matchMedia.removeEventListener('change', handleMatchMediaChange);
   }, [handleMatchMediaChange]);
 
+  // Apply the theme whenever the themeState changes
+  useEffect(() => {
+    if (theme) {
+      applyTheme(theme);
+    }
+  }, [theme]);
+
   return (
-    <ThemeContext.Provider value={{ theme: themeState, setTheme }}>
+    <ThemeContext.Provider value={{ theme, setTheme }}>
       <script
         suppressHydrationWarning
         dangerouslySetInnerHTML={{ __html: `(${script.toString()})()` }}
@@ -357,6 +350,14 @@ There's a lot going on here, so let's break down a few important bits:
   This `useEffect` listens for changes to `prefers-color-scheme` (i.e., if the
   user changes their operating system or browser preference) and calls
   `setTheme`.
+
+- ```tsx
+  // Apply the theme whenever the themeState changes
+  useEffect(() => { /* ... */ }
+  ```
+
+  This `useEffect` calls `applyTheme` to actually apply the theme (in
+  `localStorage` and the DOM) whenever `themeState` changes.
 
 - ```tsx
   <script dangerouslySetInnerHTML={{ __html: `(${script.toString()})()` }} />
@@ -474,3 +475,22 @@ export default async function RootLayout({ children }: RootLayoutProps) {
 - If you don't use Next.js, just use
   `document.documentElement.classList.add("dark")` in a `<script>` in `<head>`.
   😉
+
+# Addendum 1
+
+After I got the `ThemeProvider` working, I ran into a really confusing bug. It
+was working on some pages but not others, and **only** when deployed on GitHub
+Pages. It worked just fine when I ran the production build locally, and I spent
+hours troubleshooting it.
+
+Well, as it turns out, it was because of a _different_ hydration error. It was
+because I was using [`date-fns`](https://date-fns.org/) to format dates for blog
+posts. By default, it formats with the machine's/browser's local timezone, so it
+was working fine on my machine. But when I deployed to GitHub Pages, the static
+export was generated with the GitHub Actions runner's timezone, so when I opened
+the page, the **server-side** (i.e., statically generated) output one date, and
+then the hydrated **client-side** output another one and bam... ✨ hydration
+error ✨.
+
+All I needed was to use [`@date-fns/utc`](https://github.com/date-fns/utc) to
+keep the timezones consistent, but man, that was confusing.

@@ -2,6 +2,7 @@
 
 import useFadeInView from '@/hooks/use-fade-in-view';
 import { useIntro } from '@/hooks/use-intro';
+import { UTCDate } from '@date-fns/utc';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 import { useRef, type ComponentPropsWithoutRef, type ElementType } from 'react';
@@ -52,7 +53,7 @@ export default function Summary<T extends ElementType>({
           <SummaryItem
             i18nKey="summary1"
             icon="Code"
-            values={{ experienceYears: new Date().getFullYear() - 2017 }}
+            values={{ experienceYears: new UTCDate().getFullYear() - 2017 }}
           />
           <SummaryItem i18nKey="summary2" icon="Lightbulb" />
           <SummaryItem i18nKey="summary3" icon="Human" />

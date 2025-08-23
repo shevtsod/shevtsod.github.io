@@ -1,3 +1,4 @@
+import { UTCDate } from '@date-fns/utc';
 import { compile } from '@mdx-js/mdx';
 import { compareDesc, parse } from 'date-fns';
 import { readdir } from 'fs/promises';
@@ -75,10 +76,10 @@ export const blogPosts: BlogPostType[] = (
             ),
           // Convert strings to dates
           created: frontmatter?.created
-            ? parse(frontmatter.created, 'yyyy-MM-dd', new Date())
+            ? parse(frontmatter.created, 'yyyy-MM-dd', new UTCDate())
             : undefined,
           updated: frontmatter?.updated
-            ? parse(frontmatter.updated, 'yyyy-MM-dd', new Date())
+            ? parse(frontmatter.updated, 'yyyy-MM-dd', new UTCDate())
             : undefined,
         },
       };
@@ -98,5 +99,5 @@ export const blogPosts: BlogPostType[] = (
     if (!dateA && !dateB) return 0;
     if (!dateA) return 1;
     if (!dateB) return -1;
-    return compareDesc(new Date(dateA), new Date(dateB));
+    return compareDesc(new UTCDate(dateA), new UTCDate(dateB));
   });
