@@ -16,7 +16,7 @@ export default function BlogLayout({ children }: BlogLayoutProps) {
       {/* Colour overlay */}
       <div className="absolute top-0 w-full h-full bg-gradient-to-b from-10% to-90% from-transparent to-theme-blue-200/25 dark:to-theme-blue-600/60 pointer-events-none" />
 
-      <div className="z-2 grow flex flex-col">{children}</div>
+      <div className="z-2 grow flex flex-col"></div>
     </Layout>
   );
 }
