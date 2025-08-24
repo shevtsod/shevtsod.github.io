@@ -43,7 +43,7 @@ export default function BlogPostCard({
               <ScrambledText>{title}</ScrambledText>
             </h1>
 
-            <span className="inline-flex gap-4">
+            <span className="inline-flex gap-4 flex-wrap">
               {author && (
                 <span>
                   {t.rich('postedBy', {
@@ -54,21 +54,21 @@ export default function BlogPostCard({
               )}
 
               {created && (
-                <span className="inline-flex gap-2 flex-wrap">
+                <span className="inline-flex gap-2">
                   <Icon icon="Plus" className="w-[1em] h-auto inline-block" />
                   {format(new UTCDate(created), 'PP')}
                 </span>
               )}
 
               {updated && (
-                <span className="inline-flex gap-2 flex-wrap">
+                <span className="inline-flex gap-2">
                   <Icon icon="Pencil" className="w-[1em] h-auto inline-block" />
                   {format(new UTCDate(updated), 'PP')}
                 </span>
               )}
 
               {tags.length > 0 && (
-                <span className="inline-flex gap-2 flex-wrap">
+                <span className="inline-flex gap-2\">
                   <Icon icon="Tag" className="w-[1em] h-auto inline-block" />
                   {tags.map((tag, i) => (
                     <span key={i}>
