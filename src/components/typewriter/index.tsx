@@ -24,13 +24,13 @@ export default function Typewriter({
   useEffect(() => {
     let interval: NodeJS.Timeout;
 
-    if (duration === 0) {
+    if (duration === 0 && !paused) {
       setCounter(children.length);
     } else {
       interval = setInterval(() => {
-        if (!paused) {
-          setCounter((value) => Math.min(value + 1, children.length));
-        }
+        setCounter((value) =>
+          paused ? value : Math.min(value + 1, children.length),
+        );
       }, duration / children.length);
     }
 
