@@ -4,13 +4,13 @@ description:
   'A tale of the arduous and perilous journey to set `<html class="dark">`'
 author: shevtsod
 created: '2025-08-21'
-updated: '2025-08-23'
+updated: '2025-08-26'
 tags: webdev,nextjs
 ---
 
 # The problem
 
-What is "FOUC"? ~~FOUC is what you say when you run into this issue~~
+What is "FOUC"? <sub>~~FOUC is what you say when you run into this issue~~</sub>
 [FOUC](https://en.wikipedia.org/wiki/Flash_of_unstyled_content) is an issue that
 happens when the page content loads before its styles. It causes a split-second
 flash of the raw unstyled content until the styles load and update the page to
@@ -367,8 +367,9 @@ There's a lot going on here, so let's break down a few important bits:
 
   This is the secret sauce that makes it all work. This serializes our `script`
   from before as an
-  [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) and places it
-  in a `<script>` element just above our app content which makes it run first.
+  [IIFE](https://developer.mozilla.org/en-US/docs/Glossary/IIFE) (an anonymous
+  function that is executed immediately) and places it in a `<script>` element
+  just above our app content which makes it run first.
 
 Then, to actually use it, we update our `app/layout.tsx` like so:
 
@@ -417,8 +418,8 @@ Et voilà, it works!
 
 # Thoughts
 
-The solution above satisfies my use case, but there are definitely a few code
-smells, notably:
+The solution above satisfies my use case, but there are definitely hacky in some
+places, notably:
 
 - ```tsx
   <script
