@@ -13,6 +13,8 @@ export const skillCategories: SkillCategoryType[] = [
   {
     key: 'languages',
     skills: [
+      { key: 'html', icon: 'Html' },
+      { key: 'css', icon: 'Css' },
       { key: 'javascript', icon: 'Javascript' },
       { key: 'typescript', icon: 'Typescript' },
       { key: 'java', icon: 'Java' },
@@ -46,8 +48,9 @@ export const skillCategories: SkillCategoryType[] = [
       { key: 'postgresql', icon: 'Postgresql' },
       { key: 'mysql', icon: 'Mysql' },
       { key: 'redis', icon: 'Redis' },
-      { key: 'prometheus' },
-      { key: 'grafana' },
+      { key: 'ansible', icon: 'Ansible' },
+      { key: 'prometheus', icon: 'Prometheus' },
+      { key: 'grafana', icon: 'Grafana' },
       { key: 'influxdb', icon: 'Influxdb' },
       { key: 'rest', icon: 'Rest' },
       { key: 'godot', icon: 'Godot' },
@@ -83,17 +86,17 @@ export const skillCategories: SkillCategoryType[] = [
     key: 'networking',
     skills: [
       { key: 'fortigate', icon: 'Fortigate' },
-      { key: 'netbox' },
-      { key: 'bind' },
+      { key: 'netbox', icon: 'Netbox' },
+      { key: 'bind', icon: 'Bind' },
     ],
   },
   {
     key: 'design',
     skills: [
-      { key: 'adobe-cc' },
-      { key: 'figma' },
-      { key: 'krita' },
-      { key: 'inkscape' },
+      { key: 'adobe-cc', icon: 'AdobeCc' },
+      { key: 'figma', icon: 'Figma' },
+      { key: 'krita', icon: 'Krita' },
+      { key: 'inkscape', icon: 'Inkscape' },
     ],
   },
 ];

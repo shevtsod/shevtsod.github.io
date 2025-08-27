@@ -109,6 +109,8 @@
             "languages": {
               "title": "Languages",
               "skills": {
+                "html": { "title": "HTML" },
+                "css": { "title": "CSS" },
                 "javascript": { "title": "JavaScript" },
                 "typescript": { "title": "TypeScript" },
                 "java": { "title": "Java" },
@@ -127,6 +129,7 @@
                 "postgresql": { "title": "PostgreSQL" },
                 "mysql": { "title": "MySQL" },
                 "redis": { "title": "Redis" },
+                "ansible": { "title": "Ansible" },
                 "prometheus": { "title": "Prometheus" },
                 "grafana": { "title": "Grafana" },
                 "influxdb": { "title": "InfluxDB" },
