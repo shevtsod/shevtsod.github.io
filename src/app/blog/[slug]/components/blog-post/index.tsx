@@ -66,11 +66,11 @@ export default function BlogPost({
           {title}
         </h1>
 
-        <h2 className="prose-xl text-zinc-500 my-4!">
+        <h2 className="prose-xl text-gray-600 dark:text-zinc-500 my-4!">
           {Description ? (
             <Description />
           ) : (
-            <p className="h-8 w-full rounded bg-theme-gray-200 dark:bg-theme-gray-800" />
+            <p className="h-8 w-full rounded bg-theme-gray-100 dark:bg-theme-gray-600" />
           )}
         </h2>
 

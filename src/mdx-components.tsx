@@ -24,7 +24,10 @@ const customH = (
       )}
       {...props}
     >
-      <Link href={`#${id}`} className="no-underline">
+      <Link
+        href={`#${id}`}
+        className="no-underline text-black! dark:text-white!"
+      >
         {children}
       </Link>
       <Icon
@@ -37,13 +40,7 @@ const customH = (
 
 // https://nextjs.org/docs/app/guides/mdx#global-styles-and-components
 const components: MDXComponents = {
-  a: (props) => (
-    <a
-      className="text-theme-blue-200 dark:text-theme-blue-100"
-      target="_blank"
-      {...props}
-    />
-  ),
+  a: (props) => <a target="_blank" {...props} />,
   h1: (props) => customH('h1', props),
   h2: (props) => customH('h2', props),
   h3: (props) => customH('h3', props),

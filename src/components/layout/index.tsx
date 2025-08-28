@@ -48,7 +48,7 @@ export default function Layout({
     <div
       {...props}
       className={classNames(
-        'min-h-[100svh] flex flex-col bg-white dark:bg-black text-black dark:text-theme-gray-100 font-mono transition-colors ease-[steps(4,end)] duration-400',
+        'min-h-[100svh] flex flex-col bg-white dark:bg-black text-black dark:text-white font-mono transition-colors ease-[steps(4,end)] duration-400',
         className,
       )}
     >

@@ -88,7 +88,7 @@ export default function Contact<T extends ElementType>({
     <Component
       {...props}
       className={classNames(
-        'dark relative dark:bg-black dark:text-theme-gray-100',
+        'dark relative dark:bg-black dark:text-white',
         className,
       )}
     >

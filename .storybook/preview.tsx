@@ -47,7 +47,7 @@ const preview: Preview = {
       <div
         className={classNames(
           rootClassName,
-          'bg-white dark:bg-black text-black dark:text-theme-gray-100 font-mono',
+          'bg-white dark:bg-black text-black dark:text-white font-mono',
         )}
       >
         <Story />

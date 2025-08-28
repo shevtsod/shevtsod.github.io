@@ -40,7 +40,7 @@ export default function Heading<T extends ElementType>({
     <Component
       {...props}
       className={classNames(
-        'pt-4 flex flex-row items-stretch justify-center font-pixel text-xl md:text-4xl text-theme-gray-100 dark:text-black',
+        'pt-4 flex flex-row items-stretch justify-center font-pixel text-xl md:text-4xl text-white dark:text-black',
         styles.heading,
         className,
       )}

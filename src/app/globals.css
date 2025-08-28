@@ -13,10 +13,11 @@
 
 /* https://tailwindcss.com/docs/theme */
 @theme {
-  --color-theme-gray-100: #ffffff;
+  --color-theme-gray-100: #dddddd;
   --color-theme-gray-200: #bebebe;
   --color-theme-gray-400: #858585;
   --color-theme-gray-600: #2b2b2b;
+  --color-theme-gray-700: #212121;
   --color-theme-gray-800: #121212;
 
   --color-theme-red-200: #ea552d;
@@ -61,6 +62,12 @@
 
 /* https://github.com/tailwindlabs/tailwindcss-typography */
 @utility prose {
+  /* links */
+  a {
+    @apply text-theme-red-400;
+  }
+
+  /* block code */
   pre {
     @apply bg-transparent m-0 px-0! max-h-200 overflow-auto;
 
@@ -69,8 +76,9 @@
     }
   }
 
+  /* inline code */
   code {
-    @apply rounded-lg p-1 bg-zinc-400 dark:bg-zinc-800;
+    @apply rounded-lg p-1 bg-theme-gray-100 dark:bg-theme-gray-700;
 
     /* Hide backticks */
     &::before,
@@ -79,8 +87,9 @@
     }
   }
 
+  /* quoted text */
   blockquote {
-    @apply px-2 py-4 bg-theme-blue-100/50 dark:bg-theme-blue-600/50;
+    @apply px-2 py-4 bg-blue-100 dark:bg-gray-800;
 
     p {
       @apply my-0 not-italic font-normal;

@@ -16,7 +16,6 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import styles from './header.module.css';
 
 // Scrolled pixels when Header is shown
 const SCROLL_THRESHOLD = 50;
@@ -86,10 +85,10 @@ export default function Header({
     <header
       {...props}
       className={classNames(
-        'h-14 md:h-18 w-full flex flex-col fixed top-0 shadow-lg z-50 bg-black/10 backdrop-blur-md md:backdrop-blur-lg',
+        'h-14 md:h-18 w-full flex flex-col fixed top-0 shadow-lg z-50 bg-black/10 backdrop-blur-md md:backdrop-blur-lg transition-all duration-0 ease-[steps(4,end)]',
         { 'bg-transparent pointer-events-none opacity-0': !shown },
+        { 'duration-400': shown },
         { fixed: showOnScroll, sticky: !showOnScroll },
-        styles.header,
         className,
       )}
     >
