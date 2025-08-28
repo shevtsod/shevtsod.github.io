@@ -9,32 +9,26 @@ const customH = (
   {
     id,
     className,
-    children,
     ...props
   }: { id?: string; className?: string; children: React.ReactNode },
 ) => {
   const Component = component ?? 'h1';
 
   return (
-    <Component
+    <Link
       id={id}
+      href={`#${id}`}
       className={classNames(
-        'group flex flex-row items-start gap-1 scroll-mt-20',
+        'group flex flex-row items-start gap-1 scroll-mt-20 no-underline text-black! dark:text-white!',
         className,
       )}
-      {...props}
     >
-      <Link
-        href={`#${id}`}
-        className="no-underline text-black! dark:text-white!"
-      >
-        {children}
-      </Link>
+      <Component {...props} />
       <Icon
         icon="Link"
         className="w-6 h-auto opacity-0 group-hover:opacity-100 ease-[steps(2,end)] duration-200"
       />
-    </Component>
+    </Link>
   );
 };
 

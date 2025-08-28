@@ -62,9 +62,19 @@
 
 /* https://github.com/tailwindlabs/tailwindcss-typography */
 @utility prose {
+  /* Headings */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-bold mb-4;
+  }
+
   /* links */
   a {
-    @apply text-theme-red-400;
+    @apply text-theme-red-400 font-normal;
   }
 
   /* block code */
@@ -78,7 +88,7 @@
 
   /* inline code */
   code {
-    @apply rounded-lg p-1 bg-theme-gray-100 dark:bg-theme-gray-700;
+    @apply rounded-lg p-1 bg-theme-gray-100 dark:bg-theme-gray-700 font-normal;
 
     /* Hide backticks */
     &::before,
