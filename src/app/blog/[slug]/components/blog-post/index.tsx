@@ -4,6 +4,7 @@ import Button from '@/components/button';
 import Icon from '@/components/icon';
 import ScrambledText from '@/components/scrambled-text';
 import { useTheme } from '@/components/theme';
+import { CustomH } from '@/mdx-components';
 import type { BlogPostType, ReadingTime } from '@/utils/blog';
 import { UTCDate } from '@date-fns/utc';
 import Giscus from '@giscus/react';
@@ -33,7 +34,7 @@ export default function BlogPost({
   children,
   blogPost,
   readingTime,
-  tableOfContents,
+  tableOfContents: originalTableOfContents,
   prevBlogPost,
   nextBlogPost,
 }: BlogPostProps) {
@@ -59,6 +60,16 @@ export default function BlogPost({
     }
   }, [description]);
 
+  // Append more headings to automatically generated table of contents
+  const tableOfContents: Toc = [
+    ...originalTableOfContents,
+    {
+      depth: 1,
+      value: t('comments'),
+      id: 'comments',
+    },
+  ];
+
   return (
     <article className="grow w-full max-w-3xl prose dark:prose-invert mx-auto py-8 px-4 md:px-0 flex flex-col font-sans">
       <div className="flex flex-col text-zinc-500 text-sm">
@@ -74,7 +85,7 @@ export default function BlogPost({
           )}
         </h2>
 
-        <span className="inline-flex gap-4 flex-wrap my-4">
+        <span className="inline-flex gap-4 flex-wrap">
           {author && (
             <span>
               {t.rich('postedBy', {
@@ -119,10 +130,9 @@ export default function BlogPost({
         </span>
 
         {/* Table of Contents */}
-        <TableOfContents
-          tableOfContents={tableOfContents}
-          className="mx-6 mt-2 mb-6"
-        />
+        <div className="my-4">
+          <TableOfContents tableOfContents={tableOfContents} />
+        </div>
       </div>
 
       <div className="stretch grow-1 w-full">{children}</div>
@@ -161,10 +171,14 @@ export default function BlogPost({
         </div>
       </div>
 
+      <CustomH as="h1" id="comments">
+        {t('comments')}
+      </CustomH>
+
       {/* https://giscus.app/ */}
       <div className="overflow-x-auto">
         <span className="text-sm italic">
-          {t.rich('discussionAttribution', {
+          {t.rich('commentsAttribution', {
             link: () => (
               <a href="https://giscus.app/" target="_blank">
                 giscus

@@ -168,7 +168,8 @@
             "backToBlog": "Back to Blog",
             "postedBy": "By <b>{author}</b>",
             "readingTime": "{minutes} minute read",
-            "discussionAttribution": "Discussion powered by <link></link>"
+            "comments": "Comments",
+            "commentsAttribution": "Comments powered by <link></link>"
           }
         },
         "page": {

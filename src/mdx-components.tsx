@@ -3,16 +3,19 @@ import { YouTubeEmbed } from '@next/third-parties/google';
 import classNames from 'classnames';
 import type { MDXComponents } from 'mdx/types';
 import Link from 'next/link';
+import { ComponentPropsWithoutRef, ElementType } from 'react';
 
-const customH = (
-  component: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6',
-  {
-    id,
-    className,
-    ...props
-  }: { id?: string; className?: string; children: React.ReactNode },
-) => {
-  const Component = component ?? 'h1';
+export type CustomHProps<T extends ElementType> = {
+  as?: T;
+} & ComponentPropsWithoutRef<T>;
+
+export function CustomH<T extends ElementType>({
+  as,
+  id,
+  className,
+  ...props
+}: CustomHProps<T>) {
+  const Component = as ?? 'h1';
 
   return (
     <Link
@@ -29,17 +32,17 @@ const customH = (
       />
     </Link>
   );
-};
+}
 
 // https://nextjs.org/docs/app/guides/mdx#global-styles-and-components
 const components: MDXComponents = {
   a: (props) => <a target="_blank" {...props} />,
-  h1: (props) => customH('h1', props),
-  h2: (props) => customH('h2', props),
-  h3: (props) => customH('h3', props),
-  h4: (props) => customH('h4', props),
-  h5: (props) => customH('h5', props),
-  h6: (props) => customH('h6', props),
+  h1: (props) => <CustomH as="h1" {...props} />,
+  h2: (props) => <CustomH as="h2" {...props} />,
+  h3: (props) => <CustomH as="h3" {...props} />,
+  h4: (props) => <CustomH as="h4" {...props} />,
+  h5: (props) => <CustomH as="h5" {...props} />,
+  h6: (props) => <CustomH as="h6" {...props} />,
   YouTubeEmbed,
 };
 
