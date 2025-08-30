@@ -10,6 +10,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useMemo, useRef } from 'react';
+import Typewriter from '../../../../../components/typewriter';
 
 export interface ProjectProps {
   project: ProjectType;
@@ -27,7 +28,11 @@ export default function Project({
   const videoRef = useRef<HTMLVideoElement>(null);
   const isNearMiddle = useInView(ref, { margin: '-50% 0px -50% 0px' });
   const t = useTranslations('app.(home).components.projects.project');
-  useFadeInView(ref, { once: true, amount: 'all', ...useFadeInViewOptions });
+  const inView = useFadeInView(ref, {
+    once: true,
+    amount: 'all',
+    ...useFadeInViewOptions,
+  });
 
   const { title, description, skills: skillKeys, promo, links } = project;
   const repository = links?.find((p) => p.key === 'repository');
@@ -111,61 +116,75 @@ export default function Project({
           { 'from-transparent': isNearMiddle },
         )}
       >
-        <div className="z-1 xl:max-w-2xl self-stretch flex flex-col justify-center gap-4">
-          {/* Title */}
-          <h3 className="font-bold font-retro text-3xl md:text-4xl xl:text-5xl text-theme-red-600 dark:text-theme-red-200">
-            {repository ? (
-              <Link
-                href={repository.url}
-                target="_blank"
-                className="text-theme-red-400"
-              >
-                <ScrambledText>{`${title}`}</ScrambledText>
-              </Link>
-            ) : (
-              `${title}`
-            )}
-          </h3>
-
-          {/* Skills */}
-          {projectSkillCategories && (
-            <ul className="flex flex-wrap gap-3 group">
-              {projectSkillCategories.map((skillCategory) =>
-                skillCategory.skills.map((skill, i) => (
-                  <li key={i}>
-                    <Link
-                      href={{
-                        pathname: '/',
-                        hash: `skillCategory:${skillCategory.key}`,
-                      }}
-                    >
-                      <Skill skill={skill} skillCategory={skillCategory} />
-                    </Link>
-                  </li>
-                )),
-              )}
-            </ul>
-          )}
-
-          {/* Description */}
-          <div className="font-bold text-sm md:text-base">{description}</div>
-
-          {/* Links */}
-          <ul className="flex flex-wrap gap-2">
-            {links?.map((link, i) => (
-              <li key={i}>
-                <Button
-                  as="a"
-                  href={link.url}
+        <div className="z-1 xl:max-w-2xl self-stretch flex flex-col justify-around gap-4">
+          <div className="flex-3 flex flex-col gap-4 justify-end">
+            {/* Title */}
+            <h3 className="font-bold font-retro text-3xl md:text-4xl xl:text-5xl text-theme-red-600 dark:text-theme-red-200">
+              {repository ? (
+                <Link
+                  href={repository.url}
                   target="_blank"
-                  variant="warn"
-                  className="text-center md:text-lg px-2 font-bold"
+                  className="text-theme-red-400"
                 >
-                  <ScrambledText>{t(`links.${link.key}.title`)}</ScrambledText>
-                </Button>
-              </li>
-            ))}
-          </ul>
+                  <ScrambledText>{`${title}`}</ScrambledText>
+                </Link>
+              ) : (
+                `${title}`
+              )}
+            </h3>
+
+            {/* Skills */}
+            {projectSkillCategories.length && (
+              <ul className="flex flex-wrap gap-3 group">
+                {projectSkillCategories.map((skillCategory) =>
+                  skillCategory.skills.map((skill, i) => (
+                    <li key={i}>
+                      <Link
+                        href={{
+                          pathname: '/',
+                          hash: `skillCategory:${skillCategory.key}`,
+                        }}
+                      >
+                        <Skill skill={skill} skillCategory={skillCategory} />
+                      </Link>
+                    </li>
+                  )),
+                )}
+              </ul>
+            )}
+
+            {/* Links */}
+            {links?.length && (
+              <ul className="flex flex-wrap gap-2">
+                {links?.map((link, i) => (
+                  <li key={i}>
+                    <Button
+                      as="a"
+                      href={link.url}
+                      target="_blank"
+                      variant="warn"
+                      className="text-center md:text-lg px-2 font-bold"
+                    >
+                      <ScrambledText>
+                        {t(`links.${link.key}.title`)}
+                      </ScrambledText>
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+
+          <div className="flex-2">
+            {/* Description */}
+            <Typewriter
+              paused={!inView}
+              duration={2000}
+              className="font-bold text-sm md:text-base"
+            >
+              {description}
+            </Typewriter>
+          </div>
         </div>
       </div>
     </div>

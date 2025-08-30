@@ -16,7 +16,7 @@ const projects: ProjectType[] = [
   {
     title: 'Personal Website',
     description:
-      'This website, inspired by retro video games, was built to showcase projects and skills and includes a personal blog.',
+      'This website, inspired by retro video games, was built to showcase projects and skills and includes a personal blog',
     promo: {
       path: '/videos/projects/480p/personal-website.mp4',
       type: 'video',
@@ -76,7 +76,7 @@ const projects: ProjectType[] = [
   {
     title: 'Scotty the T. rex',
     description:
-      'Interactive 3D model viewer of the skull of Scotty the T. rex exhibited on a touchscreen at the Saskatchewan Royal Museum.',
+      'Interactive 3D model viewer of the skull of Scotty the T. rex exhibited on a touchscreen at the Saskatchewan Royal Museum',
     promo: {
       path: '/videos/projects/480p/rsm-scotty.mp4',
       type: 'video',
