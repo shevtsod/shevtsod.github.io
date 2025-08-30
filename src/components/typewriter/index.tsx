@@ -20,25 +20,32 @@ export default function Typewriter({
 }: TypewriterProps) {
   const [counter, setCounter] = useState(0);
 
-  // Increments the count of characters to be displayed on an interval
+  // Reset counter when children change
   useEffect(() => {
-    let interval: NodeJS.Timeout;
+    setCounter(0);
+  }, [children]);
 
-    if (duration === 0 && !paused) {
+  // Increments the character counter on an interval
+  useEffect(() => {
+    if (!children.length || paused) return;
+    if (duration === 0) {
       setCounter(children.length);
-    } else {
-      interval = setInterval(() => {
-        setCounter((value) =>
-          paused ? value : Math.min(value + 1, children.length),
-        );
-      }, duration / children.length);
+      return;
     }
+
+    const interval = setInterval(() => {
+      setCounter((value) => Math.min(value + 1, children.length));
+    }, duration / children.length);
 
     return () => clearInterval(interval);
   }, [paused, duration, children]);
 
   return (
-    <span {...props} className={classNames('whitespace-pre-wrap', className)}>
+    <span
+      {...props}
+      className={classNames('whitespace-pre-wrap', className)}
+      aria-live="polite"
+    >
       {children.slice(0, counter)}
       <Caret />
     </span>
