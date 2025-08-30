@@ -15,6 +15,17 @@ export async function generateMetadata(): Promise<Metadata> {
       default: t('title'),
     },
     description: t('description'),
+    metadataBase: new URL('https://shevtsod.com'),
+    openGraph: {
+      type: 'website',
+      title: {
+        template: `｢%s｣ · ${t('title')}`,
+        default: t('title'),
+      },
+      description: t('description'),
+      siteName: t('title'),
+      images: [{ url: '/images/promo.png' }],
+    },
   };
 }
 

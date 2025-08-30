@@ -33,6 +33,8 @@ interface RawFrontmatterType {
   created?: string;
   updated?: string;
   tags?: string;
+  imageUrl?: string;
+  published?: boolean;
 }
 
 /**
@@ -40,6 +42,7 @@ interface RawFrontmatterType {
  */
 export interface FrontmatterType
   extends Omit<RawFrontmatterType, 'created' | 'updated' | 'tags'> {
+  descriptionMdx?: string;
   created?: Date;
   updated?: Date;
   tags: string[];
@@ -69,7 +72,7 @@ export const blogPosts: BlogPostType[] = (
           ...frontmatter,
           // Compile MDX in the description
           // https://mdxjs.com/guides/mdx-on-demand/
-          description:
+          descriptionMdx:
             frontmatter?.description &&
             String(
               await compile(frontmatter?.description, {
@@ -90,11 +93,9 @@ export const blogPosts: BlogPostType[] = (
     }),
   )
 )
-  // Filter certain posts outside of development
+  // Filter unpublished posts outside of development
   .filter((bp) =>
-    process.env.NODE_ENV === 'development'
-      ? true
-      : !['markdown-test'].includes(bp.slug),
+    process.env.NODE_ENV === 'development' ? true : bp.frontmatter.published,
   )
   // Sort by created date, most recent first
   .sort((a, b) => {

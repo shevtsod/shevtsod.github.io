@@ -13,6 +13,7 @@ import { Toc } from '@stefanprobst/rehype-extract-toc';
 import { format } from 'date-fns';
 import { MDXModule } from 'mdx/types';
 import { useLocale, useTranslations } from 'next-intl';
+import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import * as runtime from 'react/jsx-runtime';
@@ -42,23 +43,31 @@ export default function BlogPost({
   const t = useTranslations('app.blog.[slug].components.blog-post');
   const { theme } = useTheme();
   const {
-    frontmatter: { title, description, author, created, updated, tags },
+    frontmatter: {
+      title,
+      descriptionMdx,
+      author,
+      created,
+      updated,
+      tags,
+      imageUrl,
+    },
   } = blogPost;
-  const [descriptionMdx, setDescriptionMdx] = useState<MDXModule | undefined>(
+  const [description, setDescription] = useState<MDXModule | undefined>(
     undefined,
   );
-  const Description = descriptionMdx ? descriptionMdx.default : undefined;
+  const Description = description?.default;
 
   // https://mdxjs.com/guides/mdx-on-demand/
   useEffect(() => {
-    if (description) {
+    if (descriptionMdx) {
       (async function () {
-        setDescriptionMdx(
-          await run(description, { ...runtime, baseUrl: import.meta.url }),
+        setDescription(
+          await run(descriptionMdx, { ...runtime, baseUrl: import.meta.url }),
         );
       })();
     }
-  }, [description]);
+  }, [descriptionMdx]);
 
   // Append more headings to automatically generated table of contents
   const tableOfContents: Toc = [
@@ -73,6 +82,18 @@ export default function BlogPost({
   return (
     <article className="grow w-full max-w-3xl prose dark:prose-invert mx-auto py-8 px-4 md:px-0 flex flex-col font-sans">
       <div className="flex flex-col text-zinc-500 text-sm">
+        {imageUrl && (
+          <div className="w-full h-auto aspect-video mb-4 flex justify-center">
+            <Image
+              src={imageUrl}
+              width={1280}
+              height={720}
+              alt={t('image')}
+              className="h-full w-auto m-0!"
+            />
+          </div>
+        )}
+
         <h1 className="mb-0! font-bold text-theme-red-400 font-retro">
           {title}
         </h1>
@@ -86,7 +107,7 @@ export default function BlogPost({
         </h2>
 
         <span className="inline-flex gap-4 flex-wrap">
-          {author && (
+          {author && author !== 'shevtsod' && (
             <span>
               {t.rich('postedBy', {
                 b: (chunks) => <b>{chunks}</b>,
@@ -117,7 +138,7 @@ export default function BlogPost({
           )}
 
           {tags.length > 0 && (
-            <span className="inline-flex gap-2">
+            <span className="inline-flex gap-1">
               <Icon icon="Tag" className="w-[1em] h-auto inline-block" />
               {tags.map((tag, i) => (
                 <span key={i}>
@@ -144,7 +165,7 @@ export default function BlogPost({
               href={`/blog/${prevBlogPost.slug}`}
               className="text-theme-red-400"
             >
-              🡠 {prevBlogPost.frontmatter.title}
+              ← {prevBlogPost.frontmatter.title}
             </Link>
           )}
         </div>
@@ -165,7 +186,7 @@ export default function BlogPost({
               href={`/blog/${nextBlogPost.slug}`}
               className="text-theme-red-400"
             >
-              {nextBlogPost.frontmatter.title} 🡢
+              {nextBlogPost.frontmatter.title} →
             </Link>
           )}
         </div>
@@ -177,16 +198,6 @@ export default function BlogPost({
 
       {/* https://giscus.app/ */}
       <div className="overflow-x-auto">
-        <span className="text-sm italic">
-          {t.rich('commentsAttribution', {
-            link: () => (
-              <a href="https://giscus.app/" target="_blank">
-                giscus
-              </a>
-            ),
-          })}
-        </span>
-
         <Giscus
           id="comments"
           repo="shevtsod/shevtsod.github.io"
@@ -199,8 +210,18 @@ export default function BlogPost({
           inputPosition="top"
           theme={theme}
           lang={locale}
-          loading="lazy"
+          loading="eager"
         />
+
+        <div className="text-sm italic text-right">
+          {t.rich('commentsAttribution', {
+            link: () => (
+              <a href="https://giscus.app/" target="_blank">
+                giscus
+              </a>
+            ),
+          })}
+        </div>
       </div>
     </article>
   );

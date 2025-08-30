@@ -23,7 +23,9 @@ const eslintConfig = [
       '@typescript-eslint/no-unused-vars': [
         'warn',
         {
+          argsIgnorePattern: '^_',
           caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
         },
       ],
     },

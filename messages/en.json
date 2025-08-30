@@ -166,14 +166,16 @@
         "components": {
           "blog-post": {
             "backToBlog": "Back to Blog",
-            "postedBy": "By <b>{author}</b>",
-            "readingTime": "{minutes} minute read",
             "comments": "Comments",
-            "commentsAttribution": "Comments powered by <link></link>"
+            "commentsAttribution": "Comments powered by <link></link>",
+            "image": "Article image",
+            "postedBy": "By <b>{author}</b>",
+            "readingTime": "{minutes} minute read"
           }
         },
         "page": {
-          "title": "Blog Post"
+          "title": "Blog Post",
+          "description": "Blog post description"
         }
       },
       "components": {

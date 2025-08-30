@@ -16,10 +16,19 @@ export async function generateMetadata({
   const t = await getTranslations('app.blog.[slug].page');
   const { slug } = await params;
   const blogPost = blogPosts.find((post) => post.slug === slug);
+  const frontmatter = blogPost?.frontmatter;
+  const title = frontmatter?.title ?? t('title');
+  const description = frontmatter?.description ?? t('description');
 
   return {
-    title: blogPost?.frontmatter.title ?? t('title'),
-    description: blogPost?.frontmatter.description,
+    title,
+    description,
+    openGraph: {
+      type: 'article',
+      title,
+      description,
+      images: [{ url: frontmatter?.imageUrl ?? '/images/promo.png' }],
+    },
   };
 }
 

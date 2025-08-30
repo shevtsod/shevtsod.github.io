@@ -34,7 +34,7 @@ export default function BlogPostCard({
     <Link {...props} href={`/blog/${slug}`} className="group">
       <div className="text-sm my-4 font-sans">
         <div className="flex flex-row">
-          <div className="text-right flex-1 self-center text-9xl italic font-pixel mr-4 text-zinc-400 dark:text-zinc-900 group-hover:text-gray-400 dark:group-hover:text-zinc-800">
+          <div className="text-right flex-1 self-center text-8xl md:text-9xl italic font-pixel mr-4 text-zinc-400 dark:text-zinc-900 group-hover:text-gray-400 dark:group-hover:text-zinc-800">
             {index}
           </div>
 
@@ -44,7 +44,7 @@ export default function BlogPostCard({
             </h1>
 
             <span className="inline-flex gap-4 flex-wrap">
-              {author && (
+              {author && author !== 'shevtsod' && (
                 <span>
                   {t.rich('postedBy', {
                     b: (chunks) => <b>{chunks}</b>,
@@ -68,7 +68,7 @@ export default function BlogPostCard({
               )}
 
               {tags.length > 0 && (
-                <span className="inline-flex gap-2\">
+                <span className="inline-flex gap-1">
                   <Icon icon="Tag" className="w-[1em] h-auto inline-block" />
                   {tags.map((tag, i) => (
                     <span key={i}>

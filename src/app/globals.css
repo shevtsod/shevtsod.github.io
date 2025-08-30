@@ -99,7 +99,7 @@
 
   /* quoted text */
   blockquote {
-    @apply px-2 py-4 bg-blue-100 dark:bg-gray-800;
+    @apply px-2 py-4 bg-blue-300/50 dark:bg-gray-700/50;
 
     p {
       @apply my-0 not-italic font-normal;
