@@ -38,7 +38,7 @@ export default function BlogPost({
   const t = useTranslations('app.blog.[slug].components.blog-post');
   const { theme } = useTheme();
   const { scrollY } = useScroll();
-  const invertedHalfScrollY = useTransform(scrollY, (val) => val * -0.5);
+  const invertedHalfScrollY = useTransform(scrollY, (val) => val * -0.5 - 400);
   const { frontmatter } = blogPost;
   const { imageUrl } = frontmatter;
 
@@ -46,7 +46,7 @@ export default function BlogPost({
     <article className="grow font-sans flex flex-col">
       {/* Image */}
       {imageUrl && (
-        <div className="relative w-full max-h-84">
+        <div className="relative w-full max-h-96">
           {/* Background blur */}
           <motion.div
             className="absolute h-full w-full bg-cover opacity-25"
@@ -62,12 +62,12 @@ export default function BlogPost({
             width={1280}
             height={720}
             alt={t('image')}
-            className="z-1 w-full h-auto max-h-84 object-contain backdrop-blur-xl"
+            className="z-1 w-full h-auto max-h-96 object-contain backdrop-blur-xl"
           />
         </div>
       )}
 
-      <div className="flex-1  w-full max-w-3xl mx-auto my-8 px-4 md:px-0 flex flex-col">
+      <div className="flex-1 w-full max-w-3xl mx-auto my-8 px-4 md:px-0 flex flex-col">
         {/* Metadata */}
         <BlogPostMetadata
           frontmatter={frontmatter}
@@ -76,7 +76,7 @@ export default function BlogPost({
         />
 
         {/* Content */}
-        <div className="stretch grow-1 w-full prose dark:prose-invert">
+        <div className="stretch grow-1 w-full prose dark:prose-invert max-w-3xl">
           {children}
         </div>
 
