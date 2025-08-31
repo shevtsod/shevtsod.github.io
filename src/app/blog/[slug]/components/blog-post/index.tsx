@@ -83,15 +83,13 @@ export default function BlogPost({
     <article className="grow w-full max-w-3xl prose dark:prose-invert mx-auto py-8 px-4 md:px-0 flex flex-col font-sans">
       <div className="flex flex-col text-zinc-500 text-sm">
         {imageUrl && (
-          <div className="w-full h-auto aspect-video mb-4 flex justify-center">
-            <Image
-              src={imageUrl}
-              width={1280}
-              height={720}
-              alt={t('image')}
-              className="h-full w-auto m-0!"
-            />
-          </div>
+          <Image
+            src={imageUrl}
+            width={1280}
+            height={720}
+            alt={t('image')}
+            className="w-full h-auto max-h-64 object-contain mt-0! mb-6!"
+          />
         )}
 
         <h1 className="mb-0! font-bold text-theme-red-400 font-retro">
@@ -163,30 +161,36 @@ export default function BlogPost({
           {prevBlogPost && (
             <Link
               href={`/blog/${prevBlogPost.slug}`}
-              className="text-theme-red-400"
+              className="text-theme-red-400 flex justify-center items-center"
             >
-              ← {prevBlogPost.frontmatter.title}
+              <Icon
+                icon="ArrowDown"
+                className="shrink-0 h-4 w-auto rotate-90"
+              />
+              <span className="flex-1">{prevBlogPost.frontmatter.title}</span>
             </Link>
           )}
         </div>
 
-        <div>
-          <Button
-            as={Link}
-            href="/blog"
-            className="h-full w-full flex items-center justify-center"
-          >
-            <ScrambledText className="block">{t('backToBlog')}</ScrambledText>
-          </Button>
-        </div>
+        <Button
+          as={Link}
+          href="/blog"
+          className="h-full w-full flex items-center justify-center"
+        >
+          <ScrambledText className="block">{t('backToBlog')}</ScrambledText>
+        </Button>
 
         <div>
           {nextBlogPost && (
             <Link
               href={`/blog/${nextBlogPost.slug}`}
-              className="text-theme-red-400"
+              className="text-theme-red-400 flex justify-center items-center"
             >
-              {nextBlogPost.frontmatter.title} →
+              <span className="flex-1">{nextBlogPost.frontmatter.title}</span>
+              <Icon
+                icon="ArrowDown"
+                className="shrink-0 h-4 w-auto rotate-270"
+              />
             </Link>
           )}
         </div>
