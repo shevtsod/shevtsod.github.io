@@ -1,4 +1,4 @@
-import { blogPosts } from '@/utils/blog';
+import { blogPosts, MdxModuleExports } from '@/utils/blog';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -57,7 +57,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     default: Component,
     tableOfContents,
     readingTime,
-  } = await import(`../../../content/blog/${filename}`);
+  }: MdxModuleExports = await import(`../../../content/blog/${filename}`);
 
   return (
     <BlogPost

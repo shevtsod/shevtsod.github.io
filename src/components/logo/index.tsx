@@ -85,7 +85,7 @@ export default function Logo({
         src={src}
         height={16}
         width={16}
-        alt="Logo"
+        alt=""
         className={classNames('image-pixelated', className)}
         {...props}
       />

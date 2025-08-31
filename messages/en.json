@@ -168,9 +168,7 @@
             "backToBlog": "Back to Blog",
             "comments": "Comments",
             "commentsAttribution": "Comments powered by <link></link>",
-            "image": "Article image",
-            "postedBy": "By <b>{author}</b>",
-            "readingTime": "{minutes} minute read"
+            "image": "Article image"
           }
         },
         "page": {
@@ -179,10 +177,24 @@
         }
       },
       "components": {
-        "blog-posts": {
-          "blog-post-card": {
-            "postedBy": "By <b>{author}</b>",
-            "readingTime": "{minutes} minute read"
+        "blog-post-metadata": {
+          "author": {
+            "title": "Author",
+            "text": "By <b>{author}</b>"
+          },
+          "comments": "Comments",
+          "created": {
+            "title": "Creation Date"
+          },
+          "readingTime": {
+            "title": "Reading time",
+            "text": "{minutes} minute read"
+          },
+          "tags": {
+            "title": "Tags"
+          },
+          "updated": {
+            "title": "Last Update Date"
           }
         }
       },

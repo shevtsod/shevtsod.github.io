@@ -1,8 +1,19 @@
 import { UTCDate } from '@date-fns/utc';
 import { compile } from '@mdx-js/mdx';
+import { Toc } from '@stefanprobst/rehype-extract-toc';
 import { compareDesc, parse } from 'date-fns';
 import { readdir } from 'fs/promises';
 import { basename, extname, join } from 'path';
+import { ComponentType } from 'react';
+
+/**
+ * Exports of an MDX module
+ */
+export interface MdxModuleExports {
+  default: ComponentType;
+  tableOfContents: Toc;
+  readingTime: ReadingTime;
+}
 
 /**
  * Represents the estimated reading time for a blog post.

@@ -1,5 +1,5 @@
 import { BlogPostType } from '@/utils/blog';
-import BlogPostCard from './blog-post-card';
+import BlogPostCard from '../blog-post-card';
 
 export interface BlogPostsProps {
   blogPosts: BlogPostType[];

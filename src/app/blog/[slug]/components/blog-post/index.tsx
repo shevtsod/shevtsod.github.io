@@ -6,19 +6,13 @@ import ScrambledText from '@/components/scrambled-text';
 import { useTheme } from '@/components/theme';
 import { CustomH } from '@/mdx-components';
 import type { BlogPostType, ReadingTime } from '@/utils/blog';
-import { UTCDate } from '@date-fns/utc';
 import Giscus from '@giscus/react';
-import { run } from '@mdx-js/mdx';
 import { Toc } from '@stefanprobst/rehype-extract-toc';
-import { format } from 'date-fns';
-import { MDXModule } from 'mdx/types';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
-import * as runtime from 'react/jsx-runtime';
-import TableOfContents from '../table-of-contents';
+import BlogPostMetadata from '../../../components/blog-post-metadata';
 
 export interface BlogPostProps {
   children: React.ReactNode;
@@ -36,56 +30,20 @@ export default function BlogPost({
   children,
   blogPost,
   readingTime,
-  tableOfContents: originalTableOfContents,
+  tableOfContents,
   prevBlogPost,
   nextBlogPost,
 }: BlogPostProps) {
   const locale = useLocale();
   const t = useTranslations('app.blog.[slug].components.blog-post');
   const { theme } = useTheme();
-
   const { scrollY } = useScroll();
-  const halfScrollY = useTransform(scrollY, (val) => val * 0.5 - 200);
-
-  const {
-    frontmatter: {
-      title,
-      descriptionMdx,
-      author,
-      created,
-      updated,
-      tags,
-      imageUrl,
-    },
-  } = blogPost;
-  const [description, setDescription] = useState<MDXModule | undefined>(
-    undefined,
-  );
-  const Description = description?.default;
-
-  // https://mdxjs.com/guides/mdx-on-demand/
-  useEffect(() => {
-    if (descriptionMdx) {
-      (async function () {
-        setDescription(
-          await run(descriptionMdx, { ...runtime, baseUrl: import.meta.url }),
-        );
-      })();
-    }
-  }, [descriptionMdx]);
-
-  // Append more headings to automatically generated table of contents
-  const tableOfContents: Toc = [
-    ...originalTableOfContents,
-    {
-      depth: 1,
-      value: t('comments'),
-      id: 'comments',
-    },
-  ];
+  const invertedHalfScrollY = useTransform(scrollY, (val) => val * -0.5);
+  const { frontmatter } = blogPost;
+  const { imageUrl } = frontmatter;
 
   return (
-    <article className="grow font-sans">
+    <article className="grow font-sans flex flex-col">
       {/* Image */}
       {imageUrl && (
         <div className="relative w-full max-h-84">
@@ -94,7 +52,7 @@ export default function BlogPost({
             className="absolute h-full w-full bg-cover opacity-25"
             style={{
               backgroundImage: `url('${imageUrl}')`,
-              backgroundPositionY: halfScrollY,
+              backgroundPositionY: invertedHalfScrollY,
             }}
             transition={{ ease: 'linear' }}
           />
@@ -109,75 +67,18 @@ export default function BlogPost({
         </div>
       )}
 
-      <div className="w-full max-w-3xl prose dark:prose-invert mx-auto my-8 px-4 md:px-0 flex flex-col">
+      <div className="flex-1  w-full max-w-3xl mx-auto my-8 px-4 md:px-0 flex flex-col">
         {/* Metadata */}
-        <div className="flex flex-col text-zinc-500 text-sm">
-          <h1 className="mb-0! font-bold text-theme-red-400 font-retro">
-            {title}
-          </h1>
-
-          <h2 className="prose-xl text-inherit my-4!">
-            {Description ? (
-              <Description />
-            ) : (
-              <p className="h-8 w-full rounded bg-theme-gray-100 dark:bg-theme-gray-600" />
-            )}
-          </h2>
-
-          <span className="inline-flex gap-4 flex-wrap">
-            {author && author !== 'shevtsod' && (
-              <span>
-                {t.rich('postedBy', {
-                  b: (chunks) => <b>{chunks}</b>,
-                  author,
-                })}
-              </span>
-            )}
-
-            {readingTime && (
-              <span className="inline-flex gap-2">
-                <Icon icon="Clock" className="w-[1em] h-auto inline-block" />
-                {t('readingTime', {
-                  minutes: Math.ceil(readingTime.minutes),
-                })}
-              </span>
-            )}
-
-            {created && (
-              <span className="inline-flex gap-2">
-                <Icon icon="Plus" className="w-[1em] h-auto inline-block" />
-                {format(new UTCDate(created), 'PP')}
-              </span>
-            )}
-
-            {updated && (
-              <span className="inline-flex gap-2">
-                <Icon icon="Pencil" className="w-[1em] h-auto inline-block" />
-                {format(new UTCDate(updated), 'PP')}
-              </span>
-            )}
-
-            {tags.length > 0 && (
-              <span className="inline-flex gap-1">
-                <Icon icon="Tag" className="w-[1em] h-auto inline-block" />
-                {tags.map((tag, i) => (
-                  <span key={i}>
-                    {tag}
-                    {i < tags.length - 1 && <span>, </span>}
-                  </span>
-                ))}
-              </span>
-            )}
-          </span>
-
-          {/* Table of Contents */}
-          <div className="my-4">
-            <TableOfContents tableOfContents={tableOfContents} />
-          </div>
-        </div>
+        <BlogPostMetadata
+          frontmatter={frontmatter}
+          readingTime={readingTime}
+          tableOfContents={tableOfContents}
+        />
 
         {/* Content */}
-        <div className="stretch grow-1 w-full">{children}</div>
+        <div className="stretch grow-1 w-full prose dark:prose-invert">
+          {children}
+        </div>
 
         {/* Links */}
         <div className="my-4 flex gap-2 justify-between items-center text-center [&>*]:flex-1">
@@ -185,7 +86,7 @@ export default function BlogPost({
             {prevBlogPost && (
               <Link
                 href={`/blog/${prevBlogPost.slug}`}
-                className="text-theme-red-400 flex justify-center items-center"
+                className="text-theme-red-400 underline flex justify-center items-center"
               >
                 <Icon
                   icon="ArrowDown"
@@ -208,7 +109,7 @@ export default function BlogPost({
             {nextBlogPost && (
               <Link
                 href={`/blog/${nextBlogPost.slug}`}
-                className="text-theme-red-400 flex justify-center items-center"
+                className="text-theme-red-400 underline flex justify-center items-center"
               >
                 <span className="flex-1">{nextBlogPost.frontmatter.title}</span>
                 <Icon
@@ -245,9 +146,13 @@ export default function BlogPost({
           <div className="text-sm italic text-right">
             {t.rich('commentsAttribution', {
               link: () => (
-                <a href="https://giscus.app/" target="_blank">
+                <Link
+                  href="https://giscus.app/"
+                  target="_blank"
+                  className="text-theme-red-400 underline"
+                >
                   giscus
-                </a>
+                </Link>
               ),
             })}
           </div>
