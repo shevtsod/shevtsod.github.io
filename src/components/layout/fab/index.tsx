@@ -19,7 +19,7 @@ const SCROLL_THRESHOLD = 50;
  * Renders a floating action button (FAB).
  */
 export default function Fab<T extends ElementType = 'button'>({
-  as,
+  as = 'button',
   showOnScroll = false,
   onClick,
   className,

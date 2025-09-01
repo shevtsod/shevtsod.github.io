@@ -21,18 +21,23 @@ export default function BlogPromo({ className, ...props }: BlogPromoProps) {
   useFadeInView(ref, { once: true, skip: !intro });
 
   return (
-    <div {...props} ref={ref} className={classNames('pt-12 pb-8', className)}>
-      <div className="container mx-auto px-8 text-center md:text-lg lg:text-xl font-bold">
-        <Link href="/blog">
-          {t.rich('callout', {
-            blog: () => (
-              <Button className="px-1 py-0.5 cursor-pointer">
-                <ScrambledText>{t('blog')}</ScrambledText>
-              </Button>
-            ),
-          })}
-        </Link>
-      </div>
+    <div
+      {...props}
+      ref={ref}
+      className={classNames(
+        'my-8 container mx-auto px-8 text-center md:text-lg lg:text-xl font-bold',
+        className,
+      )}
+    >
+      <Link href="/blog">
+        {t.rich('callout', {
+          blog: () => (
+            <Button className="px-1 py-0.5 cursor-pointer">
+              <ScrambledText>{t('blog')}</ScrambledText>
+            </Button>
+          ),
+        })}
+      </Link>
     </div>
   );
 }

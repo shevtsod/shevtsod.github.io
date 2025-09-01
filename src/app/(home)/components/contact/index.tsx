@@ -157,17 +157,19 @@ export default function Contact<T extends ElementType>({
           </Button>
 
           {/* Feedback */}
-          <div className="font-retro font-bold md:text-lg">
-            {Object.entries(errors).map(([key, error]) => (
-              <p key={key} className="text-theme-red-400">
-                ⨉ {error.message}
-              </p>
-            ))}
+          {(isSubmitSuccessful || Object.entries(errors).length > 0) && (
+            <div className="font-retro text-lg md:text-xl">
+              {Object.entries(errors).map(([key, error]) => (
+                <p key={key} className="text-theme-red-400">
+                  ⨉ {error.message}
+                </p>
+              ))}
 
-            {isSubmitSuccessful && (
-              <p className="text-theme-blue-200">◯ {t('form.submitted')}</p>
-            )}
-          </div>
+              {isSubmitSuccessful && (
+                <p className="text-theme-blue-200">◯ {t('form.submitted')}</p>
+              )}
+            </div>
+          )}
         </div>
       </form>
 
@@ -215,7 +217,7 @@ export function InputLabel({
 export type InputProps<T extends ElementType> = PolymorphicComponentProps<T>;
 
 export function Input<T extends ElementType>({
-  as,
+  as = 'input',
   className,
   ...props
 }: InputProps<T>) {

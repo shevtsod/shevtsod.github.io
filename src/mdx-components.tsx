@@ -12,7 +12,7 @@ import {
 export type CustomHProps<T extends ElementType> = PolymorphicComponentProps<T>;
 
 export function CustomH<T extends ElementType>({
-  as,
+  as = 'h1',
   id,
   className,
   ...props

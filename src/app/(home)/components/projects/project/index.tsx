@@ -26,9 +26,7 @@ export default function Project({
 }: ProjectProps) {
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const isNearMiddle = useInView(ref, {
-    margin: '-50% 0px -50% 0px',
-  });
+  const isNearMiddle = useInView(ref, { margin: '-50% 0px -50% 0px' });
   const t = useTranslations('app.(home).components.projects.project');
   const isInView = useFadeInView(ref, {
     once: true,

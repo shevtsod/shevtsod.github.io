@@ -8,7 +8,7 @@ import styles from './button.module.css';
 
 type ButtonVariant = 'success' | 'info' | 'warn' | null;
 
-export type ButtonProps<T extends ElementType = 'button'> = {
+export type ButtonProps<T extends ElementType> = {
   active?: boolean;
   variant?: ButtonVariant;
 } & PolymorphicComponentProps<T>;
@@ -16,8 +16,8 @@ export type ButtonProps<T extends ElementType = 'button'> = {
 /**
  * Custom-styled wrapper for buttons and links.
  */
-export default function Button<T extends ElementType = 'button'>({
-  as,
+export default function Button<T extends ElementType>({
+  as = 'button',
   active,
   className,
   children,
