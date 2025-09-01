@@ -3,9 +3,9 @@
 import Icon, { IconKey } from '@/components/icon';
 import { useTheme } from '@/components/theme';
 import classNames from 'classnames';
-import { HTMLAttributes } from 'react';
+import { ComponentProps } from 'react';
 
-export interface ThemeSwitchProps extends HTMLAttributes<HTMLButtonElement> {}
+export interface ThemeSwitchProps extends ComponentProps<'button'> {}
 
 /**
  * Renders a button that changes the current theme when clicked.

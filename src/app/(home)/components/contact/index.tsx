@@ -1,18 +1,17 @@
 'use client';
 
 import Button from '@/components/button';
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+} from '@/components/polymorphic-component';
 import ScrambledText from '@/components/scrambled-text';
 import useFadeInView from '@/hooks/use-fade-in-view';
 import { useIntro } from '@/hooks/use-intro';
 import { zodResolver } from '@hookform/resolvers/zod';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
-import React, {
-  type ComponentPropsWithoutRef,
-  type ElementType,
-  HTMLAttributes,
-  useRef,
-} from 'react';
+import React, { ComponentProps, ElementType, useRef } from 'react';
 import { type FieldError, type SubmitHandler, useForm } from 'react-hook-form';
 import z from 'zod';
 import BlogPromo from './blog-promo';
@@ -20,9 +19,7 @@ import Codec from './codec';
 import CodecCall from './codec-call';
 import styles from './contact.module.css';
 
-export type ContactProps<T extends ElementType> = {
-  as?: T;
-} & ComponentPropsWithoutRef<T>;
+export type ContactProps<T extends ElementType> = PolymorphicComponentProps<T>;
 
 const formSchema = z.object({
   name: z.string().min(1).max(64),
@@ -40,7 +37,6 @@ export default function Contact<T extends ElementType>({
   className,
   ...props
 }: ContactProps<T>) {
-  const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.contact');
   const formRef = useRef(null);
   const [intro] = useIntro();
@@ -85,7 +81,8 @@ export default function Contact<T extends ElementType>({
   };
 
   return (
-    <Component
+    <PolymorphicComponent
+      as={as}
       {...props}
       className={classNames(
         'dark relative dark:bg-black dark:text-white',
@@ -186,11 +183,11 @@ export default function Contact<T extends ElementType>({
       {formInView && intro && (
         <CodecCall className="absolute top-0 left-0 h-full w-full" />
       )}
-    </Component>
+    </PolymorphicComponent>
   );
 }
 
-export interface InputLabelProps extends HTMLAttributes<HTMLLabelElement> {
+export interface InputLabelProps extends ComponentProps<'label'> {
   error?: FieldError;
   children?: React.ReactNode;
 }
@@ -215,20 +212,17 @@ export function InputLabel({
   );
 }
 
-export type InputProps<T extends ElementType> = {
-  as?: T;
-} & ComponentPropsWithoutRef<T>;
+export type InputProps<T extends ElementType> = PolymorphicComponentProps<T>;
 
 export function Input<T extends ElementType>({
   as,
   className,
   ...props
 }: InputProps<T>) {
-  const Component = as ?? 'input';
-
   return (
-    <Component
+    <PolymorphicComponent
       {...props}
+      as={as}
       className={classNames(
         'bg-theme-gray-200/25 dark:bg-theme-gray-800/50 md:text-lg font-bold w-full py-2 px-8 rounded-none outline-none',
         className,

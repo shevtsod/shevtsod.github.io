@@ -1,23 +1,19 @@
 'use client';
 
 import Icon from '@/components/icon';
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+} from '@/components/polymorphic-component';
 import Typewriter from '@/components/typewriter';
 import { useIntro } from '@/hooks/use-intro';
 import classNames from 'classnames';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useTranslations } from 'next-intl';
-import {
-  type ComponentPropsWithoutRef,
-  type ElementType,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import { type ElementType, useEffect, useRef, useState } from 'react';
 import styles from './hero.module.css';
 
-export type HeroProps<T extends ElementType> = {
-  as?: T;
-} & ComponentPropsWithoutRef<T>;
+export type HeroProps<T extends ElementType> = PolymorphicComponentProps<T>;
 
 /**
  * Renders the hero section.
@@ -27,7 +23,6 @@ export default function Hero<T extends ElementType>({
   className,
   ...props
 }: HeroProps<T>) {
-  const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.hero');
   const [subtitlePaused, setSubtitlePaused] = useState(true);
   const [intro] = useIntro();
@@ -53,8 +48,9 @@ export default function Hero<T extends ElementType>({
   );
 
   return (
-    <Component
+    <PolymorphicComponent
       {...props}
+      as={as}
       ref={scrollRef}
       className={classNames(
         'container mx-auto relative flex flex-col justify-center text-center overflow-hidden',
@@ -106,6 +102,6 @@ export default function Hero<T extends ElementType>({
           viewBox="0 0 16 16"
         />
       </motion.div>
-    </Component>
+    </PolymorphicComponent>
   );
 }

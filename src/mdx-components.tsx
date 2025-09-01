@@ -3,11 +3,13 @@ import { YouTubeEmbed } from '@next/third-parties/google';
 import classNames from 'classnames';
 import type { MDXComponents } from 'mdx/types';
 import Link from 'next/link';
-import { ComponentPropsWithoutRef, ElementType } from 'react';
+import { ElementType } from 'react';
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+} from './components/polymorphic-component';
 
-export type CustomHProps<T extends ElementType> = {
-  as?: T;
-} & ComponentPropsWithoutRef<T>;
+export type CustomHProps<T extends ElementType> = PolymorphicComponentProps<T>;
 
 export function CustomH<T extends ElementType>({
   as,
@@ -15,8 +17,6 @@ export function CustomH<T extends ElementType>({
   className,
   ...props
 }: CustomHProps<T>) {
-  const Component = as ?? 'h1';
-
   return (
     <Link
       href={`#${id}`}
@@ -25,7 +25,12 @@ export function CustomH<T extends ElementType>({
         className,
       )}
     >
-      <Component id={id} className="scroll-mt-22" {...props} />
+      <PolymorphicComponent
+        {...props}
+        as={as}
+        id={id}
+        className="scroll-mt-22"
+      />
       <Icon
         icon="Link"
         className="w-6 h-auto opacity-0 group-hover:opacity-100 ease-[steps(2,end)] duration-200"

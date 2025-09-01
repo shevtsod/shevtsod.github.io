@@ -1,5 +1,4 @@
 .caret {
-  -webkit-animation: blink 1s steps(3, end) infinite both;
   animation: blink 1s steps(3, end) infinite both;
 }
 

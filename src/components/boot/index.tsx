@@ -5,7 +5,7 @@ import Logo from '@/components/logo';
 import useTitle from '@/hooks/use-title';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
-import { useEffect, useMemo, useState } from 'react';
+import { ComponentProps, useEffect, useMemo, useState } from 'react';
 
 const messages = (
   <>
@@ -53,7 +53,7 @@ const messages = (
   </>
 );
 
-export interface BootProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface BootProps extends ComponentProps<'div'> {
   /**
    * Boot animation duration
    */

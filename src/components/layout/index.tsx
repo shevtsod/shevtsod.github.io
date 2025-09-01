@@ -5,12 +5,12 @@ import { useTheme } from '@/components/theme';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { useEffect, useState } from 'react';
+import { ComponentProps, useEffect, useState } from 'react';
 import Fab from './fab';
 import Footer from './footer';
 import Header from './header';
 
-export interface LayoutProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface LayoutProps extends ComponentProps<'div'> {
   children?: React.ReactNode;
   header?: boolean;
   footer?: boolean;

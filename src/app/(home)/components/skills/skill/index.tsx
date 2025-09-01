@@ -2,9 +2,9 @@ import Icon from '@/components/icon';
 import { SkillCategoryType, SkillType } from '@/content/skills';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
-import { HTMLAttributes } from 'react';
+import { ComponentProps } from 'react';
 
-export interface SkillProps extends HTMLAttributes<HTMLSpanElement> {
+export interface SkillProps extends ComponentProps<'span'> {
   skill: SkillType;
   skillCategory: SkillCategoryType;
 }

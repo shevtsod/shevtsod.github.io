@@ -2,11 +2,11 @@ import logoInIcon from '@/../public/images/ui/logo-in.webp';
 import logoRotateIcon from '@/../public/images/ui/logo-rotate.gif';
 import logoIcon from '@/../public/images/ui/logo.webp';
 import classNames from 'classnames';
-import { useEffect, useRef, useState } from 'react';
+import { ComponentProps, useEffect, useRef, useState } from 'react';
 
 const DURATION_ROTATE = 3.4;
 
-export interface LogoProps extends React.ImgHTMLAttributes<HTMLImageElement> {
+export interface LogoProps extends ComponentProps<'img'> {
   shown?: boolean;
   animated?: boolean;
 }
@@ -82,12 +82,12 @@ export default function Logo({
     shown && (
       // eslint-disable-next-line @next/next/no-img-element
       <img
+        {...props}
         src={src}
         height={16}
         width={16}
         alt=""
         className={classNames('image-pixelated', className)}
-        {...props}
       />
     )
   );

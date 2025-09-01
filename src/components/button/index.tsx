@@ -1,19 +1,22 @@
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+} from '@/components/polymorphic-component';
 import classNames from 'classnames';
-import { type ComponentPropsWithoutRef, type ElementType } from 'react';
+import { type ElementType } from 'react';
 import styles from './button.module.css';
 
 type ButtonVariant = 'success' | 'info' | 'warn' | null;
 
-export type ButtonProps<T extends ElementType> = {
-  as?: T;
+export type ButtonProps<T extends ElementType = 'button'> = {
   active?: boolean;
   variant?: ButtonVariant;
-} & ComponentPropsWithoutRef<T>;
+} & PolymorphicComponentProps<T>;
 
 /**
  * Custom-styled wrapper for buttons and links.
  */
-export default function Button<T extends ElementType>({
+export default function Button<T extends ElementType = 'button'>({
   as,
   active,
   className,
@@ -21,11 +24,10 @@ export default function Button<T extends ElementType>({
   variant,
   ...props
 }: ButtonProps<T>) {
-  const Component = as ?? 'button';
-
   return (
-    <Component
+    <PolymorphicComponent
       {...props}
+      as={as}
       className={classNames(
         'px-0.5 border-4 no-underline',
         { active },
@@ -35,6 +37,6 @@ export default function Button<T extends ElementType>({
       )}
     >
       {children}
-    </Component>
+    </PolymorphicComponent>
   );
 }

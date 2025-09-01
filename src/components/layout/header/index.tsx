@@ -1,6 +1,7 @@
 'use client';
 
 import Button, { type ButtonProps } from '@/components/button';
+import Icon from '@/components/icon';
 import Logo from '@/components/logo';
 import ScrambledText from '@/components/scrambled-text';
 import classNames from 'classnames';
@@ -15,13 +16,12 @@ import { useTranslations } from 'next-intl';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import Icon from '../../icon';
+import { ComponentProps, useEffect, useState } from 'react';
 
 // Scrolled pixels when Header is shown
 const SCROLL_THRESHOLD = 50;
 
-export interface HeaderProps extends React.HTMLAttributes<HTMLElement> {
+export interface HeaderProps extends ComponentProps<'header'> {
   showOnScroll?: boolean;
   showProgress?: boolean;
   animatedLogo?: boolean;
@@ -124,8 +124,12 @@ export default function Header({
           ))}
 
           {/* GitHub link */}
-          <Link href="https://github.com/shevtsod" target="_blank">
-            <Icon icon="Github" className="h-6 md:h-8" />
+          <Link
+            href="https://github.com/shevtsod"
+            target="_blank"
+            className="h-6 md:h-8"
+          >
+            <Icon icon="Github" className="h-full w-auto" />
           </Link>
 
           <ThemeSwitch className="h-6! md:h-8!" />

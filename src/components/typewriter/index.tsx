@@ -1,8 +1,8 @@
 import Caret from '@/components/caret';
 import classNames from 'classnames';
-import { useEffect, useState } from 'react';
+import { ComponentProps, useEffect, useState } from 'react';
 
-export interface TypewriterProps extends React.HTMLAttributes<HTMLSpanElement> {
+export interface TypewriterProps extends ComponentProps<'span'> {
   children: string;
   duration?: number;
   paused?: boolean;

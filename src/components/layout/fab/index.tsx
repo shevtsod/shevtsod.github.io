@@ -1,13 +1,16 @@
 'use client';
 
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+} from '@/components/polymorphic-component';
 import classNames from 'classnames';
 import { useMotionValueEvent, useScroll } from 'motion/react';
-import { ComponentPropsWithoutRef, ElementType, useState } from 'react';
+import { ElementType, useState } from 'react';
 
-export type FabProps<T extends ElementType> = {
-  as?: T;
+export type FabProps<T extends ElementType = 'button'> = {
   showOnScroll?: boolean;
-} & ComponentPropsWithoutRef<T>;
+} & PolymorphicComponentProps<T>;
 
 // Scrolled pixels when FAB is shown
 const SCROLL_THRESHOLD = 50;
@@ -15,7 +18,7 @@ const SCROLL_THRESHOLD = 50;
 /**
  * Renders a floating action button (FAB).
  */
-export default function Fab<T extends ElementType>({
+export default function Fab<T extends ElementType = 'button'>({
   as,
   showOnScroll = false,
   onClick,
@@ -23,7 +26,6 @@ export default function Fab<T extends ElementType>({
   children,
   ...props
 }: FabProps<T>) {
-  const Component = as ?? 'button';
   const { scrollY } = useScroll();
   const [shown, setShown] = useState(!showOnScroll);
 
@@ -37,7 +39,8 @@ export default function Fab<T extends ElementType>({
   });
 
   return (
-    <Component
+    <PolymorphicComponent
+      as={as}
       onClick={onClick}
       className={classNames(
         'fixed z-50 bottom-0 right-0 p-2 border-2 bg-white dark:bg-black transition-all duration-400 ease-[steps(3,end)]',
@@ -47,6 +50,6 @@ export default function Fab<T extends ElementType>({
       {...props}
     >
       {children}
-    </Component>
+    </PolymorphicComponent>
   );
 }

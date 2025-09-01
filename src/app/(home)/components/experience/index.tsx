@@ -1,5 +1,9 @@
 'use client';
 
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+} from '@/components/polymorphic-component';
 import { experienceCategories } from '@/content/experience';
 import useFadeInView from '@/hooks/use-fade-in-view';
 import { useIntro } from '@/hooks/use-intro';
@@ -7,12 +11,11 @@ import { UTCDate } from '@date-fns/utc';
 import classNames from 'classnames';
 import { format } from 'date-fns';
 import { useTranslations } from 'next-intl';
-import { useRef, type ComponentPropsWithoutRef, type ElementType } from 'react';
+import { useRef, type ElementType } from 'react';
 import Heading from '../heading';
 
-export type ExperienceProps<T extends ElementType> = {
-  as?: T;
-} & ComponentPropsWithoutRef<T>;
+export type ExperienceProps<T extends ElementType> =
+  PolymorphicComponentProps<T>;
 
 /**
  * Renders the experience section.
@@ -22,14 +25,18 @@ export default function Experience<T extends ElementType>({
   className,
   ...props
 }: ExperienceProps<T>) {
-  const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.experience');
   const ref = useRef(null);
   const [intro] = useIntro();
   useFadeInView(ref, { once: true, skip: !intro });
 
   return (
-    <Component ref={ref} {...props} className={classNames('py-10', className)}>
+    <PolymorphicComponent
+      {...props}
+      as={as}
+      ref={ref}
+      className={classNames('py-10', className)}
+    >
       <div className="container max-w-4xl mx-auto px-8">
         <Heading
           as="h2"
@@ -120,6 +127,6 @@ export default function Experience<T extends ElementType>({
           ))}
         </ul>
       </div>
-    </Component>
+    </PolymorphicComponent>
   );
 }

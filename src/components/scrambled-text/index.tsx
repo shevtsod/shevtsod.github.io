@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { ComponentProps, useEffect, useState } from 'react';
 
 /**
  * Generates and returns a random character
@@ -36,8 +36,7 @@ function scramble(str: string) {
     .join('');
 }
 
-export interface ScrambledTextProps
-  extends React.HTMLAttributes<HTMLDivElement> {
+export interface ScrambledTextProps extends ComponentProps<'div'> {
   children?: string;
   frequency?: number;
   duration?: number;

@@ -1,7 +1,8 @@
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
+import { ComponentProps } from 'react';
 
-export interface AppErrorProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface AppErrorProps extends ComponentProps<'div'> {
   title?: string;
   error?: Error;
 }

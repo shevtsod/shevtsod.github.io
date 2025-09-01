@@ -1,9 +1,10 @@
 import Icon, { IconKey } from '@/components/icon';
 import classNames from 'classnames';
 import { RichTagsFunction, useTranslations } from 'next-intl';
+import { ComponentProps } from 'react';
 import styles from './summary-item.module.css';
 
-interface SummaryItemProps extends React.HTMLAttributes<HTMLDivElement> {
+interface SummaryItemProps extends ComponentProps<'div'> {
   icon?: IconKey;
   i18nKey: string;
   values?: Record<string, string | number | Date | RichTagsFunction>;

@@ -1,5 +1,6 @@
 'use client';
 
+import BlogPostMetadata from '@/app/blog/components/blog-post-metadata';
 import Button from '@/components/button';
 import Icon from '@/components/icon';
 import ScrambledText from '@/components/scrambled-text';
@@ -12,7 +13,6 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
-import BlogPostMetadata from '../../../components/blog-post-metadata';
 
 export interface BlogPostProps {
   children: React.ReactNode;

@@ -1,6 +1,7 @@
 import Skill from '@/app/(home)/components/skills/skill';
 import Button from '@/components/button';
 import ScrambledText from '@/components/scrambled-text';
+import Typewriter from '@/components/typewriter';
 import { ProjectType } from '@/content/projects';
 import { skillCategories, SkillCategoryType } from '@/content/skills';
 import useFadeInView, { UseFadeInViewOptions } from '@/hooks/use-fade-in-view';
@@ -10,7 +11,6 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useMemo, useRef } from 'react';
-import Typewriter from '../../../../../components/typewriter';
 
 export interface ProjectProps {
   project: ProjectType;
@@ -26,9 +26,11 @@ export default function Project({
 }: ProjectProps) {
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const isNearMiddle = useInView(ref, { margin: '-50% 0px -50% 0px' });
+  const isNearMiddle = useInView(ref, {
+    margin: '-50% 0px -50% 0px',
+  });
   const t = useTranslations('app.(home).components.projects.project');
-  useFadeInView(ref, {
+  const isInView = useFadeInView(ref, {
     once: true,
     amount: 'all',
     ...useFadeInViewOptions,
@@ -178,7 +180,7 @@ export default function Project({
           <div className="flex-2">
             {/* Description */}
             <Typewriter
-              paused={!isNearMiddle}
+              paused={!isInView}
               duration={2000}
               className="font-bold text-sm md:text-base"
             >

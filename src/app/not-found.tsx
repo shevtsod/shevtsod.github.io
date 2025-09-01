@@ -1,4 +1,5 @@
 import AppError from '@/components/app-error';
+import Layout from '@/components/layout';
 import { Metadata } from 'next';
 import { getTranslations } from 'next-intl/server';
 
@@ -16,5 +17,9 @@ export async function generateMetadata(): Promise<Metadata> {
 // https://nextjs.org/docs/app/api-reference/file-conventions/not-found
 export default async function NotFoundPage() {
   const t = await getTranslations('components.app-error.messages');
-  return <AppError className="min-h-[100svh]" error={new Error(t('404'))} />;
+  return (
+    <Layout>
+      <AppError className="min-h-[100svh]" error={new Error(t('404'))} />
+    </Layout>
+  );
 }

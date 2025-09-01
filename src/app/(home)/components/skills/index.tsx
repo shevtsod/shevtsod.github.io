@@ -1,17 +1,19 @@
 'use client';
 
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+} from '@/components/polymorphic-component';
 import { skillCategories } from '@/content/skills';
 import useFadeInView from '@/hooks/use-fade-in-view';
 import { useIntro } from '@/hooks/use-intro';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
-import { useRef, type ComponentPropsWithoutRef, type ElementType } from 'react';
+import { useRef, type ElementType } from 'react';
 import Heading from '../heading';
 import Skill from './skill';
 
-export type SkillsProps<T extends ElementType> = {
-  as?: T;
-} & ComponentPropsWithoutRef<T>;
+export type SkillsProps<T extends ElementType> = PolymorphicComponentProps<T>;
 
 /**
  * Renders the skills section.
@@ -21,14 +23,18 @@ export default function Skills<T extends ElementType>({
   className,
   ...props
 }: SkillsProps<T>) {
-  const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.skills');
   const ref = useRef(null);
   const [intro] = useIntro();
   useFadeInView(ref, { once: true, skip: !intro });
 
   return (
-    <Component ref={ref} {...props} className={classNames('py-10', className)}>
+    <PolymorphicComponent
+      {...props}
+      as={as}
+      ref={ref}
+      className={classNames('py-10', className)}
+    >
       <div className="container mx-auto px-2">
         <Heading
           as="h2"
@@ -64,6 +70,6 @@ export default function Skills<T extends ElementType>({
           ))}
         </ul>
       </div>
-    </Component>
+    </PolymorphicComponent>
   );
 }

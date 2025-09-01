@@ -7,32 +7,21 @@ import { useIntro } from '@/hooks/use-intro';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
 import Link from 'next/link';
-import { ComponentPropsWithoutRef, ElementType, useRef } from 'react';
+import { ComponentProps, useRef } from 'react';
 
-export type BlogPromoProps<T extends ElementType> = {
-  as?: T;
-} & ComponentPropsWithoutRef<T>;
+export interface BlogPromoProps extends ComponentProps<'div'> {}
 
 /**
  * Renders the blog promo section.
  */
-export default function BlogPromo<T extends ElementType>({
-  as,
-  className,
-  ...props
-}: BlogPromoProps<T>) {
-  const Component = as ?? 'div';
+export default function BlogPromo({ className, ...props }: BlogPromoProps) {
   const t = useTranslations('app.(home).components.contact.blog-promo');
   const ref = useRef(null);
   const [intro] = useIntro();
   useFadeInView(ref, { once: true, skip: !intro });
 
   return (
-    <Component
-      ref={ref}
-      {...props}
-      className={classNames('pt-12 pb-8', className)}
-    >
+    <div {...props} ref={ref} className={classNames('pt-12 pb-8', className)}>
       <div className="container mx-auto px-8 text-center md:text-lg lg:text-xl font-bold">
         <Link href="/blog">
           {t.rich('callout', {
@@ -44,6 +33,6 @@ export default function BlogPromo<T extends ElementType>({
           })}
         </Link>
       </div>
-    </Component>
+    </div>
   );
 }

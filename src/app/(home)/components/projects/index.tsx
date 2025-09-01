@@ -1,16 +1,18 @@
 'use client';
 
+import {
+  PolymorphicComponent,
+  PolymorphicComponentProps,
+} from '@/components/polymorphic-component';
 import projects from '@/content/projects';
 import { useIntro } from '@/hooks/use-intro';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
-import { type ComponentPropsWithoutRef, type ElementType } from 'react';
+import { type ElementType } from 'react';
 import Heading from '../heading';
 import Project from './project';
 
-export type ProjectsProps<T extends ElementType> = {
-  as?: T;
-} & ComponentPropsWithoutRef<T>;
+export type ProjectsProps<T extends ElementType> = PolymorphicComponentProps<T>;
 
 /**
  * Renders the projects section.
@@ -20,12 +22,15 @@ export default function Projects<T extends ElementType>({
   className,
   ...props
 }: ProjectsProps<T>) {
-  const Component = as ?? 'div';
   const t = useTranslations('app.(home).components.projects');
   const [intro] = useIntro();
 
   return (
-    <Component {...props} className={classNames('pt-6', className)}>
+    <PolymorphicComponent
+      {...props}
+      as={as}
+      className={classNames('pt-6', className)}
+    >
       <div>
         <Heading
           as="h2"
@@ -46,6 +51,6 @@ export default function Projects<T extends ElementType>({
           ))}
         </ul>
       </div>
-    </Component>
+    </PolymorphicComponent>
   );
 }

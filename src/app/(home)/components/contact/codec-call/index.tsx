@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
-import { HTMLAttributes } from 'react';
+import { ComponentProps } from 'react';
 import styles from './codec-call.module.css';
 
-export interface CodecCallProps extends HTMLAttributes<HTMLDivElement> {}
+export interface CodecCallProps extends ComponentProps<'div'> {}
 
 export default function CodecCall({ className, ...props }: CodecCallProps) {
   const t = useTranslations('app.(home).components.contact.codec-call');

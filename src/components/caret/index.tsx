@@ -1,7 +1,8 @@
 import classNames from 'classnames';
+import { ComponentProps } from 'react';
 import styles from './caret.module.css';
 
-export interface CaretProps extends React.HTMLAttributes<HTMLSpanElement> {}
+export interface CaretProps extends ComponentProps<'span'> {}
 
 /**
  * Renders a terminal caret.

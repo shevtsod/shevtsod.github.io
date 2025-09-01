@@ -1,6 +1,7 @@
 'use client';
 
 import AppError from '@/components/app-error';
+import Layout from '@/components/layout';
 import { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 import { getTranslations } from 'next-intl/server';
@@ -30,6 +31,8 @@ export default function ErrorPage({ error }: ErrorPageProps) {
   }, [error]);
 
   return (
-    <AppError className="min-h-[100svh]" title={t('title')} error={error} />
+    <Layout>
+      <AppError className="min-h-[100svh]" title={t('title')} error={error} />
+    </Layout>
   );
 }
