@@ -28,7 +28,7 @@ export default function Footer({ className, ...props }: FooterProps) {
             href={{ pathname: '/', hash: '#top' }}
             className="flex justify-center md:justify-start"
           >
-            <Logo className="h-16 md:h-24 w-auto" />
+            <Logo className="w-16 md:w-24 h-full" />
           </Link>
 
           {footerLinksSections.map((footerLinkSection, i) => (

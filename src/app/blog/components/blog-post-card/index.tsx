@@ -29,7 +29,7 @@ export default function BlogPostCard({
             {index}
           </div>
 
-          <div className="flex-3 flex flex-col justify-center text-zinc-500 group-hover:text-zinc-700 dark:group-hover:text-zinc-300">
+          <div className="flex-4 flex flex-col justify-center text-zinc-500 group-hover:text-zinc-700 dark:group-hover:text-zinc-300">
             <BlogPostMetadata
               frontmatter={frontmatter}
               showDescription={false}

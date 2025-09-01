@@ -16,6 +16,7 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import Icon from '../../icon';
 
 // Scrolled pixels when Header is shown
 const SCROLL_THRESHOLD = 50;
@@ -95,7 +96,7 @@ export default function Header({
       <div className="flex-1 container mx-auto px-4 flex justify-between items-center">
         <Link
           href={{ pathname: '/', hash: '#top' }}
-          className="h-full w-auto p-2"
+          className="h-full w-auto p-2 shrink-0"
           aria-label="Logo"
         >
           <Logo
@@ -105,7 +106,7 @@ export default function Header({
           />
         </Link>
 
-        <div className="h-full flex gap-1 items-center text-xs md:text-base">
+        <div className="h-full flex gap-1 items-center text-xs md:text-base text-theme-red-400">
           {links.map(({ children, ...props }, i) => (
             <Button
               key={i}
@@ -121,6 +122,11 @@ export default function Header({
               </b>
             </Button>
           ))}
+
+          {/* GitHub link */}
+          <Link href="https://github.com/shevtsod" target="_blank">
+            <Icon icon="Github" className="h-6 md:h-8" />
+          </Link>
 
           <ThemeSwitch className="h-6! md:h-8!" />
         </div>

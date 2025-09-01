@@ -5,4 +5,291 @@ author: 'shevtsod'
 created: '2025-08-30'
 tags: 'devops,kubernetes,certs'
 imageUrl: '/images/blog/250830-certified-kubernetes-administrator/cka.png'
+published: true
 ---
+
+I passed the CKA exam earlier this week with **92%**! It was my first cert and I
+think I way over-prepared for it because it was easier than expected. I use
+Kubernetes at work for about a year now, so I did have some experience to fall
+back on. I'd still say the biggest contributors to my success were my study
+materials and practice. I thought I'd share some tips and resources that helped
+me study while it's still fresh in my mind.
+
+# Taking the Exam
+
+The exam is entirely practical and involves completing tasks in a virtual
+environment, so there is no need to prepare for MCQs. It is taken online via the
+PSI platform and proctored remotely by sharing your screen, webcam, and
+microphone.
+
+I'll try to describe my experience of the day of the exam to give an idea of
+what to expect.
+
+- I scheduled it 2 weeks in advance. Fridays seem to be popular because my
+  preferred time slots were already taken whereas other days were still mostly
+  free. If you plan to take the exam on a Friday, try to schedule a few weeks
+  ahead.
+- The exam was **2 hours long** and consisted of **16 questions** (you may get
+  between 15-20). The passing score is **66%**.
+- You can start the exam 30 minutes early, but if the proctor is unavailable you
+  may still need to wait until the scheduled start time. I started mine 15
+  minutes early and the proctor was available.
+- You only interact with the proctor via the live chat.
+- My proctor allowed me to take 3 breaks which I did not expect. I was ready for
+  a 2 hour sprint so I did not end up taking any breaks.
+- There is a **check-in** before the exam starts. The proctor asks you to show
+  your government ID, pan your webcam around the room, and show your hands and
+  ears to make sure there are no forbidden items.
+- The 2 hour timer started right after the check-in was completed.
+- The proctor asked me to let them know when I was finished but did not interact
+  with me during the exam otherwise.
+
+> **❗About the February 2025 changes/refresh**
+>
+> The CKA exam
+> [changed significantly in February 2025](https://training.linuxfoundation.org/certified-kubernetes-administrator-cka-program-changes/)
+> and apparently got harder
+> [<sup>[1]</sup>](https://www.reddit.com/r/devops/comments/1kkv3ua/is_2025_cka_harder_than_it_was_before_rant/)[<sup>[2]</sup>](https://www.reddit.com/r/CKAExam/comments/1jbi4iw/discussion_of_the_updated_feb_18th_2025_cka_exam/).
+> It covers a few new topics:
+>
+> - Autoscaling
+> - Gateway API
+> - Helm
+> - Kustomize
+>
+> I never took the exam before so I can't comment on if it did get harder. I
+> originally prepared for the exam in 2024 but was not able to take it until
+> now, so I had to go back and prepare for the topics above. I think that Helm
+> and Kustomize are very welcome and important additions. I use them heavily at
+> work and consider them critical for Kubernetes administration but I had to
+> learn them independently before.
+>
+> Some claimed that the popular practice resources were no longer representative
+> of the content of the exam, but this was not the case in my experience.
+> The&nbsp;<a href="#resources">Resources</a> I used covered the topics of my
+> exam.
+
+# Topics
+
+The CKA exam covers these topics according to the
+[official CNCF curriculum](https://github.com/cncf/curriculum) as of August
+2025:
+
+- **Storage (10%)**
+- **Workloads and Scheduling (15%)**
+- **Servicing and Networking (20%)**
+- **Troubleshooting (30%)**
+- **Cluster Architecture, Installation and Configuration (25%)**
+
+I suggest studying for these topics in particular based on the questions I got
+on my test:
+
+- **Storage (10%)**
+  - [Create `StorageClass`, `PersistentVolumeClaim`, and `PersistentVolume` and mount as `volumes` to `Pod`s](https://kubernetes.io/docs/concepts/storage/)
+  - [Share `volumes` between multiple `containers` in a `Pod`](https://kubernetes.io/docs/tasks/configure-pod-container/configure-volume-storage/)
+- **Workloads and Scheduling (15%)**
+  - [Create `ConfigMap`s and `Secret`s and use their values in `Pod`s](https://kubernetes.io/docs/concepts/configuration/)
+  - [Configure `resources` for `Pod`s to specify CPU and RAM requests/limits for `containers`](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/)
+  - [Use a `PriorityClass` to prioritize which `Pod`s to schedule and evict](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/#priorityclass)
+  - [Create `HorizontalPodAutoscaler`s to scale `Deployment`s, `StatefulSet`s, etc. by usage](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale-walkthrough/)
+- **Servicing and Networking (20%)**
+  - [Create `Service`s to expose `Pod`s within and outside the cluster](https://kubernetes.io/docs/concepts/services-networking/service/)
+  - [Create an `Ingress` to expose `Service`s outside the cluster](https://kubernetes.io/docs/concepts/services-networking/ingress/)
+  - [Migrate from `Ingress` to `Gateway` and `HttpRoute` to expose `Service`s outside the cluster](https://kubernetes.io/docs/concepts/services-networking/gateway/)
+  - [Use a `NetworkPolicy` to limit network traffic between `Pod`s](https://kubernetes.io/docs/concepts/services-networking/network-policies/)
+- **Troubleshooting (30%)**
+  - [Format, filter, and sort output from `kubectl` (e.g., `-o jsonpath`, `--sort-by`, etc.)](https://kubernetes.io/docs/reference/kubectl/)
+  - [Troubleshoot `kubeadm` clusters, particularly static pods and other configuration files under `/etc/kubernetes`](https://kubernetes.io/docs/reference/setup-tools/kubeadm/implementation-details/#constants-and-well-known-values-and-paths)
+- **Cluster Architecture, Installation and Configuration (25%)**
+  - [Install a Container Runtime (CRI)](https://kubernetes.io/docs/setup/production-environment/container-runtimes/)
+  - [Install a Networking Addon (CNI) and know the differences between the popular addons](https://kubernetes.io/docs/concepts/cluster-administration/addons/#networking-and-network-policy)
+  - [Install, customize, and troubleshoot Helm charts](https://helm.sh/)
+
+I **did not** encounter the topics below that are commonly suggested to study:
+
+- [Kustomize](https://kubernetes.io/docs/tasks/manage-kubernetes-objects/kustomization/)
+- [etcd](https://kubernetes.io/docs/tasks/administer-cluster/configure-upgrade-etcd/)
+- [Assign pods to nodes (e.g., `nodeAffinity`, `podAffinity`, etc.)](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/)
+- [Role-Based Access Control (RBAC) (e.g., `Role`, `RoleBinding`, `ServiceAccount`, etc.)](https://kubernetes.io/docs/reference/access-authn-authz/rbac/)
+- [CoreDNS and automatic DNS records](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/)
+- [Upgrade `kubadm` clusters](https://kubernetes.io/docs/tasks/administer-cluster/kubeadm/kubeadm-upgrade/)
+
+Keep in mind these could still show up on your exam. These topics are good to
+know either way and I have absolutely encountered them professionally.
+
+# Resources
+
+These are the two resources I used to prepare for the exam:
+
+- [**Certified Kubernetes Administrator (CKA) with Practice Tests | Udemy**](https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/)
+  - Popularly known as the "KodeKloud course" and "Mumshad's course".
+  - I took it last year when I started using Kubernetes at work and thought it
+    was a great introduction.
+  - there are often coupons that drastically reduce the price like most Udemy
+    courses.
+  - It also came with a coupon for the CKA exam so getting both the course and
+    exam at a discount ended up cheaper than buying just the exam.
+  - It was updated with content covering the February 2025 exam refresh.
+- [**Killer Shell**](https://killer.sh/)
+  - Mock exams that are **nearly identical** to the PSI platform used for the
+    actual CKA exam, both in terms of the questions asked and the virtual
+    environment.
+  - You get access to 2 simulators for 36 (consecutive) hours each for free with
+    a purchase of the CKA exam.
+
+Both of the above are paid resources, but there are plenty of free ones as well.
+I recommend checking out the [r/CKAExam](https://www.reddit.com/r/CKAExam/)
+subreddit to read about other people's experiences and resources.
+
+# Tips & Advice
+
+Here are some tips that helped me with the exam. Some are from advice I read
+online, some from my own experience, and some are just general tips that are
+useful for any exam.
+
+- **My single biggest piece of advice: <u>do all 3 mock exams in Mumshad's
+  course and both the Killer Shell simulators and go over the solutions
+  after</u>**.
+
+  The questions in these mock exams are nearly identical to the actual exam, so
+  they are worth it for that alone. Plus, they help you practice under time
+  pressure and the Killer Shell simulators mimic the PSI platform, so it feels
+  like doing the actual exam.
+
+- You have 2 hours to solve about 16 questions, so plan to spend about 7.5
+  minutes per question and check the timer between each question to control your
+  pace.
+  - Don't get stunlocked on a question! If it takes you over 10 minutes to
+    solve, **just move on!** It's better to fail one question than not get to
+    even attempt all the ones after.
+
+- You get partial credits for just creating the resources. It is always better
+  to submit something than to skip questions completely.
+
+- You will often be asked to create a resource with a specific name in a
+  specific namespace (they give you weird names like `spline-reticulator`). The
+  PSI platform lets you click the name to copy-paste it. Always do this instead
+  of typing the names manually because if you have a typo and put the resource
+  in the wrong place you won't even get partial credit.
+
+- Review your answer to each question and try to catch errors **before moving to
+  the next question** and not at the end of the exam. You may not have time for
+  a final review, so you can at least be sure you reviewed each question once if
+  you do this. If you do have time left at the end, perfect, review again.
+
+- Know your way around the [Kubernetes docs](https://kubernetes.io/docs/home/).
+  You will have access to these docs (sans discussions) and the
+  [Gateway API docs](https://gateway-api.sigs.k8s.io/) during the exam. I posted
+  links in the <a href="#topics">Topics</a> section that I remember using in my
+  exam. Make sure you know how to find these.
+  - Pro-tip: Use `CTRL+F` and search `kind:` to quickly jump to an example of a
+    manifest to copy for the resource you are looking for as they tend to be
+    scattered in different places on each page.
+
+- Review the
+  [Important Instructions: CKA and CKAD](https://docs.linuxfoundation.org/tc-docs/certification/tips-cka-and-ckad)
+  to see what the PSI environment is preconfigured with.
+  - `kubectl` with the `k` alias, `vim` and `nano` text editors, and even
+    [VSCodium](https://vscodium.com/) are all pre-installed (which I hear was
+    not the case previously).
+  - As a rule of thumb, anything that worked on the Killer Shell simulators also
+    worked in the PSI environment.
+
+- Become very good at `kubectl`
+  - Learn imperative commands to quickly create resources (e.g., `kubectl run`,
+    `kubectl create secret`, `kubectl create deploy`) and be aware of some
+    exceptions that cannot be created with the CLI (e.g., `PersistentVolume`).
+  - Use imperative commands to scaffold a resource and append
+    `--dry-run=client -o yaml > manifest.yaml` to save it as a temporary file
+    and add any properties that cannot be added from the CLI, then use
+    `kubectl apply -f manifest.yaml` to deploy the resource.
+  - Learn JSONPath to extract fields from resources with `-o jsonpath`.
+  - Don't wait for `Pod`s to exit when deleting them, kill them to save time.
+
+    ```shell
+    kubectl delete pod my-pod --grace-period 0 --force
+    ```
+
+- Each question will ask you to SSH into a different machine like
+  `ssh cka000001`. Make sure you don't answer the question on the wrong machine
+  or you won't get credit for it!
+- Use the correct namespace either with `kubectl -n namespace` or
+  `kubectl use-context`.
+- There is always at least one "troubleshooting" question that is worded
+  something like:
+
+  > The cluster has an issue and is not working properly. Investigate and fix
+  > the issue.
+
+  **As soon as you see this question, immediately flag it and move on to the
+  others and leave this one for last**. Why? Because this kind of question can
+  feel like finding a needle in a haystack and can take significantly longer to
+  solve than the other tasks that are more straightforward. The "issue" you need
+  to solve could just be a typo in any manifest in `/etc/kubernetes/manifests`
+  and you need to carefully read logs and each manifest to try and locate the
+  error.
+
+  I realized this when I took one of the mock exams and spent over 15 minutes on
+  this question. This made me lose focus since I could not figure it out and I
+  had to rush the other questions as a result. It'll feel much less stressful if
+  you finish the other questions first and then go back to this one with 15-30
+  minutes left on the timer. 😉
+
+- Try to come up with a comfortable "layout" and spend the first 1-2 minutes of
+  the exam just setting up your workspace the way you want it. I personally had
+  a terminal at the top left, web browser bottom right, and VSCodium bottom left
+  for notes.
+
+- Make sure to carefully read and prepare for the
+  [exam rules and policies](https://docs.linuxfoundation.org/tc-docs/certification/lf-handbook2/exam-rules-and-policies).
+  The proctor can be **very** nitpicky during the check-in and will ask you
+  about every little item they notice during your room scan. This may not seem
+  like a big deal, but if you are laser focused and ready to start the exam,
+  this will delay it and throw you off, so you really want to get through this
+  as fast as possible.
+  - I have a lot of crap on my desk (multiple monitors, studio microphone, game
+    consoles, etc.) that would be impractical to tear down for the test and then
+    put back together, so I set up a separate desk with a laptop on the other
+    side of the room for the test. The proctor seemed to really not like my main
+    desk in the background and asked me a lot of questions about it. I reassured
+    them multiple times that I had everything turned off but, in hindsight, I
+    should've just covered it all with a bed sheet.
+  - Use an external webcam if you can. It's less of a hassle to pan around than
+    an entire laptop.
+- If you use Kubernetes professionally, consider waiting a few months to take
+  the CKA exam to get some hands-on experience first. Otherwise, consider using
+  platforms like [Killercoda](https://killercoda.com/) to practice with a
+  virtual cluster. Hands-on experience helped me deal with certain situations
+  faster than I would if I encountered them for the first time on the exam.
+
+- You get a free retake so don't sweat it if the first attempt doesn't go well!
+
+## Advice to Avoid
+
+There is also some common advice I read online that **I disagree with and would
+avoid**:
+
+- I read a lot of horror stories about the PSI environment being laggy,
+  unresponsive, and difficult to work with. It worked just fine for me and was
+  **exactly** like the Killer Shell simulators. I am located in North America,
+  though, and I suppose it might be worse in other regions.
+- No, you don't need to be a master of `vim`, `nano`, or whatever other text
+  editor. I read a lot of advice about optimizing `vim` settings and mastering
+  hotkeys. Don't waste time on any of that and focus on studying for the exam
+  content instead. I use `vim` but don't consider myself very good at it and I
+  did just fine with some basics:
+  - `v` to enter visual mode and select multiple lines
+  - `dd` to delete a line
+  - `:x` to save and exit
+
+  I even moved the cursor and indented one character at a time and still
+  finished the exam with 10 minutes to spare.
+
+- Same as above for other speed optimizations like using `tmux` and custom
+  aliases. You can use them if you want, but you don't _need_ any of them.
+- The whackiest advice I read was that you should really spin up your own
+  cluster from scratch with
+  [Kubernetes The Hard Way](https://github.com/kelseyhightower/kubernetes-the-hard-way)
+  to **truly** be ready for the exam. Is it going to give you a really deep
+  understanding of all the underlying components? Sure. Can you do well on
+  the exam without it? Yep.

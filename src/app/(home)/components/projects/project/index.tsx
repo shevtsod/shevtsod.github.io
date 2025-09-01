@@ -28,7 +28,7 @@ export default function Project({
   const videoRef = useRef<HTMLVideoElement>(null);
   const isNearMiddle = useInView(ref, { margin: '-50% 0px -50% 0px' });
   const t = useTranslations('app.(home).components.projects.project');
-  const inView = useFadeInView(ref, {
+  useFadeInView(ref, {
     once: true,
     amount: 'all',
     ...useFadeInViewOptions,
@@ -178,7 +178,7 @@ export default function Project({
           <div className="flex-2">
             {/* Description */}
             <Typewriter
-              paused={!inView}
+              paused={!isNearMiddle}
               duration={2000}
               className="font-bold text-sm md:text-base"
             >

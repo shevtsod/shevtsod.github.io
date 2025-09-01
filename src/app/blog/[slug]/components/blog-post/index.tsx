@@ -97,11 +97,7 @@ export default function BlogPost({
             )}
           </div>
 
-          <Button
-            as={Link}
-            href="/blog"
-            className="h-full w-full flex items-center justify-center"
-          >
+          <Button as={Link} href="/blog" className="h-full w-full font-bold">
             <ScrambledText className="block">{t('backToBlog')}</ScrambledText>
           </Button>
 
@@ -122,7 +118,7 @@ export default function BlogPost({
         </div>
 
         {/* Comments */}
-        <CustomH as="h1" id="comments">
+        <CustomH as="h1" id="comments" className="text-4xl font-bold">
           {t('comments')}
         </CustomH>
 

@@ -12,17 +12,13 @@ type Story = StoryObj<typeof Component>;
 
 export const Default: Story = {
   args: {
-    blogPost: {
-      slug: 'test',
-      filename: 'test.mdx',
-      frontmatter: {
-        title: faker.lorem.sentence(),
-        description: faker.lorem.paragraphs(20),
-        author: faker.internet.username(),
-        created: faker.date.recent(),
-        updated: faker.date.recent(),
-        tags: Array.from({ length: 3 }).map(() => faker.lorem.word()),
-      },
+    frontmatter: {
+      title: faker.lorem.sentence(),
+      description: faker.lorem.paragraphs(20),
+      author: faker.internet.username(),
+      created: faker.date.recent(),
+      updated: faker.date.recent(),
+      tags: Array.from({ length: 3 }).map(() => faker.lorem.word()),
     },
   },
 };

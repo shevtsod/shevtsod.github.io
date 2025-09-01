@@ -43,7 +43,7 @@ export default function Skills<T extends ElementType>({
             <li key={i} className="md:basis-1/3 lg:basis-1/4 xl:basis-1/5">
               <h3
                 id={`skillCategory:${skillCategory.key}`}
-                className="m-2 text-center font-retro font-bold text-2xl md:text-4xl text-theme-orange-600 dark:text-theme-orange-200 scroll-mt-20"
+                className="m-2 text-center font-retro font-bold text-2xl md:text-4xl text-theme-orange-600 dark:text-theme-orange-200 scroll-mt-22"
               >
                 {t(`skillCategories.${skillCategory.key}.title`)}
               </h3>
@@ -55,7 +55,7 @@ export default function Skills<T extends ElementType>({
                       skill={skill}
                       skillCategory={skillCategory}
                       id={`skill:${skill.key}`}
-                      className="scroll-mt-30"
+                      className="scroll-mt-22"
                     />
                   </li>
                 ))}

@@ -44,7 +44,7 @@ export default function Experience<T extends ElementType>({
             <li key={i}>
               <h3
                 id={`experienceCategory:${experienceCategory.key}`}
-                className="m-2 text-center font-retro font-bold text-2xl md:text-4xl text-theme-orange-600 dark:text-theme-orange-200 scroll-mt-20"
+                className="m-2 text-center font-retro font-bold text-2xl md:text-4xl text-theme-orange-600 dark:text-theme-orange-200 scroll-mt-22"
               >
                 {t(`experienceCategories.${experienceCategory.key}.title`)}
               </h3>

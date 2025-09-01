@@ -21,11 +21,11 @@ export function CustomH<T extends ElementType>({
     <Link
       href={`#${id}`}
       className={classNames(
-        'group flex flex-row items-start gap-1 scroll-mt-20 no-underline text-black! dark:text-white!',
+        'group flex flex-row items-start gap-1 no-underline text-black! dark:text-white!',
         className,
       )}
     >
-      <Component id={id} {...props} />
+      <Component id={id} className="scroll-mt-22" {...props} />
       <Icon
         icon="Link"
         className="w-6 h-auto opacity-0 group-hover:opacity-100 ease-[steps(2,end)] duration-200"

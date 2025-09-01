@@ -19,10 +19,7 @@ export default function ThemeSwitch({ className, ...props }: ThemeSwitchProps) {
         setTheme((current) => (current === 'dark' ? 'light' : 'dark'))
       }
       {...props}
-      className={classNames(
-        'relative h-full w-auto cursor-pointer text-theme-red-400',
-        className,
-      )}
+      className={classNames('relative h-full w-auto cursor-pointer', className)}
       aria-label="Theme"
     >
       {(['Sun', 'Moon'] as IconKey[]).map((icon, i) => (
