@@ -134,7 +134,7 @@ export default function Boot({
       <div className="container px-4 mx-auto text-xs md:text-lg">
         <div className="container flex flex-col justify-start items-end absolute top-0 my-10 -mx-10 z-0">
           <div className="flex flex-col justify-center items-center">
-            <Logo className="h-20 w-auto" />
+            <Logo className="w-20" />
             <b className="mt-2 text-xs">shevtsodOS</b>
             <i className="text-[0.65rem] underline">shevtsod.com</i>
           </div>

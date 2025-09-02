@@ -1,12 +1,22 @@
-import logoInIcon from '@/../public/images/ui/logo-in.webp';
-import logoRotateIcon from '@/../public/images/ui/logo-rotate.gif';
-import logoIcon from '@/../public/images/ui/logo.webp';
 import classNames from 'classnames';
-import { ComponentProps, useEffect, useRef, useState } from 'react';
+import { ComponentProps, useEffect, useState } from 'react';
 
-const DURATION_ROTATE = 3.4;
+// Total number of frames in the sprite sheet
+const ANIMATION_FRAME_COUNT = 26;
+// Start and end frames of each animation in the sprite sheet
+const ANIMATION_FRAMES = {
+  in: [0, 10],
+  static: [11, 11],
+  rotate: [12, 26],
+};
+// Duration of a frame in the animation in milliseconds
+const ANIMATION_SPEED = 125;
+// Interval of rotation animation in milliseconds
+const ANIMATION_ROTATE_INTERVAL = 10000;
 
 export interface LogoProps extends ComponentProps<'img'> {
+  intro?: boolean;
+  scale?: number;
   shown?: boolean;
   animated?: boolean;
 }
@@ -15,80 +25,74 @@ export interface LogoProps extends ComponentProps<'img'> {
  * Renders a logo that can optionally be animated.
  */
 export default function Logo({
+  intro = false,
   shown = true,
   animated,
   className,
   ...props
 }: LogoProps) {
-  const [src, setSrc] = useState<string | null>(null);
-  const lastSrcRef = useRef<string | null>(null);
+  const [animation, setAnimation] = useState<keyof typeof ANIMATION_FRAMES>(
+    intro ? 'in' : 'static',
+  );
+  const [frame, setFrame] = useState(0);
 
-  // Sets a new src by fetching the image at the given URL
-  // This is a cache-busting mechanism to generate a dynamic "blob:..." src URL
-  // for the image. It forces GIFs to replay without consuming additional network
-  // traffic like a traditional query parameter would.
-  function setSrcFromUrl(url: string) {
-    fetch(url)
-      .then((res) => res.blob())
-      .then((blob) => {
-        const newObjectUrl = URL.createObjectURL(blob);
-
-        // Revoke previous src
-        if (lastSrcRef.current) {
-          URL.revokeObjectURL(lastSrcRef.current);
-        }
-
-        lastSrcRef.current = newObjectUrl;
-        setSrc(newObjectUrl);
-      });
-  }
-
-  // Transition into view
+  // Change animation
   useEffect(() => {
-    setSrcFromUrl(animated ? logoInIcon.src : logoIcon.src);
-  }, [shown, animated]);
-
-  // Animate the logo every few seconds
-  useEffect(() => {
-    let interval: NodeJS.Timeout | undefined;
+    const [, lastFrame] = ANIMATION_FRAMES[animation];
     let timeout: NodeJS.Timeout | undefined;
 
-    if (animated) {
-      interval = setInterval(
-        () => {
-          setSrcFromUrl(logoRotateIcon.src);
-
-          timeout = setTimeout(() => {
-            setSrcFromUrl(logoIcon.src);
-          }, DURATION_ROTATE * 1000);
-        },
-        3 * DURATION_ROTATE * 1000,
-      );
+    if (!animated) {
+      // not animated - stay in static animation
+      setAnimation('static');
+    } else if (!shown) {
+      // not shown - restart animation
+      setAnimation('in');
+    } else if (animation === 'static') {
+      // static - switch to rotate animation after a delay
+      timeout = setTimeout(() => {
+        setAnimation('rotate');
+      }, ANIMATION_ROTATE_INTERVAL);
+    } else if (frame === lastFrame) {
+      // finished current animation - return to static animation
+      setAnimation('static');
     }
 
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
+    return () => clearTimeout(timeout);
+  }, [frame, animation, animated, shown]);
 
-      if (lastSrcRef.current) {
-        URL.revokeObjectURL(lastSrcRef.current);
-      }
-    };
-  }, [shown, animated]);
+  // Play animations
+  useEffect(() => {
+    const [firstFrame, lastFrame] = ANIMATION_FRAMES[animation];
 
-  if (!src) return null;
+    // Play animation frames
+    const interval = setInterval(() => {
+      setFrame((value) => {
+        if (value < firstFrame || value > lastFrame || !shown) {
+          // Restart at the first frame
+          return firstFrame;
+        } else if (!animated || value === lastFrame) {
+          // Keep the same frame
+          return value;
+        } else {
+          // Play the next frame
+          return value + 1;
+        }
+      });
+    }, ANIMATION_SPEED);
+
+    return () => clearInterval(interval);
+  }, [frame, animation, animated, shown]);
 
   return (
-    shown && (
-      // eslint-disable-next-line @next/next/no-img-element
-      <img
-        {...props}
-        src={src}
-        height={16}
-        width={16}
-        alt=""
-        className={classNames('image-pixelated', className)}
-      />
-    )
+    <div
+      {...props}
+      className={classNames(
+        'bg-[url("/images/ui/logo.png")] image-pixelated h-full aspect-square bg-cover',
+        className,
+      )}
+      style={{
+        backgroundPositionX: `${(100 * frame) / ANIMATION_FRAME_COUNT}%`,
+      }}
+    />
   );
 }

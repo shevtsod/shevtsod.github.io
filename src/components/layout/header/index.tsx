@@ -99,11 +99,7 @@ export default function Header({
           className="h-full w-auto p-2 shrink-0"
           aria-label="Logo"
         >
-          <Logo
-            shown={shown}
-            animated={animatedLogo}
-            className="h-full w-auto"
-          />
+          <Logo intro={showOnScroll} shown={shown} animated={animatedLogo} />
         </Link>
 
         <div className="h-full flex gap-1 items-center text-xs md:text-base text-theme-red-400">

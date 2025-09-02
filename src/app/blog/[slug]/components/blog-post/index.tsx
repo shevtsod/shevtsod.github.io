@@ -49,7 +49,7 @@ export default function BlogPost({
         <div className="relative w-full max-h-96">
           {/* Background blur */}
           <motion.div
-            className="absolute h-full w-full bg-cover opacity-25"
+            className="absolute h-full w-full bg-cover bg-repeat-y opacity-25"
             style={{
               backgroundImage: `url('${imageUrl}')`,
               backgroundPositionY: invertedHalfScrollY,
