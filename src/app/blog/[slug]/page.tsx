@@ -44,9 +44,9 @@ export interface BlogPostPageProps {
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const blogPostIndex = blogPosts.findIndex((post) => post.slug === slug);
-  const prevBlogPost = blogPosts[blogPostIndex - 1];
+  const prevBlogPost = blogPosts[blogPostIndex + 1];
   const blogPost = blogPosts[blogPostIndex];
-  const nextBlogPost = blogPosts[blogPostIndex + 1];
+  const nextBlogPost = blogPosts[blogPostIndex - 1];
 
   if (!blogPost) {
     notFound();

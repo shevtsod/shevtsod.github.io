@@ -4,7 +4,7 @@ description:
   'A tale of the arduous and perilous journey to set `<html class="dark">`'
 author: shevtsod
 created: '2025-08-21'
-updated: '2025-08-26'
+updated: '2025-09-07'
 tags: webdev,nextjs
 imageUrl:
 published: true
@@ -56,7 +56,7 @@ The
 [`app/layout.tsx`](https://nextjs.org/docs/app/api-reference/file-conventions/layout)
 component is very standard:
 
-```tsx
+```tsx:app/layout.tsx
 export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html>
@@ -70,15 +70,14 @@ Following Tailwind's docs for
 [Dark mode](https://tailwindcss.com/docs/dark-mode), the `Layout.tsx` component
 looks something like:
 
-```tsx
+```tsx:components/layout/layout.tsx showLineNumbers {7}
 'use client';
 
 export default function Layout({ children }: LayoutProps) {
   const [theme, setTheme] = useState<string | undefined>(undefined);
 
   // Detect and set the initial theme
-  // 💥 The problem is here!
-  useEffect(() => {
+  useEffect(() => { // 💥 The problem is here!
     // Previously selected theme stored in localStorage
     const storedTheme = localStorage.getItem('theme');
     // System preference
@@ -187,7 +186,7 @@ Let's see how we can make it work.
 
 The basic idea of solution #1 is to create a script like this:
 
-```js
+```js:components/theme-provider/script.js
 function script() {
   try {
     const storedTheme = localStorage.getItem('theme');
@@ -201,6 +200,8 @@ function script() {
 }
 ```
 
+> [!warning]
+>
 > This script will **NOT** be transpiled so it should not use any newer
 > ECMAScript features to support as many browsers as possible. It will also be
 > injected above the app content, so it should be kept as short as possible.
@@ -208,7 +209,7 @@ function script() {
 Then, we want to create a React `Context` to allow our React components to read
 and set the theme.
 
-```tsx
+```tsx:components/theme-provider/theme-provider.tsx
 export interface ThemeContextProps {
   /** the current theme */
   theme?: string;
@@ -233,14 +234,16 @@ This will let our components read and set the theme like so:
 const { theme, setTheme } = useTheme();
 ```
 
-> Note that `theme` and `setTheme` can only be used **client-side** and will
-> result in a hydration error (more on that later) if an attempt is made to
-> render based on these values on the server.
+> [!note]
+>
+> `theme` and `setTheme` can only be used **client-side** and will result in a
+> hydration error (more on that later) if an attempt is made to render based on
+> these values on the server.
 >
 > To use these in our components, we'll need to make sure we're rendering on the
 > client, i.e.,
 >
-> ```tsx
+> ```tsx:components/my-component/my-component.tsx
 > 'use client';
 >
 > export default function MyComponent() {
@@ -261,7 +264,7 @@ const { theme, setTheme } = useTheme();
 Finally, to tie it all together, we create a custom `ThemeProvider` that wraps
 the `ThemeContext.Provider` and injects our script above the content.
 
-```tsx
+```tsx:components/theme-provider/theme-provider.tsx
 /**
  * Provides ThemeContext to children
  */
@@ -375,7 +378,7 @@ There's a lot going on here, so let's break down a few important bits:
 
 Then, to actually use it, we update our `app/layout.tsx` like so:
 
-```tsx
+```tsx:app/layout.tsx
 export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html>
@@ -402,7 +405,7 @@ necessity. We just need to add `suppressHydrationWarning` to `app/layout.tsx`
 which suppresses this warning on just the `<html>` element, so we'll still be
 notified of other hydration warnings in our app itself.
 
-```tsx
+```tsx:app/layout.tsx
 export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html suppressHydrationWarning>
@@ -458,7 +461,7 @@ like this after going through this exercise myself.
 Ultimately, I think this is a DX deficiency in Next.js. It would be really great
 if we could just do something like this instead. Maybe someday.
 
-```tsx
+```tsx:app/layout.tsx
 export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <html>

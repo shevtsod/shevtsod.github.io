@@ -52,13 +52,9 @@ export default function Layout({
         className,
       )}
     >
-      {/* https://highlightjs.org/demo */}
-      {/* https://github.com/highlightjs/highlight.js/issues/3652 */}
+      {/* github.com/PrismJS/prism-themes */}
       {mounted && theme === 'dark' && (
-        <link
-          rel="stylesheet"
-          href={`/styles/highlight.js/tokyo-night-dark.min.css`}
-        />
+        <link rel="stylesheet" href={`/styles/prism/prism-one-dark.css`} />
       )}
 
       {header && (

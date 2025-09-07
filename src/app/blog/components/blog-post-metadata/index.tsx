@@ -3,6 +3,7 @@ import { FrontmatterType, ReadingTime } from '@/utils/blog';
 import { UTCDate } from '@date-fns/utc';
 import { run } from '@mdx-js/mdx';
 import { Toc } from '@stefanprobst/rehype-extract-toc';
+import classNames from 'classnames';
 import { format } from 'date-fns';
 import { MDXModule } from 'mdx/types';
 import { useTranslations } from 'next-intl';
@@ -15,6 +16,7 @@ export interface BlogPostMetadataProps {
   readingTime?: ReadingTime;
   tableOfContents?: Toc;
   showDescription?: boolean;
+  className?: string;
 }
 
 export default function BlogPostMetadata({
@@ -22,6 +24,7 @@ export default function BlogPostMetadata({
   readingTime,
   tableOfContents: originalTableOfContents,
   showDescription = true,
+  className,
 }: BlogPostMetadataProps) {
   const t = useTranslations('app.blog.components.blog-post-metadata');
   const { title, descriptionMdx, author, created, updated, tags } = frontmatter;
@@ -56,7 +59,9 @@ export default function BlogPostMetadata({
   );
 
   return (
-    <div className="flex flex-col text-zinc-500 text-sm">
+    <div
+      className={classNames('flex flex-col text-zinc-500 text-sm', className)}
+    >
       <h1 className="text-2xl md:text-4xl font-bold text-theme-red-400 font-retro">
         {title}
       </h1>

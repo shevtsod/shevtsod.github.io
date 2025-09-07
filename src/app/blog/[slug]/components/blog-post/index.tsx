@@ -67,90 +67,97 @@ export default function BlogPost({
         </div>
       )}
 
-      <div className="flex-1 w-full max-w-3xl mx-auto my-8 px-4 md:px-0 flex flex-col">
+      <div className="flex-1 my-8 px-4 lg:px-0 flex flex-col w-full max-w-5xl mx-auto">
         {/* Metadata */}
         <BlogPostMetadata
+          className="w-full max-w-3xl mx-auto"
           frontmatter={frontmatter}
           readingTime={readingTime}
           tableOfContents={tableOfContents}
         />
 
         {/* Content */}
-        <div className="stretch grow-1 w-full prose dark:prose-invert max-w-3xl">
+        <div className="stretch grow-1 w-full prose dark:prose-invert max-w-5xl">
           {children}
         </div>
 
-        {/* Links */}
-        <div className="my-4 flex gap-2 justify-between items-center text-center [&>*]:flex-1">
-          <div>
-            {prevBlogPost && (
-              <Link
-                href={`/blog/${prevBlogPost.slug}`}
-                className="text-theme-red-400 underline flex justify-center items-center"
-              >
-                <Icon
-                  icon="ArrowDown"
-                  className="shrink-0 h-4 w-auto rotate-90"
-                />
-                <span className="flex-1">{prevBlogPost.frontmatter.title}</span>
-              </Link>
-            )}
-          </div>
-
-          <Button as={Link} href="/blog" className="h-full w-full font-bold">
-            <ScrambledText className="block">{t('backToBlog')}</ScrambledText>
-          </Button>
-
-          <div>
-            {nextBlogPost && (
-              <Link
-                href={`/blog/${nextBlogPost.slug}`}
-                className="text-theme-red-400 underline flex justify-center items-center"
-              >
-                <span className="flex-1">{nextBlogPost.frontmatter.title}</span>
-                <Icon
-                  icon="ArrowDown"
-                  className="shrink-0 h-4 w-auto rotate-270"
-                />
-              </Link>
-            )}
-          </div>
-        </div>
-
-        {/* Comments */}
-        <CustomH as="h1" id="comments" className="text-4xl font-bold">
-          {t('comments')}
-        </CustomH>
-
-        {/* https://giscus.app/ */}
-        <div className="overflow-x-auto">
-          <Giscus
-            id="comments"
-            repo="shevtsod/shevtsod.github.io"
-            repoId="R_kgDOI0bUEA"
-            category="Announcements"
-            categoryId="DIC_kwDOI0bUEM4CudQg"
-            mapping="pathname"
-            strict="1"
-            reactionsEnabled="1"
-            inputPosition="top"
-            theme={theme}
-            lang={locale}
-            loading="eager"
-          />
-
-          <div className="text-sm italic text-right">
-            {t.rich('commentsAttribution', {
-              link: () => (
+        <div className="w-full max-w-3xl mx-auto">
+          {/* Links */}
+          <div className="my-4 flex gap-2 justify-between items-center text-center [&>*]:flex-1">
+            <div>
+              {prevBlogPost && (
                 <Link
-                  href="https://giscus.app/"
-                  target="_blank"
-                  className="text-theme-red-400 underline"
+                  href={`/blog/${prevBlogPost.slug}`}
+                  className="text-theme-red-400 underline flex justify-center items-center"
                 >
-                  giscus
+                  <Icon
+                    icon="ArrowDown"
+                    className="shrink-0 h-4 w-auto rotate-90"
+                  />
+                  <span className="flex-1 font-bold">
+                    {prevBlogPost.frontmatter.title}
+                  </span>
                 </Link>
-              ),
-            })}
+              )}
+            </div>
+
+            <Button as={Link} href="/blog" className="h-full w-full font-bold">
+              <ScrambledText className="block">{t('backToBlog')}</ScrambledText>
+            </Button>
+
+            <div>
+              {nextBlogPost && (
+                <Link
+                  href={`/blog/${nextBlogPost.slug}`}
+                  className="text-theme-red-400 underline flex justify-center items-center"
+                >
+                  <span className="flex-1 font-bold">
+                    {nextBlogPost.frontmatter.title}
+                  </span>
+                  <Icon
+                    icon="ArrowDown"
+                    className="shrink-0 h-4 w-auto rotate-270"
+                  />
+                </Link>
+              )}
+            </div>
+          </div>
+
+          {/* Comments */}
+          <CustomH as="h1" id="comments" className="text-4xl font-bold">
+            {t('comments')}
+          </CustomH>
+
+          {/* https://giscus.app/ */}
+          <div className="overflow-x-auto">
+            <Giscus
+              id="comments"
+              repo="shevtsod/shevtsod.github.io"
+              repoId="R_kgDOI0bUEA"
+              category="Announcements"
+              categoryId="DIC_kwDOI0bUEM4CudQg"
+              mapping="pathname"
+              strict="1"
+              reactionsEnabled="1"
+              inputPosition="top"
+              theme={theme}
+              lang={locale}
+              loading="eager"
+            />
+
+            <div className="text-sm italic text-right">
+              {t.rich('commentsAttribution', {
+                link: () => (
+                  <Link
+                    href="https://giscus.app/"
+                    target="_blank"
+                    className="text-theme-red-400 underline"
+                  >
+                    giscus
+                  </Link>
+                ),
+              })}
+            </div>
           </div>
         </div>
       </div>

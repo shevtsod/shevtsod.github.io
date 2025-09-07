@@ -98,13 +98,19 @@ const withMDX = createMDX({
       ['remark-reading-time/mdx'],
     ],
     rehypePlugins: [
-      // https://mdxjs.com/guides/syntax-highlighting/
-      ['rehype-highlight'],
+      // https://github.com/rockchalkwushock/rehype-code-titles
+      ['rehype-code-titles'],
+      // https://github.com/timlrx/rehype-prism-plus
+      ['rehype-prism-plus', { ignoreMissing: true }],
       // https://github.com/rehypejs/rehype-slug
       ['rehype-slug'],
       // https://github.com/stefanprobst/rehype-extract-toc
       ['@stefanprobst/rehype-extract-toc'],
       ['@stefanprobst/rehype-extract-toc/mdx'],
+      // https://github.com/lin-stephanie/rehype-callouts
+      ['rehype-callouts'],
+      // https://github.com/Robot-Inventor/rehype-image-caption
+      ['rehype-image-caption'],
     ],
   },
 });
