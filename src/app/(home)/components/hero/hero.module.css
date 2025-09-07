@@ -1,5 +1,15 @@
-.title {
+.container.intro {
   animation-name: shine;
+  animation-duration: 10s;
+  animation-timing-function: steps(60, end);
+  animation-delay: 6s;
+  animation-iteration-count: 1;
+  animation-direction: normal;
+  animation-fill-mode: both;
+}
+
+.title {
+  animation-name: titleShine;
   animation-duration: 10s;
   animation-timing-function: steps(60, end);
   animation-delay: 1s;
@@ -26,7 +36,7 @@
 }
 
 .title.intro {
-  animation-name: fade, shine;
+  animation-name: fade, titleShine;
   animation-duration: 2.5s, 10s;
   animation-timing-function: steps(4, end), steps(60, end);
   animation-delay: 1s, 6s;
@@ -66,6 +76,32 @@
 }
 
 @keyframes shine {
+  3% {
+    background-color: initial;
+  }
+
+  5% {
+    background-color: var(--animation-shine-color);
+  }
+
+  15% {
+    background-color: initial;
+  }
+
+  28% {
+    background-color: initial;
+  }
+
+  30% {
+    background-color: var(--animation-shine-color);
+  }
+
+  40% {
+    background-color: initial;
+  }
+}
+
+@keyframes titleShine {
   0% {
     background-position-x: 100%;
   }

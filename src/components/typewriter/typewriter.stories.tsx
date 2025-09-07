@@ -20,7 +20,7 @@ export const Styled: Story = {
   args: {
     children: faker.lorem.paragraphs(2),
     duration: 5000,
-    paused: true,
+    play: false,
   },
   decorators: [
     (Story) => (

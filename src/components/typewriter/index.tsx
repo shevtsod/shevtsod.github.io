@@ -5,7 +5,7 @@ import { ComponentProps, useEffect, useState } from 'react';
 export interface TypewriterProps extends ComponentProps<'span'> {
   children: string;
   duration?: number;
-  paused?: boolean;
+  play?: boolean;
 }
 
 /**
@@ -14,7 +14,7 @@ export interface TypewriterProps extends ComponentProps<'span'> {
 export default function Typewriter({
   children,
   duration = 1000,
-  paused,
+  play = false,
   className,
   ...props
 }: TypewriterProps) {
@@ -27,7 +27,7 @@ export default function Typewriter({
 
   // Increments the character counter on an interval
   useEffect(() => {
-    if (!children.length || paused) return;
+    if (!children.length || !play) return;
     if (duration === 0) {
       setCounter(children.length);
       return;
@@ -38,7 +38,7 @@ export default function Typewriter({
     }, duration / children.length);
 
     return () => clearInterval(interval);
-  }, [paused, duration, children]);
+  }, [play, duration, children]);
 
   return (
     <span

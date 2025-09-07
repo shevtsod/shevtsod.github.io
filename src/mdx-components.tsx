@@ -3,6 +3,7 @@ import { YouTubeEmbed } from '@next/third-parties/google';
 import classNames from 'classnames';
 import type { MDXComponents } from 'mdx/types';
 import Link from 'next/link';
+import Script from 'next/script';
 import { ElementType } from 'react';
 import {
   PolymorphicComponent,
@@ -48,6 +49,7 @@ const components: MDXComponents = {
   h4: (props) => <CustomH as="h4" {...props} />,
   h5: (props) => <CustomH as="h5" {...props} />,
   h6: (props) => <CustomH as="h6" {...props} />,
+  Script,
   YouTubeEmbed,
 };
 

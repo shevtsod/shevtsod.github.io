@@ -178,7 +178,7 @@ export default function Project({
           <div className="flex-2">
             {/* Description */}
             <Typewriter
-              paused={!isInView}
+              play={isInView}
               duration={2000}
               className="font-bold text-sm md:text-base"
             >

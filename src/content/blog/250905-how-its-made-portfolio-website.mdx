@@ -18,9 +18,9 @@ always the case. I started it in 2023 but was struggling to find the motivation
 to keep building it. I was originally going to build a run-of-the-mill
 corporate-style resume-as-HTML website but it just felt like a slog. That
 changed earlier this year when I had a 💡 moment and realized it doesn't have to
-be a boring corporate website if I built it around something I am passionate
-about, retro video games, and that epiphany helped me build it from start to
-finish in the last 4 months.
+be a boring website if I built it around something I am passionate about - retro
+video games - and that epiphany helped me build it from start to finish in the
+last 4 months.
 
 I thought it would be fun to look back at all the iterations of the website
 through the magic of version control and see how it evolved. If you are also a
@@ -31,28 +31,47 @@ inspiration to find your own passion and motivation to start building it!
 # Inspirations
 
 I grew up in the late 90s and early 2000s and love video games from that era -
-specifically GBA, PS1, and PS2. Is it fair to call those "retro" now? Anyway,
-something about the look and feel of games from that era (the **soul**, so to
-speak) is very nostalgic to me, so I thought it would be really fun to build my
-portfolio website and mimic some visual elements from games of that generation.
-I had 4 main inspirations:
+specifically GBA, PS1, and PS2. Is it fair to call those "retro" now? Something
+about the look and feel of games from that era (the **soul**, so to speak) is
+very nostalgic to me, so I thought it would be really fun to build my portfolio
+website and mimic some visual elements from games of that generation. I had 4
+main inspirations:
 
 - [**Mega Man Battle Network**](https://en.wikipedia.org/wiki/Mega_Man_Battle_Network)
 - [**Metal Gear Solid**](<https://en.wikipedia.org/wiki/Metal_Gear_Solid_(1998_video_game)>)
 - [**Pokemon Ruby/Sapphire/Emerald**](https://en.wikipedia.org/wiki/Pok%C3%A9mon_Ruby_and_Sapphire)
 - [**Signalis**](https://en.wikipedia.org/wiki/Signalis) - Not technically a
-  retro game being that it released in 2022, but its influences (Resident Evil
-  and Silent Hill) and visuals obviously call back to that era.
+  retro game since it released in 2022, but its influences (Resident Evil and
+  Silent Hill) and visuals obviously call back to that era.
 
-I found myself spending a lot of time watching videos of these 4 games and
-constantly referring back to them for inspiration as I was building the website
-to try to capture their **soul**. If you are familiar with any of these games, I
-hope you caught some references in the home page, but I'll point them out in the
-sections below too.
+I found myself spending a lot of time looking at screenshots and videos of these
+4 games and constantly referring back to them for inspiration as I was building
+the website to try to capture their _je ne sais quoi_. If you are familiar with
+any of these games, I hope you caught some references on the home page, but I'll
+point them out in the sections below too.
 
 # Iterations and Lessons Learned
 
 # The Tech Stack
+
+I eventually settled on the tech stack below:
+
+- [Next.js](https://nextjs.org/) with the App Router and using
+  [Static Exports](https://nextjs.org/docs/app/guides/static-exports) to deploy
+  as a static site
+- [Tailwind](https://tailwindcss.com/) for styling (with some CSS modules
+  sprinkled in for more complex CSS)
+- [Motion](https://motion.dev/) for a couple fancy animations
+- [MDX](https://mdxjs.com/) for blog articles like this one written in Markdown
+- [giscus](https://giscus.app/) for comment sections in blog posts
+- [GitHub Actions](https://github.com/features/actions) to build and
+  [GitHub Pages](https://pages.github.com/) to host the static site
+- [Storybook](https://storybook.js.org/) for testing components in isolation
+- and a special shoutout to
+  [classnames](https://www.npmjs.com/package/classnames), such a simple but
+  flexible utility that opens up so many advanced styling options.
+
+So far, this works quite well and covers all my needs!
 
 # Techniques and Tricks
 
@@ -79,11 +98,30 @@ sections below too.
 
 ![Hero](/images/blog/250905-how-its-made-portfolio-website/hero.png)
 
-I hope it's obvious that this one is a reference to title drops in many GBA
-games. Specifically, the one in the opening intro of **Pokemon
-Ruby/Sapphire/Emerald**.
+The hero section, the big, bold banner at the top of a website whose only job is
+to make an impact. First impressions are everything!
+
+This one is a reference to title drops in many retro games. Specifically, mine
+is inspired by the opening intro of **Pokemon Ruby/Sapphire/Emerald**.
 
 <YouTubeEmbed videoId="shUkq1sfSyU" />
+
+The subtle 3D text effect and shine rolling over it made me really want to
+recreate it, and the hero section was a perfect fit.
+
+The effect is actually really simple - it's just a combination of
+`transform: perspective()` for the 3D effect and a very specific
+`background: linear-gradient()` for that glossy, reflective shine.
+
+<div
+  className="codepen"
+  data-height="432"
+  data-default-tab="result"
+  data-slug-hash="MYaZgwY"
+  data-pen-title="hero"
+  data-user="shevtsod"
+/>
+<Script src="https://public.codepenassets.com/embed/index.js" />
 
 ### Summary
 
