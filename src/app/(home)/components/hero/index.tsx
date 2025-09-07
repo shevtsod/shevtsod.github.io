@@ -29,6 +29,7 @@ export default function Hero<T extends ElementType>({
 
   // Start the subtitle animation with a delay
   useEffect(() => {
+    if (intro === undefined) return;
     setPlaySubtitle(!intro);
     const timeout = setTimeout(() => setPlaySubtitle(true), 3500);
     return () => clearTimeout(timeout);

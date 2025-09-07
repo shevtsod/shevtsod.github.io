@@ -28,6 +28,7 @@ export default function Typewriter({
   // Increments the character counter on an interval
   useEffect(() => {
     if (!children.length || !play) return;
+
     if (duration === 0) {
       setCounter(children.length);
       return;
