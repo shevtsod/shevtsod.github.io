@@ -91,7 +91,7 @@ export default function BlogPost({
                   className="text-theme-red-400 underline flex justify-center items-center"
                 >
                   <Icon
-                    icon="ArrowDown"
+                    icon="ChevronDown"
                     className="shrink-0 h-4 w-auto rotate-90"
                   />
                   <span className="flex-1 font-bold">
@@ -115,7 +115,7 @@ export default function BlogPost({
                     {nextBlogPost.frontmatter.title}
                   </span>
                   <Icon
-                    icon="ArrowDown"
+                    icon="ChevronDown"
                     className="shrink-0 h-4 w-auto rotate-270"
                   />
                 </Link>

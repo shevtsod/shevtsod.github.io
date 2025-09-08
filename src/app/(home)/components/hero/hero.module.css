@@ -46,22 +46,22 @@
 }
 
 .chevron {
-  animation-name: floatDown;
-  animation-duration: 1.2s;
-  animation-timing-function: steps(3, end);
+  animation-name: blink;
+  animation-duration: 2s;
+  animation-timing-function: steps(1, end);
   animation-delay: 0s;
   animation-direction: normal;
-  animation-fill-mode: forwards;
+  animation-fill-mode: none;
   animation-iteration-count: infinite;
 }
 
 .chevron.intro {
-  animation-name: fade, floatDown;
-  animation-duration: 1s, 1.2s;
-  animation-timing-function: steps(4, end), steps(3, end);
-  animation-delay: 6s, 0s;
+  animation-name: fade, blink;
+  animation-duration: 1s, 2s;
+  animation-timing-function: steps(1, end), steps(1, end);
+  animation-delay: 6s, 7s;
   animation-direction: normal, normal;
-  animation-fill-mode: backwards, forwards;
+  animation-fill-mode: backwards, none;
   animation-iteration-count: 1, infinite;
 }
 
@@ -147,12 +147,15 @@
   }
 }
 
-@keyframes floatDown {
-  from {
-    transform: translateY(-20px);
+@keyframes blink {
+  0% {
   }
 
-  to {
-    transform: translateY(0);
+  66% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 0%;
   }
 }

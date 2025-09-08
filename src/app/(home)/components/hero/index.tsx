@@ -42,11 +42,7 @@ export default function Hero<T extends ElementType>({
   });
 
   // "SCROLL" chevron visibility based on scroll position
-  const chevronOpacity = useTransform(
-    scrollYProgress,
-    [0.1, 0.19, 0.2, 0.39, 0.4],
-    [1, 1, 0.5, 0.5, 0],
-  );
+  const chevronOpacity = useTransform(scrollYProgress, [0.1, 0.5], [1, 0]);
 
   return (
     <PolymorphicComponent
@@ -90,22 +86,18 @@ export default function Hero<T extends ElementType>({
         </h2>
 
         <motion.div
-          style={{
-            opacity: chevronOpacity,
-          }}
           className={classNames(
-            'important-opacity absolute bottom-0 right-0 mx-10 my-10 flex flex-col items-center font-retro pointer-events-none',
+            'absolute bottom-0 right-0 mx-6 my-12 flex flex-col items-center pointer-events-none gap-2 text-theme-orange-600 dark:text-theme-orange-200',
             styles.chevron,
             // add intro class only if intro mode is enabled
             { [styles.intro]: intro },
           )}
+          style={{
+            opacity: chevronOpacity,
+          }}
         >
-          <div>SCROLL</div>
-          <Icon
-            icon="ArrowDown"
-            className="h-[32px] w-auto"
-            viewBox="0 0 16 16"
-          />
+          <div className="uppercase font-bold font-pixel">{t('scroll')}</div>
+          <Icon icon="ArrowFullDown" className="w-8 h-auto" />
         </motion.div>
       </div>
     </PolymorphicComponent>
