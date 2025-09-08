@@ -38,7 +38,7 @@ export default function BlogPost({
   const t = useTranslations('app.blog.[slug].components.blog-post');
   const { theme } = useTheme();
   const { scrollY } = useScroll();
-  const invertedHalfScrollY = useTransform(scrollY, (val) => val * -0.5 - 400);
+  const invertedHalfScrollY = useTransform(scrollY, (val) => val * -0.5 - 250);
   const { frontmatter } = blogPost;
   const { imageUrl } = frontmatter;
 
@@ -49,7 +49,7 @@ export default function BlogPost({
         <div className="relative w-full max-h-96">
           {/* Background blur */}
           <motion.div
-            className="absolute h-full w-full bg-cover bg-repeat-y opacity-25"
+            className="absolute h-full w-full bg-cover bg-repeat-y"
             style={{
               backgroundImage: `url('${imageUrl}')`,
               backgroundPositionY: invertedHalfScrollY,
@@ -62,7 +62,7 @@ export default function BlogPost({
             width={1280}
             height={720}
             alt={t('image')}
-            className="z-1 w-full h-auto max-h-96 object-contain backdrop-blur-xl"
+            className="z-1 w-full h-auto max-h-96 object-contain backdrop-blur-xl bg-white/75 dark:bg-black/75"
           />
         </div>
       )}

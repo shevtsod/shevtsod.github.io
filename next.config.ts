@@ -96,6 +96,8 @@ const withMDX = createMDX({
       // https://github.com/mattjennings/remark-reading-time
       ['remark-reading-time'],
       ['remark-reading-time/mdx'],
+      // https://github.com/zestedesavoir/zmarkdown/
+      ['remark-captions'],
     ],
     rehypePlugins: [
       // https://github.com/rockchalkwushock/rehype-code-titles
@@ -109,8 +111,6 @@ const withMDX = createMDX({
       ['@stefanprobst/rehype-extract-toc/mdx'],
       // https://github.com/lin-stephanie/rehype-callouts
       ['rehype-callouts'],
-      // https://github.com/Robot-Inventor/rehype-image-caption
-      ['rehype-image-caption'],
     ],
   },
 });

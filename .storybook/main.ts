@@ -5,9 +5,9 @@ import rehypeExtractTocMdx from '@stefanprobst/rehype-extract-toc/mdx';
 import type { StorybookConfig } from '@storybook/nextjs';
 import rehypeCallouts from 'rehype-callouts';
 import rehypeCodeTitles from 'rehype-code-titles';
-import rehypeImageCaption from 'rehype-image-caption';
 import rehypePrismPlus from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
+import remarkCaptions from 'remark-captions';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
@@ -34,6 +34,8 @@ const config: StorybookConfig = {
               // https://github.com/mattjennings/remark-reading-time
               remarkReadingTime,
               remarkReadingTimeMdx,
+              // https://github.com/zestedesavoir/zmarkdown/
+              remarkCaptions,
             ],
             rehypePlugins: [
               // https://github.com/rockchalkwushock/rehype-code-titles
@@ -47,8 +49,6 @@ const config: StorybookConfig = {
               rehypeExtractTocMdx,
               // https://github.com/lin-stephanie/rehype-callouts
               rehypeCallouts,
-              // https://github.com/Robot-Inventor/rehype-image-caption
-              rehypeImageCaption,
             ],
           },
         },

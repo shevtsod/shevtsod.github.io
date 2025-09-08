@@ -220,6 +220,10 @@
     "boot": {
       "title": "BOOTING ..."
     },
+    "copy-button": {
+      "copy": "Copy",
+      "copied": "Copied to clipboard"
+    },
     "layout": {
       "footer": {
         "footerLinksSections": {

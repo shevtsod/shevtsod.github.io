@@ -9,7 +9,6 @@ import {
   motion,
   useMotionValueEvent,
   useScroll,
-  useSpring,
   useTransform,
 } from 'motion/react';
 import { useTranslations } from 'next-intl';
@@ -46,11 +45,7 @@ export default function Header({
   const { scrollY, scrollYProgress } = useScroll();
   const [shown, setShown] = useState(!showOnScroll);
   const pathname = usePathname();
-  const smoothScrollY = useSpring(scrollYProgress, {
-    stiffness: 100,
-    damping: 20,
-  });
-  const progress = useTransform(smoothScrollY, [0, 1], ['0%', '100%']);
+  const progress = useTransform(scrollYProgress, [0, 1], ['0%', '100%']);
 
   // Reset scroll progress when pathname changes
   useEffect(() => {

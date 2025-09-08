@@ -4,7 +4,8 @@ import classNames from 'classnames';
 import type { MDXComponents } from 'mdx/types';
 import Link from 'next/link';
 import Script from 'next/script';
-import { ElementType } from 'react';
+import { ComponentProps, ElementType } from 'react';
+import CopyButton from './components/copy-button';
 import {
   PolymorphicComponent,
   PolymorphicComponentProps,
@@ -40,6 +41,24 @@ export function CustomH<T extends ElementType>({
   );
 }
 
+export interface CustomPreProps extends ComponentProps<'pre'> {
+  __rawString__: string;
+}
+
+export function CustomPre({
+  children,
+  className,
+  __rawString__ = '',
+  ...props
+}: CustomPreProps) {
+  return (
+    <pre className={classNames('relative', className)} {...props}>
+      <CopyButton className="absolute top-0 right-0 z-1 p-1.5 mr-5 mt-1 rounded-lg" />
+      {children}
+    </pre>
+  );
+}
+
 // https://nextjs.org/docs/app/guides/mdx#global-styles-and-components
 const components: MDXComponents = {
   a: (props) => <a target="_blank" {...props} />,
@@ -49,6 +68,7 @@ const components: MDXComponents = {
   h4: (props) => <CustomH as="h4" {...props} />,
   h5: (props) => <CustomH as="h5" {...props} />,
   h6: (props) => <CustomH as="h6" {...props} />,
+  pre: CustomPre,
   Script,
   YouTubeEmbed,
 };

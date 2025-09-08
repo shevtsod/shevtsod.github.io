@@ -16,6 +16,7 @@
 
 /* https://tailwindcss.com/docs/theme */
 @theme {
+  --color-theme-gray-50: #f3f3f3;
   --color-theme-gray-100: #dddddd;
   --color-theme-gray-200: #bebebe;
   --color-theme-gray-400: #858585;
@@ -142,10 +143,10 @@
 
   /* block code */
   pre {
-    @apply max-h-200 p-0! my-2! rounded-lg!;
+    @apply p-0! my-2! rounded-lg! overflow-x-hidden!;
 
     code {
-      @apply block p-0! overflow-x-auto rounded-none;
+      @apply block max-h-200 p-0! rounded-none overflow-x-auto!;
 
       .code-line {
         @apply block py-0.25 px-2;
@@ -177,9 +178,13 @@
     }
   }
 
+  strong {
+    @apply text-inherit!;
+  }
+
   /* https://github.com/rockchalkwushock/rehype-code-titles */
   .rehype-code-title {
-    @apply bg-slate-300 dark:bg-gray-700 -mb-2 px-2 rounded-t-lg font-mono text-base py-0.5;
+    @apply bg-slate-200 dark:bg-gray-700 -mb-2 px-2 rounded-t-lg font-mono text-base py-0.5;
 
     & + pre {
       @apply rounded-t-none!;
