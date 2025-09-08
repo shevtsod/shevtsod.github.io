@@ -96,8 +96,10 @@ export default function Hero<T extends ElementType>({
             opacity: chevronOpacity,
           }}
         >
-          <div className="uppercase font-bold font-pixel">{t('scroll')}</div>
-          <Icon icon="ArrowFullDown" className="w-8 h-auto" />
+          <div className="uppercase font-bold font-pixel text-xs md:text-sm">
+            {t('scroll')}
+          </div>
+          <Icon icon="ArrowFullDown" className="w-4 md:w-6 h-auto" />
         </motion.div>
       </div>
     </PolymorphicComponent>
