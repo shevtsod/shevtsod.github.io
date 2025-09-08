@@ -53,7 +53,7 @@ export function CustomPre({
 }: CustomPreProps) {
   return (
     <pre className={classNames('relative', className)} {...props}>
-      <CopyButton className="absolute top-0 right-0 z-1 p-1.5 mr-5 mt-1 rounded-lg" />
+      <CopyButton className="absolute top-0 right-0 z-1 p-1.5 mr-5 mt-1 rounded-lg opacity-50" />
       {children}
     </pre>
   );
