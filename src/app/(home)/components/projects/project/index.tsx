@@ -1,10 +1,10 @@
 import Skill from '@/app/(home)/components/skills/skill';
 import Button from '@/components/button';
-import ScrambledText from '@/components/scrambled-text';
 import Typewriter from '@/components/typewriter';
 import { ProjectType } from '@/content/projects';
 import { skillCategories, SkillCategoryType } from '@/content/skills';
 import useFadeInView, { UseFadeInViewOptions } from '@/hooks/use-fade-in-view';
+import { useIntro } from '@/hooks/use-intro';
 import classNames from 'classnames';
 import { useInView } from 'motion/react';
 import { useTranslations } from 'next-intl';
@@ -28,6 +28,7 @@ export default function Project({
   const videoRef = useRef<HTMLVideoElement>(null);
   const isNearMiddle = useInView(ref, { margin: '-50% 0px -50% 0px' });
   const t = useTranslations('app.(home).components.projects.project');
+  const [intro] = useIntro();
   const isInView = useFadeInView(ref, {
     once: true,
     amount: 'all',
@@ -60,28 +61,23 @@ export default function Project({
 
   return (
     <div ref={ref} className="relative flex flex-col md:flex-row">
+      {/* Colour overlay */}
+      <div
+        className={classNames(
+          `z-1 absolute w-full h-full bg-linear-to-b md:bg-linear-to-r from-40% to-80% from-theme-red-800/60 to-transparent backdrop-blur-md lg:backdrop-blur-lg bg-blend-multiply transition-opacity ease-[steps(2,end)] duration-200 pointer-events-none`,
+          { 'opacity-0': isNearMiddle },
+        )}
+      />
+
       {/* Grain overlay */}
       <div
         className={classNames(
-          `z-1 absolute w-full h-full bg-[url('/images/ui/grain.svg')] bg-repeat bg-size-[256px] brightness-200 dark:brightness-0 opacity-25 dark:opacity-50 transition-opacity ease-[steps(2,end)] duration-200 pointer-events-none`,
-          {
-            'opacity-0!': isNearMiddle,
-          },
+          `z-1 absolute w-full h-full bg-[url('/images/ui/grain.svg')] bg-repeat bg-size-[256px] brightness-200 dark:brightness-0 opacity-10 dark:opacity-30 transition-opacity ease-[steps(2,end)] duration-200 pointer-events-none`,
+          { 'opacity-0': isNearMiddle },
         )}
       />
 
       <div className="relative flex-1 grow flex justify-center px-8 aspect-video">
-        {/* Colour overlay */}
-        <div
-          className={classNames(
-            `absolute w-full h-full bg-blend-multiply transition-colors ease-[steps(2,end)] duration-200 pointer-events-none`,
-            {
-              'bg-theme-red-800/60 backdrop-blur-md lg:backdrop-blur-lg':
-                !isNearMiddle,
-            },
-          )}
-        />
-
         {promo.type === 'video' && (
           <video
             ref={videoRef}
@@ -110,12 +106,7 @@ export default function Project({
         )}
       </div>
 
-      <div
-        className={classNames(
-          'flex-1 self-stretch flex py-8 px-8 from-theme-red-800/60 bg-gradient-to-b md:bg-gradient-to-r from-10% md:from-0% to-50% md:to-40% xl:to-30% to-transparent transition-colors ease-[steps(2,end)] duration-200',
-          { 'from-transparent': isNearMiddle },
-        )}
-      >
+      <div className="flex-1 self-stretch flex py-8 px-8">
         <div className="z-1 xl:max-w-2xl self-stretch flex flex-col justify-around gap-4">
           <div className="flex-3 flex flex-col gap-4 justify-end">
             {/* Title */}
@@ -126,7 +117,7 @@ export default function Project({
                   target="_blank"
                   className="text-theme-red-400"
                 >
-                  <ScrambledText>{`${title}`}</ScrambledText>
+                  {`${title}`}
                 </Link>
               ) : (
                 `${title}`
@@ -135,7 +126,7 @@ export default function Project({
 
             {/* Skills */}
             {projectSkillCategories.length && (
-              <ul className="flex flex-wrap gap-3 group">
+              <ul className="flex flex-wrap gap-1 group">
                 {projectSkillCategories.map((skillCategory) =>
                   skillCategory.skills.map((skill, i) => (
                     <li key={i}>
@@ -155,7 +146,7 @@ export default function Project({
 
             {/* Links */}
             {links?.length && (
-              <ul className="flex flex-wrap gap-2">
+              <ul className="flex flex-wrap gap-1">
                 {links?.map((link, i) => (
                   <li key={i}>
                     <Button
@@ -165,9 +156,7 @@ export default function Project({
                       variant="warn"
                       className="text-center md:text-lg px-2 font-bold"
                     >
-                      <ScrambledText>
-                        {t(`links.${link.key}.title`)}
-                      </ScrambledText>
+                      {t(`links.${link.key}.title`)}
                     </Button>
                   </li>
                 ))}
@@ -179,7 +168,7 @@ export default function Project({
             {/* Description */}
             <Typewriter
               play={isInView}
-              duration={2000}
+              duration={intro === false ? 0 : 2000}
               className="font-bold text-sm md:text-base"
             >
               {description}

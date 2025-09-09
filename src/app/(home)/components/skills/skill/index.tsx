@@ -23,13 +23,13 @@ export default function Skill({
   return (
     <span
       className={classNames(
-        'inline-flex items-center gap-1 py-1 px-2 rounded-md bg-theme-blue-100 dark:bg-theme-blue-600 hover:bg-theme-blue-150 dark:hover:bg-theme-blue-400 dark:text-theme-gray-200 hover:scale-115 hover:brightness-100 group-hover:brightness-50 transition-all duration-200',
+        'relative inline-flex items-center gap-1 py-1 px-2 bg-theme-blue-100 dark:bg-theme-blue-600 hover:bg-theme-blue-150 dark:hover:bg-theme-blue-400 dark:text-theme-gray-200 hover:scale-115 hover:brightness-100 group-hover:brightness-50 transition-all duration-200 hover:z-1',
         className,
       )}
       {...props}
     >
       {icon && <Icon icon={icon} className="h-3 md:h-4 w-auto" />}
-      <span className="text-xs md:text-sm font-bold">
+      <span className="text-sm md:text-base font-bold">
         {t(`skills.${key}.title`)}
       </span>
     </span>

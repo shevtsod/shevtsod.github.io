@@ -88,11 +88,14 @@ export default function Experience<T extends ElementType>({
                       </div>
 
                       <div
-                        className={classNames('flex-6 basis-0 shrink-0', {
-                          'pt-4': i > 0,
-                          'pb-4':
-                            i < experienceCategory.experienceItems.length - 1,
-                        })}
+                        className={classNames(
+                          'flex-6 basis-0 shrink-0 text-sm md:text-base',
+                          {
+                            'pt-4': i > 0,
+                            'pb-4':
+                              i < experienceCategory.experienceItems.length - 1,
+                          },
+                        )}
                       >
                         <div className="font-bold font-retro text-xl md:text-2xl text-theme-red-600 dark:text-theme-red-200">
                           {experienceItem.title}

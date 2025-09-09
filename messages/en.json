@@ -102,7 +102,7 @@
             "networking": {
               "title": "Networking",
               "skills": {
-                "fortigate": { "title": "FortiGate + FortiManager" },
+                "fortigate": { "title": "FortiGate/FortiManager" },
                 "netbox": { "title": "NetBox" },
                 "bind": { "title": "BIND" }
               }

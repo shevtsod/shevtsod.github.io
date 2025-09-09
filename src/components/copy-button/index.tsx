@@ -13,7 +13,7 @@ export default function CopyButton({ className, ...props }: CopyButtonProps) {
 
   const copy = async (event: MouseEvent<HTMLButtonElement>) => {
     const currentTarget = event.currentTarget;
-    const sibling = currentTarget.nextSibling;
+    const sibling = currentTarget.previousSibling;
 
     if (navigator.clipboard) {
       await navigator.clipboard.writeText(sibling?.textContent ?? '');
@@ -34,8 +34,8 @@ export default function CopyButton({ className, ...props }: CopyButtonProps) {
   return (
     <button
       className={classNames(
-        'bg-gray-200 dark:bg-gray-700  cursor-pointer',
-        { 'bg-green-200 dark:bg-green-900': copied },
+        'cursor-pointer',
+        { 'bg-green-300 dark:bg-green-700': copied },
         className,
       )}
       onClick={copy}

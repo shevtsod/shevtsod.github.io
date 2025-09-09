@@ -47,15 +47,16 @@ export interface CustomPreProps extends ComponentProps<'pre'> {
 
 export function CustomPre({
   children,
-  className,
   __rawString__ = '',
   ...props
 }: CustomPreProps) {
   return (
-    <pre className={classNames('relative', className)} {...props}>
-      <CopyButton className="absolute top-0 right-0 z-1 p-1.5 mr-5 mt-1 rounded-lg opacity-50" />
-      {children}
-    </pre>
+    <div className="relative pt-5 bg-gray-200 dark:bg-theme-gray-700 rounded-lg">
+      <pre {...props}>
+        {children}
+        <CopyButton className="absolute top-0 right-0 z-1 p-1.5 rounded-tr-lg" />
+      </pre>
+    </div>
   );
 }
 

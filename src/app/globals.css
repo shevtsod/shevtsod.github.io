@@ -143,20 +143,20 @@
 
   /* block code */
   pre {
-    @apply p-0! my-2! rounded-lg!;
+    @apply p-0! rounded-b-lg! rounded-t-none! bg-gray-100! dark:bg-theme-gray-800!;
 
     code {
-      @apply block max-h-200 p-0! rounded-none overflow-x-auto!;
+      @apply float-left min-w-full max-h-200 p-0! rounded-none bg-gray-100! dark:bg-theme-gray-800!;
 
       .code-line {
-        @apply block py-0.25 px-2;
+        @apply block px-2;
 
         &:first-child {
-          @apply pt-3;
+          @apply pt-2;
         }
 
         &:last-child {
-          @apply pb-3;
+          @apply pb-2;
         }
 
         &.inserted {
@@ -172,7 +172,7 @@
         }
 
         &.line-number::before {
-          @apply inline-block text-end content-[attr(line)] w-6 px-1 mr-1 text-gray-500 text-xs;
+          @apply inline-block text-end content-[attr(line)] w-6 mr-2 text-gray-500 text-xs;
         }
       }
     }
@@ -184,11 +184,7 @@
 
   /* https://github.com/rockchalkwushock/rehype-code-titles */
   .rehype-code-title {
-    @apply bg-slate-200 dark:bg-gray-700 -mb-2 px-2 rounded-t-lg font-mono text-base py-0.5;
-
-    & + pre {
-      @apply rounded-t-none!;
-    }
+    @apply relative z-1 top-6.5 -mt-7 pl-2 font-mono;
   }
 }
 

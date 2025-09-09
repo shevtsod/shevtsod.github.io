@@ -34,7 +34,7 @@ export default function Logo({
   const [animation, setAnimation] = useState<keyof typeof ANIMATION_FRAMES>(
     intro ? 'in' : 'static',
   );
-  const [frame, setFrame] = useState(0);
+  const [frame, setFrame] = useState(ANIMATION_FRAMES.static[0]);
 
   // Change animation
   useEffect(() => {
