@@ -72,8 +72,9 @@ export default function Project({
       {/* Grain overlay */}
       <div
         className={classNames(
-          `z-1 absolute w-full h-full bg-[url('/images/ui/grain.svg')] bg-repeat bg-size-[256px] brightness-200 dark:brightness-0 opacity-10 dark:opacity-30 transition-opacity ease-[steps(2,end)] duration-200 pointer-events-none`,
+          `z-1 absolute w-full h-full bg-[url('/images/ui/grain.svg')] bg-repeat bg-size-[256px] brightness-200 dark:brightness-0 transition-opacity ease-[steps(2,end)] duration-200 pointer-events-none`,
           { 'opacity-0': isNearMiddle },
+          { 'opacity-10 dark:opacity-30': !isNearMiddle },
         )}
       />
 
