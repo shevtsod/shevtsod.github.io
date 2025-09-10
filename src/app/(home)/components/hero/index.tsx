@@ -92,9 +92,7 @@ export default function Hero<T extends ElementType>({
             // add intro class only if intro mode is enabled
             { [styles.intro]: intro },
           )}
-          style={{
-            opacity: chevronOpacity,
-          }}
+          style={{ opacity: chevronOpacity }}
         >
           <div className="uppercase font-bold font-pixel text-xs md:text-sm">
             {t('scroll')}

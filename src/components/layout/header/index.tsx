@@ -97,7 +97,7 @@ export default function Header({
           <Logo intro={showOnScroll} shown={shown} animated={animatedLogo} />
         </Link>
 
-        <div className="h-full flex gap-1 items-center text-xs md:text-base text-theme-red-400">
+        <nav className="h-full flex gap-1 items-center text-xs md:text-base text-theme-red-400">
           {links.map(({ children, ...props }, i) => (
             <Button
               key={i}
@@ -124,7 +124,7 @@ export default function Header({
           </Link>
 
           <ThemeSwitch className="h-6! md:h-8!" />
-        </div>
+        </nav>
       </div>
 
       {showProgress && (

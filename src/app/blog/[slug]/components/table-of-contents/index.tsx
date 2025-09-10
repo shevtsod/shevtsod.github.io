@@ -12,14 +12,16 @@ export default function TableOfContents({
   className,
 }: TableOfContentsProps) {
   return (
-    <ul className={classNames('flex flex-col ms-4 list-disc', className)}>
+    <ul className={classNames('flex flex-col', className)}>
       {tableOfContents.map(({ id, value, children }, i) => (
         <li key={i} className="my-0.5!">
-          <Link href={`#${id}`} className="text-theme-red-400 underline">
+          <Link href={`#${id}`} className="text-theme-red-400 font-bold">
             {value}
           </Link>
 
-          {children && <TableOfContents tableOfContents={children} />}
+          {children && (
+            <TableOfContents tableOfContents={children} className="ms-4" />
+          )}
         </li>
       ))}
     </ul>

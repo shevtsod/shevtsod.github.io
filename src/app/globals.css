@@ -104,7 +104,7 @@
 
   /* inline code */
   code {
-    @apply rounded-lg p-1 bg-zinc-200 dark:bg-zinc-900 font-normal;
+    @apply rounded-lg p-1 bg-zinc-200 dark:bg-zinc-900 font-normal not-italic;
 
     /* Hide backticks */
     &::before,

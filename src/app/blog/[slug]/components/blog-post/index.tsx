@@ -13,6 +13,8 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useState } from 'react';
+import TableOfContents from '../table-of-contents';
 
 export interface BlogPostProps {
   children: React.ReactNode;
@@ -30,7 +32,7 @@ export default function BlogPost({
   children,
   blogPost,
   readingTime,
-  tableOfContents,
+  tableOfContents: originalTableOfContents,
   prevBlogPost,
   nextBlogPost,
 }: BlogPostProps) {
@@ -41,6 +43,20 @@ export default function BlogPost({
   const invertedHalfScrollY = useTransform(scrollY, (val) => val * -0.5 - 250);
   const { frontmatter } = blogPost;
   const { imageUrl } = frontmatter;
+
+  // Append more headings to automatically generated table of contents
+  const [tableOfContents] = useState(
+    originalTableOfContents
+      ? [
+          ...originalTableOfContents,
+          {
+            depth: 1,
+            value: t('comments'),
+            id: 'comments',
+          },
+        ]
+      : [],
+  );
 
   return (
     <article className="grow font-sans flex flex-col">
@@ -67,96 +83,115 @@ export default function BlogPost({
         </div>
       )}
 
-      <div className="flex-1 my-8 px-4 lg:px-0 flex flex-col w-full max-w-5xl mx-auto">
-        {/* Metadata */}
-        <BlogPostMetadata
-          className="w-full max-w-3xl mx-auto"
-          frontmatter={frontmatter}
-          readingTime={readingTime}
-          tableOfContents={tableOfContents}
-        />
-
-        {/* Content */}
-        <div className="stretch grow-1 w-full prose dark:prose-invert max-w-5xl">
-          {children}
+      <div className="relative">
+        {/* Table of Contents */}
+        <div className="h-full absolute top-0 hidden xl:block left-1/2 ml-112 p-4">
+          <div className="sticky top-22 z-1">
+            <TableOfContents tableOfContents={tableOfContents} />
+          </div>
         </div>
 
-        <div className="w-full max-w-3xl mx-auto">
-          {/* Links */}
-          <div className="my-4 flex gap-2 justify-between items-center text-center [&>*]:flex-1">
-            <div>
-              {prevBlogPost && (
-                <Link
-                  href={`/blog/${prevBlogPost.slug}`}
-                  className="text-theme-red-400 underline flex justify-center items-center"
-                >
-                  <Icon
-                    icon="ChevronDown"
-                    className="shrink-0 h-4 w-auto rotate-90"
-                  />
-                  <span className="flex-1 font-bold">
-                    {prevBlogPost.frontmatter.title}
-                  </span>
-                </Link>
-              )}
-            </div>
+        <div className="flex-1 my-8 px-4 lg:px-0 flex flex-col w-full max-w-4xl mx-auto">
+          {/* Metadata */}
+          <BlogPostMetadata
+            className="w-full max-w-3xl mx-auto mb-4"
+            frontmatter={frontmatter}
+            readingTime={readingTime}
+          />
 
-            <Button as={Link} href="/blog" className="h-full w-full font-bold">
-              <ScrambledText className="block">{t('backToBlog')}</ScrambledText>
-            </Button>
-
-            <div>
-              {nextBlogPost && (
-                <Link
-                  href={`/blog/${nextBlogPost.slug}`}
-                  className="text-theme-red-400 underline flex justify-center items-center"
-                >
-                  <span className="flex-1 font-bold">
-                    {nextBlogPost.frontmatter.title}
-                  </span>
-                  <Icon
-                    icon="ChevronDown"
-                    className="shrink-0 h-4 w-auto rotate-270"
-                  />
-                </Link>
-              )}
-            </div>
+          {/* Table of Contents */}
+          <div className="w-full max-w-3xl mx-auto mb-4 text-xs md:text-sm xl:hidden">
+            <TableOfContents tableOfContents={tableOfContents} />
           </div>
 
-          {/* Comments */}
-          <CustomH as="h1" id="comments" className="text-4xl font-bold">
-            {t('comments')}
-          </CustomH>
+          {/* Content */}
+          <div className="stretch grow-1 w-full prose dark:prose-invert max-w-4xl">
+            {children}
+          </div>
 
-          {/* https://giscus.app/ */}
-          <div className="overflow-x-auto">
-            <Giscus
-              id="comments"
-              repo="shevtsod/shevtsod.github.io"
-              repoId="R_kgDOI0bUEA"
-              category="Announcements"
-              categoryId="DIC_kwDOI0bUEM4CudQg"
-              mapping="pathname"
-              strict="1"
-              reactionsEnabled="1"
-              inputPosition="top"
-              theme={theme}
-              lang={locale}
-              loading="eager"
-            />
-
-            <div className="text-sm italic text-right">
-              {t.rich('commentsAttribution', {
-                link: () => (
+          <div className="w-full max-w-3xl mx-auto">
+            {/* Links */}
+            <div className="my-4 flex gap-2 justify-between items-center text-center [&>*]:flex-1">
+              <div>
+                {prevBlogPost && (
                   <Link
-                    href="https://giscus.app/"
-                    target="_blank"
-                    className="text-theme-red-400 underline"
+                    href={`/blog/${prevBlogPost.slug}`}
+                    className="text-theme-red-400 underline flex justify-center items-center"
                   >
-                    giscus
+                    <Icon
+                      icon="ChevronDown"
+                      className="shrink-0 h-4 w-auto rotate-90"
+                    />
+                    <span className="flex-1 font-bold">
+                      {prevBlogPost.frontmatter.title}
+                    </span>
                   </Link>
-                ),
-              })}
+                )}
+              </div>
+
+              <Button
+                as={Link}
+                href="/blog"
+                className="h-full w-full font-bold"
+              >
+                <ScrambledText className="block">
+                  {t('backToBlog')}
+                </ScrambledText>
+              </Button>
+
+              <div>
+                {nextBlogPost && (
+                  <Link
+                    href={`/blog/${nextBlogPost.slug}`}
+                    className="text-theme-red-400 underline flex justify-center items-center"
+                  >
+                    <span className="flex-1 font-bold">
+                      {nextBlogPost.frontmatter.title}
+                    </span>
+                    <Icon
+                      icon="ChevronDown"
+                      className="shrink-0 h-4 w-auto rotate-270"
+                    />
+                  </Link>
+                )}
+              </div>
+            </div>
+
+            {/* Comments */}
+            <CustomH as="h1" id="comments" className="text-4xl font-bold">
+              {t('comments')}
+            </CustomH>
+
+            {/* https://giscus.app/ */}
+            <div className="overflow-x-auto">
+              <Giscus
+                id="comments"
+                repo="shevtsod/shevtsod.github.io"
+                repoId="R_kgDOI0bUEA"
+                category="Announcements"
+                categoryId="DIC_kwDOI0bUEM4CudQg"
+                mapping="pathname"
+                strict="1"
+                reactionsEnabled="1"
+                inputPosition="top"
+                theme={theme}
+                lang={locale}
+                loading="eager"
+              />
+
+              <div className="text-sm italic text-right">
+                {t.rich('commentsAttribution', {
+                  link: () => (
+                    <Link
+                      href="https://giscus.app/"
+                      target="_blank"
+                      className="text-theme-red-400 underline"
+                    >
+                      giscus
+                    </Link>
+                  ),
+                })}
+              </div>
             </div>
           </div>
         </div>

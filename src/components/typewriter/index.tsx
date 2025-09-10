@@ -52,7 +52,7 @@ export default function Typewriter({
         () => {
           setCounter((value) => Math.min(value + 1, children.length));
         },
-        interval ?? duration / children.length,
+        interval || duration / children.length,
       );
     }, delay);
 

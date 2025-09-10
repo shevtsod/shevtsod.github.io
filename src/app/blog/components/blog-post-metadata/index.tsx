@@ -2,19 +2,16 @@ import Icon from '@/components/icon';
 import { FrontmatterType, ReadingTime } from '@/utils/blog';
 import { UTCDate } from '@date-fns/utc';
 import { run } from '@mdx-js/mdx';
-import { Toc } from '@stefanprobst/rehype-extract-toc';
 import classNames from 'classnames';
 import { format } from 'date-fns';
 import { MDXModule } from 'mdx/types';
 import { useTranslations } from 'next-intl';
 import { useEffect, useState } from 'react';
 import * as runtime from 'react/jsx-runtime';
-import TableOfContents from '../table-of-contents';
 
 export interface BlogPostMetadataProps {
   frontmatter: FrontmatterType;
   readingTime?: ReadingTime;
-  tableOfContents?: Toc;
   showDescription?: boolean;
   className?: string;
 }
@@ -22,7 +19,6 @@ export interface BlogPostMetadataProps {
 export default function BlogPostMetadata({
   frontmatter,
   readingTime,
-  tableOfContents: originalTableOfContents,
   showDescription = true,
   className,
 }: BlogPostMetadataProps) {
@@ -43,20 +39,6 @@ export default function BlogPostMetadata({
       })();
     }
   }, [descriptionMdx, showDescription]);
-
-  // Append more headings to automatically generated table of contents
-  const [tableOfContents] = useState(
-    originalTableOfContents
-      ? [
-          ...originalTableOfContents,
-          {
-            depth: 1,
-            value: t('comments'),
-            id: 'comments',
-          },
-        ]
-      : undefined,
-  );
 
   return (
     <div
@@ -121,11 +103,6 @@ export default function BlogPostMetadata({
           </span>
         )}
       </span>
-
-      {/* Table of Contents */}
-      {tableOfContents && (
-        <TableOfContents tableOfContents={tableOfContents} className="my-4" />
-      )}
     </div>
   );
 }
