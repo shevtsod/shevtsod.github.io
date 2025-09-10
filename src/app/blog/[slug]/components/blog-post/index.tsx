@@ -84,9 +84,9 @@ export default function BlogPost({
       )}
 
       <div className="relative">
-        {/* Table of Contents */}
+        {/* Table of Contents (sticky) */}
         <div className="h-full absolute top-0 hidden xl:block left-1/2 ml-112 p-4">
-          <div className="sticky top-22 z-1">
+          <div className="sticky top-22 z-1 md:text-sm max-h-[80svh] overflow-y-auto">
             <TableOfContents tableOfContents={tableOfContents} />
           </div>
         </div>
@@ -99,7 +99,7 @@ export default function BlogPost({
             readingTime={readingTime}
           />
 
-          {/* Table of Contents */}
+          {/* Table of Contents (static) */}
           <div className="w-full max-w-3xl mx-auto mb-4 text-xs md:text-sm xl:hidden">
             <TableOfContents tableOfContents={tableOfContents} />
           </div>
