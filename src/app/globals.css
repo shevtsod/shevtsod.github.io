@@ -104,7 +104,7 @@
 
   /* inline code */
   code {
-    @apply rounded-lg p-1 bg-zinc-200 dark:bg-zinc-900 font-normal not-italic;
+    @apply rounded-lg p-1 bg-zinc-200 dark:bg-zinc-900 font-normal not-italic break-words;
 
     /* Hide backticks */
     &::before,
@@ -184,7 +184,7 @@
 
   /* https://github.com/rockchalkwushock/rehype-code-titles */
   .rehype-code-title {
-    @apply relative z-1 top-6 md:top-6.5 -mt-7 px-8 font-mono text-sm md:text-base overflow-hidden text-ellipsis whitespace-nowrap;
+    @apply relative z-1 top-6 md:top-6 -mt-7 px-8 font-mono text-sm md:text-base overflow-hidden text-ellipsis whitespace-nowrap;
   }
 }
 

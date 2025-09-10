@@ -3,7 +3,7 @@ import Button from '@/components/button';
 import Typewriter from '@/components/typewriter';
 import { ProjectType } from '@/content/projects';
 import { skillCategories, SkillCategoryType } from '@/content/skills';
-import { UseFadeInViewOptions } from '@/hooks/use-fade-in-view';
+import useFadeInView, { UseFadeInViewOptions } from '@/hooks/use-fade-in-view';
 import { useIntro } from '@/hooks/use-intro';
 import classNames from 'classnames';
 import { useInView } from 'motion/react';
@@ -28,6 +28,7 @@ export default function Project({
 }: ProjectProps) {
   const ref = useRef(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  useFadeInView(ref, { once: true, ...useFadeInViewOptions });
   const isNearMiddle = useInView(ref, { margin: '-50% 0px -50% 0px' });
   const isNearMiddleOnce = useInView(ref, {
     margin: '-50% 0px -50% 0px',

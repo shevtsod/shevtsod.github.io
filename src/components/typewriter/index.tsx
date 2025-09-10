@@ -71,7 +71,13 @@ export default function Typewriter({
     <span className="relative inline-block">
       {/* Placeholder to take up final space of children */}
       {!completed && (
-        <span {...props} className={classNames('invisible', className)}>
+        <span
+          {...props}
+          className={classNames(
+            'inline-block w-full leading-6 invisible',
+            className,
+          )}
+        >
           {children}
           <Caret />
         </span>
@@ -80,7 +86,7 @@ export default function Typewriter({
       <span
         {...props}
         className={classNames(
-          'top-0 left-0 w-full',
+          'inline-block top-0 left-0 w-full leading-6',
           { absolute: !completed },
           className,
         )}
