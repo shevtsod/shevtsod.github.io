@@ -12,7 +12,7 @@ export default function Caret({ className, ...props }: CaretProps) {
     <span
       {...props}
       className={classNames(
-        ' inline-block align-text-bottom bg-black dark:bg-white w-3 h-5 mx-1',
+        'inline-block align-text-bottom bg-black dark:bg-white w-3 h-5 mx-1',
         styles.caret,
         className,
       )}

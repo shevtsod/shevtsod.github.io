@@ -45,6 +45,7 @@ export default function Projects<T extends ElementType>({
             <li key={i}>
               <Project
                 project={project}
+                flip={i % 2 !== 0}
                 useFadeInViewOptions={{ skip: i === 0 || !intro }}
               />
             </li>

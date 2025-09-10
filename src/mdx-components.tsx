@@ -1,4 +1,4 @@
-import Icon from '@/components/icon';
+import Icon, { IconKey } from '@/components/icon';
 import { YouTubeEmbed } from '@next/third-parties/google';
 import classNames from 'classnames';
 import type { MDXComponents } from 'mdx/types';
@@ -41,20 +41,43 @@ export function CustomH<T extends ElementType>({
   );
 }
 
-export interface CustomPreProps extends ComponentProps<'pre'> {
-  __rawString__: string;
-}
+const languageIconMap: Map<string, { icon: IconKey; className?: string }> =
+  new Map([
+    ['sh', { icon: 'Bash', className: 'bg-black' }],
+    ['bash', { icon: 'Bash', className: 'bg-black' }],
+    ['shell', { icon: 'Bash', className: 'bg-black' }],
+    ['code', { icon: 'Code', className: 'bg-zinc-600' }],
+    ['html', { icon: 'Html', className: 'bg-theme-orange-600' }],
+    ['js', { icon: 'Javascript', className: 'bg-orange-400' }],
+    ['typescript', { icon: 'Typescript', className: 'bg-theme-blue-400' }],
+    ['tsx', { icon: 'Typescript', className: 'bg-theme-blue-400' }],
+  ]);
 
-export function CustomPre({
-  children,
-  __rawString__ = '',
-  ...props
-}: CustomPreProps) {
+export interface CustomPreProps extends ComponentProps<'pre'> {}
+
+export function CustomPre({ children, className, ...props }: CustomPreProps) {
+  const classes = className?.split(' ') ?? [];
+  const languageClass = classes.find((c) => c.startsWith('language-'));
+  const language = languageClass?.slice('language-'.length);
+  const { icon, className: iconClassName } =
+    language && languageIconMap.has(language)
+      ? languageIconMap.get(language)!
+      : languageIconMap.get('code')!;
+
   return (
     <div className="relative pt-5 bg-gray-200 dark:bg-theme-gray-700 rounded-lg">
-      <pre {...props}>
+      <pre className={className} {...props}>
         {children}
-        <CopyButton className="absolute top-0 right-0 z-1 p-1.5 rounded-tr-lg" />
+        <div
+          className={classNames(
+            'absolute top-0 left-0 z-1 w-6.5 h-6.5 flex justify-center items-center text-white rounded-tl-lg',
+            iconClassName,
+          )}
+          title={language}
+        >
+          <Icon icon={icon} className="w-4 h-auto" />
+        </div>
+        <CopyButton className="absolute top-0 right-0 z-1 w-6.5 h-6.5 flex justify-center items-center rounded-tr-lg" />
       </pre>
     </div>
   );

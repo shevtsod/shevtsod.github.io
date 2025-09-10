@@ -35,7 +35,7 @@ export default function CopyButton({ className, ...props }: CopyButtonProps) {
     <button
       className={classNames(
         'cursor-pointer',
-        { 'bg-green-300 dark:bg-green-700': copied },
+        { 'bg-green-300 dark:bg-green-600': copied },
         className,
       )}
       onClick={copy}

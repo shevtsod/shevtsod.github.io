@@ -4,8 +4,15 @@ import { ComponentProps, useEffect, useState } from 'react';
 
 export interface TypewriterProps extends ComponentProps<'span'> {
   children: string;
+  /** Interval, in milliseconds, between each character being typed. Takes precedence over "duration" */
+  interval?: number;
+  /** Total duration, in milliseconds, of the animation */
   duration?: number;
+  /** Whether to play or pause the animation, paused by default */
   play?: boolean;
+  /** Delay after play becomes true to start the animation */
+  delay?: number;
+  onComplete?: () => void;
 }
 
 /**
@@ -13,12 +20,16 @@ export interface TypewriterProps extends ComponentProps<'span'> {
  */
 export default function Typewriter({
   children,
-  duration = 1000,
+  interval = 0,
+  duration = 0,
   play = false,
+  delay = 0,
+  onComplete,
   className,
   ...props
 }: TypewriterProps) {
   const [counter, setCounter] = useState(0);
+  const completed = counter === children.length;
 
   // Reset counter when children change
   useEffect(() => {
@@ -29,26 +40,55 @@ export default function Typewriter({
   useEffect(() => {
     if (!children.length || !play) return;
 
-    if (duration === 0) {
+    if (!interval && !duration) {
       setCounter(children.length);
       return;
     }
 
-    const interval = setInterval(() => {
-      setCounter((value) => Math.min(value + 1, children.length));
-    }, duration / children.length);
+    let counterInterval: NodeJS.Timeout | undefined;
 
-    return () => clearInterval(interval);
-  }, [play, duration, children]);
+    const delayTimeout = setTimeout(() => {
+      counterInterval = setInterval(
+        () => {
+          setCounter((value) => Math.min(value + 1, children.length));
+        },
+        interval ?? duration / children.length,
+      );
+    }, delay);
+
+    return () => {
+      clearTimeout(delayTimeout);
+      clearInterval(counterInterval);
+    };
+  }, [play, interval, duration, children, delay]);
+
+  // Fire events
+  useEffect(() => {
+    if (completed) onComplete?.();
+  }, [completed, onComplete]);
 
   return (
-    <span
-      {...props}
-      className={classNames('whitespace-pre-wrap', className)}
-      aria-live="polite"
-    >
-      {children.slice(0, counter)}
-      <Caret />
+    <span className="relative inline-block">
+      {/* Placeholder to take up final space of children */}
+      {!completed && (
+        <span {...props} className={classNames('invisible', className)}>
+          {children}
+          <Caret />
+        </span>
+      )}
+
+      <span
+        {...props}
+        className={classNames(
+          'top-0 left-0 w-full',
+          { absolute: !completed },
+          className,
+        )}
+        aria-live="polite"
+      >
+        {children.slice(0, counter)}
+        <Caret />
+      </span>
     </span>
   );
 }

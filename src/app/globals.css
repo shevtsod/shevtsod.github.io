@@ -184,7 +184,7 @@
 
   /* https://github.com/rockchalkwushock/rehype-code-titles */
   .rehype-code-title {
-    @apply relative z-1 top-6.5 -mt-7 pl-2 font-mono;
+    @apply relative z-1 top-6 md:top-6.5 -mt-7 px-8 font-mono text-sm md:text-base overflow-hidden text-ellipsis whitespace-nowrap;
   }
 }
 
