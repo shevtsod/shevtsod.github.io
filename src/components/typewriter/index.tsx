@@ -67,7 +67,7 @@ export default function Typewriter({
     if (completed) onComplete?.();
   }, [completed, onComplete]);
 
-  const commonClassName = 'inline-block w-full text-base';
+  const commonClassName = 'inline-block w-full text-base align-top';
 
   return (
     <span className="relative inline-block">
