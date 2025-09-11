@@ -149,6 +149,7 @@ export default function Project({
                           pathname: '/',
                           hash: `skillCategory:${skillCategory.key}`,
                         }}
+                        replace
                       >
                         <Skill skill={skill} skillCategory={skillCategory} />
                       </Link>

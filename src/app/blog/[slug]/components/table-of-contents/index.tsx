@@ -24,6 +24,7 @@ export default function TableOfContents({
             className={classNames('font-bold text-theme-red-400', {
               'xl:text-inherit': activeId === id,
             })}
+            replace
           >
             {value}
           </Link>

@@ -43,6 +43,7 @@ export function HCustom<T extends ElementType>({
         'group flex flex-row items-start gap-1 no-underline text-black! dark:text-white!',
         className,
       )}
+      replace
     >
       <PolymorphicComponent
         {...props}
