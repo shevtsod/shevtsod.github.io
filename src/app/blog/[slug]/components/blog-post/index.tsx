@@ -3,9 +3,9 @@
 import BlogPostMetadata from '@/app/blog/components/blog-post-metadata';
 import Button from '@/components/button';
 import Icon from '@/components/icon';
+import { HCustom } from '@/components/mdx-components/h-custom';
 import ScrambledText from '@/components/scrambled-text';
 import { useTheme } from '@/components/theme';
-import { CustomH } from '@/mdx-components';
 import type { BlogPostType, ReadingTime } from '@/utils/blog';
 import Giscus from '@giscus/react';
 import { Toc } from '@stefanprobst/rehype-extract-toc';
@@ -84,13 +84,6 @@ export default function BlogPost({
       )}
 
       <div className="relative">
-        {/* Table of Contents (sticky) */}
-        <div className="h-full absolute top-0 hidden xl:block left-1/2 ml-112 p-4">
-          <div className="sticky top-22 z-1 md:text-sm max-h-[80svh] overflow-y-auto">
-            <TableOfContents tableOfContents={tableOfContents} />
-          </div>
-        </div>
-
         <div className="flex-1 my-8 px-4 lg:px-0 flex flex-col w-full max-w-4xl mx-auto">
           {/* Metadata */}
           <BlogPostMetadata
@@ -99,9 +92,11 @@ export default function BlogPost({
             readingTime={readingTime}
           />
 
-          {/* Table of Contents (static) */}
-          <div className="w-full max-w-3xl mx-auto mb-4 text-xs md:text-sm xl:hidden">
-            <TableOfContents tableOfContents={tableOfContents} />
+          {/* Table of Contents */}
+          <div className="xl:h-full xl:absolute top-0 left-1/2 xl:ml-112">
+            <div className="max-w-3xl mx-auto mb-4 text-sm xl:text-base sticky top-22 z-1 overflow-y-auto xl:max-h-[calc(100svh-4.25em)] xl:p-4">
+              <TableOfContents tableOfContents={tableOfContents} />
+            </div>
           </div>
 
           {/* Content */}
@@ -158,9 +153,9 @@ export default function BlogPost({
             </div>
 
             {/* Comments */}
-            <CustomH as="h1" id="comments" className="text-4xl font-bold">
+            <HCustom as="h1" id="comments" className="text-4xl font-bold">
               {t('comments')}
-            </CustomH>
+            </HCustom>
 
             {/* https://giscus.app/ */}
             <div className="overflow-x-auto">

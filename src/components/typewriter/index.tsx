@@ -67,16 +67,15 @@ export default function Typewriter({
     if (completed) onComplete?.();
   }, [completed, onComplete]);
 
+  const commonClassName = 'inline-block w-full text-base';
+
   return (
     <span className="relative inline-block">
       {/* Placeholder to take up final space of children */}
       {!completed && (
         <span
           {...props}
-          className={classNames(
-            'inline-block w-full leading-6 invisible',
-            className,
-          )}
+          className={classNames(commonClassName, 'invisible', className)}
         >
           {children}
           <Caret />
@@ -86,8 +85,8 @@ export default function Typewriter({
       <span
         {...props}
         className={classNames(
-          'inline-block top-0 left-0 w-full leading-6',
-          { absolute: !completed },
+          commonClassName,
+          { 'absolute top-0 left-0': !completed },
           className,
         )}
         aria-live="polite"
