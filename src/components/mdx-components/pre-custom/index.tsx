@@ -30,6 +30,7 @@ export function PreCustom({ children, className, ...props }: PreCustomProps) {
     <div className="relative pt-5 rounded-lg">
       <pre className={className} {...props}>
         {children}
+        <CopyButton className="absolute top-0 right-0 z-1 w-6.5 h-6.5 flex justify-center items-center text-white rounded-tr-lg" />
         <div
           className={classNames(
             'absolute top-0 left-0 w-full h-6.5 px-1.5 flex justify-start items-center text-white rounded-t-lg',
@@ -39,7 +40,6 @@ export function PreCustom({ children, className, ...props }: PreCustomProps) {
         >
           <Icon icon={icon} className="w-4 h-auto" />
         </div>
-        <CopyButton className="absolute top-0 right-0 z-1 w-6.5 h-6.5 flex justify-center items-center text-white rounded-tr-lg" />
       </pre>
     </div>
   );
