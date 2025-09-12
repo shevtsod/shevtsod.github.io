@@ -64,7 +64,7 @@ export default function Hero<T extends ElementType>({
             <h1
               key={i}
               className={classNames(
-                'mb-16 text-[6em] sm:text-[10em] md:text-[12em] lg:text-[16em] xl:text-[18em] 2xl:text-[20em] [transform:perspective(400px)_rotateX(45deg)] sm:[transform:perspective(800px)_rotateX(45deg)] leading-[0.75] whitespace-break-spaces font-retro',
+                'mb-16 text-[6em] sm:text-[10em] md:text-[12em] lg:text-[16em] xl:text-[18em] 2xl:text-[20em] [transform:perspective(400px)_rotateX(45deg)] sm:[transform:perspective(800px)_rotateX(45deg)] leading-[0.75] font-retro',
                 styles.title,
                 // add intro class only if intro mode is enabled
                 { [styles.intro]: intro },
@@ -74,7 +74,7 @@ export default function Hero<T extends ElementType>({
                 },
               )}
             >
-              {t('title')}
+              {t.rich('title', { br: () => <br /> })}
             </h1>
           ))}
         </div>

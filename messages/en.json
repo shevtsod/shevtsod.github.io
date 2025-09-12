@@ -26,7 +26,7 @@
         },
         "hero": {
           "subtitle": "Full-stack web developer.",
-          "title": "Daniel\nShevtsov",
+          "title": "Daniel<br></br>Shevtsov",
           "scroll": "Scroll!"
         },
         "experience": {
