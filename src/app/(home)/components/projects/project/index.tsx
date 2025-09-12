@@ -72,7 +72,7 @@ export default function Project({
       {/* Colour overlay */}
       <div
         className={classNames(
-          `z-1 absolute w-full h-full bg-linear-to-b from-40% to-80% from-theme-red-800/60 to-transparent backdrop-blur-md lg:backdrop-blur-lg bg-blend-multiply transition-opacity ease-[steps(2,end)] duration-200 pointer-events-none`,
+          `z-1 absolute w-full h-full bg-linear-to-b from-40% to-80% from-theme-red-800/60 to-transparent backdrop-blur-md lg:backdrop-blur-lg bg-blend-multiply transition-opacity duration-300 pointer-events-none`,
           { 'opacity-0': isNearMiddle },
           { 'md:bg-linear-to-r': !flip, 'md:bg-linear-to-l': flip },
         )}
@@ -81,7 +81,7 @@ export default function Project({
       {/* Grain overlay */}
       <div
         className={classNames(
-          `z-1 absolute w-full h-full bg-[url('/images/ui/grain.svg')] bg-repeat bg-size-[256px] brightness-200 dark:brightness-0 transition-opacity ease-[steps(2,end)] duration-200 pointer-events-none`,
+          `z-1 absolute w-full h-full bg-[url('/images/ui/grain.svg')] bg-repeat bg-size-[256px] brightness-200 dark:brightness-0 transition-opacity  duration-300 pointer-events-none`,
           { 'opacity-0': isNearMiddle },
           { 'opacity-10 dark:opacity-30': !isNearMiddle },
         )}
