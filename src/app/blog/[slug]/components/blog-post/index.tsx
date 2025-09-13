@@ -83,24 +83,24 @@ export default function BlogPost({
         </div>
       )}
 
-      <div className="relative">
-        <div className="flex-1 my-8 px-4 lg:px-0 flex flex-col w-full max-w-4xl mx-auto">
+      <div className="relative mt-8 mb-12">
+        <div className="flex-1 px-4 lg:px-0 flex flex-col gap-4 w-full max-w-4xl 2xl:max-w-5xl mx-auto">
           {/* Metadata */}
           <BlogPostMetadata
-            className="w-full max-w-3xl mx-auto mb-4"
+            className="w-full max-w-3xl mx-auto xl:mb-4"
             frontmatter={frontmatter}
             readingTime={readingTime}
           />
 
           {/* Table of Contents */}
-          <div className="xl:h-full xl:absolute top-0 left-1/2 xl:ml-112">
-            <div className="max-w-3xl mx-auto mb-4 text-sm xl:text-base sticky top-22 z-1 overflow-y-auto xl:max-h-[calc(100svh-4.25em)] xl:p-4">
+          <div className="xl:h-full xl:absolute top-0 left-1/2 xl:ml-112 2xl:ml-128">
+            <div className="max-w-3xl mx-auto text-sm xl:text-base sticky top-22 z-1 overflow-y-auto xl:max-h-[calc(100svh-4.25em)] xl:px-4">
               <TableOfContents tableOfContents={tableOfContents} />
             </div>
           </div>
 
           {/* Content */}
-          <div className="stretch grow-1 w-full prose dark:prose-invert max-w-4xl">
+          <div className="stretch grow-1 w-full prose dark:prose-invert max-w-4xl 2xl:max-w-5xl">
             {children}
           </div>
 

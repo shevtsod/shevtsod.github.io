@@ -28,6 +28,8 @@ export default function BlogPostMetadata({
     undefined,
   );
   const Description = description?.default;
+  // Determine if showing a preview or the complete metadata
+  const preview = !showDescription;
 
   // https://mdxjs.com/guides/mdx-on-demand/
   useEffect(() => {
@@ -42,14 +44,22 @@ export default function BlogPostMetadata({
 
   return (
     <div
-      className={classNames('flex flex-col text-zinc-500 text-sm', className)}
+      className={classNames(
+        'flex flex-col gap-4 text-zinc-500 text-sm',
+        className,
+      )}
     >
-      <h1 className="text-2xl md:text-4xl font-bold text-theme-red-400 font-retro">
+      <h1
+        className={classNames(
+          'text-2xl md:text-4xl font-bold text-theme-red-400 font-retro',
+          { 'text-3xl md:text-5xl': !preview },
+        )}
+      >
         {title}
       </h1>
 
       {showDescription && (
-        <h2 className="text-lg font-bold prose dark:prose-invert text-inherit my-4">
+        <h2 className="text-lg font-bold prose dark:prose-invert text-inherit">
           {Description ? (
             <Description />
           ) : (

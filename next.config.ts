@@ -97,7 +97,21 @@ const withMDX = createMDX({
       ['remark-reading-time'],
       ['remark-reading-time/mdx'],
       // https://github.com/zestedesavoir/zmarkdown/
-      ['remark-captions'],
+      [
+        'remark-captions',
+        {
+          internal: {
+            blockquote: 'Caption:',
+            image: 'Caption:',
+            video: 'Caption:',
+          },
+          external: {
+            table: 'Caption:',
+            code: 'Caption:',
+            mdxJsxFlowElement: 'Caption:',
+          },
+        },
+      ],
     ],
     rehypePlugins: [
       // https://github.com/rockchalkwushock/rehype-code-titles

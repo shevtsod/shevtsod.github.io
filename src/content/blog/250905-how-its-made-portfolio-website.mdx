@@ -33,9 +33,9 @@ inspiration to find your own passion and motivation to start building it!
 I grew up in the late 90s and early 2000s and love video games from that era -
 specifically GBA, PS1, and PS2. Is it fair to call those "retro" now? Something
 about the look and feel of games from that era (the **soul**, so to speak) is
-very nostalgic to me, so I thought it would be really fun to build my portfolio
-website and mimic some visual elements from games of that generation. I had 4
-main inspirations:
+super nostalgic to me, so I thought it would be fun to mimic some visual
+elements from games of that generation in my portfolio website. I had 4 main
+inspirations:
 
 - [**Mega Man Battle Network**](https://en.wikipedia.org/wiki/Mega_Man_Battle_Network)
 - [**Metal Gear Solid**](<https://en.wikipedia.org/wiki/Metal_Gear_Solid_(1998_video_game)>)
@@ -48,7 +48,18 @@ I found myself spending a lot of time looking at screenshots and videos of these
 4 games and constantly referring back to them for inspiration as I was building
 the website to try to capture their _je ne sais quoi_. If you are familiar with
 any of these games, I hope you caught some references on the home page, but I'll
-point them out in the sections below too.
+point some of them out in the sections below too.
+
+Aside from those, I also bookmarked a couple of other personal websites that
+caught my eye to use as references:
+
+- [Dead Simple Sites](https://deadsimplesites.com/) - A lot of great examples
+  here and I found myself coming back to this over and over and then simplifying
+  my own design to avoid clutter.
+- [Josh W. Comeau](https://www.joshwcomeau.com/) - the holy grail of personal
+  websites in my opinion. I love all the micro-interactions and easter eggs
+  sprinkled all over all while maintaining a simple and minimalist design. I
+  definitely took a few notes from it for my own website.
 
 # Iterations and Lessons Learned
 
@@ -73,30 +84,60 @@ I eventually settled on the tech stack below:
 
 So far, this works quite well and covers all my needs!
 
+# Design Principles
+
 # Techniques and Tricks
+
+![The steps() function](/images/blog/250905-how-its-made-portfolio-website/angel.jpg)
+Caption: The angelic `steps()` function descends
 
 ## Boot Sequence
 
 ![Boot Sequence](/images/blog/250905-how-its-made-portfolio-website/boot.png)
+
+I wasn't able to find a name for this trope
+([Activation Sequence](https://tvtropes.org/pmwiki/pmwiki.php/Main/ActivationSequence)
+and
+[Diegetic Interface](https://tvtropes.org/pmwiki/pmwiki.php/Main/DiegeticInterface)
+come close) but I noticed a lot of video games, especially ones that try to go
+for a retro feel, include a fake operating system boot sequence with references
+to some in-universe brand/company. This shows up in both **Signalis** (also note
+the colour scheme, more on that below) and **Metal Gear Solid 2**.
+
+<div className="full-width two-columns">
+  <YouTubeEmbed videoId="XJPqmHEjkjE" params="start=92&end=135" />
+  <YouTubeEmbed videoId="QygyxIlfDlw" params="end=20" />
+</div>
+
+This was the perfect opportunity to introduce my very own **shevtsod
+Corporation** and **shevtsodOS** operating system.
+
+One little detail you may have missed is that the browser tab's title goes
+through a boot sequence too. Check it out again at
+[shevtsod.com](https://shevtsod.com)!
+
+## Theme & Dark Mode
+
+<div className="full-width two-columns">
+
+![Mobile](/images/blog/250905-how-its-made-portfolio-website/mobile.png)
+Caption:Mobile view
+
+![Light](/images/blog/250905-how-its-made-portfolio-website/light.png)
+Caption:Light theme
+
+</div>
+
+## Orchestrating Animations
+
+## Simulating Low Framerate
 
 ## Header
 
 ![Header](/images/blog/250905-how-its-made-portfolio-website/header.png)
 
 ![Logo sprite sheet](/images/blog/250905-how-its-made-portfolio-website/logo-frames.png)
-Figure: The logo animation sprite sheet
-
-## Theme & Dark Mode
-
-![Light](/images/blog/250905-how-its-made-portfolio-website/light.png)
-![Mobile](/images/blog/250905-how-its-made-portfolio-website/mobile.png)
-
-## Orchestrating Animations
-
-## Simulating Low Framerate
-
-![The steps() function](/images/blog/250905-how-its-made-portfolio-website/angel.jpg)
-Figure: The angelic `steps()` function descends
+Caption:The logo animation sprite sheet
 
 ## Home
 
@@ -109,20 +150,20 @@ is to make an impact. First impressions are everything! This one is a reference
 to title drops in many retro games. Specifically, mine is inspired by the
 opening intro of **Pokemon Ruby/Sapphire/Emerald**.
 
-<YouTubeEmbed videoId="shUkq1sfSyU" />
+<YouTubeEmbed videoId="shUkq1sfSyU" params="start=47&end=72" />
 
 The subtle 3D text effect and shine rolling over it made me really want to
 recreate it, and the hero section was a perfect fit.
 
-The effect is actually really simple - it's just a combination of
+The effect is really simple - it's just a combination of
 `transform: perspective()` for the 3D effect and a very specific
-`background: linear-gradient()` for that glossy, reflective shine.
+`background: linear-gradient()` for that sharp glossy shine.
 
 <div className="full-width">
   <div
     className="codepen"
     data-height="600"
-    data-default-tab="result"
+    data-default-tab="result,css"
     data-slug-hash="MYaZgwY"
     data-pen-title="hero"
     data-user="shevtsod"
@@ -133,6 +174,8 @@ The effect is actually really simple - it's just a combination of
 ### Summary
 
 ![Summary](/images/blog/250905-how-its-made-portfolio-website/summary.png)
+
+<YouTubeEmbed videoId="9CpoJDicwn4" params="start=8&end=26" />
 
 ### Skills & Experience
 
@@ -146,11 +189,60 @@ The effect is actually really simple - it's just a combination of
 
 ![Contact](/images/blog/250905-how-its-made-portfolio-website/contact.png)
 
+I hope it's obvious that this one is straight out of **Metal Gear Solid**.
+
 <YouTubeEmbed videoId="TzG8Sty9veI" />
+
+I just re-created the codec call pixel art but with the website's red theme and
+replace Snake and the colonel with my own mug and your mysterious anonymous
+face. A few carefully timed CSS animations let me show the "CALL" notification
+and a quick call to action that looks like a message from me to you.
 
 ## Blog
 
+<div className="full-width two-columns">
+
 ![Blog](/images/blog/250905-how-its-made-portfolio-website/blog.png)
+
 ![Blog Post](/images/blog/250905-how-its-made-portfolio-website/blog-post.png)
 
+</div>
+
+I wanted to have my very own blog for a long time, and I finally get to have
+one! It's powered by [MDX](https://mdxjs.com/) and I find it extremely powerful
+to be able to write blog posts (like this one!) in the lightweight Markdown
+syntax but still have the flexibility to insert any custom JSX (including any
+React component).
+
+A few of my favourite features of my blog are:
+
+- Reading progress bars that get added to the header.
+- Tables of content that stick to the right-hand side on larger devices and
+  highlight the current section.
+- Using frontmatter to set blog post metadata, set a hero image, and publish
+  posts.
+
+  ```markdown:blog-post.mdx
+  ---
+  title: "How It's Made: Portfolio Website"
+  description:
+    'A meta-blog post about the making of this portfolio website, inspirations,
+    techniques, and the iterations it went through along the way.'
+  author: 'shevtsod'
+  created: '2025-09-05'
+  updated:
+  tags: 'webdev,nextjs'
+  imageUrl: '/images/blog/250905-how-its-made-portfolio-website/hero.png'
+  published: false
+  ---
+  ```
+
+- Code blocks like the one above that were a perfect chance to re-use my
+  pixelated skills icons!
+
 # Next Steps
+
+- An RSS feed and a sitemap
+- Search/filter blog posts by tags
+- Dive into [Three.js](https://threejs.org/) and add some low-poly PS1-era 3D
+  graphics

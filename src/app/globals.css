@@ -75,6 +75,11 @@
     }
   }
 
+  /* Displays content as two columns on larger devices */
+  .two-columns {
+    @apply flex flex-col md:flex-row items-center [&>*]:flex-1 gap-4;
+  }
+
   /* links */
   a {
     @apply text-theme-red-400 font-normal;
@@ -184,7 +189,15 @@
 
   /* https://github.com/rockchalkwushock/rehype-code-titles */
   .rehype-code-title {
-    @apply relative z-1 top-6 md:top-6 -mt-7 px-8 font-mono text-sm md:text-base overflow-hidden text-ellipsis whitespace-nowrap;
+    @apply relative z-1 top-5.5 md:top-6 -mt-6 px-8 font-mono text-sm md:text-base overflow-hidden text-ellipsis whitespace-nowrap;
+
+    &:has(+ .text-white) {
+      @apply text-white;
+    }
+
+    &:has(+ .text-black) {
+      @apply text-black;
+    }
   }
 }
 

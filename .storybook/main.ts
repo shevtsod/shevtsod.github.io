@@ -7,6 +7,7 @@ import rehypeCallouts from 'rehype-callouts';
 import rehypeCodeTitles from 'rehype-code-titles';
 import rehypePrismPlus from 'rehype-prism-plus';
 import rehypeSlug from 'rehype-slug';
+// @ts-expect-error missing types
 import remarkCaptions from 'remark-captions';
 import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
@@ -35,7 +36,21 @@ const config: StorybookConfig = {
               remarkReadingTime,
               remarkReadingTimeMdx,
               // https://github.com/zestedesavoir/zmarkdown/
-              remarkCaptions,
+              [
+                remarkCaptions,
+                {
+                  internal: {
+                    blockquote: 'Caption:',
+                    image: 'Caption:',
+                    video: 'Caption:',
+                  },
+                  external: {
+                    table: 'Caption:',
+                    code: 'Caption:',
+                    mdxJsxFlowElement: 'Caption:',
+                  },
+                },
+              ],
             ],
             rehypePlugins: [
               // https://github.com/rockchalkwushock/rehype-code-titles
