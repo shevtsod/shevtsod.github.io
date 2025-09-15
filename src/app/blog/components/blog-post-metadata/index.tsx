@@ -51,8 +51,9 @@ export default function BlogPostMetadata({
     >
       <h1
         className={classNames(
-          'text-2xl md:text-4xl font-bold text-theme-red-400 font-retro',
+          'text-2xl md:text-4xl font-bold text-theme-red-400 font-retro decoration-4',
           { 'text-3xl md:text-5xl': !preview },
+          { 'hover:underline group-hover:underline': preview },
         )}
       >
         {title}

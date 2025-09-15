@@ -25,7 +25,7 @@ export default function BlogPostCard({
     <Link {...props} href={`/blog/${slug}`} className="group">
       <div className="text-sm my-4 font-sans">
         <div className="flex flex-row">
-          <div className="text-right flex-1 self-center text-8xl md:text-9xl italic font-pixel mr-4 text-zinc-400 dark:text-zinc-900 group-hover:text-gray-400 dark:group-hover:text-zinc-800">
+          <div className="text-right flex-1 self-center text-8xl md:text-9xl italic font-pixel mr-4 text-zinc-400 dark:text-zinc-900 group-hover:text-zinc-500 dark:group-hover:text-zinc-800">
             {index}
           </div>
 

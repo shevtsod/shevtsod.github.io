@@ -82,7 +82,7 @@
 
   /* links */
   a {
-    @apply text-theme-red-400 font-normal;
+    @apply text-theme-red-400;
   }
 
   /* quoted text */
@@ -142,7 +142,8 @@
     @apply font-bold mt-4! mb-2!;
   }
 
-  img {
+  img,
+  video {
     @apply my-4! rounded-xl mx-auto max-h-110;
   }
 
@@ -184,7 +185,11 @@
   }
 
   strong {
-    @apply text-inherit!;
+    @apply text-inherit! font-bold;
+
+    a {
+      @apply font-bold!;
+    }
   }
 
   /* https://github.com/rockchalkwushock/rehype-code-titles */

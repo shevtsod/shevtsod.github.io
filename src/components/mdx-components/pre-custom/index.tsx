@@ -11,11 +11,8 @@ const languageIconMap: Map<string, { icon: IconKey; className?: string }> =
     ['code', { icon: 'Code', className: 'bg-zinc-700 text-white' }],
     ['html', { icon: 'Html', className: 'bg-orange-800 text-white' }],
     ['js', { icon: 'Javascript', className: 'bg-yellow-500 text-black' }],
-    ['markdown', { icon: 'Markdown', className: 'bg-blue-400 text-black' }],
-    [
-      'typescript',
-      { icon: 'Typescript', className: 'bg-theme-blue-700 text-white' },
-    ],
+    ['md', { icon: 'Markdown', className: 'bg-blue-400 text-black' }],
+    ['ts', { icon: 'Typescript', className: 'bg-theme-blue-400 text-white' }],
     ['tsx', { icon: 'Typescript', className: 'bg-theme-blue-400 text-white' }],
   ]);
 
