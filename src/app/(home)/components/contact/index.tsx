@@ -146,12 +146,12 @@ export default function Contact<T extends ElementType>({
 
           <Button
             type="submit"
-            className="text-center md:text-lg px-2 py-1 font-bold w-full cursor-pointer"
+            className="text-center md:text-lg font-bold w-full cursor-pointer"
             disabled={
               !isDirty || !isValid || isSubmitting || isSubmitSuccessful
             }
           >
-            <ScrambledText className="inline-block w-full">
+            <ScrambledText className="block py-1">
               {t('form.submit')}
             </ScrambledText>
           </Button>

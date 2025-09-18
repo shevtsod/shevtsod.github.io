@@ -108,9 +108,9 @@ export default function Header({
                 (!props.href.hash || props.href.hash === 'top')
               }
             >
-              <b>
-                <ScrambledText>{children as string}</ScrambledText>
-              </b>
+              <ScrambledText className="block font-bold">
+                {children as string}
+              </ScrambledText>
             </Button>
           ))}
 

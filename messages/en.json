@@ -78,7 +78,7 @@
             "design": {
               "title": "Design",
               "skills": {
-                "adobe-cc": { "title": "Adobe Creative Cloud" },
+                "adobe-cc": { "title": "Adobe CC" },
                 "figma": { "title": "Figma" },
                 "krita": { "title": "Krita" },
                 "inkscape": { "title": "Inkscape" }
@@ -102,7 +102,7 @@
             "networking": {
               "title": "Networking",
               "skills": {
-                "fortigate": { "title": "FortiGate/FortiManager" },
+                "fortigate": { "title": "FortiGate" },
                 "netbox": { "title": "NetBox" },
                 "bind": { "title": "BIND" }
               }

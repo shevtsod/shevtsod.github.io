@@ -1,5 +1,6 @@
 import Skill from '@/app/(home)/components/skills/skill';
 import Button from '@/components/button';
+import ScrambledText from '@/components/scrambled-text';
 import Typewriter from '@/components/typewriter';
 import { ProjectType } from '@/content/projects';
 import { skillCategories, SkillCategoryType } from '@/content/skills';
@@ -163,15 +164,17 @@ export default function Project({
             {links?.length && (
               <ul className={classNames('flex flex-wrap gap-1')}>
                 {links?.map((link, i) => (
-                  <li key={i}>
+                  <li key={i} className="flex">
                     <Button
                       as="a"
                       href={link.url}
                       target="_blank"
                       variant="warn"
-                      className="text-center md:text-lg px-2 font-bold"
+                      className="text-center md:text-lg font-bold"
                     >
-                      {t(`links.${link.key}.title`)}
+                      <ScrambledText className="block px-1">
+                        {t(`links.${link.key}.title`)}
+                      </ScrambledText>
                     </Button>
                   </li>
                 ))}

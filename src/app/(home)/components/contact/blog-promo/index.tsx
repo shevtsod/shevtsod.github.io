@@ -32,8 +32,8 @@ export default function BlogPromo({ className, ...props }: BlogPromoProps) {
       <Link href="/blog">
         {t.rich('callout', {
           blog: () => (
-            <Button className="px-1 py-0.5 cursor-pointer">
-              <ScrambledText>{t('blog')}</ScrambledText>
+            <Button className="cursor-pointer">
+              <ScrambledText className="block">{t('blog')}</ScrambledText>
             </Button>
           ),
         })}

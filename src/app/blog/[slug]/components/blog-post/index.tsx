@@ -4,7 +4,6 @@ import BlogPostMetadata from '@/app/blog/components/blog-post-metadata';
 import Button from '@/components/button';
 import Icon from '@/components/icon';
 import { HCustom } from '@/components/mdx-components/h-custom';
-import ScrambledText from '@/components/scrambled-text';
 import { useTheme } from '@/components/theme';
 import type { BlogPostType, ReadingTime } from '@/utils/blog';
 import Giscus from '@giscus/react';
@@ -14,6 +13,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
+import ScrambledText from '../../../../../components/scrambled-text';
 import TableOfContents from '../table-of-contents';
 
 export interface BlogPostProps {
@@ -124,12 +124,8 @@ export default function BlogPost({
                 )}
               </div>
 
-              <Button
-                as={Link}
-                href="/blog"
-                className="h-full w-full font-bold"
-              >
-                <ScrambledText className="block">
+              <Button as={Link} href="/blog" className="self-stretch font-bold">
+                <ScrambledText className="w-full h-full flex justify-center items-center">
                   {t('backToBlog')}
                 </ScrambledText>
               </Button>

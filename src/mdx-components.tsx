@@ -7,7 +7,13 @@ import Script from 'next/script';
 
 // https://nextjs.org/docs/app/guides/mdx#global-styles-and-components
 const components: MDXComponents = {
-  a: (props) => <Link target="_blank" {...props} />,
+  a: ({ href, ...props }) => (
+    <Link
+      target={href.startsWith('#') ? '_self' : '_blank'}
+      href={href}
+      {...props}
+    />
+  ),
   h1: (props) => <HCustom as="h1" {...props} />,
   h2: (props) => <HCustom as="h2" {...props} />,
   h3: (props) => <HCustom as="h3" {...props} />,
