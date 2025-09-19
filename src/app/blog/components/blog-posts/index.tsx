@@ -10,7 +10,7 @@ export interface BlogPostsProps {
  */
 export default function BlogPosts({ blogPosts }: BlogPostsProps) {
   return (
-    <ul className="container max-w-3xl mx-auto px-2 mt-10">
+    <ul className="container max-w-3xl mx-auto px-2 mt-6 mb-24">
       {blogPosts.map((blogPost, i) => (
         <li
           key={blogPosts.length - i - 1}
