@@ -89,7 +89,7 @@ export default function Experience<T extends ElementType>({
 
                       <div
                         className={classNames(
-                          'flex-6 basis-0 shrink-0 text-sm md:text-base',
+                          'flex-6 basis-0 shrink-0 text-sm md:text-base  wrap-anywhere',
                           {
                             'pt-4': i > 0,
                             'pb-4':

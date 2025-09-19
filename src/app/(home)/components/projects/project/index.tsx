@@ -141,19 +141,11 @@ export default function Project({
 
             {/* Skills */}
             {projectSkillCategories.length && (
-              <ul className={classNames('flex flex-wrap gap-1 group')}>
+              <ul className={classNames('flex w-fit flex-wrap gap-1 group')}>
                 {projectSkillCategories.map((skillCategory) =>
                   skillCategory.skills.map((skill, i) => (
                     <li key={i}>
-                      <Link
-                        href={{
-                          pathname: '/',
-                          hash: `skillCategory:${skillCategory.key}`,
-                        }}
-                        replace
-                      >
-                        <Skill skill={skill} skillCategory={skillCategory} />
-                      </Link>
+                      <Skill skill={skill} skillCategory={skillCategory} />
                     </li>
                   )),
                 )}
