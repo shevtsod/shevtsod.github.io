@@ -13,7 +13,7 @@ import remarkFrontmatter from 'remark-frontmatter';
 import remarkGfm from 'remark-gfm';
 import remarkMdxFrontmatter from 'remark-mdx-frontmatter';
 import remarkReadingTime from 'remark-reading-time';
-import remarkReadingTimeMdx from 'remark-reading-time/mdx';
+import remarkReadingTimeMdx from 'remark-reading-time/mdx.js';
 import { RuleSetCondition, RuleSetRule } from 'webpack';
 
 const config: StorybookConfig = {
