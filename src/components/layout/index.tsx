@@ -4,7 +4,6 @@ import Icon from '@/components/icon';
 import { useTheme } from '@/components/theme';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
-import Link from 'next/link';
 import { ComponentProps, useEffect, useState } from 'react';
 import Fab from './fab';
 import Footer from './footer';
@@ -44,6 +43,10 @@ export default function Layout({
     setMounted(true);
   }, []);
 
+  const onFabClick = () => {
+    window.scrollTo({ top: 0 });
+  };
+
   return (
     <div
       {...props}
@@ -73,8 +76,7 @@ export default function Layout({
 
       {fab && (
         <Fab
-          as={Link}
-          href="#top"
+          onClick={onFabClick}
           showOnScroll
           className="m-8"
           title={t('returnToTop')}

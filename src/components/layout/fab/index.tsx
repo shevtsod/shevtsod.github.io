@@ -43,7 +43,7 @@ export default function Fab<T extends ElementType = 'button'>({
       as={as}
       onClick={onClick}
       className={classNames(
-        'fixed z-50 bottom-0 right-0 p-2 border-2 bg-white dark:bg-black transition-all duration-400 ease-[steps(3,end)]',
+        'fixed z-50 bottom-0 right-0 p-2 border-2 bg-white dark:bg-black transition-all duration-400 ease-[steps(3,end)] cursor-pointer',
         { 'opacity-0 scale-0 pointer-events-none': !shown },
         className,
       )}
