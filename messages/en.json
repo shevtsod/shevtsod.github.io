@@ -70,9 +70,14 @@
             "cloud": {
               "title": "Cloud",
               "skills": {
-                "aws": { "title": "Amazon Web Services" },
+                "kubernetes": { "title": "Kubernetes" },
+                "docker": { "title": "Docker" },
+                "openstack": { "title": "OpenStack" },
+                "minio": { "title": "MinIO" },
+                "ceph": { "title": "Ceph" },
+                "traefik": { "title": "Traefik" },
                 "heroku": { "title": "Heroku" },
-                "openstack": { "title": "OpenStack" }
+                "vagrant": { "title": "Vagrant" }
               }
             },
             "design": {
@@ -135,15 +140,8 @@
                 "grafana": { "title": "Grafana" },
                 "influxdb": { "title": "InfluxDB" },
                 "rest": { "title": "REST APIs" },
+                "graphql": { "title": "GraphQL" },
                 "godot": { "title": "Godot" }
-              }
-            },
-            "virtualization": {
-              "title": "Virtualization",
-              "skills": {
-                "kubernetes": { "title": "Kubernetes" },
-                "docker": { "title": "Docker" },
-                "vagrant": { "title": "Vagrant" }
               }
             }
           },

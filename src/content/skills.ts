@@ -174,6 +174,11 @@ export const skillCategories: SkillCategoryType[] = [
         icon: 'Rest',
       },
       {
+        key: 'graphql',
+        icon: 'GraphQL',
+        url: 'https://graphql.org/',
+      },
+      {
         key: 'godot',
         icon: 'Godot',
         url: 'https://godotengine.org',
@@ -181,7 +186,7 @@ export const skillCategories: SkillCategoryType[] = [
     ],
   },
   {
-    key: 'virtualization',
+    key: 'cloud',
     skills: [
       {
         key: 'kubernetes',
@@ -194,19 +199,24 @@ export const skillCategories: SkillCategoryType[] = [
         url: 'https://www.docker.com',
       },
       {
-        key: 'vagrant',
-        icon: 'Vagrant',
-        url: 'https://developer.hashicorp.com/vagrant',
+        key: 'openstack',
+        icon: 'Openstack',
+        url: 'https://www.openstack.org',
       },
-    ],
-  },
-  {
-    key: 'cloud',
-    skills: [
       {
-        key: 'aws',
-        icon: 'Aws',
-        url: 'https://aws.amazon.com',
+        key: 'minio',
+        icon: 'MinIO',
+        url: 'https://www.min.io/',
+      },
+      {
+        key: 'ceph',
+        icon: 'Ceph',
+        url: 'https://ceph.io/en/',
+      },
+      {
+        key: 'traefik',
+        icon: 'Traefik',
+        url: 'https://traefik.io/traefik',
       },
       {
         key: 'heroku',
@@ -214,9 +224,9 @@ export const skillCategories: SkillCategoryType[] = [
         url: 'https://www.heroku.com',
       },
       {
-        key: 'openstack',
-        icon: 'Openstack',
-        url: 'https://www.openstack.org',
+        key: 'vagrant',
+        icon: 'Vagrant',
+        url: 'https://developer.hashicorp.com/vagrant',
       },
     ],
   },
