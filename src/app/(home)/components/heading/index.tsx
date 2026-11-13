@@ -12,6 +12,21 @@ export type HeadingProps<T extends ElementType> = {
 } & PolymorphicComponentProps<T>;
 
 /**
+ * Renders the decorative dither stripes shown on both sides of a heading.
+ */
+function Dither({ className }: { className?: string }) {
+  return (
+    <div
+      className={classNames(
+        "h-auto min-w-[60px] image-pixelated bg-repeat-y bg-[length:64px_64px] bg-[url('/images/ui/dither-x-red-400.svg')]",
+        styles.dither,
+        className,
+      )}
+    />
+  );
+}
+
+/**
  * Renders a section heading.
  */
 export default function Heading<T extends ElementType>({
@@ -25,16 +40,6 @@ export default function Heading<T extends ElementType>({
     <span className="inline-flex items-center text-center py-2 bg-theme-red-400">
       {children}
     </span>
-  );
-
-  const Dither = ({ className }: { className?: string }) => (
-    <div
-      className={classNames(
-        "h-auto min-w-[60px] image-pixelated bg-repeat-y bg-[length:64px_64px] bg-[url('/images/ui/dither-x-red-400.svg')]",
-        styles.dither,
-        className,
-      )}
-    />
   );
 
   return (

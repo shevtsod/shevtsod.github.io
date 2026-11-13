@@ -51,8 +51,10 @@ interface RawFrontmatterType {
 /**
  * Frontmatter properties available in a blog post
  */
-export interface FrontmatterType
-  extends Omit<RawFrontmatterType, 'created' | 'updated' | 'tags'> {
+export interface FrontmatterType extends Omit<
+  RawFrontmatterType,
+  'created' | 'updated' | 'tags'
+> {
   descriptionMdx?: string;
   created?: Date;
   updated?: Date;

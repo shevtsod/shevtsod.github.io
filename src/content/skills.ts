@@ -264,11 +264,6 @@ export const skillCategories: SkillCategoryType[] = [
     key: 'networking',
     skills: [
       {
-        key: 'fortigate',
-        icon: 'Fortigate',
-        url: 'https://www.fortinet.com/products/next-generation-firewall',
-      },
-      {
         key: 'netbox',
         icon: 'Netbox',
         url: 'https://netboxlabs.com',

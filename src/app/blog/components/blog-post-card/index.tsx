@@ -5,8 +5,9 @@ import Link from 'next/link';
 import type { ComponentProps } from 'react';
 import BlogPostMetadata from '../blog-post-metadata';
 
-export interface BlogPostCardProps
-  extends Partial<ComponentProps<typeof Link>> {
+export interface BlogPostCardProps extends Partial<
+  ComponentProps<typeof Link>
+> {
   index?: number;
   blogPost: BlogPostType;
 }

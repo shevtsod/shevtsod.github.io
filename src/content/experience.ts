@@ -17,13 +17,13 @@ export const experienceCategories: ExperienceCategoryType[] = [
     key: 'employment',
     experienceItems: [
       {
-        title: 'Senior Software Developer / Sector Network Support Analyst',
+        title: 'Senior Sector Network Support Analyst',
         company: 'Government of Saskatchewan',
         location: 'Regina, SK, Canada',
         start: new UTCDate(2019, 9),
       },
       {
-        title: 'Software Developer / Sector Network Support Analyst',
+        title: 'Software Sector Network Support Analyst',
         company: 'Government of Saskatchewan',
         location: 'Regina, SK, Canada',
         start: new UTCDate(2017, 8),
@@ -37,7 +37,7 @@ export const experienceCategories: ExperienceCategoryType[] = [
       {
         title: 'Bachelor of Applied Science - Software Systems Engineering',
         company: 'University of Regina',
-        location: 'Regina, SK',
+        location: 'Regina, SK, Canada',
         start: new UTCDate(2014, 8),
         end: new UTCDate(2020, 5),
       },

@@ -5,7 +5,7 @@ import Logo from '@/components/logo';
 import useTitle from '@/hooks/use-title';
 import classNames from 'classnames';
 import { useTranslations } from 'next-intl';
-import { ComponentProps, useEffect, useMemo, useState } from 'react';
+import { ComponentProps, useEffect, useRef, useState } from 'react';
 
 const messages = (
   <>
@@ -79,7 +79,7 @@ export default function Boot({
   const [counter, setCounter] = useState(0);
   const animationDuration = 0.75 * duration;
   const counterMax = messages.props.children.length;
-  const startTime = useMemo(() => Date.now(), []);
+  const startTime = useRef(0);
 
   // Set the title as the animation progresses
   const originalTitle = useTitle(
@@ -89,10 +89,11 @@ export default function Boot({
 
   // Increment counter with some randomization
   useEffect(() => {
+    startTime.current = Date.now();
     const interval = setInterval(() => {
       setCounter((value) => {
         // Time since counter started
-        const elapsedTime = Date.now() - startTime;
+        const elapsedTime = Date.now() - startTime.current;
         // Time when counter should reach max
         const remainingTime = animationDuration - elapsedTime;
         // Remaining incrementations required
@@ -113,7 +114,7 @@ export default function Boot({
     }, animationDuration / counterMax);
 
     return () => clearInterval(interval);
-  }, [counterMax, startTime, animationDuration]);
+  }, [counterMax, animationDuration]);
 
   // Fire onComplete when duration ends
   useEffect(() => {

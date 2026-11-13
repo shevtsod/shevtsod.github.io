@@ -2,8 +2,10 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import { ComponentProps } from 'react';
 
-export interface CodecProps
-  extends Omit<ComponentProps<typeof Image>, 'src' | 'alt'> {}
+export interface CodecProps extends Omit<
+  ComponentProps<typeof Image>,
+  'src' | 'alt'
+> {}
 
 export default function Codec({ className, ...props }: CodecProps) {
   return (
