@@ -23,7 +23,7 @@ export const experienceCategories: ExperienceCategoryType[] = [
         start: new UTCDate(2019, 9),
       },
       {
-        title: 'Software Sector Network Support Analyst',
+        title: 'Sector Network Support Analyst',
         company: 'Government of Saskatchewan',
         location: 'Regina, SK, Canada',
         start: new UTCDate(2017, 8),
